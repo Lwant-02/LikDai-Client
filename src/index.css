@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Share+Tech&display=swap");
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: "Yungkio";
+  src: url("/fonts/Yunghkio.ttf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-primary: "Share Tech", sans-serif;
+  --font-secondary: "Yungkio", serif;
+  --color-background: #040303;
+  --color-foreground: #2b2e31;
+  --color-primary: #ffffff;
+  --color-yellow: #dcb743;
+  --color-blue: #3674b5;
+  --color-red: #ea2f14;
+  --color-green: #1f7d53;
+  --color-orange: #ff7601;
+  --color-purple: #7965c1;
+}
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+  body {
+    @apply bg-background text-primary font-primary;
+  }
+}
+
+/* Starborder */
+.star-border-container {
+  display: inline-block;
+  padding: 1px 0;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.border-gradient-bottom {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  opacity: 0.7;
+  bottom: -11px;
+  right: -250%;
+  border-radius: 50%;
+  animation: star-movement-bottom linear infinite alternate;
+  z-index: 0;
+}
+
+.border-gradient-top {
+  position: absolute;
+  opacity: 0.7;
+  width: 300%;
+  height: 50%;
+  top: -10px;
+  left: -250%;
+  border-radius: 50%;
+  animation: star-movement-top linear infinite alternate;
+  z-index: 0;
+}
+
+.inner-content {
+  position: relative;
+  border: 1px solid #3674b5;
+  background: #000;
+  font-size: 16px;
+  text-align: center;
+  padding: 6px 20px;
+  border-radius: 18px;
+  z-index: 1;
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,109 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+
+import { useTitle } from "@/hook/useTitle";
+import { AccoutHeader } from "@/components/AccoutHeader";
+import { AccountTabs } from "@/components/AccountTabs";
+import { ProfileTab } from "@/components/ProfileTab";
+import { StatusTab } from "@/components/StatusTab";
+import { HistoryTab } from "@/components/HistoryTab";
+import { AchievementsTab } from "@/components/AchievementsTab";
+import { SettingTab } from "@/components/SettingTab";
+
+// Mock user data - would come from your auth system in a real app
+const mockUserData = {
+  username: "speedtyper",
+  email: "user@example.com",
+  joinDate: "June 15, 2023",
+  avatar: "/images/avatar-placeholder.png", // Default avatar
+  stats: {
+    testsCompleted: 342,
+    averageWpm: 85,
+    bestWpm: 120,
+    averageAccuracy: 96.5,
+    totalTimePracticed: "28h 45m",
+  },
+  recentTests: [
+    { date: "2023-06-15", wpm: 88, accuracy: 97.2, mode: "eng" },
+    { date: "2023-06-14", wpm: 92, accuracy: 95.8, mode: "eng" },
+    { date: "2023-06-12", wpm: 78, accuracy: 98.1, mode: "shan" },
+    { date: "2023-06-10", wpm: 85, accuracy: 96.3, mode: "eng" },
+  ],
+  achievements: [
+    { name: "Speed Demon", description: "Reach 100 WPM", unlocked: true },
+    {
+      name: "Accuracy Master",
+      description: "Complete a test with 100% accuracy",
+      unlocked: true,
+    },
+    {
+      name: "Bilingual Pro",
+      description: "Complete 50 tests in both languages",
+      unlocked: false,
+    },
+    {
+      name: "Marathon Typer",
+      description: "Practice for 50 hours total",
+      unlocked: false,
+    },
+  ],
+};
+
+export const AccountPage = () => {
+  const { pathname } = useLocation();
+  useTitle({ pathName: pathname });
+
+  const [activeTab, setActiveTab] = useState<TabType>("profile");
+
+  return (
+    <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full"
+      >
+        {/* Header */}
+        <AccoutHeader {...mockUserData} />
+
+        {/* Tabs */}
+        <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        {/* Content */}
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-20"
+        >
+          {/* Profile Tab */}
+          {activeTab === "profile" && (
+            <ProfileTab
+              username={mockUserData.username}
+              email={mockUserData.email}
+              joinDate={mockUserData.joinDate}
+              stats={mockUserData.stats}
+              setActiveTab={setActiveTab}
+            />
+          )}
+
+          {/* Stats Tab */}
+          {activeTab === "stats" && <StatusTab stats={mockUserData.stats} />}
+
+          {/* History Tab */}
+          {activeTab === "history" && <HistoryTab />}
+
+          {/* Achievements Tab */}
+          {activeTab === "achievements" && (
+            <AchievementsTab achievements={mockUserData.achievements} />
+          )}
+
+          {/* Settings Tab */}
+          {activeTab === "settings" && <SettingTab />}
+        </motion.div>
+      </motion.div>
+    </article>
+  );
+};
