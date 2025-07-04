@@ -32,7 +32,7 @@ export const useLogin = () => {
 };
 
 export const useLogout = () => {
-  const { mutate: logoutUser, isPending: isLoggingOut } = useMutation({
+  const { mutateAsync: logoutUser, isPending: isLoggingOut } = useMutation({
     mutationFn: async () => {
       await authAxios.post("/auth/logout");
     },

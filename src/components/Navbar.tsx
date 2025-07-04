@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { cn } from "@/lib/utils";
+import { authStore } from "@/store/authStore";
 
 const navLink = [
   {
@@ -31,6 +32,7 @@ const navLink = [
 
 export const Navbar = () => {
   const { pathname } = useLocation();
+  const { accessToken } = authStore();
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
@@ -69,16 +71,29 @@ export const Navbar = () => {
             </Link>
           ))}
         </div>
-        <div className="flex justify-center items-center">
-          <Link to="/login">
-            <UserIcon
-              className={cn(
-                "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                pathname.endsWith("/login") && "opacity-100"
-              )}
-            />
-          </Link>
-        </div>
+        {accessToken ? (
+          <div className="flex justify-center items-center">
+            <Link to="/account">
+              <UserIcon
+                className={cn(
+                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                  pathname.endsWith("/account") && "opacity-100"
+                )}
+              />
+            </Link>
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">
+            <Link to="/login">
+              <UserIcon
+                className={cn(
+                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                  pathname.endsWith("/login") && "opacity-100"
+                )}
+              />
+            </Link>
+          </div>
+        )}
       </div>
     </motion.nav>
   );

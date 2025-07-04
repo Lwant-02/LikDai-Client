@@ -10,8 +10,8 @@ import { StatusTab } from "@/components/StatusTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
-import { axiosInstance, getAccessToken } from "@/lib/axiosInstance";
-import { Spinner } from "@/components/Spinner";
+import { axiosInstance } from "@/lib/axiosInstance";
+import { authStore } from "@/store/authStore";
 
 // Mock user data - would come from your auth system in a real app
 const mockUserData = {
@@ -54,10 +54,7 @@ const mockUserData = {
 
 export const AccountPage = () => {
   const { pathname } = useLocation();
-  const accessToken = getAccessToken();
-  const [updateAccessToken, setUpdateAccessToken] = useState<string | null>(
-    null
-  );
+  const { accessToken } = authStore();
   const [activeTab, setActiveTab] = useState<TabType>("profile");
   useTitle({ pathName: pathname });
 
@@ -68,19 +65,13 @@ export const AccountPage = () => {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    setUpdateAccessToken(accessToken);
-  }, [accessToken]);
-
-  if (!updateAccessToken) {
+  if (!accessToken) {
     return (
-      <div className=" min-h-screen w-full">
-        <Spinner size={10} />
+      <div className="w-full h-96 my-28 flex justify-center items-center ">
+        <div className="loader" />
       </div>
     );
   }
-
-  console.log("accessToken", accessToken);
 
   return (
     <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">

@@ -1,12 +1,18 @@
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import { useTitle } from "@/hook/useTitle";
 import { RegisterForm } from "@/components/RegisterForm";
 import { LoginForm } from "@/components/LoginForm";
+import { authStore } from "@/store/authStore";
 
 export const LoginPage = () => {
   const { pathname } = useLocation();
+  const { accessToken } = authStore();
   useTitle({ pathName: pathname });
+
+  if (accessToken) {
+    return <Navigate to="/account" replace />;
+  }
 
   return (
     <article className="flex justify-center items-center w-full h-full ">
