@@ -34,8 +34,9 @@ export const LoginForm = () => {
       });
       return;
     }
-    const { accessToken } = await loginUser(formData, {
-      onSuccess: () => {
+    await loginUser(formData, {
+      onSuccess: (accessToken) => {
+        setAccessToken(accessToken);
         setFormData({
           email: "",
           password: "",
@@ -49,6 +50,16 @@ export const LoginForm = () => {
         navigate("/account");
       },
       onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
         toast("❌️ Oops!", {
           description: (
             <p className="text-primary">
@@ -59,7 +70,6 @@ export const LoginForm = () => {
         });
       },
     });
-    setAccessToken(accessToken);
   };
 
   return (

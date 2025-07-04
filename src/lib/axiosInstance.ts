@@ -5,6 +5,7 @@ import axios from "axios";
 export const authAxios = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true,
+  timeout: 10000, // 10 seconds
   headers: {
     "Content-Type": "application/json",
   },
@@ -47,6 +48,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+        authStore.getState().setIsCheckingAuth(true);
         // Attempt to refresh the token using refresh token endpoint
         const refreshResponse = await authAxios.post("/auth/refresh-token");
 
@@ -69,6 +71,8 @@ axiosInstance.interceptors.response.use(
         window.location.href = "/login";
 
         return Promise.reject(refreshError);
+      } finally {
+        authStore.getState().setIsCheckingAuth(false);
       }
     }
 
