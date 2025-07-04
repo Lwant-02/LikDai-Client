@@ -9,8 +9,7 @@ import { InputFiled } from "./InputFiled";
 import { useLogin } from "@/hook/useAuth";
 import { Spinner } from "./Spinner";
 import { useNavigate } from "react-router-dom";
-import { globalStore } from "@/store/globalStore";
-import { setAccessToken } from "@/lib/axiosInstance";
+import { authStore } from "@/store/authStore";
 
 type FormData = {
   email: string;
@@ -19,7 +18,7 @@ type FormData = {
 
 export const LoginForm = () => {
   const { isLoggingIn, loginUser } = useLogin();
-  const { setUsername } = globalStore();
+  const { setAccessToken } = authStore();
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -35,7 +34,7 @@ export const LoginForm = () => {
       });
       return;
     }
-    const { username, accessToken } = await loginUser(formData, {
+    const { accessToken } = await loginUser(formData, {
       onSuccess: () => {
         setFormData({
           email: "",
@@ -60,7 +59,6 @@ export const LoginForm = () => {
         });
       },
     });
-    setUsername(username);
     setAccessToken(accessToken);
   };
 

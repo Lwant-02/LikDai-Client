@@ -6,6 +6,30 @@ type LanguageFilter = "english" | "shan";
 
 type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
+interface UserData {
+  username: string;
+  email: string;
+  joinDate: string;
+  stats: {
+    testsCompleted: number;
+    averageWpm: number;
+    bestWpm: number;
+    averageAccuracy: number;
+    totalTimePracticed: string;
+  };
+  recentTests: {
+    date: string;
+    wpm: number;
+    accuracy: number;
+    mode: string;
+  }[];
+  achievements: {
+    name: string;
+    description: string;
+    unlocked: boolean;
+  }[];
+}
+
 interface SettingOptions {
   isEngMode: boolean;
   isShanMode: boolean;

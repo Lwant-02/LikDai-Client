@@ -101,3 +101,22 @@
     opacity: 0;
   }
 }
+
+/* Loader */
+.loader {
+  width: fit-content;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 8px;
+  background: linear-gradient(currentColor 0 0) 0 100%/0% 3px no-repeat;
+  animation: l2 2s linear infinite;
+  color: #dcb743;
+}
+.loader:before {
+  content: "Loading user data...";
+}
+@keyframes l2 {
+  to {
+    background-size: 100% 3px;
+  }
+}

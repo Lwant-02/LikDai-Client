@@ -1,3 +1,4 @@
+import { authStore } from "@/store/authStore";
 import axios from "axios";
 
 // Create a separate instance for authentication requests
@@ -8,9 +9,6 @@ export const authAxios = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-// Token management - access token in memory only
-let accessToken: string | null = null;
 
 // Create a separate instance for other API requests
 export const axiosInstance = axios.create({
@@ -25,8 +23,9 @@ export const axiosInstance = axios.create({
 // Request interceptor - Add access token to requests
 axiosInstance.interceptors.request.use(
   (config) => {
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    const token = authStore.getState().accessToken;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -52,10 +51,9 @@ axiosInstance.interceptors.response.use(
         const refreshResponse = await authAxios.post("/auth/refresh-token");
 
         const newAccessToken = refreshResponse.data.accessToken;
-        console.log(newAccessToken);
 
         // Update access token in memory only
-        accessToken = newAccessToken;
+        authStore.getState().setAccessToken(newAccessToken);
 
         // Retry the original request with new token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -65,7 +63,7 @@ axiosInstance.interceptors.response.use(
         console.error("Token refresh failed:", refreshError);
 
         // Clear access token from memory
-        accessToken = null;
+        authStore.getState().setAccessToken(null);
 
         // Redirect to login page or dispatch logout action
         window.location.href = "/login";
@@ -77,14 +75,3 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-// Helper functions for token management
-export const setAccessToken = (newAccessToken: string) => {
-  accessToken = newAccessToken;
-};
-
-export const clearAccessToken = () => {
-  accessToken = null;
-};
-
-export const getAccessToken = () => accessToken;
