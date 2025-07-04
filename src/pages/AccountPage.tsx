@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { useTitle } from "@/hook/useTitle";
@@ -55,22 +55,28 @@ const mockUserData = {
 export const AccountPage = () => {
   const { pathname } = useLocation();
   const { accessToken } = authStore();
+  const [username, setUsername] = useState<string>("");
   const [activeTab, setActiveTab] = useState<TabType>("profile");
   useTitle({ pathName: pathname });
 
   useEffect(() => {
     const fetchUser = async () => {
-      await axiosInstance.get("/account/me");
+      const { data } = await axiosInstance.get("/account/me");
+      setUsername(data.username);
     };
     fetchUser();
   }, []);
 
-  if (!accessToken) {
+  if (!username) {
     return (
       <div className="w-full h-96 my-28 flex justify-center items-center ">
         <div className="loader" />
       </div>
     );
+  }
+
+  if (!accessToken) {
+    return <Navigate to="/login" replace />;
   }
 
   return (
