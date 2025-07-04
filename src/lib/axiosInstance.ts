@@ -9,11 +9,82 @@ export const authAxios = axios.create({
   },
 });
 
+// Token management - access token in memory only
+let accessToken: string | null = null;
+
 // Create a separate instance for other API requests
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
+  withCredentials: true,
   timeout: 10000, // 10 seconds
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+// Request interceptor - Add access token to requests
+axiosInstance.interceptors.request.use(
+  (config) => {
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor - Handle token refresh
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Check if error is 401 and we haven't already tried to refresh
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        // Attempt to refresh the token using refresh token endpoint
+        const refreshResponse = await authAxios.post("/auth/refresh-token");
+
+        const newAccessToken = refreshResponse.data.accessToken;
+        console.log(newAccessToken);
+
+        // Update access token in memory only
+        accessToken = newAccessToken;
+
+        // Retry the original request with new token
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        // Refresh failed - handle accordingly
+        console.error("Token refresh failed:", refreshError);
+
+        // Clear access token from memory
+        accessToken = null;
+
+        // Redirect to login page or dispatch logout action
+        window.location.href = "/login";
+
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Helper functions for token management
+export const setAccessToken = (newAccessToken: string) => {
+  accessToken = newAccessToken;
+};
+
+export const clearAccessToken = () => {
+  accessToken = null;
+};
+
+export const getAccessToken = () => accessToken;

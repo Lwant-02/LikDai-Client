@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -10,6 +10,8 @@ import { StatusTab } from "@/components/StatusTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
+import { axiosInstance, getAccessToken } from "@/lib/axiosInstance";
+import { Spinner } from "@/components/Spinner";
 
 // Mock user data - would come from your auth system in a real app
 const mockUserData = {
@@ -52,9 +54,33 @@ const mockUserData = {
 
 export const AccountPage = () => {
   const { pathname } = useLocation();
+  const accessToken = getAccessToken();
+  const [updateAccessToken, setUpdateAccessToken] = useState<string | null>(
+    null
+  );
+  const [activeTab, setActiveTab] = useState<TabType>("profile");
   useTitle({ pathName: pathname });
 
-  const [activeTab, setActiveTab] = useState<TabType>("profile");
+  useEffect(() => {
+    const fetchUser = async () => {
+      await axiosInstance.get("/account/me");
+    };
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    setUpdateAccessToken(accessToken);
+  }, [accessToken]);
+
+  if (!updateAccessToken) {
+    return (
+      <div className=" min-h-screen w-full">
+        <Spinner size={10} />
+      </div>
+    );
+  }
+
+  console.log("accessToken", accessToken);
 
   return (
     <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">

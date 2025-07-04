@@ -6,6 +6,11 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
 import { InputFiled } from "./InputFiled";
+import { useLogin } from "@/hook/useAuth";
+import { Spinner } from "./Spinner";
+import { useNavigate } from "react-router-dom";
+import { globalStore } from "@/store/globalStore";
+import { setAccessToken } from "@/lib/axiosInstance";
 
 type FormData = {
   email: string;
@@ -13,21 +18,52 @@ type FormData = {
 };
 
 export const LoginForm = () => {
+  const { isLoggingIn, loginUser } = useLogin();
+  const { setUsername } = globalStore();
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
   });
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      toast("ⓘ Notice", {
+      toast("❗️Notice", {
         description: <p className="text-primary">Please fill in all fields!</p>,
       });
       return;
     }
+    const { username, accessToken } = await loginUser(formData, {
+      onSuccess: () => {
+        setFormData({
+          email: "",
+          password: "",
+        });
+        toast("✅️ Success", {
+          description: <p className="text-primary">Login successful!</p>,
+          style: {
+            backgroundColor: "#1f7d53 ",
+          },
+        });
+        navigate("/account");
+      },
+      onError: (error: any) => {
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      },
+    });
+    setUsername(username);
+    setAccessToken(accessToken);
   };
+
   return (
     <>
       <motion.form
@@ -61,15 +97,22 @@ export const LoginForm = () => {
           }
           placeholder="Password"
           label="Password"
-          helperText="Password must be at least 8 characters long."
+          helperText="Password must be at least 8 characters long and contain at least one letter and one number."
         />
         <Button
           variant="destructive"
           type="submit"
+          disabled={isLoggingIn}
           className="mt-3 h-10 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
-          <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90" />
-          Sign In
+          {isLoggingIn ? (
+            <Spinner size={6} />
+          ) : (
+            <>
+              <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90" />
+              Sign In
+            </>
+          )}
         </Button>
         <div className=" w-full max-w-sm flex justify-end items-center">
           <button
