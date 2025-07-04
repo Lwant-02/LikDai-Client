@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 
 import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
+import { useRegister } from "@/hook/useAuth";
+import { Spinner } from "./Spinner";
 
 interface FormData {
   username: string;
@@ -13,6 +15,7 @@ interface FormData {
 }
 
 export const RegisterForm = () => {
+  const { isRegistering, registerUser } = useRegister();
   const [formData, setFormData] = useState<FormData>({
     username: "",
     email: "",
@@ -22,11 +25,40 @@ export const RegisterForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
-      toast("ⓘ Notice", {
+      toast("❗️Notice", {
         description: <p className="text-primary">Please fill in all fields!</p>,
       });
       return;
     }
+    registerUser(formData, {
+      onSuccess: () => {
+        setFormData({
+          username: "",
+          email: "",
+          password: "",
+        });
+        toast("✅️ Success", {
+          description: (
+            <p className="text-primary">
+              Registration successful! Please login with your new account.
+            </p>
+          ),
+          style: {
+            backgroundColor: "#1f7d53 ",
+          },
+        });
+      },
+      onError: (error: any) => {
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      },
+    });
   };
 
   return (
@@ -72,15 +104,22 @@ export const RegisterForm = () => {
         }
         placeholder="Password"
         label="Password"
-        helperText="Password must be at least 8 characters long."
+        helperText="Password must be at least 8 characters long and contain at least one letter and one number."
       />
       <Button
         variant="destructive"
+        disabled={isRegistering}
         type="submit"
         className="h-10 mt-3 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base transition-colors duration-200 "
       >
-        <UserPlusIcon className="size-5 bg-transparent" />
-        Sign Up
+        {isRegistering ? (
+          <Spinner size={6} />
+        ) : (
+          <>
+            <UserPlusIcon className="size-5 bg-transparent" />
+            Sign Up
+          </>
+        )}
       </Button>
     </motion.form>
   );
