@@ -6,6 +6,8 @@ import { Navigate, useSearchParams } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { InputFiled } from "@/components/InputFiled";
+import { useChangePassword } from "@/hook/useAuth";
+import { Spinner } from "@/components/Spinner";
 
 interface FormData {
   newPassword: string;
@@ -13,6 +15,7 @@ interface FormData {
 }
 
 export const ChangePasswordPage = () => {
+  const { changePassword, isChangingPassword } = useChangePassword();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const [formData, setFormData] = useState<FormData>({
@@ -20,7 +23,7 @@ export const ChangePasswordPage = () => {
     confirmPassword: "",
   });
 
-  const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.newPassword || !formData.confirmPassword) {
       toast("ⓘ Notice", {
@@ -38,20 +41,51 @@ export const ChangePasswordPage = () => {
       });
       return;
     }
-    toast("✅️ Password Changed", {
-      description: (
-        <p className="text-primary">
-          Password changed successfully! Please login with your new password.
-        </p>
-      ),
-      style: {
-        backgroundColor: "#1f7d53 ",
+    await changePassword(
+      {
+        token: token as string,
+        password: formData.newPassword,
       },
-    });
-    setFormData({
-      newPassword: "",
-      confirmPassword: "",
-    });
+      {
+        onSuccess: () => {
+          setFormData({
+            newPassword: "",
+            confirmPassword: "",
+          });
+          toast("✅️ Success", {
+            description: (
+              <p className="text-primary">
+                Password changed successfully! You may leave this page now and
+                login with your new password.
+              </p>
+            ),
+            style: {
+              backgroundColor: "#1f7d53 ",
+            },
+          });
+        },
+        onError: (error: any) => {
+          if (error.code === "ERR_NETWORK") {
+            toast("❌️ Oops!", {
+              description: (
+                <p className="text-primary">
+                  Request timed out! Please try again later.
+                </p>
+              ),
+            });
+            return;
+          }
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                {error.response.data.message ||
+                  "Something went wrong. Please try again."}
+              </p>
+            ),
+          });
+        },
+      }
+    );
   };
 
   if (!token) {
@@ -93,7 +127,7 @@ export const ChangePasswordPage = () => {
           }
           placeholder="New Password"
           label="New Password"
-          helperText="Password must be at least 8 characters long."
+          helperText="Password must be at least 8 characters long and contain at least one letter and one number."
         />
         <InputFiled
           type="password"
@@ -107,15 +141,22 @@ export const ChangePasswordPage = () => {
           }
           placeholder="Confirm Password"
           label="Confirm Password"
-          helperText="Password must be at least 8 characters long."
+          helperText="Password must be at least 8 characters long and contain at least one letter and one number."
         />
         <Button
           variant="destructive"
           type="submit"
+          disabled={isChangingPassword}
           className="mt-3 h-10 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
-          <RotateCcwKey className="size-5 bg-transparent -rotate-90" />
-          Confirm
+          {isChangingPassword ? (
+            <Spinner size={6} />
+          ) : (
+            <>
+              <RotateCcwKey className="size-5 bg-transparent -rotate-90" />
+              Confirm
+            </>
+          )}
         </Button>
       </motion.form>
     </article>

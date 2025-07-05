@@ -7,20 +7,18 @@ import { useLogout } from "@/hook/useAuth";
 import { Spinner } from "./Spinner";
 import { toast } from "sonner";
 import { authStore } from "@/store/authStore";
+import { formatJoinedDate } from "@/util/formatJoinedDate";
 
 interface AccoutHeaderProps {
+  id: string;
   username: string;
-  joinDate: string;
-  stats: {
+  joinedAt: string;
+  stats?: {
     averageWpm: number;
   };
 }
 
-export const AccoutHeader = ({
-  username,
-  joinDate,
-  stats,
-}: AccoutHeaderProps) => {
+export const AccoutHeader = ({ username, joinedAt }: AccoutHeaderProps) => {
   const { setAccessToken } = authStore();
   const { isLoggingOut, logoutUser } = useLogout();
   const { pathname } = useLocation();
@@ -37,6 +35,16 @@ export const AccoutHeader = ({
         });
       },
       onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
         toast("❌️ Oops!", {
           description: (
             <p className="text-primary">
@@ -59,12 +67,14 @@ export const AccoutHeader = ({
             </p>
           </div>
           <div className="absolute -bottom-1 -right-1 bg-green text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-            {stats.averageWpm}
+            85
           </div>
         </div>
         <div>
           <h1 className="text-2xl font-bold">{username}</h1>
-          <p className="text-sm opacity-70">Member since {joinDate}</p>
+          <p className="text-sm opacity-70">
+            Member since - {formatJoinedDate(joinedAt)}
+          </p>
         </div>
       </div>
       {pathname.endsWith("/account") && (

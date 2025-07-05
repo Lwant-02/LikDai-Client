@@ -11,6 +11,8 @@ interface User {
   email: string;
   username: string;
   joinedAt: string;
+  averageWpm: number;
+  totalTests: number;
 }
 
 interface stats {

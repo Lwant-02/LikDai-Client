@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { authStore } from "@/store/authStore";
-import { refreshToken } from "@/util/refreshToken";
+import { refreshToken } from "@/service/refreshToken";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { setAccessToken, setIsCheckingAuth } = authStore();

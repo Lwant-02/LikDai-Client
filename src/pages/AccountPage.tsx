@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -10,8 +10,8 @@ import { StatusTab } from "@/components/StatusTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
-import { axiosInstance } from "@/lib/axiosInstance";
 import { authStore } from "@/store/authStore";
+import { useGetProfile } from "@/hook/useUser";
 
 // Mock user data - would come from your auth system in a real app
 const mockUserData = {
@@ -59,15 +59,9 @@ export const AccountPage = () => {
   const [activeTab, setActiveTab] = useState<TabType>("profile");
   useTitle({ pathName: pathname });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await axiosInstance.get("/account/me");
-      console.log(user.data);
-    };
-    fetchUser();
-  }, []);
+  const { profile, isFetchingProfile } = useGetProfile();
 
-  if (isCheckingAuth) {
+  if (isCheckingAuth || isFetchingProfile || !profile) {
     return (
       <div className="w-full h-96 my-28 flex justify-center items-center ">
         <div className="loader" />
@@ -84,7 +78,7 @@ export const AccountPage = () => {
         className="w-full"
       >
         {/* Header */}
-        <AccoutHeader {...mockUserData} />
+        <AccoutHeader {...profile} />
 
         {/* Tabs */}
         <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -100,10 +94,10 @@ export const AccountPage = () => {
           {/* Profile Tab */}
           {activeTab === "profile" && (
             <ProfileTab
-              username={mockUserData.username}
-              email={mockUserData.email}
-              joinDate={mockUserData.joinDate}
-              stats={mockUserData.stats}
+              username={profile.username}
+              email={profile.email}
+              joinDate={profile.joinedAt}
+              testsCompleted={profile.totalTests}
               setActiveTab={setActiveTab}
             />
           )}

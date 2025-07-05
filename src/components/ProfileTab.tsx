@@ -5,14 +5,13 @@ import { Edit, Save, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Settings } from "lucide-react";
 import { InputFiled } from "./InputFiled";
+import { formatJoinedDate } from "@/util/formatJoinedDate";
 
 interface ProfileTabProps {
   username: string;
   email: string;
   joinDate: string;
-  stats: {
-    testsCompleted: number;
-  };
+  testsCompleted: number;
   setActiveTab: (tab: TabType) => void;
 }
 
@@ -20,7 +19,7 @@ export const ProfileTab = ({
   username,
   email,
   joinDate,
-  stats,
+  testsCompleted,
   setActiveTab,
 }: ProfileTabProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -29,9 +28,6 @@ export const ProfileTab = ({
   });
   const [userData, setUserData] = useState({
     username: username,
-    email: email,
-    joinDate: joinDate,
-    stats: stats,
   });
 
   const handleSaveProfile = () => {
@@ -111,11 +107,11 @@ export const ProfileTab = ({
           </div>
           <div>
             <p className="text-sm opacity-70 mb-1">Member Since</p>
-            <p className="font-medium">{joinDate}</p>
+            <p className="font-medium">{formatJoinedDate(joinDate)}</p>
           </div>
           <div>
             <p className="text-sm opacity-70 mb-1">Tests Completed</p>
-            <p className="font-medium">{stats.testsCompleted}</p>
+            <p className="font-medium">{testsCompleted}</p>
           </div>
         </div>
       ) : (
@@ -141,14 +137,6 @@ export const ProfileTab = ({
             label="Email"
             helperText="Email must be a valid email address."
           />
-          <div>
-            <p className="text-sm opacity-70 mb-1">Member Since</p>
-            <p className="font-medium">{userData.joinDate}</p>
-          </div>
-          <div>
-            <p className="text-sm opacity-70 mb-1">Tests Completed</p>
-            <p className="font-medium">{userData.stats.testsCompleted}</p>
-          </div>
         </div>
       )}
 
