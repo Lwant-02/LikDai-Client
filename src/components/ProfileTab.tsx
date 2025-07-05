@@ -6,6 +6,9 @@ import { Button } from "./ui/button";
 import { Settings } from "lucide-react";
 import { InputFiled } from "./InputFiled";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { useUpdateUsername } from "@/hook/useUser";
+import { Spinner } from "./Spinner";
+import { queryClient } from "@/lib/queryClient";
 
 interface ProfileTabProps {
   username: string;
@@ -22,37 +25,54 @@ export const ProfileTab = ({
   testsCompleted,
   setActiveTab,
 }: ProfileTabProps) => {
+  const { isUpdatingUsername, updateUsername } = useUpdateUsername();
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
     username: username,
   });
-  const [userData, setUserData] = useState({
-    username: username,
-  });
 
-  const handleSaveProfile = () => {
+  const handleUpdateUsername = async () => {
     if (!editForm.username.trim()) {
       toast("ⓘ Notice", {
         description: <p className="text-primary">Please fill in all fields!</p>,
       });
       return;
     }
-
-    // Update user data (in a real app, this would be an API call)
-    setUserData({
-      ...userData,
-      username: editForm.username,
+    await updateUsername(editForm.username, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["profile"] });
+        setIsEditing(false);
+        toast("✅ Profile Updated", {
+          description: (
+            <p className="text-primary">
+              Your profile has been updated successfully!
+            </p>
+          ),
+          style: { backgroundColor: "#1f7d53" },
+        });
+      },
+      onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      },
     });
-
     setIsEditing(false);
-    toast("✅ Profile Updated", {
-      description: (
-        <p className="text-primary">
-          Your profile has been updated successfully!
-        </p>
-      ),
-      style: { backgroundColor: "#1f7d53" },
-    });
   };
 
   return (
@@ -74,11 +94,19 @@ export const ProfileTab = ({
             <Button
               variant="outline"
               size="sm"
-              onClick={handleSaveProfile}
-              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer"
+              disabled={isUpdatingUsername}
+              type="button"
+              onClick={handleUpdateUsername}
+              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-28"
             >
-              <Save className="size-4 " />
-              Save
+              {isUpdatingUsername ? (
+                <Spinner size={6} />
+              ) : (
+                <>
+                  <Save className="size-4 " />
+                  Save
+                </>
+              )}
             </Button>
             <Button
               variant="outline"
@@ -86,7 +114,7 @@ export const ProfileTab = ({
               onClick={() => {
                 setIsEditing(false);
               }}
-              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer"
+              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer w-28"
             >
               <X className="size-4 " />
               Cancel
@@ -115,7 +143,7 @@ export const ProfileTab = ({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputFiled
             type="text"
             id="account_username"
@@ -137,7 +165,7 @@ export const ProfileTab = ({
             label="Email"
             helperText="Email must be a valid email address."
           />
-        </div>
+        </form>
       )}
 
       <div className="mt-6">
