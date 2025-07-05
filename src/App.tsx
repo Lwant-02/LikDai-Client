@@ -19,17 +19,30 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { Footer } from "./components/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { TestPage } from "./pages/TestPage";
+import { authStore } from "./store/authStore";
 
 export default function App() {
+  const { accessToken } = authStore();
+
   return (
     <main className="min-h-screen overflow-hidden mx-auto max-w-7xl md:px-0 px-2 relative">
       <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={
+              accessToken ? <Navigate to="/account" replace /> : <LoginPage />
+            }
+          />
           <Route path="/typing-test" element={<TypingtestPage />} />
-          <Route path="/account" element={<AccountPage />} />
+          <Route
+            path="/account"
+            element={
+              accessToken ? <AccountPage /> : <Navigate to="/login" replace />
+            }
+          />
           <Route path="/leaderboards" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />

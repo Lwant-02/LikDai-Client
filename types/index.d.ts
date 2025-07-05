@@ -6,28 +6,55 @@ type LanguageFilter = "english" | "shan";
 
 type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
+interface User {
+  id: string;
+  email: string;
+  username: string;
+  joinedAt: string;
+}
+
+interface stats {
+  averageWpm: number;
+  bestWpm: number;
+  averageAccuracy: number;
+  testsCompleted: number;
+  totalTimePracticed: string;
+}
+
+interface TypingTestResult {
+  wpm: number;
+  accuracy: number;
+  raw: number;
+  characters: number;
+  correctChars: number;
+  timeTaken: number;
+  testType: string;
+  wordCount: number;
+  consistency: number;
+  totalWords: number;
+  errorWords: number;
+}
+
+interface TestHistory {
+  date: string;
+  wpm: number;
+  accuracy: number;
+  mode: string;
+}
+
+interface Achievement {
+  name: string;
+  description: string;
+  unlocked: boolean;
+}
+
 interface UserData {
   username: string;
   email: string;
   joinDate: string;
-  stats: {
-    testsCompleted: number;
-    averageWpm: number;
-    bestWpm: number;
-    averageAccuracy: number;
-    totalTimePracticed: string;
-  };
-  recentTests: {
-    date: string;
-    wpm: number;
-    accuracy: number;
-    mode: string;
-  }[];
-  achievements: {
-    name: string;
-    description: string;
-    unlocked: boolean;
-  }[];
+  stats: stats;
+  recentTests: TestHistory[];
+  achievements: Achievement[];
 }
 
 interface SettingOptions {

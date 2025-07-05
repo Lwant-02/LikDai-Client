@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { useTitle } from "@/hook/useTitle";
 import { RegisterForm } from "@/components/RegisterForm";
@@ -7,11 +7,16 @@ import { authStore } from "@/store/authStore";
 
 export const LoginPage = () => {
   const { pathname } = useLocation();
-  const { accessToken } = authStore();
+
+  const { isCheckingAuth } = authStore();
   useTitle({ pathName: pathname });
 
-  if (accessToken) {
-    return <Navigate to="/account" replace />;
+  if (isCheckingAuth) {
+    return (
+      <div className="w-full h-96 my-28 flex justify-center items-center ">
+        <div className="loader" />
+      </div>
+    );
   }
 
   return (
