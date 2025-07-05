@@ -39,3 +39,23 @@ export const useLogout = () => {
   });
   return { logoutUser, isLoggingOut };
 };
+
+export const useForgotPassword = () => {
+  const { mutateAsync: forgotPassword, isPending: isSendingEmail } =
+    useMutation({
+      mutationFn: async (email: string) => {
+        await authAxios.post("/auth/forgot-password", { email });
+      },
+    });
+  return { forgotPassword, isSendingEmail };
+};
+
+export const useChangePassword = () => {
+  const { mutateAsync: changePassword, isPending: isChangingPassword } =
+    useMutation({
+      mutationFn: async (payload: { token: string; password: string }) => {
+        await authAxios.post("/auth/change-password", payload);
+      },
+    });
+  return { changePassword, isChangingPassword };
+};

@@ -4,8 +4,10 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
+import { authStore } from "@/store/authStore";
 
 export const ResultPage = () => {
+  const { accessToken } = authStore();
   const navigate = useNavigate();
   // Simplified data with just final values
   const testResults = {
@@ -30,24 +32,25 @@ export const ResultPage = () => {
   return (
     <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
       <h1 className="text-3xl font-bold mt-4">Result Details</h1>
-      <div className="w-full h-auto flex flex-col gap-4 items-center ">
-        <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-lg">
-          <UsersIcon className="size-6 text-yellow md:flex hidden" />
-          <p className="text-yellow">
-            You are in the guest mode.Your results will not be saved.{" "}
-            <span
-              onClick={() => navigate("/login")}
-              className="text-purple cursor-pointer underline"
-            >
-              Login to save your results.
-            </span>
-          </p>
+      {!accessToken && (
+        <div className="w-full h-auto flex flex-col gap-4 items-center ">
+          <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-lg">
+            <UsersIcon className="size-6 text-yellow md:flex hidden" />
+            <p className="text-yellow">
+              You are in the guest mode.Your results will not be saved.{" "}
+              <span
+                onClick={() => navigate("/login")}
+                className="text-purple cursor-pointer underline"
+              >
+                Login to save your results.
+              </span>
+            </p>
+          </div>
+          <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-lg">
+            Guest results will not be saved. Please login to save your results.
+          </div>
         </div>
-        <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-lg">
-          Guest results will not be saved. Please login to save your results.
-        </div>
-      </div>
-
+      )}
       <div className="grid md:grid-cols-3 grid-cols-2 gap-4 w-full">
         <ResultCard
           title="WPM"

@@ -34,6 +34,7 @@ export const LoginForm = () => {
     }
     await loginUser(formData, {
       onSuccess: (accessToken) => {
+        console.log("Login accessToken: ", accessToken);
         setAccessToken(accessToken);
         setFormData({
           email: "",

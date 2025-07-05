@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useForgotPassword } from "@/hook/useAuth";
+import { Spinner } from "./Spinner";
 
 interface ForgotPasswordDialogProps {
   isOpen: boolean;
@@ -20,9 +22,10 @@ export const ForgotPasswordDialog = ({
   isOpen,
   setIsOpen,
 }: ForgotPasswordDialogProps) => {
+  const { forgotPassword, isSendingEmail } = useForgotPassword();
   const [email, setEmail] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) {
       toast("ⓘ Notice", {
@@ -30,18 +33,42 @@ export const ForgotPasswordDialog = ({
       });
       return;
     }
-    toast("✅️ Success", {
-      description: (
-        <p className="text-primary">
-          Password reset successfully! If this email is valid, you will receive
-          an email shortly.
-        </p>
-      ),
-      style: {
-        backgroundColor: "#1f7d53 ",
+    await forgotPassword(email, {
+      onSuccess: () => {
+        setIsOpen(false);
+        setEmail("");
+        toast("✅️ Success", {
+          description: (
+            <p className="text-primary">
+              Password reset email sent successfully. Please check your email!
+            </p>
+          ),
+          style: {
+            backgroundColor: "#1f7d53 ",
+          },
+        });
+      },
+      onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
       },
     });
-    setIsOpen(false);
   };
 
   return (
@@ -68,9 +95,10 @@ export const ForgotPasswordDialog = ({
           <Button
             variant="destructive"
             type="submit"
+            disabled={isSendingEmail}
             className="mt-3 h-10 rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
           >
-            Confirm
+            {isSendingEmail ? <Spinner size={6} /> : <>Send Email</>}
           </Button>
         </form>
       </DialogContent>

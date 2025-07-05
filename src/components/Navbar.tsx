@@ -10,6 +10,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { authStore } from "@/store/authStore";
+import { useGetProfile } from "@/hook/useUser";
 
 const navLink = [
   {
@@ -33,6 +34,7 @@ const navLink = [
 export const Navbar = () => {
   const { pathname } = useLocation();
   const { accessToken } = authStore();
+  const { profile } = useGetProfile();
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
@@ -72,27 +74,25 @@ export const Navbar = () => {
           ))}
         </div>
         {accessToken ? (
-          <div className="flex justify-center items-center">
-            <Link to="/account">
-              <UserIcon
-                className={cn(
-                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                  pathname.endsWith("/account") && "opacity-100"
-                )}
-              />
-            </Link>
-          </div>
+          <Link
+            to="/account"
+            className={cn(
+              "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center gap-1",
+              pathname.endsWith("/account") && "opacity-100"
+            )}
+          >
+            <UserIcon className="size-5" />
+            <p className="hidden md:flex text-sm ">{profile?.username}</p>
+          </Link>
         ) : (
-          <div className="flex justify-center items-center">
-            <Link to="/login">
-              <UserIcon
-                className={cn(
-                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                  pathname.endsWith("/login") && "opacity-100"
-                )}
-              />
-            </Link>
-          </div>
+          <Link to="/login">
+            <UserIcon
+              className={cn(
+                "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                pathname.endsWith("/login") && "opacity-100"
+              )}
+            />
+          </Link>
         )}
       </div>
     </motion.nav>
