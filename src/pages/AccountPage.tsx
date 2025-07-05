@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { useTitle } from "@/hook/useTitle";
@@ -54,29 +54,25 @@ const mockUserData = {
 
 export const AccountPage = () => {
   const { pathname } = useLocation();
-  const { accessToken } = authStore();
-  const [username, setUsername] = useState<string>("");
+  const { isCheckingAuth } = authStore();
+
   const [activeTab, setActiveTab] = useState<TabType>("profile");
   useTitle({ pathName: pathname });
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data } = await axiosInstance.get("/account/me");
-      setUsername(data.username);
+      const user = await axiosInstance.get("/account/me");
+      console.log(user.data);
     };
     fetchUser();
   }, []);
 
-  if (!username) {
+  if (isCheckingAuth) {
     return (
       <div className="w-full h-96 my-28 flex justify-center items-center ">
         <div className="loader" />
       </div>
     );
-  }
-
-  if (!accessToken) {
-    return <Navigate to="/login" replace />;
   }
 
   return (

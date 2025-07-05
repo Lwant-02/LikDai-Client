@@ -8,7 +8,6 @@ import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
 import { InputFiled } from "./InputFiled";
 import { useLogin } from "@/hook/useAuth";
 import { Spinner } from "./Spinner";
-import { useNavigate } from "react-router-dom";
 import { authStore } from "@/store/authStore";
 
 type FormData = {
@@ -24,7 +23,6 @@ export const LoginForm = () => {
     password: "",
   });
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,7 +45,6 @@ export const LoginForm = () => {
             backgroundColor: "#1f7d53 ",
           },
         });
-        navigate("/account");
       },
       onError: (error: any) => {
         if (error.code === "ERR_NETWORK") {
