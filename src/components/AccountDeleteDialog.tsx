@@ -70,7 +70,7 @@ export const AccountDeleteDialog = ({
           <DialogTitle>Delete Account Warning ❗️</DialogTitle>
           <DialogDescription className="text-sm opacity-70">
             This action cannot be undone. This will permanently delete your
-            account.
+            account and all of your data. Please confirm to proceed.
           </DialogDescription>
         </DialogHeader>
         <Button
