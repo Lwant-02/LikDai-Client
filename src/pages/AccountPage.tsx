@@ -49,6 +49,11 @@ const mockUserData = {
       description: "Practice for 50 hours total",
       unlocked: false,
     },
+    {
+      name: "Marathon Typer",
+      description: "Practice for 50 hours total",
+      unlocked: false,
+    },
   ],
 };
 

@@ -17,6 +17,20 @@ export const useGetProfile = () => {
   return { profile, isFetchingProfile };
 };
 
+export const useGetAchievements = () => {
+  const { data: achievements, isLoading: isFetchingAchievements } =
+    useQuery<AchievementResponse>({
+      queryKey: ["achievements"],
+      queryFn: async () => {
+        const { data } = await axiosInstance.get("/account/achievements");
+        return data.data;
+      },
+      enabled: !!authStore.getState().accessToken,
+      retry: 1,
+    });
+  return { achievements, isFetchingAchievements };
+};
+
 export const useUpdateUsername = () => {
   const { mutateAsync: updateUsername, isPending: isUpdatingUsername } =
     useMutation({

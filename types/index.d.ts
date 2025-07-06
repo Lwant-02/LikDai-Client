@@ -6,6 +6,14 @@ type LanguageFilter = "english" | "shan";
 
 type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
+enum AchievementCategory {
+  speed = "speed",
+  accuracy = "accuracy",
+  consistency = "consistency",
+  practice = "practice",
+  certificate = "certificate",
+}
+
 interface User {
   id: string;
   email: string;
@@ -45,9 +53,23 @@ interface TestHistory {
 }
 
 interface Achievement {
+  id: string;
   name: string;
-  description: string;
-  unlocked: boolean;
+  requirement: string;
+  threshold: number;
+  category: AchievementCategory;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
+
+interface UlockedAchievement {
+  achievementId: string;
+  unlockedAt: string | Date;
+}
+
+interface AchievementResponse {
+  achievement: Achievement[];
+  unlockedAchievements: UlockedAchievement[];
 }
 
 interface UserData {

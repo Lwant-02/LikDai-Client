@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Award } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
@@ -24,11 +25,12 @@ export const AchievementsTab = ({
         {achievements.map((achievement, index) => (
           <div
             key={index}
-            className={`p-4 rounded-lg border ${
+            className={cn(
+              "p-4 rounded-lg border ",
               achievement.unlocked
                 ? "border-yellow bg-yellow/10"
                 : "border-primary/20 bg-foreground/20 opacity-60"
-            }`}
+            )}
           >
             <div className="flex items-center gap-3">
               <div
