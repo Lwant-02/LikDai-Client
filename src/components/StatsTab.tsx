@@ -34,7 +34,7 @@ export const StatsTab = () => {
           <p className="text-2xl font-bold text-green">{stats?.bestWpm || 0}</p>
         </div>
         <div className="bg-foreground/20 p-4 rounded-lg text-center">
-          <p className="text-sm opacity-70 mb-1">Avg. Accuracy</p>
+          <p className="text-sm opacity-70 mb-1">Average Accuracy</p>
           <p className="text-2xl font-bold text-yellow">
             {stats?.averageAccuracy || 0}%
           </p>

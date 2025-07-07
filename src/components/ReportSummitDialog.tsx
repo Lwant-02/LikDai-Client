@@ -1,0 +1,115 @@
+import { useState } from "react";
+import { toast } from "sonner";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "./ui/button";
+import { Spinner } from "./Spinner";
+import { Textarea } from "./ui/textarea";
+import { cn } from "@/lib/utils";
+import { ThankyouDialog } from "./ThankyouDialog";
+import { submitReport } from "@/service/submitReport";
+
+interface ReportSummitDialogProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+export const ReportSummitDialog = ({
+  isOpen,
+  setIsOpen,
+}: ReportSummitDialogProps) => {
+  const [text, setText] = useState<string>("");
+  const [isThankyouDialogOpen, setIsThankyouDialogOpen] =
+    useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!text) {
+      toast("ⓘ Notice", {
+        description: (
+          <p className="text-primary">Please do not leave this empty!</p>
+        ),
+      });
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      const res = await submitReport(text);
+      if (res) {
+        setText("");
+        setIsOpen(false);
+        setIsThankyouDialogOpen(true);
+        toast("✅️ Success", {
+          description: (
+            <p className="text-primary">Report submitted successfully!</p>
+          ),
+          style: {
+            backgroundColor: "#1f7d53 ",
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast("❌️ Oops!", {
+        description: (
+          <p className="text-primary">
+            Something went wrong. Please try again.
+          </p>
+        ),
+      });
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+          <DialogHeader>
+            <DialogTitle>Report a Bug 🐞</DialogTitle>
+            <DialogDescription className="text-sm opacity-70">
+              Please explain the issue you are facing and we will get back to
+              you as soon as possible.
+            </DialogDescription>
+          </DialogHeader>
+          <form
+            className="flex items-center gap-2 flex-col "
+            onSubmit={handleSubmit}
+          >
+            <Textarea
+              id="custom_text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Report your issue here..."
+              className={cn(
+                "bg-background/30 border-none focus:ring-1! ring-primary/30 h-40  rounded-lg resize-none"
+              )}
+            />
+            <Button
+              variant="destructive"
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-3 h-10 rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+            >
+              {isSubmitting ? <Spinner size={6} /> : <>Submit</>}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+      {/* Thank you dialog */}
+      <ThankyouDialog
+        isOpen={isThankyouDialogOpen}
+        setIsOpen={setIsThankyouDialogOpen}
+      />
+    </>
+  );
+};
