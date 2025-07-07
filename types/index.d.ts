@@ -23,12 +23,14 @@ interface User {
   totalTests: number;
 }
 
-interface stats {
+interface Stats {
   averageWpm: number;
   bestWpm: number;
   averageAccuracy: number;
   testsCompleted: number;
   totalTimePracticed: string;
+  engDistribution: number;
+  shanDistribution: number;
 }
 
 interface TypingTestResult {

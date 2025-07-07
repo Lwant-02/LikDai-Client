@@ -5,7 +5,7 @@ import { useTitle } from "@/hook/useTitle";
 import { AccoutHeader } from "@/components/AccoutHeader";
 import { AccountTabs } from "@/components/AccountTabs";
 import { ProfileTab } from "@/components/ProfileTab";
-import { StatusTab } from "@/components/StatusTab";
+import { StatsTab } from "@/components/StatsTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
@@ -108,7 +108,7 @@ export const AccountPage = () => {
           )}
 
           {/* Stats Tab */}
-          {activeTab === "stats" && <StatusTab stats={mockUserData.stats} />}
+          {activeTab === "stats" && <StatsTab />}
 
           {/* History Tab */}
           {activeTab === "history" && <HistoryTab />}

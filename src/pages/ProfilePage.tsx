@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTitle } from "@/hook/useTitle";
 import { AccoutHeader } from "@/components/AccoutHeader";
 import { AccountTabs } from "@/components/AccountTabs";
-import { StatusTab } from "@/components/StatusTab";
+import { StatsTab } from "@/components/StatsTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 
@@ -14,6 +14,7 @@ const mockUserData = {
   username: "speedtyper",
   email: "user@example.com",
   joinDate: "June 15, 2023",
+  id: "1",
   stats: {
     testsCompleted: 342,
     averageWpm: 85,
@@ -62,7 +63,11 @@ export const ProfilePage = () => {
         className="w-full "
       >
         {/* Header */}
-        <AccoutHeader {...mockUserData} />
+        <AccoutHeader
+          joinedAt={mockUserData.joinDate}
+          username={mockUserData.username}
+          id={mockUserData.id}
+        />
 
         {/* Tabs */}
         <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -76,7 +81,7 @@ export const ProfilePage = () => {
           className=" mb-20"
         >
           {/* Stats Tab */}
-          {activeTab === "stats" && <StatusTab stats={mockUserData.stats} />}
+          {activeTab === "stats" && <StatsTab />}
 
           {/* History Tab */}
           {activeTab === "history" && <HistoryTab />}

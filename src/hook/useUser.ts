@@ -41,6 +41,23 @@ export const useGetHistorys = () => {
   return { history, isFetchingHistory };
 };
 
+export const useGetStats = () => {
+  const { data: stats, isLoading: isFetchingStats } = useQuery<Stats>({
+    queryKey: ["stats"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get("/account/stats");
+      return data.data;
+    },
+    enabled:
+      !!authStore.getState().accessToken &&
+      settingStore.getState().activeTab === "stats",
+    retry: 1,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
+  return { stats, isFetchingStats };
+};
+
 export const useGetAchievements = () => {
   const { data: achievements, isLoading: isFetchingAchievements } =
     useQuery<AchievementResponse>({

@@ -13,9 +13,7 @@ interface AccoutHeaderProps {
   id: string;
   username: string;
   joinedAt: string;
-  stats?: {
-    averageWpm: number;
-  };
+  averageWpm?: number;
 }
 
 export const AccoutHeader = ({ username, joinedAt }: AccoutHeaderProps) => {
