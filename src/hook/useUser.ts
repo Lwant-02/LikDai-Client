@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/lib/axiosInstance";
 import { authStore } from "@/store/authStore";
+import { settingStore } from "@/store/settingStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetProfile = () => {
@@ -10,11 +11,34 @@ export const useGetProfile = () => {
         const { data } = await axiosInstance.get("/account/me");
         return data.data;
       },
-      enabled: !!authStore.getState().accessToken,
+      enabled:
+        !!authStore.getState().accessToken &&
+        settingStore.getState().activeTab === "profile",
       retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
     }
   );
   return { profile, isFetchingProfile };
+};
+
+export const useGetHistorys = () => {
+  const { data: history = [], isLoading: isFetchingHistory } = useQuery<
+    TestHistory[]
+  >({
+    queryKey: ["history"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get("/account/history");
+      return data.data;
+    },
+    enabled:
+      !!authStore.getState().accessToken &&
+      settingStore.getState().activeTab === "history",
+    retry: 1,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
+  return { history, isFetchingHistory };
 };
 
 export const useGetAchievements = () => {

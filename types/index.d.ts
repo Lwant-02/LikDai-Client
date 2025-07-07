@@ -46,7 +46,8 @@ interface TypingTestResult {
 }
 
 interface TestHistory {
-  date: string;
+  id: string;
+  createdAt: string | Date;
   wpm: number;
   accuracy: number;
   mode: string;
