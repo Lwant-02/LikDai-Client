@@ -7,7 +7,7 @@ export const HistoryTab = () => {
 
   if (isFetchingHistory) {
     return (
-      <div className="w-full h-96 my-28 flex justify-center items-center ">
+      <div className="w-full h-96  flex justify-center items-center ">
         <div className="loader" />
       </div>
     );
@@ -74,7 +74,7 @@ export const HistoryTab = () => {
           </table>
         </div>
       ) : (
-        <div className="w-full h-full flex justify-center items-center ">
+        <div className="w-full h-96 flex justify-center items-center ">
           <p className="text-center text-lg opacity-70">
             You do not have any test history yet!
           </p>
