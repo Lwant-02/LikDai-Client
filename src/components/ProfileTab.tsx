@@ -38,6 +38,18 @@ export const ProfileTab = ({
       });
       return;
     }
+    //Check if username is include letter and number
+    if (!/^(?=.*[a-z])(?=.*\d)[a-z0-9]+$/i.test(editForm.username)) {
+      toast("ⓘ Notice", {
+        description: (
+          <p className="text-primary">
+            Username must contain at least one letter and one number.
+          </p>
+        ),
+      });
+      return;
+    }
+
     await updateUsername(editForm.username, {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["profile"] });
@@ -97,7 +109,7 @@ export const ProfileTab = ({
               disabled={isUpdatingUsername}
               type="button"
               onClick={handleUpdateUsername}
-              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-28"
+              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer md:w-28"
             >
               {isUpdatingUsername ? (
                 <Spinner size={6} />
@@ -114,7 +126,7 @@ export const ProfileTab = ({
               onClick={() => {
                 setIsEditing(false);
               }}
-              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer w-28"
+              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer md:w-28"
             >
               <X className="size-4 " />
               Cancel

@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 interface SettingOptions {
   mode: LanguageMode;
+  activeTab: TabType;
   selectedSetting: TestType;
   selectedTimer: number;
   selectedWords: number;
@@ -9,6 +10,7 @@ interface SettingOptions {
   incorrectChar: number;
   totalChar: number;
   userInput: string;
+  setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
   setTotalChar: (v: number) => void;
   setIncorrectChar: (v: number) => void;
@@ -28,6 +30,8 @@ export const settingStore = create<SettingOptions>((set) => ({
   incorrectChar: 0,
   totalChar: 0,
   userInput: "",
+  activeTab: "profile",
+  setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),
   setTotalChar: (v) => set({ totalChar: v }),
   setIncorrectChar: (v) => set({ incorrectChar: v }),

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -12,6 +11,7 @@ import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hook/useUser";
+import { settingStore } from "@/store/settingStore";
 
 // Mock user data - would come from your auth system in a real app
 const mockUserData = {
@@ -61,7 +61,7 @@ export const AccountPage = () => {
   const { pathname } = useLocation();
   const { isCheckingAuth } = authStore();
 
-  const [activeTab, setActiveTab] = useState<TabType>("profile");
+  const { activeTab, setActiveTab } = settingStore();
   useTitle({ pathName: pathname });
 
   const { profile, isFetchingProfile } = useGetProfile();
