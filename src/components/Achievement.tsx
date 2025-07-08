@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { useState } from "react";
+import { CertificateSubmitDialog } from "./CertificateSubmitDialog";
 
 interface AchievementProps {
   category: AchievementCategory;
@@ -31,6 +33,7 @@ export const Achievement = ({
   category,
   unlockedAt,
 }: AchievementProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   return (
     <>
       <div
@@ -62,13 +65,14 @@ export const Achievement = ({
               <div className="flex items-center gap-2 ">
                 <button
                   type="button"
-                  disabled={!unlocked}
+                  disabled={unlocked}
                   className={cn(
                     "text-sm text-green",
-                    !unlocked
+                    unlocked
                       ? " cursor-not-allowed"
                       : "cursor-pointer hover:underline"
                   )}
+                  onClick={() => setIsDialogOpen(true)}
                 >
                   Get Certificate
                 </button>
@@ -88,6 +92,10 @@ export const Achievement = ({
           </span>
         </div>
       </div>
+      <CertificateSubmitDialog
+        isOpen={isDialogOpen}
+        setIsOpen={setIsDialogOpen}
+      />
     </>
   );
 };

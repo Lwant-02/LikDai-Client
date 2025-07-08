@@ -38,8 +38,14 @@ export const Navbar = () => {
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
+  const isCertificatePage = pathname.includes("/certificate");
 
-  if (isChangePasswordPage || isHomePage || isNotFoundPage) {
+  if (
+    isChangePasswordPage ||
+    isHomePage ||
+    isNotFoundPage ||
+    isCertificatePage
+  ) {
     return null;
   }
 
