@@ -20,6 +20,7 @@ import { Footer } from "./components/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { TestPage } from "./pages/TestPage";
 import { authStore } from "./store/authStore";
+import { CertificatePage } from "./pages/CertificatePage";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/certificate/:username" element={<CertificatePage />} />
           <Route path="/404" element={<NotFoundPage />} />
         </Routes>
       </Router>
