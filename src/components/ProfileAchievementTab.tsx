@@ -2,12 +2,9 @@ import { useLocation } from "react-router-dom";
 import { Achievement } from "./Achievement";
 import { useGetAchievements } from "@/hook/useUser";
 
-export const AchievementsTab = () => {
+export const ProfileAchievementsTab = () => {
   const { achievements, isFetchingAchievements } = useGetAchievements();
   const { pathname } = useLocation();
-  const allAchievements = achievements?.allAchievements.length;
-  const unlockedAchievements = achievements?.unlockedAchievements.length;
-  const progress = (unlockedAchievements! / allAchievements!) * 100;
 
   if (isFetchingAchievements) {
     return (
@@ -53,18 +50,11 @@ export const AchievementsTab = () => {
           <div className="flex-1 h-2 bg-foreground/30 rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-blue via-green to-yellow"></div>
           </div>
-          <span className="text-sm font-medium">{progress}%</span>
+          <span className="text-sm font-medium">50%</span>
         </div>
-        {unlockedAchievements! === allAchievements ? (
-          <p className="text-sm font-medium text-green mt-2">
-            Congratulation! 🥳 You have unlocked all the achievements!
-          </p>
-        ) : (
-          <p className="text-xs opacity-70 mt-2">
-            You've unlocked {unlockedAchievements} of {allAchievements}{" "}
-            achievements. Keep practicing to unlock more!
-          </p>
-        )}
+        <p className="text-xs opacity-70 mt-2">
+          You've unlocked 2 of 4 achievements. Keep practicing to unlock more!
+        </p>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import { LogOut } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { formatName } from "@/util/formatName";
-import { useLocation } from "react-router-dom";
 import { useLogout } from "@/hook/useAuth";
 import { Spinner } from "./Spinner";
 import { toast } from "sonner";
@@ -13,13 +12,16 @@ interface AccoutHeaderProps {
   id: string;
   username: string;
   joinedAt: string;
-  averageWpm?: number;
+  averageWpm: number;
 }
 
-export const AccoutHeader = ({ username, joinedAt }: AccoutHeaderProps) => {
+export const AccoutHeader = ({
+  username,
+  joinedAt,
+  averageWpm,
+}: AccoutHeaderProps) => {
   const { setAccessToken } = authStore();
   const { isLoggingOut, logoutUser } = useLogout();
-  const { pathname } = useLocation();
 
   const handleLogout = async () => {
     await logoutUser(undefined, {
@@ -65,7 +67,7 @@ export const AccoutHeader = ({ username, joinedAt }: AccoutHeaderProps) => {
             </p>
           </div>
           <div className="absolute -bottom-1 -right-1 bg-green text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-            85
+            {averageWpm}
           </div>
         </div>
         <div>
@@ -75,23 +77,22 @@ export const AccoutHeader = ({ username, joinedAt }: AccoutHeaderProps) => {
           </p>
         </div>
       </div>
-      {pathname.endsWith("/account") && (
-        <Button
-          variant="destructive"
-          disabled={isLoggingOut}
-          className="bg-foreground/50 hover:bg-foreground cursor-pointer w-32"
-          onClick={handleLogout}
-        >
-          {isLoggingOut ? (
-            <Spinner size={6} />
-          ) : (
-            <>
-              <LogOut className="size-4 mr-1" />
-              Logout
-            </>
-          )}
-        </Button>
-      )}
+
+      <Button
+        variant="destructive"
+        disabled={isLoggingOut}
+        className="bg-foreground/50 hover:bg-foreground cursor-pointer w-32"
+        onClick={handleLogout}
+      >
+        {isLoggingOut ? (
+          <Spinner size={6} />
+        ) : (
+          <>
+            <LogOut className="size-4 mr-1" />
+            Logout
+          </>
+        )}
+      </Button>
     </div>
   );
 };
