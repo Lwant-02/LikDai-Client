@@ -66,8 +66,12 @@ export const useGetAchievements = () => {
         const { data } = await axiosInstance.get("/account/achievements");
         return data.data;
       },
-      enabled: !!authStore.getState().accessToken,
+      enabled:
+        !!authStore.getState().accessToken &&
+        settingStore.getState().activeTab === "achievements",
       retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
     });
   return { achievements, isFetchingAchievements };
 };

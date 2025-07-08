@@ -61,8 +61,6 @@ interface Achievement {
   requirement: string;
   threshold: number;
   category: AchievementCategory;
-  createdAt: string | Date;
-  updatedAt: string | Date;
 }
 
 interface UlockedAchievement {
@@ -71,7 +69,7 @@ interface UlockedAchievement {
 }
 
 interface AchievementResponse {
-  achievement: Achievement[];
+  allAchievements: Achievement[];
   unlockedAchievements: UlockedAchievement[];
 }
 

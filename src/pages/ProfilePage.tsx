@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { useTitle } from "@/hook/useTitle";
-import { AccoutHeader } from "@/components/AccoutHeader";
-import { AccountTabs } from "@/components/AccountTabs";
-import { StatsTab } from "@/components/StatsTab";
-import { HistoryTab } from "@/components/HistoryTab";
-import { AchievementsTab } from "@/components/AchievementsTab";
+import { ProfileHeader } from "@/components/ProfileHeader";
+import { ProfileTabs } from "@/components/ProfileTabs";
+import { ProfileStatsTab } from "@/components/ProfileStatsTab";
+import { ProfileHistoryTab } from "@/components/ProfileHistoryTab";
+import { ProfileAchievementsTab } from "@/components/ProfileAchievementTab";
 
 // Mock user data - would come from your auth system in a real app
 const mockUserData = {
@@ -50,9 +50,15 @@ const mockUserData = {
 
 export const ProfilePage = () => {
   const { pathname } = useLocation();
+  const params = useParams();
   useTitle({ pathName: pathname });
-
   const [activeTab, setActiveTab] = useState<TabType>("stats");
+
+  const username = params.username;
+
+  if (!username) {
+    return null;
+  }
 
   return (
     <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
@@ -63,14 +69,14 @@ export const ProfilePage = () => {
         className="w-full "
       >
         {/* Header */}
-        <AccoutHeader
+        <ProfileHeader
           joinedAt={mockUserData.joinDate}
           username={mockUserData.username}
           id={mockUserData.id}
         />
 
         {/* Tabs */}
-        <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Content */}
         <motion.div
@@ -81,15 +87,13 @@ export const ProfilePage = () => {
           className=" mb-20"
         >
           {/* Stats Tab */}
-          {activeTab === "stats" && <StatsTab />}
+          {activeTab === "stats" && <ProfileStatsTab />}
 
           {/* History Tab */}
-          {activeTab === "history" && <HistoryTab />}
+          {activeTab === "history" && <ProfileHistoryTab />}
 
           {/* Achievements Tab */}
-          {activeTab === "achievements" && (
-            <AchievementsTab achievements={mockUserData.achievements} />
-          )}
+          {activeTab === "achievements" && <ProfileAchievementsTab />}
         </motion.div>
       </motion.div>
     </article>
