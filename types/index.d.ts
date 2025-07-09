@@ -71,6 +71,12 @@ interface UlockedAchievement {
 interface AchievementResponse {
   allAchievements: Achievement[];
   unlockedAchievements: UlockedAchievement[];
+  isSubmitted: boolean;
+}
+
+interface Certificate {
+  fullName: string;
+  createdAt: string | Date;
 }
 
 interface UserData {

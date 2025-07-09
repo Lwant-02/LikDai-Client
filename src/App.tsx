@@ -51,7 +51,7 @@ export default function App() {
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />
           <Route path="/test" element={<TestPage />} />
-          <Route path="/certificate/:username" element={<CertificatePage />} />
+          <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/404" element={<NotFoundPage />} />
         </Routes>
       </Router>

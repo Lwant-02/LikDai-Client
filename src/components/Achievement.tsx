@@ -2,9 +2,11 @@ import { cn } from "@/lib/utils";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 import { useState } from "react";
 import { CertificateSubmitDialog } from "./CertificateSubmitDialog";
+import { Link } from "react-router-dom";
 
 interface AchievementProps {
   category: AchievementCategory;
+  isCertificateSubmitted?: boolean;
   name: string;
   requirement: string;
   unlocked: boolean;
@@ -32,8 +34,10 @@ export const Achievement = ({
   unlocked,
   category,
   unlockedAt,
+  isCertificateSubmitted,
 }: AchievementProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   return (
     <>
       <div
@@ -63,19 +67,28 @@ export const Achievement = ({
             </div>
             {category === "certificate" && (
               <div className="flex items-center gap-2 ">
-                <button
-                  type="button"
-                  disabled={unlocked}
-                  className={cn(
-                    "text-sm text-green",
-                    unlocked
-                      ? " cursor-not-allowed"
-                      : "cursor-pointer hover:underline"
-                  )}
-                  onClick={() => setIsDialogOpen(true)}
-                >
-                  Get Certificate
-                </button>
+                {isCertificateSubmitted ? (
+                  <Link
+                    to="/certificate"
+                    className="text-sm text-green hover:underline"
+                  >
+                    View Certificate
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={!unlocked}
+                    className={cn(
+                      "text-sm text-green",
+                      !unlocked
+                        ? " cursor-not-allowed"
+                        : "cursor-pointer hover:underline"
+                    )}
+                    onClick={() => setIsDialogOpen(true)}
+                  >
+                    Get Certificate
+                  </button>
+                )}
               </div>
             )}
           </div>

@@ -42,6 +42,7 @@ export const AchievementsTab = () => {
               requirement={achievement.requirement}
               unlocked={unlocked}
               unlockedAt={unlockedAt}
+              isCertificateSubmitted={achievements?.isSubmitted}
               category={achievement.category}
             />
           );

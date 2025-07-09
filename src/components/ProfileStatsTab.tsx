@@ -1,10 +1,8 @@
-import { useLocation } from "react-router-dom";
 import { Separator } from "./ui/separator";
 import { useGetStats } from "@/hook/useUser";
 
 export const ProfileStatsTab = () => {
   const { isFetchingStats, stats } = useGetStats();
-  const { pathname } = useLocation();
 
   if (isFetchingStats) {
     return (
@@ -16,11 +14,7 @@ export const ProfileStatsTab = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold">
-        {pathname.endsWith("/account")
-          ? "Your Typing Statistics"
-          : "User's Typing Statistics"}
-      </h2>
+      <h2 className="text-xl font-bold">User's Typing Statistics</h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-foreground/20 p-4 rounded-lg text-center">
