@@ -1,14 +1,17 @@
 import { ArrowLeft, Download } from "lucide-react";
 import { motion } from "framer-motion";
+import * as htmlToImage from "html-to-image";
 
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useGetCertificate } from "@/hook/useUser";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { useRef } from "react";
 
 export const CertificatePage = () => {
   const { certificate, isFetchingCertificate } = useGetCertificate();
   const navigate = useNavigate();
+  const certificateRef = useRef<HTMLDivElement>(null);
 
   if (isFetchingCertificate) {
     return (
@@ -17,6 +20,26 @@ export const CertificatePage = () => {
       </div>
     );
   }
+
+  if (!certificate.fullName) {
+    return <Navigate to="/account" replace />;
+  }
+
+  const handleDownloadCertificate = () => {
+    if (certificateRef.current) {
+      htmlToImage
+        .toPng(certificateRef.current)
+        .then(function (dataUrl) {
+          const link = document.createElement("a");
+          link.download = `${certificate.fullName}_certificate.png`; // Set filename
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch(function (error) {
+          console.error("oops, something went wrong!", error);
+        });
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center px-4">
@@ -36,10 +59,11 @@ export const CertificatePage = () => {
       </motion.div>
       {/* Certificate Display */}
       <motion.div
+        ref={certificateRef}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mb-8 w-full max-w-xl rounded-md bg-gradient-to-r from-blue via-green to-yellow py-10 mt-6"
+        className="mb-8 w-full max-w-xl bg-gradient-to-r from-blue via-green to-yellow py-10 mt-6"
       >
         <div className="flex justify-center items-center gap-4  flex-col">
           <img src="/svg/certificate.svg" alt="badge" className="size-36 " />
@@ -80,7 +104,7 @@ export const CertificatePage = () => {
           Back to Account
         </Button>
         <Button
-          // onClick={() => navigate("/")}
+          onClick={handleDownloadCertificate}
           className="bg-yellow hover:bg-yellow/80 text-background flex items-center gap-2 cursor-pointer"
         >
           <Download className="size-4" />
