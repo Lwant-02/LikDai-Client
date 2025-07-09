@@ -1,10 +1,8 @@
-import { useLocation } from "react-router-dom";
-import { Achievement } from "./Achievement";
 import { useGetAchievements } from "@/hook/useUser";
+import { ProfileAchievement } from "./ProfileAchievement";
 
 export const ProfileAchievementsTab = () => {
   const { achievements, isFetchingAchievements } = useGetAchievements();
-  const { pathname } = useLocation();
 
   if (isFetchingAchievements) {
     return (
@@ -16,11 +14,7 @@ export const ProfileAchievementsTab = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold">
-        {pathname.endsWith("/account")
-          ? "Your Achievements"
-          : "User's Achievements"}
-      </h2>
+      <h2 className="text-xl font-bold">User's Achievements</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {achievements?.allAchievements.map((achievement) => {
           const unlocked = achievements?.unlockedAchievements.some(
@@ -33,7 +27,7 @@ export const ProfileAchievementsTab = () => {
           )?.unlockedAt;
 
           return (
-            <Achievement
+            <ProfileAchievement
               key={achievement.id}
               name={achievement.name}
               requirement={achievement.requirement}

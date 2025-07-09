@@ -11,8 +11,8 @@ import {
 import { Button } from "./ui/button";
 import { Spinner } from "./Spinner";
 import { cn } from "@/lib/utils";
-import { submitReport } from "@/service/submitReport";
 import { Input } from "./ui/input";
+import { useSubmitCertificate } from "@/hook/useUser";
 
 interface CertificateSubmitDialogProps {
   isOpen: boolean;
@@ -23,47 +23,56 @@ export const CertificateSubmitDialog = ({
   isOpen,
   setIsOpen,
 }: CertificateSubmitDialogProps) => {
+  const { submitCertificate, isSubmittingCertificate } = useSubmitCertificate();
   const [text, setText] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!text) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">Please do not leave this empty!</p>
+          <p className="text-primary">Please do not leave full name empty!</p>
         ),
       });
       return;
     }
-    try {
-      setIsSubmitting(true);
-      const res = await submitReport(text);
-      if (res) {
+    await submitCertificate(text, {
+      onSuccess: () => {
         setText("");
         setIsOpen(false);
         toast("✅️ Success", {
           description: (
-            <p className="text-primary">Report submitted successfully!</p>
+            <p className="text-primary">
+              Certificate submitted successfully and you can click the link to
+              preview or download your certificate.
+            </p>
           ),
           style: {
             backgroundColor: "#1f7d53 ",
           },
         });
-      }
-    } catch (error) {
-      console.log(error);
-      toast("❌️ Oops!", {
-        description: (
-          <p className="text-primary">
-            Something went wrong. Please try again.
-          </p>
-        ),
-      });
-      return;
-    } finally {
-      setIsSubmitting(false);
-    }
+      },
+      onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      },
+    });
   };
 
   return (
@@ -92,10 +101,10 @@ export const CertificateSubmitDialog = ({
             <Button
               variant="destructive"
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmittingCertificate}
               className="mt-3 h-10 rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
             >
-              {isSubmitting ? <Spinner size={6} /> : <>Submit</>}
+              {isSubmittingCertificate ? <Spinner size={6} /> : <>Submit</>}
             </Button>
           </form>
         </DialogContent>

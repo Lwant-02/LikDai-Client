@@ -1,9 +1,7 @@
 import { useGetHistorys } from "@/hook/useUser";
-import { useLocation } from "react-router-dom";
 
 export const ProfileHistoryTab = () => {
   const { history, isFetchingHistory } = useGetHistorys();
-  const { pathname } = useLocation();
 
   if (isFetchingHistory) {
     return (
@@ -15,11 +13,7 @@ export const ProfileHistoryTab = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold">
-        {pathname.endsWith("/account")
-          ? "Your Recent Tests"
-          : "User's Recent Tests"}
-      </h2>
+      <h2 className="text-xl font-bold">User's Recent Tests</h2>
 
       <div className="overflow-x-auto">
         <table className="w-full">

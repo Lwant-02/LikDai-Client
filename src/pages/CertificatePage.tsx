@@ -1,9 +1,23 @@
-import { Download } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { useGetCertificate } from "@/hook/useUser";
+import { formatJoinedDate } from "@/util/formatJoinedDate";
 
 export const CertificatePage = () => {
+  const { certificate, isFetchingCertificate } = useGetCertificate();
+  const navigate = useNavigate();
+
+  if (isFetchingCertificate) {
+    return (
+      <div className="w-full h-96 my-28 flex justify-center items-center ">
+        <div className="loader" />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center px-4">
       {/* Interactive Message */}
@@ -34,12 +48,14 @@ export const CertificatePage = () => {
             <p className="text-sm opacity-90">
               This certificate is presented to
             </p>
-            <p className="text-2xl font-bold">John Doe</p>
+            <p className="text-2xl font-bold">{certificate.fullName}</p>
             <p className="text-sm opacity-90 ">
               For unlocking all achievements and demonstrating exceptional
               typing proficiency.
             </p>
-            <p className="text-sm opacity-90">Date: June 15, 2023</p>
+            <p className="text-sm opacity-90">
+              Issued Date: {formatJoinedDate(certificate.createdAt)}
+            </p>
             <p className="text-sm opacity-90">
               Issued by <span className="font-bold italic">LikDai-Pro</span>
             </p>
@@ -54,8 +70,15 @@ export const CertificatePage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="w-full flex justify-center items-center "
+        className="w-full flex justify-center items-center gap-4"
       >
+        <Button
+          onClick={() => navigate("/account")}
+          className="bg-transparent hover:bg-yellow hover:text-background w-40 text-white border border-foreground flex items-center gap-2 cursor-pointer"
+        >
+          <ArrowLeft className="size-4" />
+          Back to Account
+        </Button>
         <Button
           // onClick={() => navigate("/")}
           className="bg-yellow hover:bg-yellow/80 text-background flex items-center gap-2 cursor-pointer"

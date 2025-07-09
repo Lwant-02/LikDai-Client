@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/lib/axiosInstance";
+import { queryClient } from "@/lib/queryClient";
 import { authStore } from "@/store/authStore";
 import { settingStore } from "@/store/settingStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -74,6 +75,37 @@ export const useGetAchievements = () => {
       staleTime: Infinity,
     });
   return { achievements, isFetchingAchievements };
+};
+
+export const useSubmitCertificate = () => {
+  const { mutateAsync: submitCertificate, isPending: isSubmittingCertificate } =
+    useMutation({
+      mutationFn: async (fullName: string) => {
+        await axiosInstance.post("/account/submit-certificate", { fullName });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["achievements"] });
+      },
+    });
+  return { submitCertificate, isSubmittingCertificate };
+};
+
+export const useGetCertificate = () => {
+  const {
+    data: certificate = { fullName: "", createdAt: "" },
+    isLoading: isFetchingCertificate,
+  } = useQuery<Certificate>({
+    queryKey: ["certificate"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get("/account/certificate");
+      return data.data;
+    },
+    enabled: !!authStore.getState().accessToken,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
+  return { certificate, isFetchingCertificate };
 };
 
 export const useUpdateUsername = () => {
