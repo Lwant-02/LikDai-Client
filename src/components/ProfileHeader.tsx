@@ -5,10 +5,14 @@ interface ProfileHeaderProps {
   id: string;
   username: string;
   joinedAt: string;
-  averageWpm?: number;
+  averageWpm: number;
 }
 
-export const ProfileHeader = ({ username, joinedAt }: ProfileHeaderProps) => {
+export const ProfileHeader = ({
+  username,
+  joinedAt,
+  averageWpm,
+}: ProfileHeaderProps) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center mb-8">
       <div className="flex items-center gap-4 mb-4 md:mb-0">
@@ -19,7 +23,7 @@ export const ProfileHeader = ({ username, joinedAt }: ProfileHeaderProps) => {
             </p>
           </div>
           <div className="absolute -bottom-1 -right-1 bg-green text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-            85
+            {averageWpm}
           </div>
         </div>
         <div>

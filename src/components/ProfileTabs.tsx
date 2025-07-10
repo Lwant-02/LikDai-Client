@@ -2,11 +2,7 @@ import { History, Award, BarChart3 } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-
-interface ProfileTabsProps {
-  activeTab: TabType;
-  setActiveTab: (tab: TabType) => void;
-}
+import { settingStore } from "@/store/settingStore";
 
 const tabs = [
   {
@@ -26,7 +22,8 @@ const tabs = [
   },
 ];
 
-export const ProfileTabs = ({ activeTab, setActiveTab }: ProfileTabsProps) => {
+export const ProfileTabs = () => {
+  const { profileAciveTab, setProfileAciveTab } = settingStore();
   return (
     <div className="flex overflow-x-auto mb-6 pb-2 gap-2 ">
       {tabs.map((tab) => (
@@ -35,11 +32,11 @@ export const ProfileTabs = ({ activeTab, setActiveTab }: ProfileTabsProps) => {
           variant="ghost"
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer",
-            activeTab === tab.id
+            profileAciveTab === tab.id
               ? "bg-foreground text-yellow"
               : "hover:bg-foreground/50"
           )}
-          onClick={() => setActiveTab(tab.id as TabType)}
+          onClick={() => setProfileAciveTab(tab.id as TabType)}
         >
           {tab.icon}
           <span>{tab.label}</span>

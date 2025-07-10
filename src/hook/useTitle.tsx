@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 
-export const useTitle = ({ pathName }: { pathName: string }): string => {
-  const routeTitles = {
+interface UseTitleProps {
+  pathName: string;
+}
+
+export const useTitle = ({ pathName }: UseTitleProps) => {
+  let title = "";
+  const routeTitles: Record<string, string> = {
     "/": "LikDai - Pro | Master Shan Typing",
     "/about": "About | LikDai - Pro",
     "/typing-test": "Typing | LikDai - Pro",
@@ -9,10 +14,15 @@ export const useTitle = ({ pathName }: { pathName: string }): string => {
     "/account": "Account | LikDai - Pro",
     "/login": "Login | LikDai - Pro",
   };
-  const title = routeTitles[pathName as keyof typeof routeTitles];
+  if (routeTitles[pathName]) {
+    title = routeTitles[pathName];
+  } else if (pathName.includes("/profile/")) {
+    const username = pathName.split("/")[2];
+    title = `${username} | Profile`;
+  } else {
+    title = "LikDai - Pro";
+  }
   useEffect(() => {
     document.title = title;
   }, [title]);
-
-  return title;
 };

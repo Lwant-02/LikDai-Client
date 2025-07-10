@@ -10,6 +10,8 @@ interface SettingOptions {
   incorrectChar: number;
   totalChar: number;
   userInput: string;
+  profileAciveTab: TabType;
+  setProfileAciveTab: (tab: TabType) => void;
   setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
   setTotalChar: (v: number) => void;
@@ -31,6 +33,8 @@ export const settingStore = create<SettingOptions>((set) => ({
   totalChar: 0,
   userInput: "",
   activeTab: "profile",
+  profileAciveTab: "stats",
+  setProfileAciveTab: (tab) => set({ profileAciveTab: tab }),
   setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),
   setTotalChar: (v) => set({ totalChar: v }),

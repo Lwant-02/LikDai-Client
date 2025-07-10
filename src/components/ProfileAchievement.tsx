@@ -12,15 +12,15 @@ interface ProfileAchievementProps {
 const getIcon = (category: string) => {
   switch (category) {
     case "speed":
-      return "svg/speed.svg";
+      return "/svg/speed.svg";
     case "accuracy":
-      return "svg/accuracy.svg";
+      return "/svg/accuracy.svg";
     case "consistency":
-      return "svg/consistency.svg";
+      return "/svg/consistency.svg";
     case "practice":
-      return "svg/practice.svg";
+      return "/svg/practice.svg";
     case "certificate":
-      return "svg/certificate.svg";
+      return "/svg/certificate.svg";
   }
 };
 
@@ -31,6 +31,8 @@ export const ProfileAchievement = ({
   category,
   unlockedAt,
 }: ProfileAchievementProps) => {
+  console.log(category);
+
   return (
     <div
       className={cn(
