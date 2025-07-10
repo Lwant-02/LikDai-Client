@@ -31,8 +31,6 @@ export const ProfileAchievement = ({
   category,
   unlockedAt,
 }: ProfileAchievementProps) => {
-  console.log(category);
-
   return (
     <div
       className={cn(

@@ -13,12 +13,14 @@ interface AccoutHeaderProps {
   username: string;
   joinedAt: string;
   averageWpm: number;
+  bio: string;
 }
 
 export const AccoutHeader = ({
   username,
   joinedAt,
   averageWpm,
+  bio,
 }: AccoutHeaderProps) => {
   const { setAccessToken } = authStore();
   const { isLoggingOut, logoutUser } = useLogout();
@@ -77,7 +79,12 @@ export const AccoutHeader = ({
           </p>
         </div>
       </div>
-
+      <div className=" w-auto md:mb-0 mb-4 text-center">
+        <h1 className="text-xl font-bold">Your Bio</h1>
+        <p className="text-sm opacity-70 ">
+          {bio ? bio : "You have not set your bio yet."}
+        </p>
+      </div>
       <Button
         variant="destructive"
         disabled={isLoggingOut}

@@ -8,7 +8,7 @@ import { settingStore } from "@/store/settingStore";
 export const useGetProfile = () => {
   const { data: profile, isLoading: isFetchingProfile } = useQuery<User | null>(
     {
-      queryKey: ["profile"],
+      queryKey: ["profile", authStore.getState().accessToken],
       queryFn: async () => {
         const { data } = await axiosInstance.get("/account/me");
         return data.data;
@@ -109,14 +109,14 @@ export const useGetCertificate = () => {
   return { certificate, isFetchingCertificate };
 };
 
-export const useUpdateUsername = () => {
-  const { mutateAsync: updateUsername, isPending: isUpdatingUsername } =
+export const useUpdateProfile = () => {
+  const { mutateAsync: updateProfile, isPending: isUpdatingProfile } =
     useMutation({
-      mutationFn: async (username: string) => {
-        await axiosInstance.patch("/account/update-username", { username });
+      mutationFn: async (payload: { username: string; bio: string }) => {
+        await axiosInstance.patch("/account/update-profile", { ...payload });
       },
     });
-  return { updateUsername, isUpdatingUsername };
+  return { updateProfile, isUpdatingProfile };
 };
 
 export const useUpdatePassword = () => {

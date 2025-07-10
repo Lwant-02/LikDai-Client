@@ -55,6 +55,7 @@ export const AccountPage = () => {
           {/* Profile Tab */}
           {activeTab === "profile" && (
             <ProfileTab
+              bio={profile.bio}
               username={profile.username}
               email={profile.email}
               joinDate={profile.joinedAt}

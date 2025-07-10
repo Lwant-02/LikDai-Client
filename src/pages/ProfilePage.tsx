@@ -40,12 +40,7 @@ export const ProfilePage = () => {
         className="w-full "
       >
         {/* Header */}
-        <ProfileHeader
-          username={profile?.username}
-          joinedAt={profile?.joinedAt}
-          id={profile?.id}
-          averageWpm={profile?.averageWpm}
-        />
+        <ProfileHeader {...profile} />
 
         {/* Tabs */}
         <ProfileTabs />
