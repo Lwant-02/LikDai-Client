@@ -17,6 +17,7 @@ enum AchievementCategory {
 interface User {
   id: string;
   email: string;
+  bio: string;
   username: string;
   joinedAt: string;
   averageWpm: number;

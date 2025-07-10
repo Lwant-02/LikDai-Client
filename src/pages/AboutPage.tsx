@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Keyboard, Award, BarChart, Quote, Sparkles, Bug } from "lucide-react";
+import {
+  Keyboard,
+  Award,
+  BarChart,
+  Quote,
+  Bug,
+  UserCog,
+  ChevronsUp,
+} from "lucide-react";
 
 import { useTitle } from "@/hook/useTitle";
 import { Button } from "@/components/ui/button";
 import { ReportSummitDialog } from "@/components/ReportSummitDialog";
+import { developerContacts } from "@/constant";
 
 const timelineItems = [
   {
@@ -46,6 +55,7 @@ const timelineItems = [
 export const AboutPage = () => {
   const [isSubmittingDialogOpen, setIsSubmittingDialogOpen] =
     useState<boolean>(false);
+  const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useTitle({ pathName: pathname });
@@ -66,11 +76,26 @@ export const AboutPage = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsUserScrolled(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
-      <article className="min-h-screen">
+      <article className="min-h-screen relative">
         {/* Hero Section */}
-        <section className="relative flex items-center justify-center overflow-hidden mt-3">
+        <section
+          id="hero"
+          className="relative flex items-center justify-center overflow-hidden mt-3"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -96,9 +121,6 @@ export const AboutPage = () => {
             className="max-w-4xl mx-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-12">
-              <div className="inline-flex items-center justify-center size-16 rounded-full bg-blue/10 mb-4">
-                <Sparkles className="size-8 text-blue" />
-              </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                 Our Mission
               </h2>
@@ -300,6 +322,54 @@ export const AboutPage = () => {
           </motion.div>
         </section>
 
+        {/* Developer Section */}
+        <section className="px-4 pb-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl font-bold mb-6 "
+            >
+              About Developer <UserCog className="inline-block size-7" />
+            </motion.h2>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-lg opacity-80 max-w-2xl mx-auto "
+            >
+              This webiste was developed and maintained by{" "}
+              <span className="font-bold text-yellow">
+                Sai Naw Main (Lwant).{" "}
+              </span>
+              You can contact him through the contacts below.
+            </motion.p>
+            <motion.div className="mb-8 mt-3" variants={itemVariants}>
+              <div className="flex flex-wrap justify-center gap-4">
+                {developerContacts.map((contact, index) => (
+                  <a
+                    key={index}
+                    href={contact.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-white rounded-md p-1"
+                  >
+                    <img
+                      src={contact.imagePath}
+                      alt={contact.link}
+                      className="size-6"
+                    />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
+
         {/* CTA Section */}
         <section className="px-4 pb-20">
           <motion.div
@@ -336,6 +406,14 @@ export const AboutPage = () => {
             </motion.div>
           </motion.div>
         </section>
+        {isUserScrolled && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-foreground hover:bg-yellow/80 transition-colors cursor-pointer"
+          >
+            <ChevronsUp className="size-6" />
+          </button>
+        )}
       </article>
       {/* Dialog to report a bug */}
       <ReportSummitDialog
