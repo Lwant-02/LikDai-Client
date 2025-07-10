@@ -1,27 +1,19 @@
 import { motion } from "framer-motion";
+import { BarChart2, Users, Crown } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { Clock, BarChart2, Users } from "lucide-react";
-import { Link } from "react-router-dom";
 import { formatName } from "@/util/formatName";
+import { formatJoinedDate } from "@/util/formatJoinedDate";
 
 interface LeaderboardTableProps {
   leaderboardData: LeaderboardEntry[];
-  currentPage: number;
-  entriesPerPage: number;
 }
 
 export const LeaderboardTable = ({
   leaderboardData,
-  currentPage,
-  entriesPerPage,
 }: LeaderboardTableProps) => {
-  const getCurrentEntries = () => {
-    const startIndex = (currentPage - 1) * entriesPerPage;
-    const endIndex = startIndex + entriesPerPage;
-    return leaderboardData.slice(startIndex, endIndex);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,7 +22,7 @@ export const LeaderboardTable = ({
       className="w-full bg-foreground/5 rounded-lg overflow-hidden"
     >
       {/* Table header - Responsive grid */}
-      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 py-3 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 py-3 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
         <div className="col-span-2 flex items-center gap-2">
           <Users className="size-4 opacity-70" />
           <span>User</span>
@@ -42,20 +34,18 @@ export const LeaderboardTable = ({
         <div className="hidden sm:block">Accuracy</div>
         <div className="hidden md:block">Raw</div>
         <div className="hidden md:block">Consistency</div>
-        <div className="flex items-center gap-2">
-          <Clock className="size-4 opacity-70 hidden sm:inline" />
-          <span>Tests</span>
-        </div>
+        <div className="hidden md:block">Tests</div>
+        <div className="hidden md:block">Date</div>
       </div>
       <Separator />
 
       {/* Table rows - Responsive grid */}
-      {getCurrentEntries().map((entry, index) => {
+      {leaderboardData.map((entry, index) => {
         return (
           <div key={index}>
             <div
               className={cn(
-                "grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
+                "grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
                 entry.rank === 1 && "bg-yellow/15",
                 entry.rank === 2 && "bg-blue/15",
                 entry.rank === 3 && "bg-green/15"
@@ -64,7 +54,7 @@ export const LeaderboardTable = ({
               <div className="col-span-2 flex items-center gap-2 sm:gap-3">
                 <span
                   className={cn(
-                    "w-5 sm:w-6 text-center font-medium",
+                    "w-5 sm:w-6 text-center font-medium ",
                     entry.rank === 1
                       ? "text-yellow"
                       : entry.rank === 2
@@ -74,19 +64,23 @@ export const LeaderboardTable = ({
                       : "opacity-70"
                   )}
                 >
-                  {entry.rank}
+                  {entry.rank === 1 ? (
+                    <Crown className="size-5 " />
+                  ) : (
+                    entry.rank
+                  )}
                 </span>
                 <div className="flex justify-center items-center gap-2">
                   <div className="size-6 rounded-full border-1 border-yellow flex justify-center items-center ">
                     <p className="text-xs font-bold text-yellow">
-                      {formatName(entry.username)}
+                      {formatName(entry.user.username)}
                     </p>
                   </div>
                   <Link
-                    to={`/profile/${entry.username}`}
+                    to={`/profile/${entry.user.username}`}
                     className="font-medium truncate"
                   >
-                    {entry.username}
+                    {entry.user.username}
                   </Link>
                 </div>
               </div>
@@ -94,9 +88,12 @@ export const LeaderboardTable = ({
               <div className="hidden sm:block">{entry.accuracy}%</div>
               <div className="hidden md:block">{entry.raw}</div>
               <div className="hidden md:block">{entry.consistency}%</div>
-              <div>{entry.tests}</div>
+              <div>{entry.tests_completed}</div>
+              <div className="hidden sm:block">
+                {formatJoinedDate(entry.updatedAt)}
+              </div>
             </div>
-            {index < getCurrentEntries().length - 1 && <Separator />}
+            <Separator />
           </div>
         );
       })}

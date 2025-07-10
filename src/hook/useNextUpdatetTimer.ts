@@ -17,8 +17,8 @@ export const useNextUpdateTimer = () => {
         // If expired, calculate the next valid 10-minute block
         if (storedTime <= now) {
           const diffMs = now.getTime() - storedTime.getTime();
-          const blocks = Math.floor(diffMs / (10 * 60 * 1000)) + 1; // how many 10-min blocks have passed
-          const newNext = addMinutes(storedTime, blocks * 10);
+          const blocks = Math.floor(diffMs / (15 * 60 * 1000)) + 1; // how many 15-min blocks have passed
+          const newNext = addMinutes(storedTime, blocks * 15);
           localStorage.setItem(TIMER_KEY, newNext.toISOString());
           return newNext;
         }
@@ -26,7 +26,7 @@ export const useNextUpdateTimer = () => {
         return storedTime;
       }
 
-      const newNext = addMinutes(now, 10);
+      const newNext = addMinutes(now, 15);
       localStorage.setItem(TIMER_KEY, newNext.toISOString());
       return newNext;
     };
@@ -39,7 +39,7 @@ export const useNextUpdateTimer = () => {
 
       if (diffMs <= 0) {
         // Set the next 10-minute interval
-        nextUpdate = addMinutes(nextUpdate, 10);
+        nextUpdate = addMinutes(nextUpdate, 15);
         localStorage.setItem(TIMER_KEY, nextUpdate.toISOString());
         diffMs = nextUpdate.getTime() - now.getTime(); // Recalculate after resetting
       }
