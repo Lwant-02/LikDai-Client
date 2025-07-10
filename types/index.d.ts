@@ -2,7 +2,7 @@ type LanguageMode = "eng" | "shan";
 
 type TestType = "time" | "words" | "quote" | "custom";
 
-type LanguageFilter = "english" | "shan";
+type LanguageFilter = "eng" | "shan";
 
 type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
@@ -99,13 +99,33 @@ interface SettingOptions {
 
 interface LeaderboardEntry {
   rank: number;
-  username: string;
+  user: {
+    username: string;
+  };
   wpm: number;
   accuracy: number;
   raw: number;
   consistency: number;
-  date: string;
-  tests: number;
+  tests_completed: number;
+  mode: string;
+  updatedAt: string | Date;
+}
+
+interface LeaderboardResponse {
+  leaderboard: {
+    id: string;
+    wpm: number;
+    accuracy: number;
+    raw: number;
+    consistency: number;
+    tests_completed: number;
+    mode: string;
+    user: {
+      username: string;
+    };
+    updatedAt: string | Date;
+  }[];
+  totalPages: number;
 }
 
 declare namespace Intl {

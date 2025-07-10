@@ -23,7 +23,7 @@ export const LeaderboardFilter = ({
       </div>
 
       <div className="flex bg-foreground/10 rounded-md overflow-hidden">
-        {(["english", "shan"] as LanguageFilter[]).map((filter) => (
+        {(["eng", "shan"] as LanguageFilter[]).map((filter) => (
           <button
             key={filter}
             onClick={() => setLanguageFilter(filter)}
@@ -33,7 +33,7 @@ export const LeaderboardFilter = ({
                 : "hover:bg-foreground/20"
             }`}
           >
-            {filter}
+            {filter === "eng" ? "English" : "Shan"}
           </button>
         ))}
       </div>

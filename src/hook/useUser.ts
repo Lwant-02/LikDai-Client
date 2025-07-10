@@ -1,8 +1,9 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { axiosInstance } from "@/lib/axiosInstance";
 import { queryClient } from "@/lib/queryClient";
 import { authStore } from "@/store/authStore";
 import { settingStore } from "@/store/settingStore";
-import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetProfile = () => {
   const { data: profile, isLoading: isFetchingProfile } = useQuery<User | null>(
