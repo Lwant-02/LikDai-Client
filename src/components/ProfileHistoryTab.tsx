@@ -1,7 +1,11 @@
-import { useGetHistorys } from "@/hook/useUser";
+import { useGetPublicHistory } from "@/hook/useProfile";
 
-export const ProfileHistoryTab = () => {
-  const { history, isFetchingHistory } = useGetHistorys();
+interface ProfileHistoryTabProps {
+  username: string;
+}
+
+export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
+  const { history, isFetchingHistory } = useGetPublicHistory({ username });
 
   if (isFetchingHistory) {
     return (
@@ -68,7 +72,7 @@ export const ProfileHistoryTab = () => {
       {history.length === 0 && (
         <div className="w-full h-96 flex justify-center items-center ">
           <p className="text-center text-lg opacity-70">
-            You do not have any test history yet!
+            This user do not have any test history yet!
           </p>
         </div>
       )}

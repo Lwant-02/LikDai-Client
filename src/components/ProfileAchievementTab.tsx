@@ -1,8 +1,20 @@
-import { useGetAchievements } from "@/hook/useUser";
 import { ProfileAchievement } from "./ProfileAchievement";
+import { useGetPublicAchievements } from "@/hook/useProfile";
 
-export const ProfileAchievementsTab = () => {
-  const { achievements, isFetchingAchievements } = useGetAchievements();
+interface ProfileAchievementsTabProps {
+  username: string;
+}
+
+export const ProfileAchievementsTab = ({
+  username,
+}: ProfileAchievementsTabProps) => {
+  const { achievements, isFetchingAchievements } = useGetPublicAchievements({
+    username,
+  });
+
+  const totalAchievements = achievements.allAchievements.length;
+  const unlockedAchievements = achievements.unlockedAchievements.length;
+  const progress = (unlockedAchievements / totalAchievements) * 100;
 
   if (isFetchingAchievements) {
     return (
@@ -44,11 +56,18 @@ export const ProfileAchievementsTab = () => {
           <div className="flex-1 h-2 bg-foreground/30 rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-blue via-green to-yellow"></div>
           </div>
-          <span className="text-sm font-medium">50%</span>
+          <span className="text-sm font-medium">{progress}%</span>
         </div>
-        <p className="text-xs opacity-70 mt-2">
-          You've unlocked 2 of 4 achievements. Keep practicing to unlock more!
-        </p>
+        {unlockedAchievements! === totalAchievements ? (
+          <p className="text-sm font-medium text-green mt-2">
+            Congratulation! 🥳 This user has unlocked all the achievements!
+          </p>
+        ) : (
+          <p className="text-xs opacity-70 mt-2">
+            This user has unlocked {unlockedAchievements} of {totalAchievements}{" "}
+            achievements. Keep practicing to unlock more!
+          </p>
+        )}
       </div>
     </div>
   );

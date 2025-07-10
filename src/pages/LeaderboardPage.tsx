@@ -22,13 +22,13 @@ export const LeaderboardPage = () => {
     page,
   });
   useTitle({ pathName: pathname });
+  const isLeaderboardhas = leaderboard.leaderboard.length > 0;
 
   // State for filters
   const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("eng");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(leaderboard.leaderboard.length / Number(total));
 
   //Leaderboard with rank
   const leaderboardWithRank: LeaderboardEntry[] = leaderboard.leaderboard.map(
@@ -69,7 +69,7 @@ export const LeaderboardPage = () => {
         className="w-full max-w-5xl"
       >
         {/* Header - Responsive layout */}
-        <LeaderboardHeader />
+        <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
 
         {/* Filters - Responsive layout */}
         <LeaderboardFilter
@@ -77,32 +77,46 @@ export const LeaderboardPage = () => {
           setLanguageFilter={setLanguageFilter}
         />
 
+        <p className="md:text-2xl text-xl font-bolds mb-3">
+          {languageFilter === "eng" ? "English" : "Shan"} All Time
+        </p>
+
         {isFetchingLeaderboard ? (
           <div className="w-full flex justify-center items-center h-52">
             <Spinner size={14} />
           </div>
         ) : (
           <>
-            {/* Leaderboard table - Responsive layout */}
-            <LeaderboardTable leaderboardData={leaderboardWithRank} />
+            {leaderboard.leaderboard.length > 0 ? (
+              <>
+                {/* Leaderboard table - Responsive layout */}
+                <LeaderboardTable leaderboardData={leaderboardWithRank} />
 
-            {/* Pagination - Responsive layout */}
-            <LeaderboardPagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalPages={totalPages}
-            />
+                {/* Pagination - Responsive layout */}
+                <LeaderboardPagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalPages={leaderboard.totalPages}
+                />
 
-            {/* Info text */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.7 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-4 text-xs sm:text-sm text-center mb-20"
-            >
-              Leaderboards are updated every 15 minutes. Only verified accounts
-              are displayed.
-            </motion.p>
+                {/* Info text */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.7 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="mt-4 text-xs sm:text-sm text-center mb-20"
+                >
+                  Leaderboards are updated every 15 minutes. Only verified
+                  accounts are displayed.
+                </motion.p>
+              </>
+            ) : (
+              <div className="w-full flex justify-center items-center h-52">
+                <p className="text-center text-lg opacity-70">
+                  Currently, there are no leaderboards to display.
+                </p>
+              </div>
+            )}
           </>
         )}
       </motion.div>

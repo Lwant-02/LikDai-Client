@@ -1,8 +1,12 @@
+import { useGetPublicStats } from "@/hook/useProfile";
 import { Separator } from "./ui/separator";
-import { useGetStats } from "@/hook/useUser";
 
-export const ProfileStatsTab = () => {
-  const { isFetchingStats, stats } = useGetStats();
+interface ProfileStatsTabProps {
+  username: string;
+}
+
+export const ProfileStatsTab = ({ username }: ProfileStatsTabProps) => {
+  const { isFetchingStats, stats } = useGetPublicStats({ username });
 
   if (isFetchingStats) {
     return (
