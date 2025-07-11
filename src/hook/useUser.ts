@@ -109,14 +109,23 @@ export const useGetCertificate = () => {
   return { certificate, isFetchingCertificate };
 };
 
-export const useUpdateProfile = () => {
-  const { mutateAsync: updateProfile, isPending: isUpdatingProfile } =
+export const useUpdateUsername = () => {
+  const { mutateAsync: updateUsername, isPending: isUpdatingUsername } =
     useMutation({
-      mutationFn: async (payload: { username: string; bio: string }) => {
-        await axiosInstance.patch("/account/update-profile", { ...payload });
+      mutationFn: async (username: string) => {
+        await axiosInstance.patch("/account/update-username", { username });
       },
     });
-  return { updateProfile, isUpdatingProfile };
+  return { updateUsername, isUpdatingUsername };
+};
+
+export const useUpdateBio = () => {
+  const { mutateAsync: updateBio, isPending: isUpdatingBio } = useMutation({
+    mutationFn: async (bio: string) => {
+      await axiosInstance.patch("/account/update-bio", { bio });
+    },
+  });
+  return { updateBio, isUpdatingBio };
 };
 
 export const useUpdatePassword = () => {

@@ -55,8 +55,18 @@ export const ReportSummitDialog = ({
           },
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      if (error.code === "ERR_NETWORK") {
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              Request timed out! Please try again later.
+            </p>
+          ),
+        });
+        return;
+      }
       toast("❌️ Oops!", {
         description: (
           <p className="text-primary">
@@ -75,10 +85,10 @@ export const ReportSummitDialog = ({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
           <DialogHeader>
-            <DialogTitle>Report a Bug 🐞</DialogTitle>
+            <DialogTitle>Report a Bug or Give Feedbacks 🐞</DialogTitle>
             <DialogDescription className="text-sm opacity-70">
-              Please explain the issue you are facing and we will get back to
-              you as soon as possible.
+              Please explain the issue you are facing or any feedbacks or
+              suggestions you have. we will get back to you as soon as possible.
             </DialogDescription>
           </DialogHeader>
           <form
@@ -89,7 +99,7 @@ export const ReportSummitDialog = ({
               id="custom_text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Report your issue here..."
+              placeholder="Report your issue or your suggestions or feedbacks here..."
               className={cn(
                 "bg-background/30 border-none focus:ring-1! ring-primary/30 h-40  rounded-lg resize-none"
               )}
