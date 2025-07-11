@@ -30,7 +30,7 @@ export const TimerSetting = () => {
           key={option.name}
           onClick={() => setSelectedTimer(option.value)}
           className={cn(
-            "w-8 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+            "w-8 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer",
             selectedTimer === option.value && "opacity-100 text-yellow"
           )}
         >

@@ -108,7 +108,7 @@ export const ReportSummitDialog = ({
               variant="destructive"
               type="submit"
               disabled={isSubmitting}
-              className="mt-3 h-10 rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+              className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
             >
               {isSubmitting ? <Spinner size={6} /> : <>Submit</>}
             </Button>

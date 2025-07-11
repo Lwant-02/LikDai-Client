@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import SplitText from "@/components/ui/SplitText";
-import StarBorder from "@/components/ui/Startborder";
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 
 export function HomePage() {
@@ -112,15 +111,13 @@ export function HomePage() {
           transition={{ duration: 0.5 }}
           className="relative"
         >
-          <StarBorder color="#ffffff" speed="6s" className="cursor-pointer">
-            <Link
-              to="/typing-test"
-              className="flex gap-3 justify-center items-center px-1"
-            >
-              <p className="text-sm md:text-base">Start Typing Now</p>
-              <MoveRight className="size-4" />
-            </Link>
-          </StarBorder>
+          <Link
+            to="/typing-test"
+            className="flex gap-3 justify-center items-center  border border-yellow/70 rounded-full py-2 hover:bg-yellow/10 transition-colors duration-200 cursor-pointer px-6"
+          >
+            <p className="text-sm md:text-base ">Start Typing Now</p>
+            <MoveRight className="size-4" />
+          </Link>
         </motion.div>
 
         {/* Quick stats */}

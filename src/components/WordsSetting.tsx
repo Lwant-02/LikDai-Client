@@ -30,7 +30,7 @@ export const WordsSetting = () => {
           key={option.name}
           onClick={() => setSelectedWords(option.value)}
           className={cn(
-            "w-8 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+            "w-8 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer",
             selectedWords === option.value && "opacity-100 text-yellow"
           )}
         >

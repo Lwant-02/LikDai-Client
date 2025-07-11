@@ -12,6 +12,7 @@ export const CertificatePage = () => {
   const { certificate, isFetchingCertificate } = useGetCertificate();
   const navigate = useNavigate();
   const certificateRef = useRef<HTMLDivElement>(null);
+  const websiteLink = import.meta.env.VITE_WEBSITE_URL;
 
   if (isFetchingCertificate) {
     return (
@@ -84,8 +85,7 @@ export const CertificatePage = () => {
               Issued by <span className="font-bold italic">LikDai-Pro</span>
             </p>
             <p className="text-sm opacity-90">
-              Website -{" "}
-              <span className="font-bold italic">http://localhost:3001</span>
+              Website - <span className="font-bold italic">{websiteLink}</span>
             </p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export const CertificatePage = () => {
       >
         <Button
           onClick={() => navigate("/account")}
-          className="bg-transparent hover:bg-yellow hover:text-background w-40 text-white border border-foreground flex items-center gap-2 cursor-pointer"
+          className="bg-transparent hover:bg-yellow hover:text-background w-40 border border-foreground flex items-center gap-2 cursor-pointer"
         >
           <ArrowLeft className="size-4" />
           Back to Account

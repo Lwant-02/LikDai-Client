@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Crown, Keyboard } from "lucide-react";
+import { Crown, Keyboard, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
 
 import {
@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hook/useUser";
+import { settingStore } from "@/store/settingStore";
 
 const navLink = [
   {
@@ -35,6 +36,7 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   const { accessToken } = authStore();
   const { profile } = useGetProfile();
+  const { theme, setTheme } = settingStore();
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
@@ -78,6 +80,18 @@ export const Navbar = () => {
               {link.icon}
             </Link>
           ))}
+          <button
+            onClick={() => {
+              setTheme(theme === "dark" ? "light" : "dark");
+            }}
+            className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
+          >
+            {theme === "dark" ? (
+              <Moon className="size-5 " />
+            ) : (
+              <Sun className="size-5 " />
+            )}
+          </button>
         </div>
         {accessToken ? (
           <Link

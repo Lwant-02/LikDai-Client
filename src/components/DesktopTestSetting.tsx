@@ -54,7 +54,7 @@ export const DesktopTestSetting = () => {
       <button
         onClick={handleChangeMode}
         className={cn(
-          "w-20 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+          "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
           mode === "eng" && "opacity-100 text-yellow"
         )}
       >
@@ -89,7 +89,7 @@ export const DesktopTestSetting = () => {
             setUserInput("");
           }}
           className={cn(
-            "w-16 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+            "w-16 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
             selectedSetting === setting.value && "opacity-100 text-yellow",
             setting.name === "Quote" &&
               mode === "shan" &&

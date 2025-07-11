@@ -102,7 +102,7 @@ export const CertificateSubmitDialog = ({
               variant="destructive"
               type="submit"
               disabled={isSubmittingCertificate}
-              className="mt-3 h-10 rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+              className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
             >
               {isSubmittingCertificate ? <Spinner size={6} /> : <>Submit</>}
             </Button>

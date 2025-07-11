@@ -10,7 +10,7 @@ export const CustomSetting = () => {
     <>
       <button
         onClick={() => setIsDialogOpen(true)}
-        className="w-20 flex md:justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+        className="w-20 flex md:justify-center  items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer"
       >
         <Replace className="size-4" />
         <p>Change</p>
