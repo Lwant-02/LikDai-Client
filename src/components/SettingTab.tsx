@@ -20,14 +20,14 @@ export const SettingTab = () => {
     e.preventDefault();
     if (!newPassword || !confirmPassword || !currentPassword) {
       toast("ⓘ Notice", {
-        description: <p className="text-primary">Please fill in all fields!</p>,
+        description: <p className="text-white">Please fill in all fields!</p>,
       });
       return;
     }
     if (newPassword !== confirmPassword) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">
+          <p className="text-white">
             Passwords do not match! Please try again.
           </p>
         ),
@@ -43,7 +43,7 @@ export const SettingTab = () => {
         onSuccess: () => {
           toast("✅️ Success", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Password changed successfully! You can now login with your new
                 password.
               </p>
@@ -57,7 +57,7 @@ export const SettingTab = () => {
           if (error.code === "ERR_NETWORK") {
             toast("❌️ Oops!", {
               description: (
-                <p className="text-primary">
+                <p className="text-white">
                   Request timed out! Please try again later.
                 </p>
               ),
@@ -66,7 +66,7 @@ export const SettingTab = () => {
           }
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 {error.response.data.message ||
                   "Something went wrong. Please try again."}
               </p>
@@ -88,7 +88,7 @@ export const SettingTab = () => {
 
         <div className="space-y-4">
           <form
-            className="p-4 bg-foreground/20 rounded-lg"
+            className="p-4 bg-foreground/40 rounded-lg"
             onSubmit={handleUpdatePassword}
           >
             <h3 className="font-semibold mb-3">
@@ -170,7 +170,7 @@ export const SettingTab = () => {
               </div>
             )}
           </form>
-          <div className="p-4 bg-foreground/20 rounded-lg">
+          <div className="p-4 bg-foreground/40 rounded-lg">
             <h3 className="font-semibold mb-3">Account Management</h3>
             <div className="space-y-2">
               <Button

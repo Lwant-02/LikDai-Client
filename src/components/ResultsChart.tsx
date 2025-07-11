@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import { getChartColor } from "@/util/getChartColor";
+import { settingStore } from "@/store/settingStore";
 
 interface ResultsChartProps {
   wpm: number;
@@ -17,6 +18,7 @@ interface ResultsChartProps {
 }
 
 export const ResultsChart = ({ wpm, accuracy }: ResultsChartProps) => {
+  const { theme } = settingStore();
   const data = [
     {
       name: "Your Results",
@@ -43,8 +45,11 @@ export const ResultsChart = ({ wpm, accuracy }: ResultsChartProps) => {
             margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#2b2e31" />
-            <XAxis dataKey="name" stroke="#ffffff" />
-            <YAxis stroke="#ffffff" />
+            <XAxis
+              dataKey="name"
+              stroke={theme === "dark" ? "#ffffff" : "#000000"}
+            />
+            <YAxis stroke={theme === "dark" ? "#ffffff" : "#000000"} />
             <Tooltip
               contentStyle={{
                 backgroundColor: "#040303",

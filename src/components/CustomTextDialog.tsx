@@ -29,7 +29,7 @@ export const CustomTextDialog = ({
     if (!text) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">You can not leave this empty!</p>
+          <p className="text-white">You can not leave this empty!</p>
         ),
       });
       return;

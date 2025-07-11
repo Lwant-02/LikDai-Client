@@ -26,7 +26,7 @@ export const RegisterForm = () => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
       toast("❗️Notice", {
-        description: <p className="text-primary">Please fill in all fields!</p>,
+        description: <p className="text-white">Please fill in all fields!</p>,
       });
       return;
     }
@@ -39,7 +39,7 @@ export const RegisterForm = () => {
         });
         toast("✅️ Success", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Registration successful! Please login with your new account.
             </p>
           ),
@@ -52,7 +52,7 @@ export const RegisterForm = () => {
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -61,7 +61,7 @@ export const RegisterForm = () => {
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>
@@ -120,7 +120,7 @@ export const RegisterForm = () => {
         variant="destructive"
         disabled={isRegistering}
         type="submit"
-        className="h-10 mt-3 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base transition-colors duration-200 "
+        className="h-10 mt-3 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base transition-colors duration-200 "
       >
         {isRegistering ? (
           <Spinner size={6} />

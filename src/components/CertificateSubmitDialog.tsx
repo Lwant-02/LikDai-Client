@@ -31,7 +31,7 @@ export const CertificateSubmitDialog = ({
     if (!text) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">Please do not leave full name empty!</p>
+          <p className="text-white">Please do not leave full name empty!</p>
         ),
       });
       return;
@@ -42,7 +42,7 @@ export const CertificateSubmitDialog = ({
         setIsOpen(false);
         toast("✅️ Success", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Certificate submitted successfully and you can click the link to
               preview or download your certificate.
             </p>
@@ -56,7 +56,7 @@ export const CertificateSubmitDialog = ({
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -65,7 +65,7 @@ export const CertificateSubmitDialog = ({
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>

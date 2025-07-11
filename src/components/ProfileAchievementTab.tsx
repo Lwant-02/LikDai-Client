@@ -50,7 +50,7 @@ export const ProfileAchievementsTab = ({
           );
         })}
       </div>
-      <div className="mt-4 p-4 bg-foreground/20 rounded-lg">
+      <div className="mt-4 p-4 bg-foreground/40 rounded-lg">
         <h3 className="font-semibold mb-2">Achievement Progress</h3>
         <div className="flex items-center gap-2">
           <div className="flex-1 h-2 bg-foreground/30 rounded-full overflow-hidden">
@@ -65,7 +65,7 @@ export const ProfileAchievementsTab = ({
         ) : (
           <p className="text-xs opacity-70 mt-2">
             This user has unlocked {unlockedAchievements} of {totalAchievements}{" "}
-            achievements. Keep practicing to unlock more!
+            achievements.
           </p>
         )}
       </div>

@@ -23,23 +23,23 @@ export const StatsTab = () => {
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-foreground/20 p-4 rounded-lg text-center">
+        <div className="bg-foreground/40 p-4 rounded-lg text-center">
           <p className="text-sm opacity-70 mb-1">Average WPM</p>
           <p className="text-2xl font-bold text-blue">
             {stats?.averageWpm || 0}
           </p>
         </div>
-        <div className="bg-foreground/20 p-4 rounded-lg text-center">
+        <div className="bg-foreground/40 p-4 rounded-lg text-center">
           <p className="text-sm opacity-70 mb-1">Best WPM</p>
           <p className="text-2xl font-bold text-green">{stats?.bestWpm || 0}</p>
         </div>
-        <div className="bg-foreground/20 p-4 rounded-lg text-center">
+        <div className="bg-foreground/40 p-4 rounded-lg text-center">
           <p className="text-sm opacity-70 mb-1">Average Accuracy</p>
           <p className="text-2xl font-bold text-yellow">
             {stats?.averageAccuracy || 0}%
           </p>
         </div>
-        <div className="bg-foreground/20 p-4 rounded-lg text-center">
+        <div className="bg-foreground/40 p-4 rounded-lg text-center">
           <p className="text-sm opacity-70 mb-1">Tests Completed</p>
           <p className="text-2xl font-bold text-purple">
             {stats?.testsCompleted || 0}
@@ -49,7 +49,7 @@ export const StatsTab = () => {
 
       <div className="mt-8">
         <h3 className="text-lg font-semibold mb-4">Practice Time</h3>
-        <div className="bg-foreground/20 p-4 rounded-lg">
+        <div className="bg-foreground/40 p-4 rounded-lg">
           <div className="flex justify-between items-center">
             <p className="text-sm opacity-70">Total Time Practiced</p>
             <p className="font-bold text-yellow">
@@ -64,7 +64,7 @@ export const StatsTab = () => {
 
       <div className="mt-8">
         <h3 className="text-lg font-semibold mb-4">Language Distribution</h3>
-        <div className="bg-foreground/20 p-4 rounded-lg flex items-center">
+        <div className="bg-foreground/40 p-4 rounded-lg flex items-center">
           <div className="flex-1">
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">English</p>
