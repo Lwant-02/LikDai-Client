@@ -29,7 +29,7 @@ export const ForgotPasswordDialog = ({
     e.preventDefault();
     if (!email) {
       toast("ⓘ Notice", {
-        description: <p className="text-primary">Please fill your email!</p>,
+        description: <p className="text-white">Please fill your email!</p>,
       });
       return;
     }
@@ -39,7 +39,7 @@ export const ForgotPasswordDialog = ({
         setEmail("");
         toast("✅️ Success", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Password reset email sent successfully. Please check your email!
             </p>
           ),
@@ -52,7 +52,7 @@ export const ForgotPasswordDialog = ({
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -61,7 +61,7 @@ export const ForgotPasswordDialog = ({
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>

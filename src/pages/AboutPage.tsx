@@ -357,7 +357,7 @@ export const AboutPage = () => {
                     href={contact.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-white rounded-md p-1"
+                    className="flex items-center gap-2 bg-gray-200 rounded-md p-1"
                   >
                     <img
                       src={contact.imagePath}

@@ -43,7 +43,7 @@ export const LeaderboardPagination = ({
                   className={cn(
                     "size-7 sm:size-8 rounded-md flex items-center justify-center text-xs sm:text-sm",
                     currentPage === page
-                      ? "bg-blue text-primary"
+                      ? "bg-blue/50 text-primary"
                       : "hover:bg-foreground/10"
                   )}
                 >
@@ -68,7 +68,7 @@ export const LeaderboardPagination = ({
               className={cn(
                 "size-7 sm:size-8 rounded-md flex items-center justify-center text-xs sm:text-sm",
                 currentPage === page
-                  ? "bg-blue text-primary"
+                  ? "bg-blue/50 text-primary"
                   : "hover:bg-foreground/10"
               )}
             >

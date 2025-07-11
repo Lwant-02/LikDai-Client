@@ -17,9 +17,9 @@
 @theme {
   --font-primary: "Share Tech", sans-serif;
   --font-secondary: "Yungkio", serif;
-  --color-background: #ffffff;
-  --color-foreground: #eff3ea;
-  --color-primary: #040303;
+  --color-background: #040303;
+  --color-foreground: #2b2e31;
+  --color-primary: #ffffff;
   --color-yellow: #dcb743;
   --color-blue: #3674b5;
   --color-red: #ea2f14;
@@ -30,9 +30,9 @@
 :root {
   --font-primary: "Share Tech", sans-serif;
   --font-secondary: "Yungkio", serif;
-  --color-background: #ffffff;
-  --color-foreground: #eff3ea;
-  --color-primary: #040303;
+  --color-background: #040303;
+  --color-foreground: #2b2e31;
+  --color-primary: #ffffff;
   --color-yellow: #dcb743;
   --color-blue: #3674b5;
   --color-red: #ea2f14;
@@ -41,12 +41,12 @@
   --color-purple: #7965c1;
 }
 
-.dark {
+.light {
   --font-primary: "Share Tech", sans-serif;
   --font-secondary: "Yungkio", serif;
-  --color-background: #040303;
-  --color-foreground: #2b2e31;
-  --color-primary: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #f1f0e8;
+  --color-primary: #040303;
   --color-yellow: #dcb743;
   --color-blue: #3674b5;
   --color-red: #ea2f14;
@@ -151,9 +151,9 @@
 
 /* --font-primary: "Share Tech", sans-serif;
   --font-secondary: "Yungkio", serif;
-  --color-background: #040303;
-  --color-foreground: #2b2e31;
-  --color-primary: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #f1f0e8;
+  --color-primary: #040303;
   --color-yellow: #dcb743;
   --color-blue: #3674b5;
   --color-red: #ea2f14;

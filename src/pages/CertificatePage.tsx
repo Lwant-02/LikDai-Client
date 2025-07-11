@@ -68,7 +68,7 @@ export const CertificatePage = () => {
       >
         <div className="flex justify-center items-center gap-4  flex-col">
           <img src="/svg/certificate.svg" alt="badge" className="size-36 " />
-          <div className="flex flex-col justify-center items-center gap-2 text-center">
+          <div className="flex flex-col justify-center items-center gap-2 text-center text-white">
             <p className="text-2xl font-bold">Certificate of Achievement</p>
             <p className="text-sm opacity-90">
               This certificate is presented to

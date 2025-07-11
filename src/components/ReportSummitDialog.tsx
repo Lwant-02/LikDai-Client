@@ -34,7 +34,7 @@ export const ReportSummitDialog = ({
     if (!text) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">Please do not leave this empty!</p>
+          <p className="text-white">Please do not leave this empty!</p>
         ),
       });
       return;
@@ -48,7 +48,7 @@ export const ReportSummitDialog = ({
         setIsThankyouDialogOpen(true);
         toast("✅️ Success", {
           description: (
-            <p className="text-primary">Report submitted successfully!</p>
+            <p className="text-white">Report submitted successfully!</p>
           ),
           style: {
             backgroundColor: "#1f7d53 ",
@@ -60,7 +60,7 @@ export const ReportSummitDialog = ({
       if (error.code === "ERR_NETWORK") {
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Request timed out! Please try again later.
             </p>
           ),
@@ -69,9 +69,7 @@ export const ReportSummitDialog = ({
       }
       toast("❌️ Oops!", {
         description: (
-          <p className="text-primary">
-            Something went wrong. Please try again.
-          </p>
+          <p className="text-white">Something went wrong. Please try again.</p>
         ),
       });
       return;

@@ -36,7 +36,7 @@ export const ProfileTab = ({
   const handleUpdateUsername = async () => {
     if (!UserUsername.trim()) {
       toast("ⓘ Notice", {
-        description: <p className="text-primary">Please fill in all fields!</p>,
+        description: <p className="text-white">Please fill in all fields!</p>,
       });
       return;
     }
@@ -44,7 +44,7 @@ export const ProfileTab = ({
     if (!/^(?=.*[a-z])(?=.*\d)[a-z0-9]+$/i.test(UserUsername)) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">
+          <p className="text-white">
             Username must contain at least one letter and one number.
           </p>
         ),
@@ -58,7 +58,7 @@ export const ProfileTab = ({
         queryClient.invalidateQueries({ queryKey: ["profile"] });
         toast("✅ Username Updated", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Your username has been updated successfully!
             </p>
           ),
@@ -69,7 +69,7 @@ export const ProfileTab = ({
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -78,7 +78,7 @@ export const ProfileTab = ({
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>
@@ -92,7 +92,7 @@ export const ProfileTab = ({
     if (!userBio.trim()) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">Please do not leave this empty!</p>
+          <p className="text-white">Please do not leave this empty!</p>
         ),
       });
       return;
@@ -101,7 +101,7 @@ export const ProfileTab = ({
     if (userBio.split(" ").length > 20) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">Bio must be less than 20 characters.</p>
+          <p className="text-white">Bio must be less than 20 characters.</p>
         ),
       });
       return;
@@ -113,7 +113,7 @@ export const ProfileTab = ({
         queryClient.invalidateQueries({ queryKey: ["profile"] });
         toast("✅ Bio Updated", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               Your bio has been updated successfully!
             </p>
           ),
@@ -124,7 +124,7 @@ export const ProfileTab = ({
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -133,7 +133,7 @@ export const ProfileTab = ({
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>

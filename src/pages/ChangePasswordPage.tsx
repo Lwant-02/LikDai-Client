@@ -27,14 +27,14 @@ export const ChangePasswordPage = () => {
     e.preventDefault();
     if (!formData.newPassword || !formData.confirmPassword) {
       toast("ⓘ Notice", {
-        description: <p className="text-primary">Please fill in all fields!</p>,
+        description: <p className="text-white">Please fill in all fields!</p>,
       });
       return;
     }
     if (formData.confirmPassword !== formData.newPassword) {
       toast("ⓘ Notice", {
         description: (
-          <p className="text-primary">
+          <p className="text-white">
             Passwords do not match! Please try again.
           </p>
         ),
@@ -54,7 +54,7 @@ export const ChangePasswordPage = () => {
           });
           toast("✅️ Success", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Password changed successfully! You may leave this page now and
                 login with your new password.
               </p>
@@ -68,7 +68,7 @@ export const ChangePasswordPage = () => {
           if (error.code === "ERR_NETWORK") {
             toast("❌️ Oops!", {
               description: (
-                <p className="text-primary">
+                <p className="text-white">
                   Request timed out! Please try again later.
                 </p>
               ),
@@ -77,7 +77,7 @@ export const ChangePasswordPage = () => {
           }
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 {error.response.data.message ||
                   "Something went wrong. Please try again."}
               </p>
@@ -147,7 +147,7 @@ export const ChangePasswordPage = () => {
           variant="destructive"
           type="submit"
           disabled={isChangingPassword}
-          className="mt-3 h-10 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 h-10 rounded-lg text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isChangingPassword ? (
             <Spinner size={6} />

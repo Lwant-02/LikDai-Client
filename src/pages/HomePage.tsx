@@ -3,7 +3,6 @@ import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import SplitText from "@/components/ui/SplitText";
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 
 export function HomePage() {
@@ -39,19 +38,10 @@ export function HomePage() {
           alt="logo"
           className="size-20 sm:size-32 object-cover "
         />
-        <SplitText
-          text="LikDai - Pro"
-          className="text-4xl md:text-6xl font-semibold text-center"
-          delay={100}
-          duration={0.6}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
-          textAlign="center"
-        />
+
+        <h1 className="text-4xl md:text-6xl font-semibold text-center">
+          LikDai - Pro
+        </h1>
 
         <motion.div
           initial={{ opacity: 0 }}

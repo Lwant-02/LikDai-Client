@@ -28,7 +28,7 @@ export const LoginForm = () => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       toast("❗️Notice", {
-        description: <p className="text-primary">Please fill in all fields!</p>,
+        description: <p className="text-white">Please fill in all fields!</p>,
       });
       return;
     }
@@ -41,7 +41,7 @@ export const LoginForm = () => {
           password: "",
         });
         toast("✅️ Success", {
-          description: <p className="text-primary">Login successful!</p>,
+          description: <p className="text-white">Login successful!</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },
@@ -51,7 +51,7 @@ export const LoginForm = () => {
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -60,7 +60,7 @@ export const LoginForm = () => {
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>
@@ -109,13 +109,13 @@ export const LoginForm = () => {
           variant="destructive"
           type="submit"
           disabled={isLoggingIn}
-          className="mt-3 h-10 rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingIn ? (
             <Spinner size={6} />
           ) : (
             <>
-              <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90" />
+              <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90 " />
               Sign In
             </>
           )}

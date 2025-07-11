@@ -22,14 +22,14 @@ export const LeaderboardFilter = ({
         <span className="text-sm opacity-70">Language:</span>
       </div>
 
-      <div className="flex bg-foreground/10 rounded-md overflow-hidden">
+      <div className="flex bg-foreground/50 rounded-md overflow-hidden">
         {(["eng", "shan"] as LanguageFilter[]).map((filter) => (
           <button
             key={filter}
             onClick={() => setLanguageFilter(filter)}
             className={`cursor-pointer px-3 py-1 text-sm capitalize ${
               languageFilter === filter
-                ? "bg-blue text-primary"
+                ? "bg-blue/50 text-primary"
                 : "hover:bg-foreground/20"
             }`}
           >

@@ -30,7 +30,7 @@ export const AccoutHeader = ({
       onSuccess: () => {
         setAccessToken(null);
         toast("✅️ Success", {
-          description: <p className="text-primary">Logout successful!</p>,
+          description: <p className="text-white">Logout successful!</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },
@@ -40,7 +40,7 @@ export const AccoutHeader = ({
         if (error.code === "ERR_NETWORK") {
           toast("❌️ Oops!", {
             description: (
-              <p className="text-primary">
+              <p className="text-white">
                 Request timed out! Please try again later.
               </p>
             ),
@@ -49,7 +49,7 @@ export const AccoutHeader = ({
         }
         toast("❌️ Oops!", {
           description: (
-            <p className="text-primary">
+            <p className="text-white">
               {error.response.data.message ||
                 "Something went wrong. Please try again."}
             </p>
