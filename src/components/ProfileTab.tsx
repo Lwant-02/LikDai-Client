@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { Edit, Save, X } from "lucide-react";
+import { Edit, Save, X, Settings } from "lucide-react";
 
 import { Button } from "./ui/button";
-import { Settings } from "lucide-react";
 import { InputFiled } from "./InputFiled";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
-import { useUpdateProfile } from "@/hook/useUser";
+import { useUpdateBio, useUpdateUsername } from "@/hook/useUser";
 import { Spinner } from "./Spinner";
 import { queryClient } from "@/lib/queryClient";
 
@@ -27,22 +26,22 @@ export const ProfileTab = ({
   setActiveTab,
   bio,
 }: ProfileTabProps) => {
-  const { isUpdatingProfile, updateProfile } = useUpdateProfile();
-  const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState({
-    username: username,
-    bio: bio,
-  });
+  const { updateUsername, isUpdatingUsername } = useUpdateUsername();
+  const { updateBio, isUpdatingBio } = useUpdateBio();
+  const [isEditBio, setIsEditBio] = useState<boolean>(false);
+  const [isEditUsername, setIsEditUsername] = useState<boolean>(false);
+  const [userBio, setUserBio] = useState<string>(bio);
+  const [UserUsername, setUserUsername] = useState<string>(username);
 
   const handleUpdateUsername = async () => {
-    if (!editForm.username.trim()) {
+    if (!UserUsername.trim()) {
       toast("ⓘ Notice", {
         description: <p className="text-primary">Please fill in all fields!</p>,
       });
       return;
     }
     //Check if username is include letter and number
-    if (!/^(?=.*[a-z])(?=.*\d)[a-z0-9]+$/i.test(editForm.username)) {
+    if (!/^(?=.*[a-z])(?=.*\d)[a-z0-9]+$/i.test(UserUsername)) {
       toast("ⓘ Notice", {
         description: (
           <p className="text-primary">
@@ -53,27 +52,14 @@ export const ProfileTab = ({
       return;
     }
 
-    //Check if bio is less than 20 characters
-    if (editForm.bio.split(" ").length > 20) {
-      toast("ⓘ Notice", {
-        description: (
-          <p className="text-primary">Bio must be less than 20 characters.</p>
-        ),
-      });
-      return;
-    }
-    const payload = {
-      username: editForm.username,
-      bio: editForm.bio,
-    };
-    await updateProfile(payload, {
+    await updateUsername(UserUsername, {
       onSuccess: () => {
+        setIsEditUsername(false);
         queryClient.invalidateQueries({ queryKey: ["profile"] });
-        setIsEditing(false);
-        toast("✅ Profile Updated", {
+        toast("✅ Username Updated", {
           description: (
             <p className="text-primary">
-              Your profile has been updated successfully!
+              Your username has been updated successfully!
             </p>
           ),
           style: { backgroundColor: "#1f7d53" },
@@ -100,34 +86,99 @@ export const ProfileTab = ({
         });
       },
     });
-    setIsEditing(false);
+  };
+
+  const handleUpdateBio = async () => {
+    if (!userBio.trim()) {
+      toast("ⓘ Notice", {
+        description: (
+          <p className="text-primary">Please do not leave this empty!</p>
+        ),
+      });
+      return;
+    }
+    //Check if bio is less than 20 characters
+    if (userBio.split(" ").length > 20) {
+      toast("ⓘ Notice", {
+        description: (
+          <p className="text-primary">Bio must be less than 20 characters.</p>
+        ),
+      });
+      return;
+    }
+
+    await updateBio(userBio, {
+      onSuccess: () => {
+        setIsEditBio(false);
+        queryClient.invalidateQueries({ queryKey: ["profile"] });
+        toast("✅ Bio Updated", {
+          description: (
+            <p className="text-primary">
+              Your bio has been updated successfully!
+            </p>
+          ),
+          style: { backgroundColor: "#1f7d53" },
+        });
+      },
+      onError: (error: any) => {
+        if (error.code === "ERR_NETWORK") {
+          toast("❌️ Oops!", {
+            description: (
+              <p className="text-primary">
+                Request timed out! Please try again later.
+              </p>
+            ),
+          });
+          return;
+        }
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-primary">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      },
+    });
   };
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between md:items-center md:gap-0 gap-2 md:flex-row flex-col">
         <h2 className="text-xl font-bold">Profile Information</h2>
-        {!isEditing ? (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsEditing(true)}
-            className="bg-foreground/30 cursor-pointer"
-          >
-            <Edit className="size-4 mr-1" />
-            Edit Profile
-          </Button>
+        {!isEditBio && !isEditUsername ? (
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsEditUsername(true)}
+              className="bg-foreground/30 cursor-pointer w-32"
+            >
+              <Edit className="size-4 mr-1" />
+              Edit Username
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsEditBio(true)}
+              className="bg-foreground/30 cursor-pointer w-32"
+            >
+              <Edit className="size-4 mr-1" />
+              Edit Bio
+            </Button>
+          </div>
         ) : (
           <div className="flex gap-2">
             <Button
               variant="outline"
               size="sm"
-              disabled={isUpdatingProfile}
+              disabled={isUpdatingUsername || isUpdatingBio}
               type="button"
-              onClick={handleUpdateUsername}
-              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer md:w-28"
+              onClick={isEditBio ? handleUpdateBio : handleUpdateUsername}
+              className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-32"
             >
-              {isUpdatingProfile ? (
+              {isUpdatingUsername || isUpdatingBio ? (
                 <Spinner size={6} />
               ) : (
                 <>
@@ -140,9 +191,13 @@ export const ProfileTab = ({
               variant="outline"
               size="sm"
               onClick={() => {
-                setIsEditing(false);
+                if (isEditBio) {
+                  setIsEditBio(false);
+                } else {
+                  setIsEditUsername(false);
+                }
               }}
-              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer md:w-28"
+              className="bg-red/20 hover:bg-red/30 text-red cursor-pointer w-32"
             >
               <X className="size-4 " />
               Cancel
@@ -151,7 +206,7 @@ export const ProfileTab = ({
         )}
       </div>
 
-      {!isEditing ? (
+      {!isEditBio && !isEditUsername ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <p className="text-sm opacity-70 mb-1">Username</p>
@@ -178,36 +233,28 @@ export const ProfileTab = ({
         </div>
       ) : (
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputFiled
-            type="text"
-            id="account_username"
-            value={editForm.username}
-            onChange={(e) =>
-              setEditForm({ ...editForm, username: e.target.value })
-            }
-            placeholder="Username"
-            label="Username"
-            helperText="Username must be contain numbers and lowercase letters only."
-          />
-          <InputFiled
-            type="email"
-            disabled={true}
-            id="account_email"
-            value={email}
-            onChange={() => {}}
-            placeholder="Email"
-            label="Email"
-            helperText="Email must be a valid email address."
-          />
-          <InputFiled
-            type="text"
-            id="account_bio"
-            value={bio}
-            onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
-            placeholder="Add your bio"
-            label="Bio"
-            helperText="Bio must be less than 20 characters."
-          />
+          {isEditBio && (
+            <InputFiled
+              type="text"
+              id="account_bio"
+              value={userBio}
+              onChange={(e) => setUserBio(e.target.value)}
+              placeholder="Add your bio"
+              label="Bio"
+              helperText="Bio must be less than 20 characters."
+            />
+          )}
+          {isEditUsername && (
+            <InputFiled
+              type="text"
+              id="account_username"
+              value={UserUsername}
+              onChange={(e) => setUserUsername(e.target.value)}
+              placeholder="Username"
+              label="Username"
+              helperText="Username must be contain numbers and lowercase letters only."
+            />
+          )}
         </form>
       )}
 

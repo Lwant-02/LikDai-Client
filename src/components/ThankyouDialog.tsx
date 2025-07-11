@@ -29,8 +29,8 @@ export const ThankyouDialog = ({ isOpen, setIsOpen }: ThankyouDialogProps) => {
           autoplay
         />
         <p className="text-center text-lg font-semibold">
-          Thank you very much for your contribution! Your report will help us
-          improve the app and make it better for everyone.
+          Thank you very much for your contribution! Your report and feedbacks
+          will help us improve the app and make it better for everyone.
         </p>
       </DialogContent>
     </Dialog>

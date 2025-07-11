@@ -302,7 +302,8 @@ export const AboutPage = () => {
               variants={itemVariants}
               className="text-3xl sm:text-4xl font-bold mb-6 "
             >
-              Report a Bug <Bug className="inline-block size-7" />
+              Report a Bug or Give Feedbacks{" "}
+              <Bug className="inline-block size-7" />
             </motion.h2>
 
             <motion.p
@@ -409,7 +410,7 @@ export const AboutPage = () => {
         {isUserScrolled && (
           <button
             onClick={scrollToTop}
-            className="fixed bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-foreground hover:bg-yellow/80 transition-colors cursor-pointer"
+            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-foreground hover:bg-yellow/80 transition-colors cursor-pointer"
           >
             <ChevronsUp className="size-6" />
           </button>
