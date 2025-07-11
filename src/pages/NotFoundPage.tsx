@@ -124,7 +124,7 @@ export const NotFoundPage = () => {
                 delay: i * 0.5,
                 repeatDelay: Math.random() * 2,
               }}
-              className="absolute text-sm font-mono text-white inset-0"
+              className="absolute text-sm font-mono  inset-0"
             >
               {letter}
             </motion.div>

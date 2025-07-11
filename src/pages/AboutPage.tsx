@@ -148,7 +148,7 @@ export const AboutPage = () => {
         </section>
 
         {/* Features Section */}
-        <section className="pt-5 px-4 bg-foreground/5">
+        <section className="pt-5 px-4 ">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -410,7 +410,7 @@ export const AboutPage = () => {
         {isUserScrolled && (
           <button
             onClick={scrollToTop}
-            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-foreground hover:bg-yellow/80 transition-colors cursor-pointer"
+            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer"
           >
             <ChevronsUp className="size-6" />
           </button>

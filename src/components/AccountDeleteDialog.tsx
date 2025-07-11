@@ -78,7 +78,7 @@ export const AccountDeleteDialog = ({
           type="submit"
           disabled={isDeletingAccount}
           onClick={handleDeleteAccount}
-          className="mt-3 h-10 rounded-lg bg-red/80 w-full cursor-pointer flex justify-center items-center hover:bg-red text-base"
+          className="mt-3 h-10 text-primary rounded-lg bg-red/80 w-full cursor-pointer flex justify-center items-center hover:bg-red text-base"
         >
           {isDeletingAccount ? <Spinner size={6} /> : <>Confirm & Delete</>}
         </Button>

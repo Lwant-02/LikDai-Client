@@ -11,6 +11,8 @@ interface SettingOptions {
   totalChar: number;
   userInput: string;
   profileAciveTab: TabType;
+  theme: string;
+  setTheme: (theme: string) => void;
   setProfileAciveTab: (tab: TabType) => void;
   setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
@@ -34,6 +36,11 @@ export const settingStore = create<SettingOptions>((set) => ({
   userInput: "",
   activeTab: "profile",
   profileAciveTab: "stats",
+  theme: localStorage.getItem("theme") || "dark",
+  setTheme: (theme) => {
+    set({ theme });
+    localStorage.setItem("theme", theme);
+  },
   setProfileAciveTab: (tab) => set({ profileAciveTab: tab }),
   setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),

@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @import "tw-animate-css";
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -14,6 +15,33 @@
 }
 
 @theme {
+  --font-primary: "Share Tech", sans-serif;
+  --font-secondary: "Yungkio", serif;
+  --color-background: #ffffff;
+  --color-foreground: #eff3ea;
+  --color-primary: #040303;
+  --color-yellow: #dcb743;
+  --color-blue: #3674b5;
+  --color-red: #ea2f14;
+  --color-green: #1f7d53;
+  --color-orange: #ff7601;
+  --color-purple: #7965c1;
+}
+:root {
+  --font-primary: "Share Tech", sans-serif;
+  --font-secondary: "Yungkio", serif;
+  --color-background: #ffffff;
+  --color-foreground: #eff3ea;
+  --color-primary: #040303;
+  --color-yellow: #dcb743;
+  --color-blue: #3674b5;
+  --color-red: #ea2f14;
+  --color-green: #1f7d53;
+  --color-orange: #ff7601;
+  --color-purple: #7965c1;
+}
+
+.dark {
   --font-primary: "Share Tech", sans-serif;
   --font-secondary: "Yungkio", serif;
   --color-background: #040303;
@@ -29,7 +57,7 @@
 
 @layer base {
   * {
-    @apply transition-colors duration-200;
+    @apply transition-colors duration-300 ease-in-out;
   }
   body {
     @apply bg-background text-primary font-primary;
@@ -120,3 +148,15 @@
     background-size: 100% 3px;
   }
 }
+
+/* --font-primary: "Share Tech", sans-serif;
+  --font-secondary: "Yungkio", serif;
+  --color-background: #040303;
+  --color-foreground: #2b2e31;
+  --color-primary: #ffffff;
+  --color-yellow: #dcb743;
+  --color-blue: #3674b5;
+  --color-red: #ea2f14;
+  --color-green: #1f7d53;
+  --color-orange: #ff7601;
+  --color-purple: #7965c1; */

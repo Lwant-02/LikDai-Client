@@ -32,7 +32,7 @@ export const MobileTestSettingDialog = ({
       <DialogContent className="max-w-60 border-none bg-foreground rounded-lg flex flex-col justify-center gap-3 space-y-2">
         <DialogTitle className="text-center flex justify-center items-center gap-2">
           <Settings className="size-4" />
-          <p className="text-sm">Test Settings</p>
+          <p className="text-sm ">Test Settings</p>
         </DialogTitle>
         <DialogDescription className="sr-only">
           Customize your test settings here.
@@ -52,12 +52,12 @@ export const MobileTestSettingDialog = ({
                 alt="uk-flag"
                 className="size-4 rounded-full object-cover border border-foreground"
               />
-              <p>English</p>
+              <p className="text-primary">English</p>
             </button>
             <button
               onClick={handleChangeMode}
               className={cn(
-                "w-20 flex items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+                "w-20 flex  items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
                 mode === "shan" && "opacity-100 text-yellow"
               )}
             >
@@ -79,7 +79,7 @@ export const MobileTestSettingDialog = ({
                 disabled={setting.value === "quote" && mode === "shan"}
                 onClick={() => setSelectedSetting(setting.value as TestType)}
                 className={cn(
-                  "opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex items-center gap-1",
+                  "opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex items-center gap-1",
                   selectedSetting === setting.value &&
                     "opacity-100 text-yellow",
                   setting.name === "Quote" &&

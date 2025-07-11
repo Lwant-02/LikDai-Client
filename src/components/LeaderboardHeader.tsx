@@ -14,7 +14,7 @@ export const LeaderboardHeader = ({
         <h1 className="text-2xl sm:text-3xl font-bold">Leaderboards</h1>
       </div>
       {isLeaderboardhas && (
-        <div className="flex items-center gap-2 bg-foreground/5 py-1 rounded-md self-start sm:self-auto">
+        <div className="flex items-center gap-2  py-1 rounded-md self-start sm:self-auto">
           <Clock className="size-4 text-yellow" />
           <span className="text-sm">Next update: {timeRemaining}</span>
         </div>
