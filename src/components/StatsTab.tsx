@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { Separator } from "./ui/separator";
 import { useGetStats } from "@/hook/useUser";
+import { roundNumber } from "@/util/formatNumber";
 
 export const StatsTab = () => {
   const { isFetchingStats, stats } = useGetStats();
@@ -69,7 +70,7 @@ export const StatsTab = () => {
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">English</p>
               <p className="text-sm font-medium">
-                {stats?.engDistribution || 0}%
+                {roundNumber(stats?.engDistribution!) || 0}%
               </p>
             </div>
             <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
@@ -81,7 +82,7 @@ export const StatsTab = () => {
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">Shan</p>
               <p className="text-sm font-medium">
-                {stats?.shanDistribution || 0}%
+                {roundNumber(stats?.shanDistribution!) || 0}%
               </p>
             </div>
             <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
