@@ -59,11 +59,11 @@ export const Navbar = () => {
       className="w-full h-auto z-20 flex justify-center items-center py-3"
     >
       <div className="h-12 z-50 mx-auto w-full flex justify-between items-center ">
-        <Link to="/" className="flex justify-center items-center ">
+        <Link to="/" className="flex justify-center items-center gap-2">
           <img
-            src="/images/Logo.png"
+            src="/svg/Logo.svg"
             alt="Logo"
-            className="size-16 object-cover"
+            className="size-12 object-cover"
           />
           <p className="text-2xl font-bold md:flex hidden">LikDai - Pro</p>
         </Link>

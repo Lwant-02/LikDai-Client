@@ -102,9 +102,16 @@ export const AboutPage = () => {
             transition={{ duration: 0.8 }}
             className="z-20 text-center px-4"
           >
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-              LikDai - Pro
-            </h1>
+            <div className="flex gap-2 justify-center items-center">
+              <img
+                src="/svg/Logo.svg"
+                alt="Logo"
+                className="size-16 sm:size-20 object-cover inline-block mb-4"
+              />
+              <h1 className="text-4xl sm:text-6xl font-bold mb-4">
+                LikDai - Pro
+              </h1>
+            </div>
             <p className="text-xl sm:text-2xl opacity-80 max-w-2xl mx-auto">
               Master Shan Typing with Precision and Speed
             </p>
@@ -170,7 +177,7 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
               <motion.div
                 variants={itemVariants}
-                className="bg-foreground/10 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
               >
                 <div className="bg-yellow/10 size-14 rounded-lg flex items-center justify-center mb-4">
                   <Keyboard className="size-7 text-yellow" />
@@ -185,7 +192,7 @@ export const AboutPage = () => {
 
               <motion.div
                 variants={itemVariants}
-                className="bg-foreground/10 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
               >
                 <div className="bg-green/10 size-14 rounded-lg flex items-center justify-center mb-4">
                   <BarChart className="size-7 text-green" />
@@ -199,7 +206,7 @@ export const AboutPage = () => {
 
               <motion.div
                 variants={itemVariants}
-                className="bg-foreground/10 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
               >
                 <div className="bg-blue/10 size-14 rounded-lg flex items-center justify-center mb-4">
                   <Award className="size-7 text-blue" />
@@ -213,7 +220,7 @@ export const AboutPage = () => {
 
               <motion.div
                 variants={itemVariants}
-                className="bg-foreground/10 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
               >
                 <div className="bg-orange/10 size-14 rounded-lg flex items-center justify-center mb-4">
                   <Quote className="size-7 text-orange rotate-180" />

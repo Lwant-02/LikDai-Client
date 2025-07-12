@@ -33,15 +33,14 @@ export function HomePage() {
         transition={{ duration: 0.7 }}
         className="z-10 flex flex-col items-center"
       >
-        <img
-          src="/images/Logo.png"
-          alt="logo"
-          className="size-20 sm:size-32 object-cover "
-        />
-
-        <h1 className="text-4xl md:text-6xl font-semibold text-center">
-          LikDai - Pro
-        </h1>
+        <div className="flex gap-2 justify-center items-center">
+          <img
+            src="/svg/Logo.svg"
+            alt="Logo"
+            className="size-16 sm:size-20 object-cover inline-block mb-4"
+          />
+          <h1 className="text-4xl sm:text-6xl font-bold mb-4">LikDai - Pro</h1>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}

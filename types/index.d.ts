@@ -80,15 +80,6 @@ interface Certificate {
   createdAt: string | Date;
 }
 
-interface UserData {
-  username: string;
-  email: string;
-  joinDate: string;
-  stats: stats;
-  recentTests: TestHistory[];
-  achievements: Achievement[];
-}
-
 interface SettingOptions {
   isEngMode: boolean;
   isShanMode: boolean;

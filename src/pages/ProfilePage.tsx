@@ -16,6 +16,7 @@ export const ProfilePage = () => {
   useTitle({ pathName: pathname });
   const { profileAciveTab } = settingStore();
   const username = params.username;
+
   if (!username) {
     return null;
   }
