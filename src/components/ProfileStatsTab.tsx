@@ -1,5 +1,6 @@
 import { useGetPublicStats } from "@/hook/useProfile";
 import { Separator } from "./ui/separator";
+import { roundNumber } from "@/util/formatNumber";
 
 interface ProfileStatsTabProps {
   username: string;
@@ -67,7 +68,7 @@ export const ProfileStatsTab = ({ username }: ProfileStatsTabProps) => {
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">English</p>
               <p className="text-sm font-medium">
-                {stats?.engDistribution || 0}%
+                {roundNumber(stats?.engDistribution!) || 0}%
               </p>
             </div>
             <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
@@ -79,7 +80,7 @@ export const ProfileStatsTab = ({ username }: ProfileStatsTabProps) => {
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">Shan</p>
               <p className="text-sm font-medium">
-                {stats?.shanDistribution || 0}%
+                {roundNumber(stats?.shanDistribution!) || 0}%
               </p>
             </div>
             <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
