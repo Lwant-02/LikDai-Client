@@ -98,13 +98,9 @@ export const ChangePasswordPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex justify-center items-center"
+        className="flex justify-center items-center gap-2"
       >
-        <img
-          src="/images/Logo.png"
-          alt="Logo"
-          className="size-16 object-cover"
-        />
+        <img src="/svg/Logo.svg" alt="Logo" className="size-12 object-cover" />
         <p className="text-2xl font-bold ">LikDai - Pro</p>
       </motion.div>
       <motion.form
