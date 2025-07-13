@@ -54,20 +54,6 @@ export const DesktopTestSetting = () => {
       <button
         onClick={handleChangeMode}
         className={cn(
-          "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-          mode === "eng" && "opacity-100 text-yellow"
-        )}
-      >
-        <img
-          src="/images/UK-Flag.jpg"
-          alt="uk-flag"
-          className="size-4 rounded-full object-cover border border-foreground"
-        />
-        <p>English</p>
-      </button>
-      <button
-        onClick={handleChangeMode}
-        className={cn(
           "w-20 flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
           mode === "shan" && "opacity-100 text-yellow"
         )}
@@ -78,6 +64,20 @@ export const DesktopTestSetting = () => {
           className="size-4 rounded-full object-cover border border-foreground"
         />
         <p>Shan</p>
+      </button>
+      <button
+        onClick={handleChangeMode}
+        className={cn(
+          "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+          mode === "eng" && "opacity-100 text-yellow"
+        )}
+      >
+        <img
+          src="/images/UK-Flag.jpg"
+          alt="uk-flag"
+          className="size-4 rounded-full object-cover border border-foreground"
+        />
+        <p>English</p>
       </button>
       <span className="h-6 w-1 bg-primary/20 rounded-lg" />
       {settingOptions.map((setting) => (

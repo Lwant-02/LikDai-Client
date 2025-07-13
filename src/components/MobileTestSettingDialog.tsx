@@ -43,20 +43,6 @@ export const MobileTestSettingDialog = ({
             <button
               onClick={handleChangeMode}
               className={cn(
-                "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex items-center gap-1",
-                mode === "eng" && "opacity-100 text-yellow"
-              )}
-            >
-              <img
-                src="/images/UK-Flag.jpg"
-                alt="uk-flag"
-                className="size-4 rounded-full object-cover border border-foreground"
-              />
-              <p className="text-primary">English</p>
-            </button>
-            <button
-              onClick={handleChangeMode}
-              className={cn(
                 "w-20 flex  items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
                 mode === "shan" && "opacity-100 text-yellow"
               )}
@@ -67,6 +53,20 @@ export const MobileTestSettingDialog = ({
                 className="size-4 rounded-full object-cover border border-foreground"
               />
               <p>Shan</p>
+            </button>
+            <button
+              onClick={handleChangeMode}
+              className={cn(
+                "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex items-center gap-1",
+                mode === "eng" && "opacity-100 text-yellow"
+              )}
+            >
+              <img
+                src="/images/UK-Flag.jpg"
+                alt="uk-flag"
+                className="size-4 rounded-full object-cover border border-foreground"
+              />
+              <p className="text-primary">English</p>
             </button>
           </div>
         </div>
