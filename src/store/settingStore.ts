@@ -12,6 +12,12 @@ interface SettingOptions {
   userInput: string;
   profileAciveTab: TabType;
   theme: string;
+  startTime: number | null;
+  endTime: number | null;
+  wpmPerSecond: number[];
+  setStartTime: (startTime: number | null) => void;
+  setEndTime: (endTime: number | null) => void;
+  setWpmPerSecond: (wpmPerSecond: number[]) => void;
   setTheme: (theme: string) => void;
   setProfileAciveTab: (tab: TabType) => void;
   setActiveTab: (tab: TabType) => void;
@@ -26,7 +32,7 @@ interface SettingOptions {
 }
 
 export const settingStore = create<SettingOptions>((set) => ({
-  mode: "eng",
+  mode: "shan",
   selectedSetting: "time",
   selectedTimer: 15,
   selectedWords: 30,
@@ -37,6 +43,12 @@ export const settingStore = create<SettingOptions>((set) => ({
   activeTab: "profile",
   profileAciveTab: "stats",
   theme: localStorage.getItem("theme") || "dark",
+  startTime: null,
+  endTime: null,
+  wpmPerSecond: [],
+  setStartTime: (startTime) => set({ startTime }),
+  setEndTime: (endTime) => set({ endTime }),
+  setWpmPerSecond: (wpmPerSecond) => set({ wpmPerSecond }),
   setTheme: (theme) => {
     set({ theme });
     localStorage.setItem("theme", theme);

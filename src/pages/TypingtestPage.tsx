@@ -26,6 +26,12 @@ export const TypingtestPage = () => {
     incorrectChar,
     userInput,
     setUserInput,
+    startTime,
+    endTime,
+    wpmPerSecond,
+    setStartTime,
+    setEndTime,
+    setWpmPerSecond,
   } = settingStore();
 
   const { secondsLeft, resetTimer, startTimer, isRunning } =
@@ -34,6 +40,7 @@ export const TypingtestPage = () => {
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const correctCharCount = totalChar - incorrectChar;
   useTitle({ pathName: pathname });
 
   //Generate random text based on selected setting
@@ -150,6 +157,32 @@ export const TypingtestPage = () => {
         break;
     }
   }, [secondsLeft, totalTypedWords, targetText]);
+
+  //Track wpm per second
+  useEffect(() => {
+    if (!startTime || endTime) return;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const minutes = (now - startTime) / 1000 / 60;
+      const wpm = correctCharCount / 5 / minutes;
+      setWpmPerSecond([...wpmPerSecond, Math.round(wpm)]);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [startTime, endTime, correctCharCount]);
+
+  //Track start and end time only if the mode is not time
+  useEffect(() => {
+    if (selectedSetting === "time") return;
+
+    if (!startTime && userInput.length === 1) {
+      setStartTime(Date.now());
+    }
+    if (totalTypedWords === targetText.split(" ").length) {
+      setEndTime(Date.now());
+    }
+  }, [selectedSetting, totalTypedWords, targetText]);
 
   //Restart test
   const handleRestartTest = () => {

@@ -5,10 +5,16 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
 import { authStore } from "@/store/authStore";
+import { settingStore } from "@/store/settingStore";
+import { useEffect } from "react";
+import { calculateTypingStats } from "@/util/calculateTypingStats";
 
 export const ResultPage = () => {
+  const { endTime, startTime, wpmPerSecond, totalChar, incorrectChar } =
+    settingStore();
   const { accessToken } = authStore();
   const navigate = useNavigate();
+  const correctCharCount = totalChar - incorrectChar;
   // Simplified data with just final values
   const testResults = {
     wpm: 95,
@@ -28,6 +34,25 @@ export const ResultPage = () => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
+
+  useEffect(() => {
+    if (endTime) {
+      const stats = calculateTypingStats({
+        correctCharCount,
+        totalTypedChars: totalChar,
+        startTime,
+        endTime,
+        wpmPerSecond,
+      });
+
+      console.log("WPM:", stats.wpm);
+      console.log("Raw WPM:", stats.rawWpm);
+      console.log("Accuracy:", stats.accuracy + "%");
+      console.log("Consistency:", stats.consistency);
+    }
+  }, [endTime]);
+
+  console.log(endTime);
 
   return (
     <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
