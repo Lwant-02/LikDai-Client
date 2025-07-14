@@ -1,6 +1,6 @@
 interface CalculateTypingStatsProps {
   correctCharCount: number;
-  totalTypedChars: number;
+  totalTypedChars: number; // This is userInput.length
   startTime: number | null;
   endTime: number | null;
   wpmPerSecond: number[];
@@ -13,44 +13,70 @@ export const calculateTypingStats = ({
   endTime,
   wpmPerSecond,
 }: CalculateTypingStatsProps) => {
-  console.log(
-    "calculateTypingStats:",
-    correctCharCount,
-    totalTypedChars,
-    startTime,
-    endTime,
-    wpmPerSecond
-  );
+  // Console log for debugging, can be removed in production
+  // console.log(
+  //   "calculateTypingStats inputs:",
+  //   { correctCharCount, totalTypedChars, startTime, endTime, wpmPerSecond }
+  // );
+
+  // Handle cases where essential data is missing or test didn't start/complete
   if (!startTime || !endTime || totalTypedChars === 0) {
     return {
       wpm: 0,
       rawWpm: 0,
       accuracy: 0,
       consistency: 0,
+      timeTaken: 0, // Explicitly return 0 for time taken
     };
   }
 
-  const durationInMinutes = (endTime - startTime) / 1000 / 60;
+  // Calculate total duration in milliseconds and then minutes/seconds
+  const totalDurationMs = endTime - startTime;
+  const durationInSeconds = totalDurationMs / 1000;
+  const durationInMinutes = durationInSeconds / 60;
 
+  // Prevent division by zero or near-zero for very short durations
+  if (durationInMinutes <= 0) {
+    return {
+      wpm: 0,
+      rawWpm: 0,
+      accuracy: 0,
+      consistency: 0,
+      timeTaken: 0,
+    };
+  }
+
+  // WPM (Net WPM): Correct characters divided by 5 (chars per word) and by minutes
   const wpm = correctCharCount / 5 / durationInMinutes;
+
+  // Raw WPM (Gross WPM): Total characters typed (including errors and spaces)
+  // divided by 5 and by minutes.
   const rawWpm = totalTypedChars / 5 / durationInMinutes;
+
   const accuracy = (correctCharCount / totalTypedChars) * 100;
 
-  // Consistency = standard deviation of wpmPerSecond
+  // Consistency: Standard deviation of WPM per second values.
+  // Lower value indicates higher consistency.
   let consistency = 0;
-  if (wpmPerSecond.length > 0) {
+  if (wpmPerSecond.length > 1) {
+    // Need at least 2 points for variance
     const mean =
       wpmPerSecond.reduce((sum, val) => sum + val, 0) / wpmPerSecond.length;
     const variance =
       wpmPerSecond.reduce((sum, val) => sum + (val - mean) ** 2, 0) /
-      wpmPerSecond.length;
+      wpmPerSecond.length; // Population variance
     consistency = Math.sqrt(variance);
+  } else if (wpmPerSecond.length === 1) {
+    // If only one WPM point, consistency is perfect (no deviation)
+    consistency = 0;
   }
+  // If wpmPerSecond.length is 0, consistency remains 0 (initialized value)
 
   return {
     wpm: Math.round(wpm),
     rawWpm: Math.round(rawWpm),
     accuracy: Math.round(accuracy),
-    consistency: Math.round(consistency),
+    consistency: parseFloat(consistency.toFixed(2)), // Keep 2 decimal places for consistency
+    timeTaken: Math.round(durationInSeconds), // Return time taken in seconds, rounded
   };
 };

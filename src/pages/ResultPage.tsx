@@ -5,28 +5,22 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
 import { authStore } from "@/store/authStore";
-import { settingStore } from "@/store/settingStore";
-import { useEffect } from "react";
-import { calculateTypingStats } from "@/util/calculateTypingStats";
+import { resultStore } from "@/store/resultStore";
 
 export const ResultPage = () => {
-  const { endTime, startTime, wpmPerSecond, totalChar, incorrectChar } =
-    settingStore();
+  const {
+    finalWpm,
+    finalAccuracy,
+    finalRawWpm,
+    finalConsistency,
+    finalTimeTaken,
+    finalTotalCharacters,
+    finalCorrectCharacters,
+    finalTestType,
+    finalWordCount,
+  } = resultStore();
   const { accessToken } = authStore();
   const navigate = useNavigate();
-  const correctCharCount = totalChar - incorrectChar;
-  // Simplified data with just final values
-  const testResults = {
-    wpm: 95,
-    accuracy: 92,
-    raw: 100,
-    characters: 500,
-    correctChars: 460,
-    timeTaken: 90,
-    testType: "words",
-    wordCount: 25,
-    consistency: 5,
-  };
 
   // Format time for display (e.g., "1:30")
   const formatTime = (seconds: number) => {
@@ -34,25 +28,17 @@ export const ResultPage = () => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
-
-  useEffect(() => {
-    if (endTime) {
-      const stats = calculateTypingStats({
-        correctCharCount,
-        totalTypedChars: totalChar,
-        startTime,
-        endTime,
-        wpmPerSecond,
-      });
-
-      console.log("WPM:", stats.wpm);
-      console.log("Raw WPM:", stats.rawWpm);
-      console.log("Accuracy:", stats.accuracy + "%");
-      console.log("Consistency:", stats.consistency);
-    }
-  }, [endTime]);
-
-  console.log(endTime);
+  const actualTestResults = {
+    wpm: finalWpm || 0, // Default to 0 or null if not yet available
+    accuracy: finalAccuracy || 0,
+    raw: finalRawWpm || 0,
+    characters: finalTotalCharacters || 0,
+    correctChars: finalCorrectCharacters || 0,
+    timeTaken: finalTimeTaken || 0,
+    testType: finalTestType || "unknown",
+    wordCount: finalWordCount || 0,
+    consistency: finalConsistency || 0,
+  };
 
   return (
     <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
@@ -79,47 +65,50 @@ export const ResultPage = () => {
       <div className="grid md:grid-cols-3 grid-cols-2 gap-4 w-full">
         <ResultCard
           title="WPM"
-          value={testResults.wpm}
+          value={actualTestResults.wpm}
           subtitle="Words Per Minute"
           color="blue"
         />
         <ResultCard
           title="ACC"
-          value={`${testResults.accuracy}%`}
+          value={`${actualTestResults.accuracy}%`}
           subtitle="Accuracy"
           color="green"
         />
         <ResultCard
           title="TEST"
-          value={`Words ${testResults.wordCount}`}
+          value={`Words ${actualTestResults.wordCount}`}
           subtitle="Test Type"
           color="orange"
           className="md:col-span-1 col-span-2"
         />
       </div>
-      <ResultsChart wpm={testResults.wpm} accuracy={testResults.accuracy} />
+      <ResultsChart
+        wpm={actualTestResults.wpm}
+        accuracy={actualTestResults.accuracy}
+      />
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4 w-full">
         <ResultCard
           title="RAW"
-          value={testResults.raw}
+          value={actualTestResults.raw}
           subtitle="Raw WPM"
           color="blue"
         />
         <ResultCard
           title="CONSISTENCY"
           color="purple"
-          value={testResults.consistency}
+          value={actualTestResults.consistency}
           subtitle="Consistency"
         />
         <ResultCard
           title="CHARS"
-          value={`${testResults.correctChars}/${testResults.characters}`}
+          value={`${actualTestResults.correctChars}/${actualTestResults.characters}`}
           subtitle="Characters"
           color="green"
         />
         <ResultCard
           title="TIME"
-          value={formatTime(testResults.timeTaken)}
+          value={formatTime(actualTestResults.timeTaken)}
           subtitle="Time Taken"
           color="yellow"
         />
