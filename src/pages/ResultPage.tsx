@@ -6,6 +6,8 @@ import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
 import { authStore } from "@/store/authStore";
 import { resultStore } from "@/store/resultStore";
+import { useEffect } from "react";
+import { saveFinalResults } from "@/service/saveFinalResults";
 
 export const ResultPage = () => {
   const {
@@ -17,7 +19,7 @@ export const ResultPage = () => {
     finalTotalCharacters,
     finalCorrectCharacters,
     finalTestType,
-    finalWordCount,
+    finalMode,
   } = resultStore();
   const { accessToken } = authStore();
   const navigate = useNavigate();
@@ -29,16 +31,31 @@ export const ResultPage = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
   const actualTestResults = {
-    wpm: finalWpm || 0, // Default to 0 or null if not yet available
+    wpm: finalWpm || 0,
     accuracy: finalAccuracy || 0,
     raw: finalRawWpm || 0,
     characters: finalTotalCharacters || 0,
-    correctChars: finalCorrectCharacters || 0,
+    correct_chars: finalCorrectCharacters || 0,
     timeTaken: finalTimeTaken || 0,
-    testType: finalTestType || "unknown",
-    wordCount: finalWordCount || 0,
+    test_type: (finalTestType || "unknown") as TestType,
     consistency: finalConsistency || 0,
+    mode: finalMode || "eng",
   };
+
+  //Need to fix the error here coz it save two times
+  useEffect(() => {
+    if (accessToken) {
+      const saveResults = async () => {
+        const isSaved = await saveFinalResults(actualTestResults);
+        if (isSaved) {
+          console.log("Results saved successfully!");
+        } else {
+          console.log("Failed to save results!");
+        }
+      };
+      saveResults();
+    }
+  }, [accessToken, actualTestResults]);
 
   return (
     <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
@@ -77,7 +94,15 @@ export const ResultPage = () => {
         />
         <ResultCard
           title="TEST"
-          value={`Words ${actualTestResults.wordCount}`}
+          value={
+            finalTestType === "words"
+              ? "Words"
+              : finalTestType === "time"
+              ? "Time"
+              : finalTestType === "quote"
+              ? "Quote"
+              : "Custom"
+          }
           subtitle="Test Type"
           color="orange"
           className="md:col-span-1 col-span-2"
@@ -102,7 +127,7 @@ export const ResultPage = () => {
         />
         <ResultCard
           title="CHARS"
-          value={`${actualTestResults.correctChars}/${actualTestResults.characters}`}
+          value={`${actualTestResults.correct_chars}/${actualTestResults.characters}`}
           subtitle="Characters"
           color="green"
         />

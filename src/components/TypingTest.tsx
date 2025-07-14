@@ -50,7 +50,7 @@ export const TypingTest = ({
   // Style helpers
   const getTextClasses = () => {
     const baseClasses = "relative md:text-4xl text-2xl";
-    return mode === "eng" ? baseClasses : cn(baseClasses, "font-secondary!");
+    return mode === "eng" ? baseClasses : cn(baseClasses, "font-secondary");
   };
 
   const getContainerClasses = () => {

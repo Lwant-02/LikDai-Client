@@ -1,24 +1,18 @@
-interface CalculateTypingStatsProps {
+interface CalculateFinalResultProps {
   correctCharCount: number;
-  totalTypedChars: number; // This is userInput.length
+  totalTypedChars: number;
   startTime: number | null;
   endTime: number | null;
   wpmPerSecond: number[];
 }
 
-export const calculateTypingStats = ({
+export const calculateFinalResult = ({
   correctCharCount,
   totalTypedChars,
   startTime,
   endTime,
   wpmPerSecond,
-}: CalculateTypingStatsProps) => {
-  // Console log for debugging, can be removed in production
-  // console.log(
-  //   "calculateTypingStats inputs:",
-  //   { correctCharCount, totalTypedChars, startTime, endTime, wpmPerSecond }
-  // );
-
+}: CalculateFinalResultProps) => {
   // Handle cases where essential data is missing or test didn't start/complete
   if (!startTime || !endTime || totalTypedChars === 0) {
     return {
@@ -26,7 +20,7 @@ export const calculateTypingStats = ({
       rawWpm: 0,
       accuracy: 0,
       consistency: 0,
-      timeTaken: 0, // Explicitly return 0 for time taken
+      timeTaken: 0,
     };
   }
 
@@ -70,13 +64,12 @@ export const calculateTypingStats = ({
     // If only one WPM point, consistency is perfect (no deviation)
     consistency = 0;
   }
-  // If wpmPerSecond.length is 0, consistency remains 0 (initialized value)
 
   return {
     wpm: Math.round(wpm),
     rawWpm: Math.round(rawWpm),
     accuracy: Math.round(accuracy),
-    consistency: parseFloat(consistency.toFixed(2)), // Keep 2 decimal places for consistency
-    timeTaken: Math.round(durationInSeconds), // Return time taken in seconds, rounded
+    consistency: parseFloat(consistency.toFixed(2)),
+    timeTaken: Math.round(durationInSeconds),
   };
 };

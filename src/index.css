@@ -1,22 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Share+Tech&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Noto+Serif+Myanmar:wght@100;200;300;400;500;600;700;800;900&family=Share+Tech&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
-/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: "Yungkio";
-  src: url("/fonts/Yunghkio.ttf");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Yungkio", serif;
+  --font-secondary: "Noto Serif Myanmar", serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;

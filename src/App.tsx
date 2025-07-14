@@ -21,7 +21,6 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { TestPage } from "./pages/TestPage";
 import { authStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
-import { TypingtestPageCopy } from "./pages/TypingtestPageCopy";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -38,7 +37,7 @@ export default function App() {
               accessToken ? <Navigate to="/account" replace /> : <LoginPage />
             }
           />
-          <Route path="/typing-test" element={<TypingtestPageCopy />} />
+          <Route path="/typing-test" element={<TypingtestPage />} />
           <Route
             path="/account"
             element={

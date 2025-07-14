@@ -8,8 +8,9 @@ interface ResultState {
   finalTimeTaken: number | null; // In seconds
   finalTotalCharacters: number | null;
   finalCorrectCharacters: number | null;
-  finalTestType: string | null;
-  finalWordCount: number | null; // For words mode
+  finalTestType: TestType | null;
+  finalMode: LanguageMode | null;
+  setFinalMode: (mode: LanguageMode | null) => void;
   setFinalWpm: (wpm: number | null) => void;
   setFinalAccuracy: (accuracy: number | null) => void;
   setFinalRawWpm: (rawWpm: number | null) => void;
@@ -17,8 +18,7 @@ interface ResultState {
   setFinalTimeTaken: (time: number | null) => void;
   setFinalTotalCharacters: (chars: number | null) => void;
   setFinalCorrectCharacters: (chars: number | null) => void;
-  setFinalTestType: (type: string | null) => void;
-  setFinalWordCount: (count: number | null) => void;
+  setFinalTestType: (type: TestType | null) => void;
 }
 
 export const resultStore = create<ResultState>((set) => ({
@@ -30,7 +30,8 @@ export const resultStore = create<ResultState>((set) => ({
   finalTotalCharacters: null,
   finalCorrectCharacters: null,
   finalTestType: null,
-  finalWordCount: null,
+  finalMode: null,
+  setFinalMode: (mode) => set({ finalMode: mode }),
   setFinalWpm: (wpm) => set({ finalWpm: wpm }),
   setFinalAccuracy: (accuracy) => set({ finalAccuracy: accuracy }),
   setFinalRawWpm: (rawWpm) => set({ finalRawWpm: rawWpm }),
@@ -39,5 +40,4 @@ export const resultStore = create<ResultState>((set) => ({
   setFinalTotalCharacters: (chars) => set({ finalTotalCharacters: chars }),
   setFinalCorrectCharacters: (chars) => set({ finalCorrectCharacters: chars }),
   setFinalTestType: (type) => set({ finalTestType: type }),
-  setFinalWordCount: (count) => set({ finalWordCount: count }),
 }));
