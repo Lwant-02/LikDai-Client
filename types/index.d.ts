@@ -38,14 +38,12 @@ interface TypingTestResult {
   wpm: number;
   accuracy: number;
   raw: number;
-  characters: number;
-  correctChars: number;
-  timeTaken: number;
-  testType: string;
-  wordCount: number;
   consistency: number;
-  totalWords: number;
-  errorWords: number;
+  timeTaken: number;
+  mode: LanguageMode;
+  test_type: TestType;
+  characters: number;
+  correct_chars: number;
 }
 
 interface TestHistory {
