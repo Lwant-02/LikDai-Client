@@ -12,6 +12,8 @@ import { TypingTest } from "@/components/TypingTest";
 import { getRandomParagraph } from "@/util/getRandomParagraph.util";
 import { getRandomWords } from "@/util/getRandomWord.util";
 import { getRandomQuote } from "@/util/getRandomQuote.util";
+import { getShanRandomParagraph } from "@/util/getShanRandomParagraph";
+import { getShanRandomWords } from "@/util/getShanRandomWord";
 
 export const TypingtestPage = () => {
   const {
@@ -51,7 +53,7 @@ export const TypingtestPage = () => {
           const newText = getRandomParagraph();
           setTargetText(newText);
         } else {
-          const newText = "မႂ်ႇသုင်ၶႃႈ";
+          const newText = getShanRandomParagraph();
           setTargetText(newText);
         }
         break;
@@ -60,7 +62,7 @@ export const TypingtestPage = () => {
           const newWords = getRandomWords(selectedWords);
           setTargetText(newWords);
         } else {
-          const newWords = "မႂ်ႇသုင်ၶႃႈ";
+          const newWords = getShanRandomWords(selectedWords);
           setTargetText(newWords);
         }
         break;
