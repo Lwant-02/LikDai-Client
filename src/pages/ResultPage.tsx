@@ -1,12 +1,12 @@
 import { RotateCcw } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
+import { useEffect, useMemo, useRef } from "react";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
 import { authStore } from "@/store/authStore";
 import { resultStore } from "@/store/resultStore";
-import { useEffect } from "react";
 import { saveFinalResults } from "@/service/saveFinalResults";
 
 export const ResultPage = () => {
@@ -16,13 +16,14 @@ export const ResultPage = () => {
     finalRawWpm,
     finalConsistency,
     finalTimeTaken,
-    finalTotalCharacters,
     finalCorrectCharacters,
     finalTestType,
     finalMode,
+    finalTypedCharacters,
   } = resultStore();
   const { accessToken } = authStore();
   const navigate = useNavigate();
+  const hanSavedRef = useRef(false);
 
   // Format time for display (e.g., "1:30")
   const formatTime = (seconds: number) => {
@@ -30,32 +31,45 @@ export const ResultPage = () => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
-  const actualTestResults = {
-    wpm: finalWpm || 0,
-    accuracy: finalAccuracy || 0,
-    raw: finalRawWpm || 0,
-    characters: finalTotalCharacters || 0,
-    correct_chars: finalCorrectCharacters || 0,
-    timeTaken: finalTimeTaken || 0,
-    test_type: (finalTestType || "unknown") as TestType,
-    consistency: finalConsistency || 0,
-    mode: finalMode || "eng",
-  };
+  const actualTestResults = useMemo(
+    () => ({
+      wpm: finalWpm || 0,
+      accuracy: finalAccuracy || 0,
+      raw: finalRawWpm || 0,
+      characters: finalTypedCharacters || 0,
+      correct_chars: finalCorrectCharacters || 0,
+      timeTaken: finalTimeTaken || 0,
+      test_type: (finalTestType || "unknown") as TestType,
+      consistency: finalConsistency || 0,
+      mode: finalMode || "eng",
+    }),
+    [
+      finalWpm,
+      finalAccuracy,
+      finalRawWpm,
+      finalConsistency,
+      finalTimeTaken,
+      finalTypedCharacters,
+      finalCorrectCharacters,
+      finalTestType,
+      finalMode,
+    ]
+  );
 
-  //Need to fix the error here coz it save two times
+  //Save results to db
   useEffect(() => {
-    if (accessToken) {
+    if (accessToken && !hanSavedRef.current) {
       const saveResults = async () => {
-        const isSaved = await saveFinalResults(actualTestResults);
-        if (isSaved) {
-          console.log("Results saved successfully!");
-        } else {
-          console.log("Failed to save results!");
-        }
+        hanSavedRef.current = true;
+        await saveFinalResults(actualTestResults);
       };
       saveResults();
     }
-  }, [accessToken, actualTestResults]);
+  }, [accessToken]);
+
+  if (!finalWpm) {
+    return <Navigate to="/typing-test" replace />;
+  }
 
   return (
     <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
@@ -126,9 +140,9 @@ export const ResultPage = () => {
           subtitle="Consistency"
         />
         <ResultCard
-          title="CHARS"
+          title="CHARACTERS"
           value={`${actualTestResults.correct_chars}/${actualTestResults.characters}`}
-          subtitle="Characters"
+          subtitle="Correct/Typed"
           color="green"
         />
         <ResultCard

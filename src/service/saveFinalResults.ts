@@ -2,13 +2,9 @@ import { axiosInstance } from "@/lib/axiosInstance";
 
 export const saveFinalResults = async (
   finalResults: TypingTestResult
-): Promise<boolean | undefined> => {
+): Promise<void> => {
   try {
-    const { data } = await axiosInstance.post(
-      "/test/save-results",
-      finalResults
-    );
-    return data.isSuccess;
+    await axiosInstance.post("/test/save-results", finalResults);
   } catch (error) {
     console.log(error);
     return;

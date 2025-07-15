@@ -29,7 +29,7 @@ interface Stats {
   bestWpm: number;
   averageAccuracy: number;
   testsCompleted: number;
-  totalTimePracticed: string;
+  totalTimePracticed: number;
   engDistribution: number;
   shanDistribution: number;
 }
