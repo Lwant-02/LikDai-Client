@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Separator } from "./ui/separator";
+
 import { useGetStats } from "@/hook/useUser";
 import { roundNumber } from "@/util/formatNumber";
 import { formatTotalPracticeTime } from "@/util/formatTotalTimePractice";
@@ -66,20 +66,8 @@ export const StatsTab = () => {
 
       <div className="mt-8">
         <h3 className="text-lg font-semibold mb-4">Language Distribution</h3>
-        <div className="bg-foreground/40 p-4 rounded-lg flex items-center">
-          <div className="flex-1">
-            <div className="flex justify-between items-center mb-1">
-              <p className="text-sm">English</p>
-              <p className="text-sm font-medium">
-                {roundNumber(stats?.engDistribution!) || 0}%
-              </p>
-            </div>
-            <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
-              <div className="h-full bg-blue" />
-            </div>
-          </div>
-          <Separator orientation="vertical" className="mx-4 h-12 opacity-30" />
-          <div className="flex-1">
+        <div className="bg-foreground/40 p-4 rounded-lg flex items-center gap-6 md:flex-row flex-col">
+          <div className="md:flex-1 w-full">
             <div className="flex justify-between items-center mb-1">
               <p className="text-sm">Shan</p>
               <p className="text-sm font-medium">
@@ -88,6 +76,17 @@ export const StatsTab = () => {
             </div>
             <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
               <div className="h-full bg-yellow" />
+            </div>
+          </div>
+          <div className="md:flex-1 w-full">
+            <div className="flex justify-between items-center mb-1">
+              <p className="text-sm">English</p>
+              <p className="text-sm font-medium">
+                {roundNumber(stats?.engDistribution!) || 0}%
+              </p>
+            </div>
+            <div className="h-3 bg-foreground/30 rounded-full overflow-hidden">
+              <div className="h-full bg-blue" />
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ export const LeaderboardTable = ({
         <div className="hidden sm:block">Accuracy</div>
         <div className="hidden md:block">Raw</div>
         <div className="hidden md:block">Consistency</div>
-        <div className="hidden md:block">Tests</div>
+        <div>Tests</div>
         <div className="hidden md:block">Date</div>
       </div>
       <Separator />
