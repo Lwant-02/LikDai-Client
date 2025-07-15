@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { Separator } from "./ui/separator";
 import { useGetStats } from "@/hook/useUser";
 import { roundNumber } from "@/util/formatNumber";
+import { formatTotalPracticeTime } from "@/util/formatTotalTimePractice";
 
 export const StatsTab = () => {
   const { isFetchingStats, stats } = useGetStats();
@@ -54,7 +55,7 @@ export const StatsTab = () => {
           <div className="flex justify-between items-center">
             <p className="text-sm opacity-70">Total Time Practiced</p>
             <p className="font-bold text-yellow">
-              {stats?.totalTimePracticed || 0}
+              {formatTotalPracticeTime(stats?.totalTimePracticed!) || 0}
             </p>
           </div>
           <div className="mt-4 h-4 bg-foreground/30 rounded-full overflow-hidden">

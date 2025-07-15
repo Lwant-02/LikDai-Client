@@ -1,6 +1,7 @@
 import { useGetPublicStats } from "@/hook/useProfile";
 import { Separator } from "./ui/separator";
 import { roundNumber } from "@/util/formatNumber";
+import { formatTotalPracticeTime } from "@/util/formatTotalTimePractice";
 
 interface ProfileStatsTabProps {
   username: string;
@@ -52,7 +53,7 @@ export const ProfileStatsTab = ({ username }: ProfileStatsTabProps) => {
           <div className="flex justify-between items-center">
             <p className="text-sm opacity-70">Total Time Practiced</p>
             <p className="font-bold text-yellow">
-              {stats?.totalTimePracticed || 0}
+              {formatTotalPracticeTime(stats?.totalTimePracticed!) || 0}
             </p>
           </div>
           <div className="mt-4 h-4 bg-foreground/30 rounded-full overflow-hidden">

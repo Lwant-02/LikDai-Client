@@ -7,8 +7,6 @@ interface SettingOptions {
   selectedTimer: number;
   selectedWords: number;
   customText: string;
-  incorrectChar: number;
-  totalChar: number;
   userInput: string;
   profileAciveTab: TabType;
   theme: string;
@@ -22,8 +20,6 @@ interface SettingOptions {
   setProfileAciveTab: (tab: TabType) => void;
   setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
-  setTotalChar: (v: number) => void;
-  setIncorrectChar: (v: number) => void;
   setCustomText: (customText: string) => void;
   setMode: (mode: LanguageMode) => void;
   setSelectedSetting: (selectedSetting: TestType) => void;
@@ -37,8 +33,6 @@ export const settingStore = create<SettingOptions>((set) => ({
   selectedTimer: 15,
   selectedWords: 30,
   customText: "This is a custom text.",
-  incorrectChar: 0,
-  totalChar: 0,
   userInput: "",
   activeTab: "profile",
   profileAciveTab: "stats",
@@ -56,8 +50,6 @@ export const settingStore = create<SettingOptions>((set) => ({
   setProfileAciveTab: (tab) => set({ profileAciveTab: tab }),
   setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),
-  setTotalChar: (v) => set({ totalChar: v }),
-  setIncorrectChar: (v) => set({ incorrectChar: v }),
   setCustomText: (customText) => set({ customText }),
   setMode: (mode) => {
     const newText =

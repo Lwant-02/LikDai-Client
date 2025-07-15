@@ -16,6 +16,7 @@ import { getShanRandomParagraph } from "@/util/getShanRandomParagraph";
 import { getShanRandomWords } from "@/util/getShanRandomWord";
 import { resultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
+import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 
 export const TypingtestPage = () => {
   const {
@@ -24,10 +25,6 @@ export const TypingtestPage = () => {
     selectedWords,
     mode,
     customText,
-    setIncorrectChar,
-    setTotalChar,
-    totalChar,
-    incorrectChar,
     userInput,
     setUserInput,
     startTime,
@@ -43,10 +40,10 @@ export const TypingtestPage = () => {
     setFinalRawWpm,
     setFinalConsistency,
     setFinalTimeTaken,
-    setFinalTotalCharacters,
     setFinalCorrectCharacters,
     setFinalTestType,
     setFinalMode,
+    setFinalTypedCharacters,
   } = resultStore();
 
   const { secondsLeft, resetTimer, startTimer, isRunning } =
@@ -56,7 +53,10 @@ export const TypingtestPage = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const hasSetEndTimeRef = useRef(false);
-  const correctCharCount = totalChar - incorrectChar;
+  const correctCharCount = calculateCorrectChars(
+    userInput.replace(/\s/g, ""),
+    targetText.replace(/\s/g, "")
+  );
   useTitle({ pathName: pathname });
 
   //Generate random text based on selected setting
@@ -87,10 +87,9 @@ export const TypingtestPage = () => {
     setTargetText(newText);
   }, [selectedSetting, selectedWords, mode, customText]);
 
-  //Count total typed words and incorrect characters and total characters
+  //Count total typed words
   useEffect(() => {
     const input = userInput;
-    const target = targetText;
 
     let currentWordCount = 0;
     const inputSegments = input
@@ -107,27 +106,6 @@ export const TypingtestPage = () => {
       }
     }
     setTotalTypedWords(currentWordCount);
-
-    let currentIncorrectCharCount = 0;
-
-    // Compare characters within the overlapping length of userInput and targetText.
-    for (let i = 0; i < Math.min(input.length, target.length); i++) {
-      if (input[i] !== target[i]) {
-        currentIncorrectCharCount++;
-      }
-    }
-    // Only count these extra characters as incorrect if they are NOT spaces.
-    if (input.length > target.length) {
-      for (let i = target.length; i < input.length; i++) {
-        if (input[i] !== " ") {
-          currentIncorrectCharCount++;
-        }
-      }
-    }
-    setIncorrectChar(currentIncorrectCharCount);
-
-    // Count only non-space characters from the user input.
-    setTotalChar(input.replace(/\s/g, "").length);
   }, [userInput, targetText]);
 
   // Regenerate new text
@@ -136,8 +114,6 @@ export const TypingtestPage = () => {
     resetTimer();
     setUserInput("");
     setTotalTypedWords(0);
-    setIncorrectChar(0);
-    setTotalChar(0);
     setStartTime(null);
     setEndTime(null);
     setWpmPerSecond([]);
@@ -151,8 +127,6 @@ export const TypingtestPage = () => {
     resetTimer,
     setUserInput,
     setTotalTypedWords,
-    setIncorrectChar,
-    setTotalChar,
     setStartTime,
     setEndTime,
     setWpmPerSecond,
@@ -172,7 +146,6 @@ export const TypingtestPage = () => {
 
       const netWpm = correctCharCount / 5 / minutesElapsed;
 
-      // ✅ FIXED: use functional update to prevent stale closure and rerender loops
       setWpmPerSecond([...wpmPerSecond, Math.round(netWpm)]);
     }, 1000);
 
@@ -228,10 +201,11 @@ export const TypingtestPage = () => {
       setEndTime(actualEndTime);
 
       const safeStartTime = startTime || actualEndTime;
+      const totalTypedChars = userInput.replace(/\s/g, "").length;
 
       const stats = calculateFinalResult({
         correctCharCount,
-        totalTypedChars: totalChar,
+        totalTypedChars,
         startTime: safeStartTime,
         endTime: actualEndTime,
         wpmPerSecond,
@@ -244,10 +218,10 @@ export const TypingtestPage = () => {
       setFinalTimeTaken(
         selectedSetting === "time" ? stats.timeTaken + 1 : stats.timeTaken
       );
-      setFinalTotalCharacters(totalChar);
       setFinalCorrectCharacters(correctCharCount);
       setFinalTestType(selectedSetting);
       setFinalMode(mode);
+      setFinalTypedCharacters(totalTypedChars);
 
       navigate("/results");
     }
@@ -259,8 +233,6 @@ export const TypingtestPage = () => {
     targetText,
     navigate,
     startTime,
-    totalChar,
-    incorrectChar,
     wpmPerSecond,
     correctCharCount,
     setEndTime,
@@ -269,7 +241,6 @@ export const TypingtestPage = () => {
     setFinalRawWpm,
     setFinalConsistency,
     setFinalTimeTaken,
-    setFinalTotalCharacters,
     setFinalCorrectCharacters,
     setFinalTestType,
   ]);
@@ -280,8 +251,6 @@ export const TypingtestPage = () => {
     resetTimer();
     setUserInput("");
     setTotalTypedWords(0);
-    setIncorrectChar(0);
-    setTotalChar(0);
     setStartTime(null);
     setEndTime(null);
     setWpmPerSecond([]);
