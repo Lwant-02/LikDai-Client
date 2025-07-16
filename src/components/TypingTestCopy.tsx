@@ -9,15 +9,22 @@ interface TypingTestProps {
   startTimer: () => void;
   targetText: string;
 }
+// Mock GraphemeSplitter for demonstration
+class MockGraphemeSplitter {
+  splitGraphemes(text: string) {
+    // Simple fallback - you should use the actual GraphemeSplitter
+    return [...text];
+  }
+}
 
-export const TypingTest = ({
+export const TypingTestCopy = ({
   isRunning,
   startTimer,
   targetText,
 }: TypingTestProps) => {
   const { selectedSetting, mode, userInput, setUserInput } = settingStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const splitter = new GraphemeSplitter();
+  const splitter = new MockGraphemeSplitter();
   const units = splitter.splitGraphemes(targetText);
   const typedUnits = splitter.splitGraphemes(userInput);
 
@@ -67,7 +74,7 @@ export const TypingTest = ({
   };
 
   return (
-    <div className="cursor-text select-none px-3 w-full h-full">
+    <div className="cursor-text select-none px-3 w-full h-full ">
       <div className={getContainerClasses()}>
         {units.map((unit, i) => {
           const typedUnit = typedUnits[i];
@@ -94,6 +101,11 @@ export const TypingTest = ({
         })}
       </div>
 
+      {/* <div className="text-4xl font-secondary" lang="shn">
+        {units.map((unit, i) => (
+          <span key={i}>{unit}</span>
+        ))}
+      </div> */}
       <input
         ref={inputRef}
         type="text"
