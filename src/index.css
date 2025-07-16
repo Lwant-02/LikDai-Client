@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Share+Tech&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Noto+Serif+Myanmar:wght@100;200;300;400;500;600;700;800;900&family=Share+Tech&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@100;200;300;400;500;600;700;800;900&family=Padauk:wght@400;700&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -8,7 +9,7 @@
 
 @theme {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Noto Serif Myanmar", serif;
+  --font-secondary: "Padauk", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -21,7 +22,7 @@
 }
 :root {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Yungkio", serif;
+  --font-secondary: "Padauk", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -35,7 +36,7 @@
 
 .light {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Yungkio", serif;
+  --font-secondary: "Padauk", sans-serif;
   --color-background: #ffffff;
   --color-foreground: #f1f0e8;
   --color-primary: #040303;
