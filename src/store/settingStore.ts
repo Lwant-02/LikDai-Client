@@ -13,6 +13,8 @@ interface SettingOptions {
   startTime: number | null;
   endTime: number | null;
   wpmPerSecond: number[];
+  selectedKeyMap: KeyMapNames;
+  setSelectedKeyMap: (keyMap: KeyMapNames) => void;
   setStartTime: (startTime: number | null) => void;
   setEndTime: (endTime: number | null) => void;
   setWpmPerSecond: (wpmPerSecond: number[]) => void;
@@ -40,6 +42,8 @@ export const settingStore = create<SettingOptions>((set) => ({
   startTime: null,
   endTime: null,
   wpmPerSecond: [],
+  selectedKeyMap: "namkhone",
+  setSelectedKeyMap: (keyMap) => set({ selectedKeyMap: keyMap }),
   setStartTime: (startTime) => set({ startTime }),
   setEndTime: (endTime) => set({ endTime }),
   setWpmPerSecond: (wpmPerSecond) => set({ wpmPerSecond }),

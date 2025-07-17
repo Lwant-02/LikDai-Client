@@ -7,6 +7,7 @@ import { CustomSetting } from "./CustomSetting";
 import { settingOptions } from "./DesktopTestSetting";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { Settings } from "lucide-react";
+import { KeyBoardSelector } from "./KeyBoardSelector";
 
 interface CustomTextDialogProps {
   isOpen: boolean;
@@ -108,6 +109,12 @@ export const MobileTestSettingDialog = ({
             {selectedSetting === "words" && <WordsSetting />}
             {selectedSetting === "custom" && <CustomSetting />}
           </div>
+          {mode === "shan" && (
+            <>
+              <p className="text-sm opacity-70">Keyboard Layout</p>
+              <KeyBoardSelector />
+            </>
+          )}
         </div>
       </DialogContent>
     </Dialog>

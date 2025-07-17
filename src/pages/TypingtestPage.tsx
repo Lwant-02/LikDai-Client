@@ -1,14 +1,13 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
 import { MobileTestSetting } from "@/components/MobileTestSetting";
 import { useTitle } from "@/hook/useTitle";
 import { useCountdownTimer } from "@/hook/useCountdownTimer";
 import { settingStore } from "@/store/settingStore";
-import { TypingTest } from "@/components/TypingTest";
 import { getRandomParagraph } from "@/util/getRandomParagraph.util";
 import { getRandomWords } from "@/util/getRandomWord.util";
 import { getRandomQuote } from "@/util/getRandomQuote.util";
@@ -18,6 +17,7 @@ import { resultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { TypingTestCopy } from "@/components/TypingTestCopy";
+import { KeyboardLayout } from "@/components/KeyboardLayout";
 
 export const TypingtestPage = () => {
   const {
@@ -51,6 +51,7 @@ export const TypingtestPage = () => {
     useCountdownTimer(selectedTimer);
   const [targetText, setTargetText] = useState<string>("");
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const hasSetEndTimeRef = useRef(false);
@@ -258,8 +259,8 @@ export const TypingtestPage = () => {
   };
 
   return (
-    <article className="w-full h-full flex flex-col gap-14 items-center">
-      <div className="w-auto mt-7 h-auto">
+    <article className="w-full h-full flex flex-col gap-7 items-center">
+      <div className="w-auto mt-5 h-auto">
         <DesktopTestSetting />
         <MobileTestSetting />
       </div>
@@ -288,7 +289,7 @@ export const TypingtestPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 h-96 w-full"
+          className="mt-3 h-52 w-full  "
         >
           <TypingTestCopy
             isRunning={isRunning}
@@ -296,19 +297,48 @@ export const TypingtestPage = () => {
             targetText={targetText}
           />
         </motion.div>
+
+        {/* Restart and Keyboard Toggle Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-full flex justify-center items-center "
+          className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16"
         >
-          <button
-            type="button"
-            onClick={handleRestartTest}
-            className="mt-10 opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-          >
-            <RotateCcw className="size-5 " />
-          </button>
+          {isKeyboardVisible && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="transform scale-50 md:scale-75 lg:scale-90 origin-top "
+            >
+              <KeyboardLayout />
+            </motion.div>
+          )}
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={handleRestartTest}
+              className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+            >
+              <RotateCcw className="size-5 " />
+            </button>
+
+            {/* Keyboard Toggle Button */}
+            <button
+              type="button"
+              onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
+              className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+              title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
+            >
+              {isKeyboardVisible ? (
+                <EyeOff className="size-5" />
+              ) : (
+                <Keyboard className="size-5" />
+              )}
+            </button>
+          </div>
         </motion.div>
       </div>
     </article>

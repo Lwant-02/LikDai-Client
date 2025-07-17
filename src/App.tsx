@@ -18,7 +18,6 @@ import { ResultPage } from "./pages/ResultPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { Footer } from "./components/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { TestPage } from "./pages/TestPage";
 import { authStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
 
@@ -37,20 +36,19 @@ export default function App() {
               accessToken ? <Navigate to="/account" replace /> : <LoginPage />
             }
           />
-          <Route path="/typing-test" element={<TypingtestPage />} />
           <Route
             path="/account"
             element={
               accessToken ? <AccountPage /> : <Navigate to="/login" replace />
             }
           />
+          <Route path="/typing-test" element={<TypingtestPage />} />
           <Route path="/leaderboards" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />
-          <Route path="/test" element={<TestPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/404" element={<NotFoundPage />} />
         </Routes>
