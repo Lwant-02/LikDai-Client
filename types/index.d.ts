@@ -117,3 +117,7 @@ interface LeaderboardResponse {
   }[];
   totalPages: number;
 }
+
+type KeyMapNames = "english" | "namkhone" | "panglong" | "yunghkio" | "sil";
+
+type KeyMap = Record<string, string>;

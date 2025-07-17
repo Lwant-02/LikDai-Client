@@ -6,6 +6,7 @@ import { TimerSetting } from "./TimerSetting";
 import { WordsSetting } from "./WordsSetting";
 import { CustomSetting } from "./CustomSetting";
 import { settingStore } from "@/store/settingStore";
+import { KeyBoardSelector } from "./KeyBoardSelector";
 
 export const settingOptions = [
   {
@@ -104,6 +105,12 @@ export const DesktopTestSetting = () => {
       {selectedSetting === "time" && <TimerSetting />}
       {selectedSetting === "words" && <WordsSetting />}
       {selectedSetting === "custom" && <CustomSetting />}
+      {mode === "shan" && (
+        <>
+          <span className="h-6 w-1 bg-primary/20 rounded-lg mr-2" />
+          <KeyBoardSelector />
+        </>
+      )}
     </motion.article>
   );
 };

@@ -3,6 +3,7 @@ import GraphemeSplitter from "grapheme-splitter";
 
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
+// import { KeyMaps } from "@/keymaps";
 
 interface TypingTestProps {
   isRunning: boolean;
@@ -23,14 +24,18 @@ export const TypingTest = ({
 
   // Handle typing input
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const key = e.key;
     if (key === "Backspace") {
-      setUserInput(userInput.slice(0, -1));
+      // Use GraphemeSplitter to properly remove the last grapheme cluster
+      const currentUnits = splitter.splitGraphemes(userInput);
+      if (currentUnits.length > 0) {
+        const newUnits = currentUnits.slice(0, -1);
+        setUserInput(newUnits.join(""));
+      }
     } else if (key.length === 1) {
       setUserInput(userInput + key);
     }
-
-    e.preventDefault();
   };
 
   // Global keyboard focus logic
