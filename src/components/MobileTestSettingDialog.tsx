@@ -77,15 +77,10 @@ export const MobileTestSettingDialog = ({
             {settingOptions.map((setting) => (
               <button
                 key={setting.value}
-                disabled={setting.value === "quote" && mode === "shan"}
                 onClick={() => setSelectedSetting(setting.value as TestType)}
                 className={cn(
                   "opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex items-center gap-1",
-                  selectedSetting === setting.value &&
-                    "opacity-100 text-yellow",
-                  setting.name === "Quote" &&
-                    mode === "shan" &&
-                    "opacity-30 hover:opacity-30 pointer-events-none "
+                  selectedSetting === setting.value && "opacity-100 text-yellow"
                 )}
               >
                 {setting.icon}

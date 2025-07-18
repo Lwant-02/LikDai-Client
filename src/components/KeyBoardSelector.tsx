@@ -1,4 +1,4 @@
-import { KeyMaps } from "@/keymaps";
+import { KeyMaps } from "@/keymaps/KeyMaps";
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 

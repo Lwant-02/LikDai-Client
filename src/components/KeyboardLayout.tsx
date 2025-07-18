@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { settingStore } from "@/store/settingStore";
-import { KeyMaps } from "@/keymaps";
+import { KeyMaps } from "@/keymaps/KeyMaps";
 import { cn } from "@/lib/utils";
 
 interface KeyProps {
@@ -213,7 +213,24 @@ export const KeyboardLayout = () => {
         <Key physicalKey="Ctrl" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
-        <Key physicalKey="Space" shanChar="" isSpecial={true} width="space" />
+        <Key
+          physicalKey={
+            selectedKeyMap === "english"
+              ? "Space"
+              : selectedKeyMap === "namkhone"
+              ? "ၼမ်ႉၶူင်း"
+              : selectedKeyMap === "panglong"
+              ? "ပၢင်လူင်"
+              : selectedKeyMap === "yunghkio"
+              ? "ယုင်းၶဵဝ်"
+              : selectedKeyMap === "sil"
+              ? "လၵ်းၸဵင်"
+              : "Space"
+          }
+          shanChar=""
+          isSpecial={true}
+          width="space"
+        />
         <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Ctrl" shanChar="" isSpecial={true} width="wide" />
