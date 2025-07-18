@@ -1,4 +1,4 @@
-import { shanWords } from "@/constant/shan.words.constant";
+import { shanWords } from "@/resources/shan.words";
 
 export const getShanRandomWords = (count: number) => {
   const shuffled = [...shanWords].sort(() => Math.random() - 0.5);

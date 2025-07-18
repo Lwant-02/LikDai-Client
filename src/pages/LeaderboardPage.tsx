@@ -13,7 +13,7 @@ import { Spinner } from "@/components/Spinner";
 export const LeaderboardPage = () => {
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const mode = searchParams.get("mode") || "eng";
+  const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
   const page = searchParams.get("page") || "1";
   const { leaderboard, isFetchingLeaderboard } = useGetLeaderboard({
@@ -25,7 +25,7 @@ export const LeaderboardPage = () => {
   const isLeaderboardhas = leaderboard.leaderboard.length > 0;
 
   // State for filters
-  const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("eng");
+  const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("shan");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);

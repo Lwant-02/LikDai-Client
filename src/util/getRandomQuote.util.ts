@@ -1,4 +1,4 @@
-import { englishQuotes } from "@/constant/quotes.constant";
+import { englishQuotes } from "@/resources/eng.quotes";
 
 export const getRandomQuote = (): string => {
   return englishQuotes[Math.floor(Math.random() * englishQuotes.length)];

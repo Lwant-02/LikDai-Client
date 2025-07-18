@@ -1,4 +1,4 @@
-import { englishParagraphs } from "@/constant/paragraph.constant";
+import { englishParagraphs } from "@/resources/eng.paragraph";
 
 export const getRandomParagraph = (): string => {
   return englishParagraphs[

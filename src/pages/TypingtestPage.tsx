@@ -18,6 +18,7 @@ import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { TypingTestCopy } from "@/components/TypingTestCopy";
 import { KeyboardLayout } from "@/components/KeyboardLayout";
+import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 
 export const TypingtestPage = () => {
   const {
@@ -76,8 +77,7 @@ export const TypingtestPage = () => {
             : getShanRandomWords(selectedWords);
         break;
       case "quote":
-        if (mode === "shan") return;
-        newText = getRandomQuote();
+        newText = mode === "eng" ? getRandomQuote() : getShanRandomQuote();
         break;
       case "custom":
         newText = customText;
@@ -289,7 +289,7 @@ export const TypingtestPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-3 h-52 w-full  "
+          className="mt-3 h-52 w-full overflow-hidden  flex justify-center items-center"
         >
           <TypingTestCopy
             isRunning={isRunning}
@@ -320,6 +320,7 @@ export const TypingtestPage = () => {
             <button
               type="button"
               onClick={handleRestartTest}
+              title="Restart Test"
               className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
             >
               <RotateCcw className="size-5 " />

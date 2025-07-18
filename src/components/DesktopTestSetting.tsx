@@ -84,24 +84,25 @@ export const DesktopTestSetting = () => {
       {settingOptions.map((setting) => (
         <button
           key={setting.value}
-          disabled={setting.value === "quote" && mode === "shan"}
           onClick={() => {
             setSelectedSetting(setting.value as TestType);
             setUserInput("");
           }}
           className={cn(
             "w-16 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-            selectedSetting === setting.value && "opacity-100 text-yellow",
-            setting.name === "Quote" &&
-              mode === "shan" &&
-              "opacity-30 hover:opacity-30 pointer-events-none "
+            selectedSetting === setting.value && "opacity-100 text-yellow"
           )}
         >
           {setting.icon}
           <p>{setting.name}</p>
         </button>
       ))}
-      <span className="h-6 w-1 bg-primary/20 rounded-lg" />
+      <span
+        className={cn(
+          "h-6 w-1 bg-primary/20 rounded-lg",
+          selectedSetting === "quote" && mode === "shan" && "hidden"
+        )}
+      />
       {selectedSetting === "time" && <TimerSetting />}
       {selectedSetting === "words" && <WordsSetting />}
       {selectedSetting === "custom" && <CustomSetting />}

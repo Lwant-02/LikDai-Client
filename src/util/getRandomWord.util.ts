@@ -1,4 +1,4 @@
-import { englishWords } from "@/constant/words.constant";
+import { englishWords } from "@/resources/eng.words";
 
 export const getRandomWords = (count: number) => {
   const shuffled = [...englishWords].sort(() => Math.random() - 0.5);

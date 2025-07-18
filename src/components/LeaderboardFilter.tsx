@@ -23,7 +23,7 @@ export const LeaderboardFilter = ({
       </div>
 
       <div className="flex bg-foreground/50 rounded-md overflow-hidden">
-        {(["eng", "shan"] as LanguageFilter[]).map((filter) => (
+        {(["shan", "eng"] as LanguageFilter[]).map((filter) => (
           <button
             key={filter}
             onClick={() => setLanguageFilter(filter)}

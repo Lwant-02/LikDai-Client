@@ -26,7 +26,7 @@ export const KeyMaps = {
     rows: yunghkioRows,
   },
   sil: {
-    name: "SIL",
+    name: "လၵ်းၸဵင်",
     map: silMap,
     rows: silRows,
   },

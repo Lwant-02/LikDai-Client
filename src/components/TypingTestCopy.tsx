@@ -3,7 +3,7 @@ import GraphemeSplitter from "grapheme-splitter";
 
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
-import { KeyMaps } from "@/keymaps";
+import { KeyMaps } from "@/keymaps/KeyMaps";
 
 interface TypingTestProps {
   isRunning: boolean;
@@ -11,12 +11,12 @@ interface TypingTestProps {
   targetText: string;
 }
 // Mock GraphemeSplitter for demonstration
-class MockGraphemeSplitter {
-  splitGraphemes(text: string) {
-    // Simple fallback - you should use the actual GraphemeSplitter
-    return [...text];
-  }
-}
+// class MockGraphemeSplitter {
+//   splitGraphemes(text: string) {
+//     // For demonstration, we'll just split by character
+//     return [...text];
+//   }
+// }
 
 export const TypingTestCopy = ({
   isRunning,
@@ -30,9 +30,11 @@ export const TypingTestCopy = ({
   const currentCharRef = useRef<HTMLSpanElement>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
 
-  const splitter = new MockGraphemeSplitter();
+  const splitter = new GraphemeSplitter();
   const units = splitter.splitGraphemes(targetText);
   const typedUnits = splitter.splitGraphemes(userInput);
+  console.log(units);
+  console.log(typedUnits);
 
   // Calculate scroll position based on current character position
   const updateScrollPosition = useCallback(() => {
@@ -118,27 +120,20 @@ export const TypingTestCopy = ({
     return mode === "eng" ? baseClasses : cn(baseClasses, "font-secondary");
   };
 
-  const getContainerClasses = () => {
-    const baseClasses = "flex leading-relaxed";
-    return mode === "shan"
-      ? cn(baseClasses, "flex-wrap whitespace-pre-wrap")
-      : cn(baseClasses, "flex-wrap whitespace-pre-wrap");
-  };
-
   return (
-    <div className="cursor-text select-none px-3 w-full h-full relative">
+    <div className="cursor-text select-none px-3 w-full h-full relative flex justify-center items-center">
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}
-        className="h-full overflow-hidden relative transition-transform duration-200 ease-out"
+        className="h-full overflow-hidden relative transition-transform duration-200 ease-out  py-[9px] px-2"
       >
         <div
-          className="transition-transform duration-200 ease-out"
+          className="transition-transform duration-200 ease-out "
           {...({
             style: { transform: `translateY(-${scrollOffset}px)` },
           } as any)}
         >
-          <div className={getContainerClasses()}>
+          <div className="flex flex-wrap break-words whitespace-pre-wrap">
             {units.map((unit, i) => {
               const typedUnit = typedUnits[i];
               const isCurrent = i === typedUnits.length;
@@ -153,7 +148,7 @@ export const TypingTestCopy = ({
                 <span
                   key={i}
                   ref={isCurrent ? currentCharRef : null}
-                  className={cn(getTextClasses(), colorClass)}
+                  className={cn(getTextClasses(), colorClass, "leading-snug ")}
                   lang={mode === "shan" ? "shn" : "en"}
                 >
                   {unit}
