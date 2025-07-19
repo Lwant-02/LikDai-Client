@@ -34,7 +34,7 @@ export const settingStore = create<SettingOptions>((set) => ({
   selectedSetting: "time",
   selectedTimer: 15,
   selectedWords: 30,
-  customText: "This is a custom text.",
+  customText: "ၼႆႉပဵၼ်လိၵ်ႈ ဢၼ်ပၼ်တူဝ်ယၢင်ႇ",
   userInput: "",
   activeTab: "profile",
   profileAciveTab: "stats",
@@ -57,9 +57,9 @@ export const settingStore = create<SettingOptions>((set) => ({
   setCustomText: (customText) => set({ customText }),
   setMode: (mode) => {
     const newText =
-      mode === "eng"
-        ? "This is a custom English text."
-        : "ၽႃႇသႂ်ႇတႃႇၵႂႃႇတႄႉတႅင်း";
+      mode === "shan"
+        ? "ၼႆႉပဵၼ်လိၵ်ႈ ဢၼ်ပၼ်တူဝ်ယၢင်ႇ"
+        : "This is a sample text for English.";
     set({ mode: mode, customText: newText });
   },
   setSelectedSetting: (selectedSetting) => set({ selectedSetting }),

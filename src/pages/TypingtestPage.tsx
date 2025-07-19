@@ -16,9 +16,9 @@ import { getShanRandomWords } from "@/util/getShanRandomWord";
 import { resultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
-import { TypingTestCopy } from "@/components/TypingTestCopy";
 import { KeyboardLayout } from "@/components/KeyboardLayout";
 import { getShanRandomQuote } from "@/util/getShanRandomQuote";
+import { TypingTest } from "@/components/TypingTest";
 
 export const TypingtestPage = () => {
   const {
@@ -291,7 +291,7 @@ export const TypingtestPage = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-3 h-52 w-full overflow-hidden  flex justify-center items-center"
         >
-          <TypingTestCopy
+          <TypingTest
             isRunning={isRunning}
             startTimer={startTimer}
             targetText={targetText}

@@ -13,3 +13,11 @@ export const developerContacts = [
   },
   { imagePath: "/svg/github.svg", link: "https://github.com/Lwant-02" },
 ];
+
+export const supporterContacts = [
+  {
+    imagePath: "/svg/facebook.svg",
+    link: "https://www.facebook.com/saing.hmine.tun",
+  },
+  { imagePath: "/svg/github.svg", link: "https://github.com/SaingHmineTun" },
+];

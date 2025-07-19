@@ -8,7 +8,7 @@ import {
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { settingStore } from "@/store/settingStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export const CustomTextDialog = ({
   setIsOpen,
 }: CustomTextDialogProps) => {
   const { setCustomText, customText, mode } = settingStore();
-  const [text, setText] = useState<string>(customText);
+  const [text, setText] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,6 +37,10 @@ export const CustomTextDialog = ({
     setCustomText(text);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setText(customText);
+  }, [mode]);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
