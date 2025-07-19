@@ -9,12 +9,14 @@ import {
   Bug,
   UserCog,
   ChevronsUp,
+  Handshake,
+  Rocket,
 } from "lucide-react";
 
 import { useTitle } from "@/hook/useTitle";
 import { Button } from "@/components/ui/button";
 import { ReportSummitDialog } from "@/components/ReportSummitDialog";
-import { developerContacts } from "@/constant";
+import { developerContacts, supporterContacts } from "@/constant";
 
 const timelineItems = [
   {
@@ -375,6 +377,83 @@ export const AboutPage = () => {
                 ))}
               </div>
             </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Supports & Resources Section */}
+        <section className="px-4 pb-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl font-bold mb-6 "
+            >
+              Supports & Resources <Handshake className="inline-block size-7" />
+            </motion.h2>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-lg opacity-80 max-w-2xl mx-auto "
+            >
+              A big thanks to{" "}
+              <span className="font-bold text-yellow">
+                Sai Mao (TMK-
+                <span className="font-secondary">ထုင်ႉမၢဝ်းၶမ်း</span>){" "}
+              </span>{" "}
+              for providing the Shan Quotes and other resources and supports for
+              this project. You can reach out to him through the contacts below.
+            </motion.p>
+            <motion.div className="mb-8 mt-3" variants={itemVariants}>
+              <div className="flex flex-wrap justify-center gap-4">
+                {supporterContacts.map((contact, index) => (
+                  <a
+                    key={index}
+                    href={contact.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-gray-200 rounded-md p-1"
+                  >
+                    <img
+                      src={contact.imagePath}
+                      alt={contact.link}
+                      className="size-6"
+                    />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Release Announcement Section */}
+        <section className="px-4 pb-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl font-bold mb-6 "
+            >
+              Release Announcement <Rocket className="inline-block size-7" />
+            </motion.h2>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-lg opacity-80 max-w-2xl mx-auto "
+            >
+              🎉 Welcome to our first release! We're excited to share it with
+              you. While there might be a few issues or bugs, we're working hard
+              to improve things — thanks for being part of the journey!
+            </motion.p>
           </motion.div>
         </section>
 

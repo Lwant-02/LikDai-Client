@@ -10,13 +10,6 @@ interface TypingTestProps {
   startTimer: () => void;
   targetText: string;
 }
-// Mock GraphemeSplitter for demonstration
-// class MockGraphemeSplitter {
-//   splitGraphemes(text: string) {
-//     // For demonstration, we'll just split by character
-//     return [...text];
-//   }
-// }
 
 export const TypingTestCopy = ({
   isRunning,
@@ -33,8 +26,6 @@ export const TypingTestCopy = ({
   const splitter = new GraphemeSplitter();
   const units = splitter.splitGraphemes(targetText);
   const typedUnits = splitter.splitGraphemes(userInput);
-  console.log(units);
-  console.log(typedUnits);
 
   // Calculate scroll position based on current character position
   const updateScrollPosition = useCallback(() => {
@@ -125,15 +116,15 @@ export const TypingTestCopy = ({
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}
-        className="h-full overflow-hidden relative transition-transform duration-200 ease-out  py-[9px] px-2"
+        className="h-full overflow-hidden relative transition-transform duration-200 ease-out py-[9px] px-2"
       >
         <div
-          className="transition-transform duration-200 ease-out "
+          className="transition-transform duration-200 ease-out"
           {...({
             style: { transform: `translateY(-${scrollOffset}px)` },
           } as any)}
         >
-          <div className="flex flex-wrap break-words whitespace-pre-wrap">
+          <div className="block break-words whitespace-pre-wrap">
             {units.map((unit, i) => {
               const typedUnit = typedUnits[i];
               const isCurrent = i === typedUnits.length;
@@ -148,13 +139,16 @@ export const TypingTestCopy = ({
                 <span
                   key={i}
                   ref={isCurrent ? currentCharRef : null}
-                  className={cn(getTextClasses(), colorClass, "leading-snug ")}
+                  className={cn(
+                    getTextClasses(),
+                    colorClass,
+                    "leading-snug transition-all duration-300 ease-in-out",
+                    isCurrent &&
+                      "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs  ring-1 ring-yellow/40"
+                  )}
                   lang={mode === "shan" ? "shn" : "en"}
                 >
                   {unit}
-                  {isCurrent && (
-                    <span className="absolute -left-0.5 rounded-md top-0 h-full w-[3px] bg-yellow animate-[pulse_1.5s_ease-in-out_infinite]" />
-                  )}
                 </span>
               );
             })}
