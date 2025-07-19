@@ -19,9 +19,9 @@ export const TypingGame = () => {
   const currentCharRef = useRef<HTMLSpanElement>(null); // Reference to the span of the current character
   const cursorRef = useRef<HTMLSpanElement>(null); // Reference to the separate cursor element
 
-  const isFinished =
-    typedUnits.length === units.length &&
-    typedUnits.every((g, i) => g === units[i]);
+  // const isFinished =
+  //   typedUnits.length === units.length &&
+  //   typedUnits.every((g, i) => g === units[i]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTypedText(e.target.value);
