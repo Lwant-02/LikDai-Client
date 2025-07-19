@@ -19,6 +19,8 @@ import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/components/KeyboardLayout";
 import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
+import { TooltipHover } from "@/components/TooltipHover";
+import { cn } from "@/lib/utils";
 
 export const TypingtestPage = () => {
   const {
@@ -35,6 +37,7 @@ export const TypingtestPage = () => {
     setStartTime,
     setEndTime,
     setWpmPerSecond,
+    setMode,
   } = settingStore();
   const {
     setFinalWpm,
@@ -258,9 +261,54 @@ export const TypingtestPage = () => {
     setWpmPerSecond([]);
   };
 
+  //Change mode
+  const handleChangeMode = () => {
+    if (mode === "eng") {
+      setMode("shan");
+      setUserInput("");
+    } else {
+      setMode("eng");
+      setUserInput("");
+    }
+  };
   return (
-    <article className="w-full h-full flex flex-col gap-7 items-center">
-      <div className="w-auto mt-5 h-auto">
+    <article className="w-full h-full flex flex-col gap-4 items-center">
+      <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex gap-3 mb-2 w-full justify-center items-center"
+        >
+          <button
+            onClick={handleChangeMode}
+            className={cn(
+              "w-20 flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+              mode === "shan" && "opacity-100 text-yellow"
+            )}
+          >
+            <img
+              src="/svg/Shan-Flag.svg"
+              alt="shan-flag"
+              className="size-5 rounded-full object-cover border border-foreground"
+            />
+            <p className="text-md font-secondary">လိၵ်ႈတႆး</p>
+          </button>
+          <button
+            onClick={handleChangeMode}
+            className={cn(
+              "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+              mode === "eng" && "opacity-100 text-yellow"
+            )}
+          >
+            <img
+              src="/images/UK-Flag.jpg"
+              alt="uk-flag"
+              className="size-5 rounded-full object-cover border border-foreground"
+            />
+            <p className="text-md font-secondary">လိၵ်ႈEng</p>
+          </button>
+        </motion.div>
         <DesktopTestSetting />
         <MobileTestSetting />
       </div>
@@ -289,7 +337,7 @@ export const TypingtestPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-3 h-52 w-full overflow-hidden  flex justify-center items-center"
+          className="h-52 w-full overflow-hidden  flex justify-center items-center"
         >
           <TypingTest
             isRunning={isRunning}
@@ -317,28 +365,34 @@ export const TypingtestPage = () => {
             </motion.div>
           )}
           <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={handleRestartTest}
-              title="Restart Test"
-              className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-            >
-              <RotateCcw className="size-5 " />
-            </button>
+            <TooltipHover tooltipText="ၶိုၼ်းတႄႇမႂ်ႇ">
+              <span
+                onClick={handleRestartTest}
+                title="Restart Test"
+                className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+              >
+                <RotateCcw className="size-5 " />
+              </span>
+            </TooltipHover>
 
             {/* Keyboard Toggle Button */}
-            <button
-              type="button"
-              onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
-              className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-              title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
+            <TooltipHover
+              tooltipText={
+                isKeyboardVisible ? "လပ်ႉလွၵ်းမိုဝ်း" : "ၼႄလွၵ်းမိုဝ်း"
+              }
             >
-              {isKeyboardVisible ? (
-                <EyeOff className="size-5" />
-              ) : (
-                <Keyboard className="size-5" />
-              )}
-            </button>
+              <span
+                onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
+                className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+                title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
+              >
+                {isKeyboardVisible ? (
+                  <EyeOff className="size-5" />
+                ) : (
+                  <Keyboard className="size-5" />
+                )}
+              </span>
+            </TooltipHover>
           </div>
         </motion.div>
       </div>

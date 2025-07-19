@@ -10,108 +10,71 @@ import { KeyBoardSelector } from "./KeyBoardSelector";
 
 export const settingOptions = [
   {
-    name: "Time",
+    name: "ၶၢဝ်းယၢမ်း",
     value: "time",
     icon: <Timer className="size-4" />,
   },
   {
-    name: "Words",
+    name: "တူဝ်လိၵ်ႈ",
     value: "words",
     icon: <Baseline className="size-4" />,
   },
   {
-    name: "Quote",
+    name: "ၵႂၢမ်းၵမ်းထုၵ်ႇ",
     value: "quote",
     icon: <Quote className="size-4 rotate-180" />,
   },
   {
-    name: "Custom",
+    name: "တႅမ်ႈသႂ်ႇ",
     value: "custom",
     icon: <Wrench className="size-4" />,
   },
 ];
 
 export const DesktopTestSetting = () => {
-  const { mode, selectedSetting, setSelectedSetting, setMode, setUserInput } =
+  const { mode, selectedSetting, setSelectedSetting, setUserInput } =
     settingStore();
 
-  const handleChangeMode = () => {
-    if (mode === "eng") {
-      setMode("shan");
-      setUserInput("");
-    } else {
-      setMode("eng");
-      setUserInput("");
-    }
-  };
-
   return (
-    <motion.article
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="py-2 px-7 bg-foreground rounded-lg  text-sm gap-2 md:flex hidden"
-    >
-      <button
-        onClick={handleChangeMode}
-        className={cn(
-          "w-20 flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-          mode === "shan" && "opacity-100 text-yellow"
-        )}
+    <>
+      <motion.article
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="py-2 px-7 bg-foreground rounded-lg  text-sm gap-2 md:flex hidden"
       >
-        <img
-          src="/svg/Shan-Flag.svg"
-          alt="shan-flag"
-          className="size-4 rounded-full object-cover border border-foreground"
-        />
-        <p>Shan</p>
-      </button>
-      <button
-        onClick={handleChangeMode}
-        className={cn(
-          "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-          mode === "eng" && "opacity-100 text-yellow"
-        )}
-      >
-        <img
-          src="/images/UK-Flag.jpg"
-          alt="uk-flag"
-          className="size-4 rounded-full object-cover border border-foreground"
-        />
-        <p>English</p>
-      </button>
-      <span className="h-6 w-1 bg-primary/20 rounded-lg" />
-      {settingOptions.map((setting) => (
-        <button
-          key={setting.value}
-          onClick={() => {
-            setSelectedSetting(setting.value as TestType);
-            setUserInput("");
-          }}
+        {settingOptions.map((setting) => (
+          <button
+            key={setting.value}
+            onClick={() => {
+              setSelectedSetting(setting.value as TestType);
+              setUserInput("");
+            }}
+            className={cn(
+              "w-auto px-2 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+              selectedSetting === setting.value && "opacity-100 text-yellow"
+            )}
+          >
+            {setting.icon}
+            <p className="text-sm font-secondary">{setting.name}</p>
+          </button>
+        ))}
+        <span
           className={cn(
-            "w-16 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-            selectedSetting === setting.value && "opacity-100 text-yellow"
+            "h-6 w-1 bg-primary/20 rounded-lg",
+            selectedSetting === "quote" && mode === "shan" && "hidden"
           )}
-        >
-          {setting.icon}
-          <p>{setting.name}</p>
-        </button>
-      ))}
-      <span
-        className={cn(
-          "h-6 w-1 bg-primary/20 rounded-lg",
-          selectedSetting === "quote" && mode === "shan" && "hidden"
+        />
+        {selectedSetting === "time" && <TimerSetting />}
+        {selectedSetting === "words" && <WordsSetting />}
+        {selectedSetting === "custom" && <CustomSetting />}
+        {mode === "shan" && (
+          <>
+            <span className="h-6 w-1 bg-primary/20 rounded-lg mr-2" />
+            <KeyBoardSelector />
+          </>
         )}
-      />
-      {selectedSetting === "time" && <TimerSetting />}
-      {selectedSetting === "words" && <WordsSetting />}
-      {selectedSetting === "custom" && <CustomSetting />}
-      {mode === "shan" && (
-        <>
-          <span className="h-6 w-1 bg-primary/20 rounded-lg mr-2" />
-          <KeyBoardSelector />
-        </>
-      )}
-    </motion.article>
+      </motion.article>
+    </>
   );
 };

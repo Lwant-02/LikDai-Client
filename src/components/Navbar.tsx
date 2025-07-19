@@ -12,23 +12,28 @@ import { cn } from "@/lib/utils";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hook/useUser";
 import { settingStore } from "@/store/settingStore";
+import { TooltipHover } from "./TooltipHover";
 
 const navLink = [
   {
+    name: "ၼႃႈႁိူၼ်း",
     path: "/",
-    icon: <HomeIcon />,
+    icon: <HomeIcon className="size-5" />,
   },
   {
+    name: "တီႈၽိုၵ်းတႅမ်ႈ",
     path: "/typing-test",
     icon: <Keyboard className="size-5" />,
   },
   {
+    name: "ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်",
     path: "/leaderboards",
     icon: <Crown className="size-5 " />,
   },
   {
+    name: "လွင်ႈႁဝ်းၶႃႈ",
     path: "/about",
-    icon: <InformationCircleIcon />,
+    icon: <InformationCircleIcon className="size-5 " />,
   },
 ];
 
@@ -69,50 +74,60 @@ export const Navbar = () => {
         </Link>
         <div className="flex justify-center items-center gap-5 md:mr-36 mr-5">
           {navLink.map((link) => (
-            <Link
-              to={link.path}
-              key={link.path}
-              className={cn(
-                "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                pathname.endsWith(link.path) && "opacity-100"
-              )}
-            >
-              {link.icon}
-            </Link>
+            <TooltipHover tooltipText={link.name} key={link.name}>
+              <Link
+                to={link.path}
+                className={cn(
+                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                  pathname.endsWith(link.path) && "opacity-100"
+                )}
+              >
+                {link.icon}
+              </Link>
+            </TooltipHover>
           ))}
-          <button
-            onClick={() => {
-              setTheme(theme === "dark" ? "light" : "dark");
-            }}
-            className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
+          <TooltipHover
+            tooltipText={theme === "dark" ? "ၵၢင်ၶမ်ႈ" : "ၵၢင်ဝၼ်း"}
+            className="flex justify-center"
           >
-            {theme === "dark" ? (
-              <Moon className="size-5 " />
-            ) : (
-              <Sun className="size-5 " />
-            )}
-          </button>
+            <span
+              onClick={() => {
+                setTheme(theme === "dark" ? "light" : "dark");
+              }}
+              className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
+            >
+              {theme === "dark" ? (
+                <Moon className="size-5 " />
+              ) : (
+                <Sun className="size-5 " />
+              )}
+            </span>
+          </TooltipHover>
         </div>
         {accessToken ? (
-          <Link
-            to="/account"
-            className={cn(
-              "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center gap-1",
-              pathname.endsWith("/account") && "opacity-100"
-            )}
-          >
-            <UserIcon className="size-5" />
-            <p className="hidden md:flex text-sm ">{profile?.username}</p>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <UserIcon
+          <TooltipHover tooltipText={profile?.username || "ႁဵင်းမၢႆသုၼ်ႇတူဝ်"}>
+            <Link
+              to="/account"
               className={cn(
-                "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                pathname.endsWith("/login") && "opacity-100"
+                "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center gap-1",
+                pathname.endsWith("/account") && "opacity-100"
               )}
-            />
-          </Link>
+            >
+              <UserIcon className="size-5" />
+              <p className="hidden md:flex text-sm ">{profile?.username}</p>
+            </Link>
+          </TooltipHover>
+        ) : (
+          <TooltipHover tooltipText="ၶဝ်ႈဝႅပ်ႉသၢႆႉ">
+            <Link to="/login">
+              <UserIcon
+                className={cn(
+                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                  pathname.endsWith("/login") && "opacity-100"
+                )}
+              />
+            </Link>
+          </TooltipHover>
         )}
       </div>
     </motion.nav>

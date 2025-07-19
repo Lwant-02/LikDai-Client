@@ -13,7 +13,7 @@ export const MobileTestSetting = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         onClick={() => setIsDialogOpen(true)}
-        className="py-2 px-6 flex w-auto justify-center items-center gap-2 rounded-lg bg-foreground md:hidden cursor-pointer"
+        className="py-2 px-6 flex w-52 justify-center items-center gap-2 rounded-lg bg-foreground md:hidden cursor-pointer"
       >
         <Settings className="size-4" />
         <p className="text-sm">Test Settings</p>
