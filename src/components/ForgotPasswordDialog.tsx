@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 import {
   Dialog,
@@ -22,6 +23,7 @@ export const ForgotPasswordDialog = ({
   isOpen,
   setIsOpen,
 }: ForgotPasswordDialogProps) => {
+  const navigate = useNavigate();
   const { forgotPassword, isSendingEmail } = useForgotPassword();
   const [email, setEmail] = useState<string>("");
 
@@ -37,10 +39,14 @@ export const ForgotPasswordDialog = ({
       onSuccess: () => {
         setIsOpen(false);
         setEmail("");
+
+        // Redirect to OTP verification page
+        navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
+
         toast("✅️ Success", {
           description: (
             <p className="text-white">
-              Password reset email sent successfully. Please check your email!
+              OTP sent to your email! Please check your inbox or spam folder.
             </p>
           ),
           style: {

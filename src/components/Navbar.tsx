@@ -46,12 +46,14 @@ export const Navbar = () => {
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
   const isCertificatePage = pathname.includes("/certificate");
+  const isVerifyOtpPage = pathname.includes("/verify-otp");
 
   if (
     isChangePasswordPage ||
     isHomePage ||
     isNotFoundPage ||
-    isCertificatePage
+    isCertificatePage ||
+    isVerifyOtpPage
   ) {
     return null;
   }

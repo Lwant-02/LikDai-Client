@@ -4,7 +4,7 @@ import * as htmlToImage from "html-to-image";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { toast } from "sonner";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import { Button } from "@/components/ui/button";
 import { useGetCertificate } from "@/hook/useUser";
