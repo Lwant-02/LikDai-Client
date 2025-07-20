@@ -1,7 +1,6 @@
-import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
-import { useTitle } from "@/hook/useTitle";
 import { AccoutHeader } from "@/components/AccoutHeader";
 import { AccountTabs } from "@/components/AccountTabs";
 import { ProfileTab } from "@/components/ProfileTab";
@@ -14,11 +13,9 @@ import { useGetProfile } from "@/hook/useUser";
 import { settingStore } from "@/store/settingStore";
 
 export const AccountPage = () => {
-  const { pathname } = useLocation();
   const { isCheckingAuth } = authStore();
 
   const { activeTab, setActiveTab } = settingStore();
-  useTitle({ pathName: pathname });
 
   const { profile, isFetchingProfile } = useGetProfile();
 
@@ -31,52 +28,61 @@ export const AccountPage = () => {
   }
 
   return (
-    <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full"
-      >
-        {/* Header */}
-        <AccoutHeader {...profile} />
-
-        {/* Tabs */}
-        <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-        {/* Content */}
+    <>
+      <Helmet>
+        <title>Account | LikDai - Pro</title>
+        <meta
+          name="description"
+          content="Manage your account settings and view your profile."
+        />
+      </Helmet>
+      <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
         <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mb-20"
+          transition={{ duration: 0.5 }}
+          className="w-full"
         >
-          {/* Profile Tab */}
-          {activeTab === "profile" && (
-            <ProfileTab
-              bio={profile.bio}
-              username={profile.username}
-              email={profile.email}
-              joinDate={profile.joinedAt}
-              testsCompleted={profile.totalTests}
-              setActiveTab={setActiveTab}
-            />
-          )}
+          {/* Header */}
+          <AccoutHeader {...profile} />
 
-          {/* Stats Tab */}
-          {activeTab === "stats" && <StatsTab />}
+          {/* Tabs */}
+          <AccountTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-          {/* History Tab */}
-          {activeTab === "history" && <HistoryTab />}
+          {/* Content */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mb-20"
+          >
+            {/* Profile Tab */}
+            {activeTab === "profile" && (
+              <ProfileTab
+                bio={profile.bio}
+                username={profile.username}
+                email={profile.email}
+                joinDate={profile.joinedAt}
+                testsCompleted={profile.totalTests}
+                setActiveTab={setActiveTab}
+              />
+            )}
 
-          {/* Achievements Tab */}
-          {activeTab === "achievements" && <AchievementsTab />}
+            {/* Stats Tab */}
+            {activeTab === "stats" && <StatsTab />}
 
-          {/* Settings Tab */}
-          {activeTab === "settings" && <SettingTab />}
+            {/* History Tab */}
+            {activeTab === "history" && <HistoryTab />}
+
+            {/* Achievements Tab */}
+            {activeTab === "achievements" && <AchievementsTab />}
+
+            {/* Settings Tab */}
+            {activeTab === "settings" && <SettingTab />}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </article>
+      </article>
+    </>
   );
 };

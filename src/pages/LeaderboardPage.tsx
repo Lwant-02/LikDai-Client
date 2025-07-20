@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
-import { useTitle } from "@/hook/useTitle";
 import { LeaderboardPagination } from "@/components/LeaderboardPagination";
 import { LeaderboardHeader } from "@/components/LeaderboardHeader";
 import { LeaderboardFilter } from "@/components/LeaderboardFilter";
@@ -11,7 +11,6 @@ import { useGetLeaderboard } from "@/hook/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
 
 export const LeaderboardPage = () => {
-  const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
@@ -21,7 +20,6 @@ export const LeaderboardPage = () => {
     total,
     page,
   });
-  useTitle({ pathName: pathname });
   const isLeaderboardhas = leaderboard.leaderboard.length > 0;
 
   // State for filters
@@ -61,65 +59,74 @@ export const LeaderboardPage = () => {
   }, [mode, total, page, searchParams, languageFilter, currentPage]);
 
   return (
-    <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl"
-      >
-        {/* Header - Responsive layout */}
-        <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
-
-        {/* Filters - Responsive layout */}
-        <LeaderboardFilter
-          languageFilter={languageFilter}
-          setLanguageFilter={setLanguageFilter}
+    <>
+      <Helmet>
+        <title>Leaderboards | LikDai - Pro</title>
+        <meta
+          name="description"
+          content="Compete with others and see how you rank on the leaderboard."
         />
+      </Helmet>
+      <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-5xl"
+        >
+          {/* Header - Responsive layout */}
+          <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
 
-        <p className="md:text-2xl text-xl font-bolds mb-3">
-          {languageFilter === "eng" ? "English" : "Shan"} All Time
-        </p>
+          {/* Filters - Responsive layout */}
+          <LeaderboardFilter
+            languageFilter={languageFilter}
+            setLanguageFilter={setLanguageFilter}
+          />
 
-        {isFetchingLeaderboard ? (
-          <div className="w-full flex justify-center items-center h-52">
-            <Spinner size={14} />
-          </div>
-        ) : (
-          <>
-            {leaderboard.leaderboard.length > 0 ? (
-              <>
-                {/* Leaderboard table - Responsive layout */}
-                <LeaderboardTable leaderboardData={leaderboardWithRank} />
+          <p className="md:text-2xl text-xl font-bolds mb-3">
+            {languageFilter === "eng" ? "English" : "Shan"} All Time
+          </p>
 
-                {/* Pagination - Responsive layout */}
-                <LeaderboardPagination
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  totalPages={leaderboard.totalPages}
-                />
+          {isFetchingLeaderboard ? (
+            <div className="w-full flex justify-center items-center h-52">
+              <Spinner size={14} />
+            </div>
+          ) : (
+            <>
+              {leaderboard.leaderboard.length > 0 ? (
+                <>
+                  {/* Leaderboard table - Responsive layout */}
+                  <LeaderboardTable leaderboardData={leaderboardWithRank} />
 
-                {/* Info text */}
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.7 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="mt-4 text-xs sm:text-sm text-center mb-20"
-                >
-                  Leaderboards are updated every 15 minutes. Only verified
-                  accounts are displayed.
-                </motion.p>
-              </>
-            ) : (
-              <div className="w-full flex justify-center items-center h-52">
-                <p className="text-center text-lg opacity-70">
-                  Currently, there are no leaderboards to display.
-                </p>
-              </div>
-            )}
-          </>
-        )}
-      </motion.div>
-    </article>
+                  {/* Pagination - Responsive layout */}
+                  <LeaderboardPagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPages={leaderboard.totalPages}
+                  />
+
+                  {/* Info text */}
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.7 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-4 text-xs sm:text-sm text-center mb-20"
+                  >
+                    Leaderboards are updated every 15 minutes. Only verified
+                    accounts are displayed.
+                  </motion.p>
+                </>
+              ) : (
+                <div className="w-full flex justify-center items-center h-52">
+                  <p className="text-center text-lg opacity-70">
+                    Currently, there are no leaderboards to display.
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+        </motion.div>
+      </article>
+    </>
   );
 };

@@ -2,6 +2,7 @@ import { RotateCcw } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useEffect, useMemo, useRef } from "react";
+import { Helmet } from "react-helmet";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
@@ -72,94 +73,105 @@ export const ResultPage = () => {
   }
 
   return (
-    <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
-      <h1 className="text-3xl font-bold mt-4">Result Details</h1>
-      {!accessToken && (
-        <div className="w-full h-auto flex flex-col gap-4 items-center ">
-          <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-lg">
-            <UsersIcon className="size-6 text-yellow md:flex hidden" />
-            <p className="text-yellow">
-              You are in the guest mode.Your results will not be saved.{" "}
-              <span
-                onClick={() => navigate("/login")}
-                className="text-purple cursor-pointer underline"
-              >
-                Login to save your results.
-              </span>
-            </p>
+    <>
+      <Helmet>
+        <title>Results | LikDai - Pro</title>
+        <meta
+          name="description"
+          content="View your results and compare with others on the leaderboard."
+        />
+      </Helmet>
+
+      <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
+        <h1 className="text-3xl font-bold mt-4">Result Details</h1>
+        {!accessToken && (
+          <div className="w-full h-auto flex flex-col gap-4 items-center ">
+            <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-lg">
+              <UsersIcon className="size-6 text-yellow md:flex hidden" />
+              <p className="text-yellow">
+                You are in the guest mode.Your results will not be saved.{" "}
+                <span
+                  onClick={() => navigate("/login")}
+                  className="text-purple cursor-pointer underline"
+                >
+                  Login to save your results.
+                </span>
+              </p>
+            </div>
+            <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-lg">
+              Guest results will not be saved. Please login to save your
+              results.
+            </div>
           </div>
-          <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-lg">
-            Guest results will not be saved. Please login to save your results.
-          </div>
+        )}
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4 w-full">
+          <ResultCard
+            title="WPM"
+            value={actualTestResults.wpm}
+            subtitle="Words Per Minute"
+            color="blue"
+          />
+          <ResultCard
+            title="ACC"
+            value={`${actualTestResults.accuracy}%`}
+            subtitle="Accuracy"
+            color="green"
+          />
+          <ResultCard
+            title="TEST"
+            value={
+              finalTestType === "words"
+                ? "Words"
+                : finalTestType === "time"
+                ? "Time"
+                : finalTestType === "quote"
+                ? "Quote"
+                : "Custom"
+            }
+            subtitle="Test Type"
+            color="orange"
+            className="md:col-span-1 col-span-2"
+          />
         </div>
-      )}
-      <div className="grid md:grid-cols-3 grid-cols-2 gap-4 w-full">
-        <ResultCard
-          title="WPM"
-          value={actualTestResults.wpm}
-          subtitle="Words Per Minute"
-          color="blue"
+        <ResultsChart
+          wpm={actualTestResults.wpm}
+          accuracy={actualTestResults.accuracy}
         />
-        <ResultCard
-          title="ACC"
-          value={`${actualTestResults.accuracy}%`}
-          subtitle="Accuracy"
-          color="green"
-        />
-        <ResultCard
-          title="TEST"
-          value={
-            finalTestType === "words"
-              ? "Words"
-              : finalTestType === "time"
-              ? "Time"
-              : finalTestType === "quote"
-              ? "Quote"
-              : "Custom"
-          }
-          subtitle="Test Type"
-          color="orange"
-          className="md:col-span-1 col-span-2"
-        />
-      </div>
-      <ResultsChart
-        wpm={actualTestResults.wpm}
-        accuracy={actualTestResults.accuracy}
-      />
-      <div className="grid md:grid-cols-4 grid-cols-2 gap-4 w-full">
-        <ResultCard
-          title="RAW"
-          value={actualTestResults.raw}
-          subtitle="Raw WPM"
-          color="blue"
-        />
-        <ResultCard
-          title="CONSISTENCY"
-          color="purple"
-          value={actualTestResults.consistency}
-          subtitle="Consistency"
-        />
-        <ResultCard
-          title="CHARACTERS"
-          value={`${actualTestResults.correct_chars}/${actualTestResults.characters}`}
-          subtitle="Correct/Typed"
-          color="green"
-        />
-        <ResultCard
-          title="TIME"
-          value={formatTime(actualTestResults.timeTaken)}
-          subtitle="Time Taken"
-          color="yellow"
-        />
-      </div>
-      <button
-        type="button"
-        onClick={() => navigate("/typing-test")}
-        className="opacity-70 border border-foreground py-1 px-2 mb-20 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-      >
-        <RotateCcw className="size-5 rotate-40" />
-        <p>Take Another Test</p>
-      </button>
-    </article>
+        <div className="grid md:grid-cols-4 grid-cols-2 gap-4 w-full">
+          <ResultCard
+            title="RAW"
+            value={actualTestResults.raw}
+            subtitle="Raw WPM"
+            color="blue"
+          />
+          <ResultCard
+            title="CONSISTENCY"
+            color="purple"
+            value={actualTestResults.consistency}
+            subtitle="Consistency"
+          />
+          <ResultCard
+            title="CHARACTERS"
+            value={`${actualTestResults.correct_chars}/${actualTestResults.characters}`}
+            subtitle="Correct/Typed"
+            color="green"
+          />
+          <ResultCard
+            title="TIME"
+            value={formatTime(actualTestResults.timeTaken)}
+            subtitle="Time Taken"
+            color="yellow"
+          />
+        </div>
+        <button
+          type="button"
+          onClick={() => navigate("/typing-test")}
+          className="opacity-70 border border-foreground py-1 px-2 mb-20 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+        >
+          <RotateCcw className="size-5 rotate-40" />
+          <p>Take Another Test</p>
+        </button>
+      </article>
+    </>
   );
 };

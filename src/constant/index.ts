@@ -21,3 +21,9 @@ export const supporterContacts = [
   },
   { imagePath: "/svg/github.svg", link: "https://github.com/SaingHmineTun" },
 ];
+
+export const githubFrontendRepoUrl =
+  "https://github.com/Lwant-02/LikDaiPro-Client.git";
+
+export const githubBackendRepoUrl =
+  "https://github.com/Lwant-02/LikDaiPro-Server.git";

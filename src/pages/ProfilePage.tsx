@@ -1,7 +1,7 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
-import { useTitle } from "@/hook/useTitle";
 import { ProfileHeader } from "@/components/ProfileHeader";
 import { ProfileTabs } from "@/components/ProfileTabs";
 import { ProfileStatsTab } from "@/components/ProfileStatsTab";
@@ -11,9 +11,7 @@ import { useGetPublicProfile } from "@/hook/useProfile";
 import { settingStore } from "@/store/settingStore";
 
 export const ProfilePage = () => {
-  const { pathname } = useLocation();
   const params = useParams();
-  useTitle({ pathName: pathname });
   const { profileAciveTab } = settingStore();
   const username = params.username;
 
@@ -33,43 +31,53 @@ export const ProfilePage = () => {
   }
 
   return (
-    <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full "
-      >
-        {/* Header */}
-        <ProfileHeader {...profile} />
+    <>
+      <Helmet>
+        <title>{username} | Profile</title>
+        <meta
+          name="description"
+          content={`View ${username}'s profile on LikDai - Pro.`}
+        />
+      </Helmet>
 
-        {/* Tabs */}
-        <ProfileTabs />
-
-        {/* Content */}
+      <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
         <motion.div
-          key={profileAciveTab}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className=" mb-20"
+          transition={{ duration: 0.5 }}
+          className="w-full "
         >
-          {/* Stats Tab */}
-          {profileAciveTab === "stats" && (
-            <ProfileStatsTab username={username} />
-          )}
+          {/* Header */}
+          <ProfileHeader {...profile} />
 
-          {/* History Tab */}
-          {profileAciveTab === "history" && (
-            <ProfileHistoryTab username={username} />
-          )}
+          {/* Tabs */}
+          <ProfileTabs />
 
-          {/* Achievements Tab */}
-          {profileAciveTab === "achievements" && (
-            <ProfileAchievementsTab username={username} />
-          )}
+          {/* Content */}
+          <motion.div
+            key={profileAciveTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className=" mb-20"
+          >
+            {/* Stats Tab */}
+            {profileAciveTab === "stats" && (
+              <ProfileStatsTab username={username} />
+            )}
+
+            {/* History Tab */}
+            {profileAciveTab === "history" && (
+              <ProfileHistoryTab username={username} />
+            )}
+
+            {/* Achievements Tab */}
+            {profileAciveTab === "achievements" && (
+              <ProfileAchievementsTab username={username} />
+            )}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </article>
+      </article>
+    </>
   );
 };
