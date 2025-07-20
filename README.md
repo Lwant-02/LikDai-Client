@@ -1,3 +1,5 @@
+# ⚙️ LikDai-Pro (Frontend)
+
 ![LikDai-Pro Screenshot](https://res.cloudinary.com/dxmvqasul/image/upload/v1752992434/Screenshot_2568-07-20_at_1.19.15_PM_p7u8gq.png)
 
 **LikDai-Pro** is a responsive and intuitive web-based typing tutor, designed especially for practicing the Shan language and more. It provides real-time feedback, accuracy tracking, and animated caret rendering to enhance typing efficiency and language learning.
