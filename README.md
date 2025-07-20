@@ -1,54 +1,43 @@
-# React + TypeScript + Vite
+![LikDai-Pro Screenshot](https://res.cloudinary.com/dxmvqasul/image/upload/v1752992434/Screenshot_2568-07-20_at_1.19.15_PM_p7u8gq.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**LikDai-Pro** is a responsive and intuitive web-based typing tutor, designed especially for practicing the Shan language and more. It provides real-time feedback, accuracy tracking, and animated caret rendering to enhance typing efficiency and language learning.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🎯 **Typing Practice for Shan and English**
+- ⌨️ **Virtual Keyboard Support**
+- 🟡 **Real-Time Caret Animation**
+- 📊 **Live Accuracy & WPM Stats**
+- 🌐 **Grapheme-aware Rendering (for complex scripts)**
+- 🎨 **Responsive UI with Tailwind CSS**
+- 🔁 **Typing Modes: Practice, Custom Text , Time & Quotes**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** – Component-based UI
+- **Typescript** - For type safe
+- **Tailwind CSS** – Utility-first styling
+- **GraphemeSplitter** – Accurate character segmentation for complex scripts
+- **Zustand** – Global state management
+- **Shadcn** - For reuseable UI
+- **Vite** – Lightning-fast bundler
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🚀 Open Source
+
+This project is fully open source and maintained with the help of the community.  
+We welcome contributions of any kind — whether it’s fixing bugs, improving documentation, adding new features, or sharing ideas.
+
+
+Feel free to open issues for bugs or feature requests.  
+Your support and contributions help make this project better for everyone!
+
+---
+
+Thank you for being part of this open source journey! 🚀
