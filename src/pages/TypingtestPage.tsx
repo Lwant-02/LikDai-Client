@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
+import { Helmet } from "react-helmet";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
 import { MobileTestSetting } from "@/components/MobileTestSetting";
-import { useTitle } from "@/hook/useTitle";
 import { useCountdownTimer } from "@/hook/useCountdownTimer";
 import { settingStore } from "@/store/settingStore";
 import { getRandomParagraph } from "@/util/getRandomParagraph.util";
@@ -56,14 +56,12 @@ export const TypingtestPage = () => {
   const [targetText, setTargetText] = useState<string>("");
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(false);
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const hasSetEndTimeRef = useRef(false);
   const correctCharCount = calculateCorrectChars(
     userInput.replace(/\s/g, ""),
     targetText.replace(/\s/g, "")
   );
-  useTitle({ pathName: pathname });
 
   //Generate random text based on selected setting
   const generateText = useCallback(() => {
@@ -272,130 +270,139 @@ export const TypingtestPage = () => {
     }
   };
   return (
-    <article className="w-full h-full flex flex-col gap-4 items-center">
-      <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex gap-3 mb-2 w-full justify-center items-center"
-        >
-          <button
-            onClick={handleChangeMode}
-            className={cn(
-              "w-20 flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-              mode === "shan" && "opacity-100 text-yellow"
-            )}
+    <>
+      <Helmet>
+        <title>Typing Test | LikDai - Pro</title>
+        <meta
+          name="description"
+          content="Test your typing speed and accuracy with LikDai - Pro."
+        />
+      </Helmet>
+      <article className="w-full h-full flex flex-col gap-4 items-center">
+        <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex gap-3 mb-2 w-full justify-center items-center"
           >
-            <img
-              src="/svg/Shan-Flag.svg"
-              alt="shan-flag"
-              className="size-5 rounded-full object-cover border border-foreground"
-            />
-            <p className="text-md font-secondary">လိၵ်ႈတႆး</p>
-          </button>
-          <button
-            onClick={handleChangeMode}
-            className={cn(
-              "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-              mode === "eng" && "opacity-100 text-yellow"
-            )}
+            <button
+              onClick={handleChangeMode}
+              className={cn(
+                "w-20 flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+                mode === "shan" && "opacity-100 text-yellow"
+              )}
+            >
+              <img
+                src="/svg/Shan-Flag.svg"
+                alt="shan-flag"
+                className="size-5 rounded-full object-cover border border-foreground"
+              />
+              <p className="text-md font-secondary">လိၵ်ႈတႆး</p>
+            </button>
+            <button
+              onClick={handleChangeMode}
+              className={cn(
+                "w-20 opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+                mode === "eng" && "opacity-100 text-yellow"
+              )}
+            >
+              <img
+                src="/images/UK-Flag.jpg"
+                alt="uk-flag"
+                className="size-5 rounded-full object-cover border border-foreground"
+              />
+              <p className="text-md font-secondary">လိၵ်ႈEng</p>
+            </button>
+          </motion.div>
+          <DesktopTestSetting />
+          <MobileTestSetting />
+        </div>
+        <div className="w-full h-auto flex flex-col justify-center items-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex justify-center items-center gap-4"
           >
-            <img
-              src="/images/UK-Flag.jpg"
-              alt="uk-flag"
-              className="size-5 rounded-full object-cover border border-foreground"
+            {selectedSetting === "time" ? (
+              <h3 className="md:text-3xl text-xl text-yellow">
+                Time : {secondsLeft} s
+              </h3>
+            ) : (
+              <h3 className="md:text-3xl text-xl text-yellow">
+                Characters : {totalTypedWords}/
+                {selectedSetting === "words"
+                  ? selectedWords
+                  : targetText.split(" ").length}{" "}
+                words
+              </h3>
+            )}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="h-52 w-full overflow-hidden  flex justify-center items-center"
+          >
+            <TypingTest
+              isRunning={isRunning}
+              startTimer={startTimer}
+              targetText={targetText}
             />
-            <p className="text-md font-secondary">လိၵ်ႈEng</p>
-          </button>
-        </motion.div>
-        <DesktopTestSetting />
-        <MobileTestSetting />
-      </div>
-      <div className="w-full h-auto flex flex-col justify-center items-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-center items-center gap-4"
-        >
-          {selectedSetting === "time" ? (
-            <h3 className="md:text-3xl text-xl text-yellow">
-              Time : {secondsLeft} s
-            </h3>
-          ) : (
-            <h3 className="md:text-3xl text-xl text-yellow">
-              Characters : {totalTypedWords}/
-              {selectedSetting === "words"
-                ? selectedWords
-                : targetText.split(" ").length}{" "}
-              words
-            </h3>
-          )}
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="h-52 w-full overflow-hidden  flex justify-center items-center"
-        >
-          <TypingTest
-            isRunning={isRunning}
-            startTimer={startTimer}
-            targetText={targetText}
-          />
-        </motion.div>
+          </motion.div>
 
-        {/* Restart and Keyboard Toggle Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16"
-        >
-          {isKeyboardVisible && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="transform scale-50 md:scale-75 lg:scale-90 origin-top "
-            >
-              <KeyboardLayout />
-            </motion.div>
-          )}
-          <div className="flex gap-3">
-            <TooltipHover tooltipText="ၶိုၼ်းတႄႇမႂ်ႇ">
-              <span
-                onClick={handleRestartTest}
-                title="Restart Test"
-                className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+          {/* Restart and Keyboard Toggle Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16"
+          >
+            {isKeyboardVisible && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="transform scale-50 md:scale-75 lg:scale-90 origin-top "
               >
-                <RotateCcw className="size-5 " />
-              </span>
-            </TooltipHover>
+                <KeyboardLayout />
+              </motion.div>
+            )}
+            <div className="flex gap-3">
+              <TooltipHover tooltipText="ၶိုၼ်းတႄႇမႂ်ႇ">
+                <span
+                  onClick={handleRestartTest}
+                  title="Restart Test"
+                  className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+                >
+                  <RotateCcw className="size-5 " />
+                </span>
+              </TooltipHover>
 
-            {/* Keyboard Toggle Button */}
-            <TooltipHover
-              tooltipText={
-                isKeyboardVisible ? "လပ်ႉလွၵ်းမိုဝ်း" : "ၼႄလွၵ်းမိုဝ်း"
-              }
-            >
-              <span
-                onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
-                className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-                title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
+              {/* Keyboard Toggle Button */}
+              <TooltipHover
+                tooltipText={
+                  isKeyboardVisible ? "လပ်ႉလွၵ်းမိုဝ်း" : "ၼႄလွၵ်းမိုဝ်း"
+                }
               >
-                {isKeyboardVisible ? (
-                  <EyeOff className="size-5" />
-                ) : (
-                  <Keyboard className="size-5" />
-                )}
-              </span>
-            </TooltipHover>
-          </div>
-        </motion.div>
-      </div>
-    </article>
+                <span
+                  onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
+                  className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+                  title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
+                >
+                  {isKeyboardVisible ? (
+                    <EyeOff className="size-5" />
+                  ) : (
+                    <Keyboard className="size-5" />
+                  )}
+                </span>
+              </TooltipHover>
+            </div>
+          </motion.div>
+        </div>
+      </article>
+    </>
   );
 };
