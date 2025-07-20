@@ -2,7 +2,7 @@ import { RotateCcw } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useEffect, useMemo, useRef } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";

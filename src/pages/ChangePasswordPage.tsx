@@ -2,8 +2,8 @@ import { RotateCcwKey } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { Navigate, useSearchParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 import { Button } from "@/components/ui/button";
 import { InputFiled } from "@/components/InputFiled";
@@ -18,11 +18,12 @@ interface FormData {
 export const ChangePasswordPage = () => {
   const { changePassword, isChangingPassword } = useChangePassword();
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
+  const email = searchParams.get("email");
   const [formData, setFormData] = useState<FormData>({
     newPassword: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ export const ChangePasswordPage = () => {
     }
     await changePassword(
       {
-        token: token as string,
+        email: email!,
         password: formData.newPassword,
       },
       {
@@ -53,6 +54,7 @@ export const ChangePasswordPage = () => {
             newPassword: "",
             confirmPassword: "",
           });
+          navigate("/login", { replace: true });
           toast("✅️ Success", {
             description: (
               <p className="text-white">
@@ -89,7 +91,7 @@ export const ChangePasswordPage = () => {
     );
   };
 
-  if (!token) {
+  if (!email) {
     return <Navigate to="/" replace />;
   }
 

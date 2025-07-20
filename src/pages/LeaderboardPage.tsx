@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import { LeaderboardPagination } from "@/components/LeaderboardPagination";
 import { LeaderboardHeader } from "@/components/LeaderboardHeader";

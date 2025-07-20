@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
 import { MobileTestSetting } from "@/components/MobileTestSetting";

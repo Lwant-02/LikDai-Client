@@ -14,6 +14,7 @@ import { AccountPage } from "@/pages/AccountPage";
 import { TypingtestPage } from "@/pages/TypingtestPage";
 import { Navbar } from "./components/Navbar";
 import { ChangePasswordPage } from "./pages/ChangePasswordPage";
+import { VerifyOtpPage } from "./pages/VerifyOtpPage";
 import { ResultPage } from "./pages/ResultPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { Footer } from "./components/Footer";
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/leaderboards" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/verify-otp" element={<VerifyOtpPage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />

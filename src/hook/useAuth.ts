@@ -53,9 +53,27 @@ export const useForgotPassword = () => {
 export const useChangePassword = () => {
   const { mutateAsync: changePassword, isPending: isChangingPassword } =
     useMutation({
-      mutationFn: async (payload: { token: string; password: string }) => {
+      mutationFn: async (payload: { email: string; password: string }) => {
         await authAxios.post("/auth/change-password", payload);
       },
     });
   return { changePassword, isChangingPassword };
+};
+
+export const useVerifyOtp = () => {
+  const { mutateAsync: verifyOtp, isPending: isVerifyingOtp } = useMutation({
+    mutationFn: async (payload: { email: string; otp: string }) => {
+      await authAxios.post("/auth/verify-otp", payload);
+    },
+  });
+  return { verifyOtp, isVerifyingOtp };
+};
+
+export const useResendOtp = () => {
+  const { mutateAsync: resendOtp, isPending: isResendingOtp } = useMutation({
+    mutationFn: async (email: string) => {
+      await authAxios.post("/auth/resend-otp", { email });
+    },
+  });
+  return { resendOtp, isResendingOtp };
 };
