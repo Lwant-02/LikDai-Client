@@ -21,7 +21,7 @@ import { Footer } from "./components/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { authStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
-import { CheckAuth } from "./components/CheckAuth";
+// import { CheckAuth } from "./components/CheckAuth";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -38,14 +38,7 @@ export default function App() {
               accessToken ? <Navigate to="/account" replace /> : <LoginPage />
             }
           />
-          <Route
-            path="/account"
-            element={
-              <CheckAuth>
-                <AccountPage />
-              </CheckAuth>
-            }
-          />
+          <Route path="/account" element={<AccountPage />} />
           <Route path="/typing-test" element={<TypingtestPage />} />
           <Route path="/leaderboards" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
