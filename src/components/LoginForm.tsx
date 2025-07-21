@@ -9,6 +9,7 @@ import { InputFiled } from "./InputFiled";
 import { useLogin } from "@/hook/useAuth";
 import { Spinner } from "./Spinner";
 import { authStore } from "@/store/authStore";
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   email: string;
@@ -18,6 +19,7 @@ type FormData = {
 export const LoginForm = () => {
   const { isLoggingIn, loginUser } = useLogin();
   const { setAccessToken } = authStore();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -35,6 +37,7 @@ export const LoginForm = () => {
     await loginUser(formData, {
       onSuccess: (accessToken) => {
         setAccessToken(accessToken);
+        navigate("/account", { replace: true });
         setFormData({
           email: "",
           password: "",
