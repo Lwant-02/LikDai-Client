@@ -2,7 +2,7 @@ import { LogOut } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { formatName } from "@/util/formatName";
-import { useLogout } from "@/hook/useAuth";
+import { useLogout } from "@/hooks/useAuth";
 import { Spinner } from "./Spinner";
 import { toast } from "sonner";
 import { authStore } from "@/store/authStore";

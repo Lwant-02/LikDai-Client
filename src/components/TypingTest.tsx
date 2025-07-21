@@ -4,6 +4,7 @@ import GraphemeSplitter from "grapheme-splitter";
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 import { KeyMaps } from "@/keymaps/KeyMaps";
+import { useKeySound } from "@/hooks/useKeySound";
 
 interface TypingTestProps {
   isRunning: boolean;
@@ -18,6 +19,7 @@ export const TypingTest = ({
 }: TypingTestProps) => {
   const { selectedSetting, mode, userInput, setUserInput, selectedKeyMap } =
     settingStore();
+  const { playKeySound } = useKeySound();
   const inputRef = useRef<HTMLInputElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
   const currentCharRef = useRef<HTMLSpanElement>(null);
@@ -63,6 +65,12 @@ export const TypingTest = ({
   // Handle typing input
   const handleEngKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const key = e.key;
+
+    // Play key sound for any valid key press
+    if (key === "Backspace" || key.length === 1) {
+      playKeySound();
+    }
+
     if (key === "Backspace") {
       setUserInput(userInput.slice(0, -1));
     } else if (key.length === 1) {
@@ -77,6 +85,12 @@ export const TypingTest = ({
     const key = e.key;
     const keyMap = KeyMaps[selectedKeyMap];
     const mappedKey = key === " " ? " " : keyMap.map[key];
+
+    // Play key sound for any valid key press
+    if (key === "Backspace" || key.length === 1) {
+      playKeySound();
+    }
+
     if (key === "Backspace") {
       setUserInput(userInput.slice(0, -1));
     } else if (key.length === 1) {

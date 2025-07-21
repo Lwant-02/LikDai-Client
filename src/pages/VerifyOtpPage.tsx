@@ -7,7 +7,7 @@ import { Shield, ArrowLeft, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
-import { useVerifyOtp, useResendOtp } from "@/hook/useAuth";
+import { useVerifyOtp, useResendOtp } from "@/hooks/useAuth";
 
 export const VerifyOtpPage = () => {
   const navigate = useNavigate();

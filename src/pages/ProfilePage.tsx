@@ -7,7 +7,7 @@ import { ProfileTabs } from "@/components/ProfileTabs";
 import { ProfileStatsTab } from "@/components/ProfileStatsTab";
 import { ProfileHistoryTab } from "@/components/ProfileHistoryTab";
 import { ProfileAchievementsTab } from "@/components/ProfileAchievementTab";
-import { useGetPublicProfile } from "@/hook/useProfile";
+import { useGetPublicProfile } from "@/hooks/useProfile";
 import { settingStore } from "@/store/settingStore";
 
 export const ProfilePage = () => {

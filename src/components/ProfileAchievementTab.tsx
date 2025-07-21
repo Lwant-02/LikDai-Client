@@ -1,5 +1,5 @@
 import { ProfileAchievement } from "./ProfileAchievement";
-import { useGetPublicAchievements } from "@/hook/useProfile";
+import { useGetPublicAchievements } from "@/hooks/useProfile";
 
 interface ProfileAchievementsTabProps {
   username: string;

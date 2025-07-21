@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
-import { useRegister } from "@/hook/useAuth";
+import { useRegister } from "@/hooks/useAuth";
 import { Spinner } from "./Spinner";
 
 interface FormData {

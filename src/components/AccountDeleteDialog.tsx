@@ -10,7 +10,7 @@ import {
 import { Button } from "./ui/button";
 import { Spinner } from "./Spinner";
 import { authStore } from "@/store/authStore";
-import { useDeleteAccount } from "@/hook/useUser";
+import { useDeleteAccount } from "@/hooks/useUser";
 
 interface AccountDeleteDialogProps {
   isOpen: boolean;

@@ -6,7 +6,7 @@ import { WordsSetting } from "./WordsSetting";
 import { CustomSetting } from "./CustomSetting";
 import { settingOptions } from "./DesktopTestSetting";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-import { Settings } from "lucide-react";
+import { Settings, Volume2, VolumeX } from "lucide-react";
 import { KeyBoardSelector } from "./KeyBoardSelector";
 
 interface CustomTextDialogProps {
@@ -18,7 +18,13 @@ export const MobileTestSettingDialog = ({
   isOpen,
   setIsOpen,
 }: CustomTextDialogProps) => {
-  const { mode, selectedSetting, setSelectedSetting } = settingStore();
+  const {
+    mode,
+    selectedSetting,
+    setSelectedSetting,
+    soundEnabled,
+    setSoundEnabled,
+  } = settingStore();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -65,11 +71,32 @@ export const MobileTestSettingDialog = ({
             {selectedSetting === "custom" && <CustomSetting />}
           </div>
           {mode === "shan" && (
-            <>
+            <div className="md:flex hidden">
               <p className="text-sm opacity-70">Keyboard Layout</p>
               <KeyBoardSelector />
-            </>
+            </div>
           )}
+          <div className="flex flex-col gap-3">
+            <p className="text-sm opacity-70">Sound</p>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setSoundEnabled(!soundEnabled)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background/50 hover:bg-background/70 transition-colors duration-200"
+              >
+                {soundEnabled ? (
+                  <>
+                    <Volume2 className="size-4 text-yellow" />
+                    <span className="text-sm">Sound On</span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="size-4" />
+                    <span className="text-sm">Sound Off</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

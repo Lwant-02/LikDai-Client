@@ -9,7 +9,7 @@ import { HistoryTab } from "@/components/HistoryTab";
 import { AchievementsTab } from "@/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
 import { authStore } from "@/store/authStore";
-import { useGetProfile } from "@/hook/useUser";
+import { useGetProfile } from "@/hooks/useUser";
 import { settingStore } from "@/store/settingStore";
 
 export const AccountPage = () => {

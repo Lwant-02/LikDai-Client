@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useForgotPassword } from "@/hook/useAuth";
+import { useForgotPassword } from "@/hooks/useAuth";
 import { Spinner } from "./Spinner";
 
 interface ForgotPasswordDialogProps {

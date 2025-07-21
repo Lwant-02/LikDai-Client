@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
 import { MobileTestSetting } from "@/components/MobileTestSetting";
-import { useCountdownTimer } from "@/hook/useCountdownTimer";
+import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { settingStore } from "@/store/settingStore";
 import { getRandomParagraph } from "@/util/getRandomParagraph.util";
 import { getRandomWords } from "@/util/getRandomWord.util";
@@ -389,7 +389,7 @@ export const TypingtestPage = () => {
               >
                 <span
                   onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
-                  className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
+                  className=" opacity-70 border border-foreground py-1 px-2 md:flex hidden rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer gap-2 justify-center items-center"
                   title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
                 >
                   {isKeyboardVisible ? (

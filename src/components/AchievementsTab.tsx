@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { Achievement } from "./Achievement";
-import { useGetAchievements } from "@/hook/useUser";
+import { useGetAchievements } from "@/hooks/useUser";
 
 export const AchievementsTab = () => {
   const { achievements, isFetchingAchievements } = useGetAchievements();

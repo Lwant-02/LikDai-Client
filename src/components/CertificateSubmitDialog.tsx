@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 import { Spinner } from "./Spinner";
 import { cn } from "@/lib/utils";
 import { Input } from "./ui/input";
-import { useSubmitCertificate } from "@/hook/useUser";
+import { useSubmitCertificate } from "@/hooks/useUser";
 
 interface CertificateSubmitDialogProps {
   isOpen: boolean;

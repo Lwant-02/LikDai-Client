@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Helmet } from "react-helmet-async";
 
 import { Button } from "@/components/ui/button";
-import { useGetCertificate } from "@/hook/useUser";
+import { useGetCertificate } from "@/hooks/useUser";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 
 export const CertificatePage = () => {
