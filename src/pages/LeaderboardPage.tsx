@@ -7,7 +7,7 @@ import { LeaderboardPagination } from "@/components/LeaderboardPagination";
 import { LeaderboardHeader } from "@/components/LeaderboardHeader";
 import { LeaderboardFilter } from "@/components/LeaderboardFilter";
 import { LeaderboardTable } from "@/components/LeaderboardTable";
-import { useGetLeaderboard } from "@/hook/useLeaderboard";
+import { useGetLeaderboard } from "@/hooks/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
 
 export const LeaderboardPage = () => {

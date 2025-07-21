@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
 import { InputFiled } from "./InputFiled";
-import { useLogin } from "@/hook/useAuth";
+import { useLogin } from "@/hooks/useAuth";
 import { Spinner } from "./Spinner";
 import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";

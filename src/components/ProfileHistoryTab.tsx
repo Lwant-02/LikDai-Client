@@ -1,4 +1,4 @@
-import { useGetPublicHistory } from "@/hook/useProfile";
+import { useGetPublicHistory } from "@/hooks/useProfile";
 
 interface ProfileHistoryTabProps {
   username: string;

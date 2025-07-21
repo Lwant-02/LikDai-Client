@@ -1,4 +1,4 @@
-import { useNextUpdateTimer } from "@/hook/useNextUpdatetTimer";
+import { useNextUpdateTimer } from "@/hooks/useNextUpdatetTimer";
 import { Clock, Trophy } from "lucide-react";
 
 export const LeaderboardHeader = ({

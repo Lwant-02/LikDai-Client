@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 
 import { Button } from "@/components/ui/button";
 import { InputFiled } from "@/components/InputFiled";
-import { useChangePassword } from "@/hook/useAuth";
+import { useChangePassword } from "@/hooks/useAuth";
 import { Spinner } from "@/components/Spinner";
 
 interface FormData {

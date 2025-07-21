@@ -214,19 +214,7 @@ export const KeyboardLayout = () => {
         <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
         <Key
-          physicalKey={
-            selectedKeyMap === "english"
-              ? "Space"
-              : selectedKeyMap === "namkhone"
-              ? "ၼမ်ႉၶူင်း"
-              : selectedKeyMap === "panglong"
-              ? "ပၢင်လူင်"
-              : selectedKeyMap === "yunghkio"
-              ? "ယုင်းၶဵဝ်"
-              : selectedKeyMap === "sil"
-              ? "လၵ်းၸဵင်"
-              : "Space"
-          }
+          physicalKey={mode === "eng" ? "Space" : "လွၵ်းမိုဝ်းတႆး"}
           shanChar=""
           isSpecial={true}
           width="space"

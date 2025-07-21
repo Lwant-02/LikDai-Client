@@ -1,4 +1,4 @@
-import { Baseline, Quote, Timer, Wrench } from "lucide-react";
+import { Baseline, Quote, Timer, Wrench, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import { WordsSetting } from "./WordsSetting";
 import { CustomSetting } from "./CustomSetting";
 import { settingStore } from "@/store/settingStore";
 import { KeyBoardSelector } from "./KeyBoardSelector";
+import { TooltipHover } from "./TooltipHover";
 
 export const settingOptions = [
   {
@@ -32,8 +33,14 @@ export const settingOptions = [
 ];
 
 export const DesktopTestSetting = () => {
-  const { mode, selectedSetting, setSelectedSetting, setUserInput } =
-    settingStore();
+  const {
+    mode,
+    selectedSetting,
+    setSelectedSetting,
+    setUserInput,
+    soundEnabled,
+    setSoundEnabled,
+  } = settingStore();
 
   return (
     <>
@@ -74,6 +81,22 @@ export const DesktopTestSetting = () => {
             <KeyBoardSelector />
           </>
         )}
+        <span className="h-6 w-1 bg-primary/20 rounded-lg" />
+        <TooltipHover
+          tooltipText={soundEnabled ? "ပိတ်ႇသံ" : "ပိုတ်ႇသံ"}
+          className="flex justify-center"
+        >
+          <button
+            onClick={() => setSoundEnabled(!soundEnabled)}
+            className="opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center"
+          >
+            {soundEnabled ? (
+              <Volume2 className="size-4 text-yellow" />
+            ) : (
+              <VolumeX className="size-4" />
+            )}
+          </button>
+        </TooltipHover>
       </motion.article>
     </>
   );

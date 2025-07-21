@@ -1,4 +1,4 @@
-import { useGetPublicStats } from "@/hook/useProfile";
+import { useGetPublicStats } from "@/hooks/useProfile";
 import { roundNumber } from "@/util/formatNumber";
 import { formatTotalPracticeTime } from "@/util/formatTotalTimePractice";
 

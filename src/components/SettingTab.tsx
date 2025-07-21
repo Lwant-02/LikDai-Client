@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
 import { AccountDeleteDialog } from "./AccountDeleteDialog";
-import { useUpdatePassword } from "@/hook/useUser";
+import { useUpdatePassword } from "@/hooks/useUser";
 import { Spinner } from "./Spinner";
 
 export const SettingTab = () => {

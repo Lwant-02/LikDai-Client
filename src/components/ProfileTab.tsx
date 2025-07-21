@@ -5,7 +5,7 @@ import { Edit, Save, X, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
-import { useUpdateBio, useUpdateUsername } from "@/hook/useUser";
+import { useUpdateBio, useUpdateUsername } from "@/hooks/useUser";
 import { Spinner } from "./Spinner";
 import { queryClient } from "@/lib/queryClient";
 

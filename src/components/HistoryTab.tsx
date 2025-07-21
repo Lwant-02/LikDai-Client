@@ -1,4 +1,4 @@
-import { useGetHistorys } from "@/hook/useUser";
+import { useGetHistorys } from "@/hooks/useUser";
 import { useLocation } from "react-router-dom";
 
 export const HistoryTab = () => {
