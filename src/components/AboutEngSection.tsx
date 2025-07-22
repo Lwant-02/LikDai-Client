@@ -33,23 +33,30 @@ const timelineItems = [
     color: "bg-yellow/20 text-yellow",
   },
   {
+    title: "Select your desired keyboard layout",
+    description:
+      "Choose from Namkhone, Panglong, Yunghkio, or Sil keyboard layouts.",
+    icon: <span className="text-xl font-bold">3</span>,
+    color: "bg-purple/20 text-purple",
+  },
+  {
     title: "Start typing",
     description: "The timer begins automatically when you start typing.",
-    icon: <span className="text-xl font-bold">3</span>,
+    icon: <span className="text-xl font-bold">4</span>,
     color: "bg-green/20 text-green",
   },
   {
     title: "View your results",
     description:
       "After completing a test, review your WPM, accuracy, and other metrics.",
-    icon: <span className="text-xl font-bold">4</span>,
+    icon: <span className="text-xl font-bold">5</span>,
     color: "bg-orange/20 text-orange",
   },
   {
     title: "Track your progress",
     description:
       "Create an account to save your results and compare with others on the leaderboard.",
-    icon: <span className="text-xl font-bold">5</span>,
+    icon: <span className="text-xl font-bold">6</span>,
     color: "bg-purple/20 text-purple",
   },
 ];

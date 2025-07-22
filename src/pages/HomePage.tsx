@@ -1,4 +1,4 @@
-import { MoveRight, Keyboard, Award, BarChart } from "lucide-react";
+import { MoveRight, Keyboard, Award, BarChart, Globe } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,7 +9,7 @@ import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 export function HomePage() {
   const featureCards = [
     {
-      icon: <Keyboard className="size-5 text-yellow" />,
+      icon: <Globe className="size-5 text-yellow" />,
       title: "Bilingual Support",
       description: "Practice in English & Shan",
     },
@@ -22,6 +22,11 @@ export function HomePage() {
       icon: <BarChart className="size-5 text-blue" />,
       title: "Leaderboards",
       description: "Compete with others",
+    },
+    {
+      icon: <Keyboard className="size-5 text-orange" />,
+      title: "Keyboards Support",
+      description: "Support 4 Shan Keyboards",
     },
   ];
 
@@ -84,7 +89,7 @@ export function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-3 gap-2 mt-4 mb-8 max-w-4xl"
+            className="grid md:grid-cols-4 grid-cols-2 gap-2 mt-4 mb-8 max-w-4xl"
           >
             {featureCards.map((feature) => (
               <div
