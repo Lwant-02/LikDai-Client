@@ -83,17 +83,17 @@ export const DesktopTestSetting = () => {
         )}
         <span className="h-6 w-1 bg-primary/20 rounded-lg" />
         <TooltipHover
-          tooltipText={soundEnabled ? "ပိတ်ႇသံ" : "ပိုတ်ႇသံ"}
-          className="flex justify-center"
+          tooltipText={soundEnabled ? "ပိၵ်ႉသဵင်" : "ပိုတ်ႇသဵင်"}
+          className="flex justify-center items-center"
         >
           <div
             onClick={() => setSoundEnabled(!soundEnabled)}
             className="opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center"
           >
             {soundEnabled ? (
-              <Volume2 className="size-4 text-yellow" />
+              <Volume2 className="size-5 text-yellow" />
             ) : (
-              <VolumeX className="size-4" />
+              <VolumeX className="size-5" />
             )}
           </div>
         </TooltipHover>

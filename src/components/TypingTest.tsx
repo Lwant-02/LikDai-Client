@@ -22,8 +22,10 @@ export const TypingTest = ({
   const { playKeySound } = useKeySound();
   const inputRef = useRef<HTMLInputElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
+  const inputContainerRef = useRef<HTMLDivElement>(null);
   const currentCharRef = useRef<HTMLSpanElement>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [inputScrollOffset, setInputScrollOffset] = useState(0);
 
   const splitter = new GraphemeSplitter();
   const units = splitter.splitGraphemes(targetText);
@@ -44,15 +46,19 @@ export const TypingTest = ({
     const charBottom = currentCharTop + currentCharHeight;
 
     // If character is below visible area, scroll down
-    if (charBottom > visibleBottom - 60) {
-      // 60px buffer from bottom
-      const newScrollOffset = currentCharTop - containerHeight + 120; // 120px from top
+    if (charBottom > visibleBottom - 20) {
+      // 20px buffer from bottom
+      const newScrollOffset =
+        currentCharTop - containerHeight / 2 + currentCharHeight / 2;
       setScrollOffset(Math.max(0, newScrollOffset));
     }
     // If character is above visible area (when backspacing), scroll up
-    else if (currentCharTop < scrollOffset + 60) {
-      // 60px buffer from top
-      const newScrollOffset = Math.max(0, currentCharTop - 60);
+    else if (currentCharTop < scrollOffset + 20) {
+      // 20px buffer from top
+      const newScrollOffset = Math.max(
+        0,
+        currentCharTop - containerHeight / 2 + currentCharHeight / 2
+      );
       setScrollOffset(newScrollOffset);
     }
   }, [scrollOffset]);
@@ -62,7 +68,28 @@ export const TypingTest = ({
     updateScrollPosition();
   }, [userInput, updateScrollPosition]);
 
-  // Handle typing input
+  // Calculate input scroll position
+  const updateInputScrollPosition = useCallback(() => {
+    if (!inputContainerRef.current) return;
+
+    const container = inputContainerRef.current;
+    const containerHeight = container.clientHeight;
+    const inputHeight = container.scrollHeight;
+
+    if (inputHeight > containerHeight) {
+      const newScrollOffset = inputHeight - containerHeight;
+      setInputScrollOffset(newScrollOffset);
+    } else {
+      setInputScrollOffset(0);
+    }
+  }, [inputScrollOffset]);
+
+  // Update input scroll position when user input changes
+  useEffect(() => {
+    updateInputScrollPosition();
+  }, [userInput, updateInputScrollPosition]);
+
+  //Handle Eng typing
   const handleEngKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const key = e.key;
 
@@ -122,15 +149,17 @@ export const TypingTest = ({
   // Style helpers
   const getTextClasses = () => {
     const baseClasses = "relative md:text-4xl text-2xl";
-    return mode === "eng" ? baseClasses : cn(baseClasses, "font-secondary");
+    return mode === "eng"
+      ? baseClasses
+      : cn(baseClasses, "font-secondary leading-relaxed");
   };
 
   return (
-    <div className="cursor-text select-none px-3 w-full h-full relative md:flex hidden justify-center items-center ">
+    <div className="cursor-text select-none px-3 w-full h-full relative md:flex hidden justify-center items-start flex-col gap-2">
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}
-        className="h-full overflow-hidden relative transition-transform duration-200 ease-out py-[9px] px-2"
+        className="h-[70px] overflow-hidden relative transition-transform duration-200 ease-out px-2"
       >
         <div
           className="transition-transform duration-200 ease-out"
@@ -138,16 +167,9 @@ export const TypingTest = ({
             style: { transform: `translateY(-${scrollOffset}px)` },
           } as any)}
         >
-          <div className="block break-words whitespace-pre-wrap">
+          <div className="block break-words whitespace-pre-wrap items-center justify-center">
             {units.map((unit, i) => {
-              const typedUnit = typedUnits[i];
               const isCurrent = i === typedUnits.length;
-              const isCorrect = typedUnit === unit;
-
-              let colorClass = "text-primary/50";
-              if (typedUnit !== undefined) {
-                colorClass = isCorrect ? "text-primary" : "text-red underline";
-              }
 
               return (
                 <span
@@ -155,8 +177,7 @@ export const TypingTest = ({
                   ref={isCurrent ? currentCharRef : null}
                   className={cn(
                     getTextClasses(),
-                    colorClass,
-                    "leading-snug transition-all duration-300 ease-in-out",
+                    "leading-loose transition-all duration-300 ease-in-out ",
                     isCurrent &&
                       "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs  ring-1 ring-yellow/40"
                   )}
@@ -166,6 +187,53 @@ export const TypingTest = ({
                 </span>
               );
             })}
+          </div>
+        </div>
+      </div>
+
+      {/* User Input Display - Bottom Half */}
+      <div
+        ref={inputContainerRef}
+        className="h-[70px] w-full overflow-hidden relative transition-transform duration-200 ease-out px-2 border border-foreground  items-center flex rounded-md"
+      >
+        <div
+          className="transition-transform duration-200 ease-out"
+          {...({
+            style: { transform: `translateY(-${inputScrollOffset}px)` },
+          } as any)}
+        >
+          <div className="block break-words whitespace-pre-wrap items-center justify-center">
+            {typedUnits.map((typedUnit, i) => {
+              const isCorrect = i < units.length && typedUnit === units[i];
+              const isIncorrect = i < units.length && typedUnit !== units[i];
+
+              let colorClass = "";
+              if (isIncorrect) {
+                colorClass = "text-red-400 underline";
+              } else if (isCorrect) {
+                colorClass = "text-green-400";
+              } else {
+                colorClass = "text-foreground";
+              }
+
+              return (
+                <span
+                  key={i}
+                  className={cn(
+                    "relative md:text-3xl text-2xl",
+                    mode === "shan" ? "font-secondary" : "",
+                    colorClass,
+                    "leading-loose transition-all duration-300 ease-in-out"
+                  )}
+                  lang={mode === "shan" ? "shn" : "en"}
+                >
+                  {typedUnit}
+                </span>
+              );
+            })}
+            <span className="animate-pulse text-yellow md:text-2xl text-lg ">
+              |
+            </span>
           </div>
         </div>
       </div>

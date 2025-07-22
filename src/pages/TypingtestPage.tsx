@@ -21,6 +21,7 @@ import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
 import { TooltipHover } from "@/components/TooltipHover";
 import { cn } from "@/lib/utils";
+// import { TypingTestCopy } from "@/components/TypingTestCopy";
 
 export const TypingtestPage = () => {
   const {
@@ -323,7 +324,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex justify-center items-center gap-4"
+            className="md:flex hidden justify-center items-center gap-4 "
           >
             {selectedSetting === "time" ? (
               <h3 className="md:text-3xl text-xl text-yellow">
@@ -343,7 +344,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="h-52 w-full overflow-hidden  flex justify-center items-center"
+            className="h-[140px] w-full overflow-hidden  flex justify-center items-center "
           >
             <TypingTest
               isRunning={isRunning}
@@ -374,7 +375,7 @@ export const TypingtestPage = () => {
               </motion.div>
             )}
             <div className="flex gap-3">
-              <TooltipHover tooltipText="ၶိုၼ်းတႄႇမႂ်ႇ">
+              <TooltipHover tooltipText="ၶိုၼ်းတေႇမႂ်ႇ">
                 <span
                   onClick={handleRestartTest}
                   title="Restart Test"
