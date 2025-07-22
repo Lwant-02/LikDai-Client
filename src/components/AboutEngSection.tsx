@@ -8,6 +8,7 @@ import {
   UserCog,
   Handshake,
   Rocket,
+  Globe,
 } from "lucide-react";
 
 import {
@@ -58,6 +59,38 @@ const timelineItems = [
       "Create an account to save your results and compare with others on the leaderboard.",
     icon: <span className="text-xl font-bold">6</span>,
     color: "bg-purple/20 text-purple",
+  },
+];
+
+const keyfeatures = [
+  {
+    title: "Bilingual Support",
+    description: "Practice typing in both English and Shan languages.",
+    icon: <Globe className="size-7 text-yellow" />,
+  },
+  {
+    title: "Multiple Test Modes",
+    description:
+      "Choose from timed tests, word count challenges, quotes, or create your own custom typing exercises.",
+    icon: <Quote className="size-7 text-purple rotate-180" />,
+  },
+  {
+    title: "Achievements",
+    description:
+      "Earn badges and unlock achievements as you improve your typing speed, accuracy, and consistency over time.",
+    icon: <Award className="size-7 text-blue" />,
+  },
+  {
+    title: "Leaderboards",
+    description:
+      "Compete with others on the leaderboard to see how you rank against other users.",
+    icon: <BarChart className="size-7 text-green" />,
+  },
+  {
+    title: "Keyboards Support",
+    description:
+      "Support 4 Shan Keyboards (Namkhone, Panglong, Yunghkio, Sil) and English Keyboard.",
+    icon: <Keyboard className="size-7 text-orange" />,
   },
 ];
 
@@ -393,63 +426,20 @@ export const AboutEngSection = ({
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            <motion.div
-              variants={itemVariants}
-              className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
-            >
-              <div className="bg-yellow/10 size-14 rounded-lg flex items-center justify-center mb-4">
-                <Keyboard className="size-7 text-yellow" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Bilingual Support</h3>
-              <p className="opacity-80">
-                Practice typing in both English and Shan languages with
-                specialized texts designed to improve your skills in both
-                writing systems.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
-            >
-              <div className="bg-green/10 size-14 rounded-lg flex items-center justify-center mb-4">
-                <BarChart className="size-7 text-green" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Performance Tracking</h3>
-              <p className="opacity-80">
-                Monitor your progress with detailed statistics, charts, and
-                insights to help you identify areas for improvement.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
-            >
-              <div className="bg-blue/10 size-14 rounded-lg flex items-center justify-center mb-4">
-                <Award className="size-7 text-blue" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Achievements</h3>
-              <p className="opacity-80">
-                Earn badges and unlock achievements as you improve your typing
-                speed, accuracy, and consistency over time.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
-            >
-              <div className="bg-orange/10 size-14 rounded-lg flex items-center justify-center mb-4">
-                <Quote className="size-7 text-orange rotate-180" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Multiple Test Modes</h3>
-              <p className="opacity-80">
-                Choose from timed tests, word count challenges, quotes, or
-                create your own custom typing exercises.
-              </p>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 ">
+            {keyfeatures.map((feautre) => (
+              <motion.div
+                variants={itemVariants}
+                key={feautre.title}
+                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+              >
+                <div className="bg-yellow/10 size-14 rounded-lg flex items-center justify-center mb-4">
+                  {feautre.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{feautre.title}</h3>
+                <p className="opacity-80">{feautre.description}</p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>

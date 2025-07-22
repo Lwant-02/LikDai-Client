@@ -6,30 +6,30 @@ import { Helmet } from "react-helmet-async";
 
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 
-export function HomePage() {
-  const featureCards = [
-    {
-      icon: <Globe className="size-5 text-yellow" />,
-      title: "Bilingual Support",
-      description: "Practice in English & Shan",
-    },
-    {
-      icon: <Award className="size-5 text-green" />,
-      title: "Track Progress",
-      description: "Monitor your improvement",
-    },
-    {
-      icon: <BarChart className="size-5 text-blue" />,
-      title: "Leaderboards",
-      description: "Compete with others",
-    },
-    {
-      icon: <Keyboard className="size-5 text-orange" />,
-      title: "Keyboards Support",
-      description: "Support 4 Shan Keyboards",
-    },
-  ];
+const featureCards = [
+  {
+    icon: <Globe className="size-5 text-yellow" />,
+    title: "Bilingual Support",
+    description: "Practice in English & Shan",
+  },
+  {
+    icon: <Award className="size-5 text-green" />,
+    title: "Track Progress",
+    description: "Monitor your improvement",
+  },
+  {
+    icon: <BarChart className="size-5 text-blue" />,
+    title: "Leaderboards",
+    description: "Compete with others",
+  },
+  {
+    icon: <Keyboard className="size-5 text-orange" />,
+    title: "Keyboards Support",
+    description: "Support 4 Shan Keyboards",
+  },
+];
 
+export function HomePage() {
   return (
     <>
       <Helmet>
@@ -78,9 +78,9 @@ export function HomePage() {
                 1000,
               ]}
               speed={50}
-              style={{ fontSize: "23px", fontWeight: "bold", color: "#ff7601" }}
+              style={{ fontSize: "20px", fontWeight: "bold", color: "#ff7601" }}
               repeat={Infinity}
-              className="md:text-4xl text-2xl"
+              className="md:text-4xl text-[20px]"
             />
           </motion.div>
 

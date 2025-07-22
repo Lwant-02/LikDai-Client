@@ -246,6 +246,10 @@ export const TypingTest = ({
         onKeyDown={mode === "eng" ? handleEngKeyDown : handleShanKeyDown}
         className="opacity-0 absolute pointer-events-none"
         aria-label="Typing input"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
       />
     </div>
   );
