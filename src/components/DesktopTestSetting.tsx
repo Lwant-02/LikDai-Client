@@ -81,7 +81,12 @@ export const DesktopTestSetting = () => {
             <KeyBoardSelector />
           </>
         )}
-        <span className="h-6 w-1 bg-primary/20 rounded-lg" />
+        <span
+          className={cn(
+            "h-6 w-1 bg-primary/20 rounded-lg",
+            selectedSetting === "quote" && mode === "eng" && "hidden"
+          )}
+        />
         <TooltipHover
           tooltipText={soundEnabled ? "ပိၵ်ႉသဵင်" : "ပိုတ်ႇသဵင်"}
           className="flex justify-center items-center"

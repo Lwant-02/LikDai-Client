@@ -6,7 +6,7 @@ import { englishMap, englishRows } from "./EnglishKeyMap";
 
 export const KeyMaps = {
   english: {
-    name: "English (QWERTY)",
+    name: "English Keyboard",
     map: englishMap,
     rows: englishRows,
   },
