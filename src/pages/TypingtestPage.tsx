@@ -350,6 +350,9 @@ export const TypingtestPage = () => {
               startTimer={startTimer}
               targetText={targetText}
             />
+            <p className="md:hidden flex text-lg text-center opacity-70">
+              Please use a larger screen for better experience.
+            </p>
           </motion.div>
 
           {/* Restart and Keyboard Toggle Button */}

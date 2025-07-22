@@ -126,7 +126,7 @@ export const TypingTest = ({
   };
 
   return (
-    <div className="cursor-text select-none px-3 w-full h-full relative flex justify-center items-center">
+    <div className="cursor-text select-none px-3 w-full h-full relative md:flex hidden justify-center items-center ">
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}

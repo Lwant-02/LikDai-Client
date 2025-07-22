@@ -86,7 +86,7 @@ export const DesktopTestSetting = () => {
           tooltipText={soundEnabled ? "ပိတ်ႇသံ" : "ပိုတ်ႇသံ"}
           className="flex justify-center"
         >
-          <button
+          <div
             onClick={() => setSoundEnabled(!soundEnabled)}
             className="opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center"
           >
@@ -95,7 +95,7 @@ export const DesktopTestSetting = () => {
             ) : (
               <VolumeX className="size-4" />
             )}
-          </button>
+          </div>
         </TooltipHover>
       </motion.article>
     </>
