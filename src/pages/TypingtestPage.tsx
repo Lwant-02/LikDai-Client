@@ -5,7 +5,7 @@ import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
-import { MobileTestSetting } from "@/components/MobileTestSetting";
+// import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { settingStore } from "@/store/settingStore";
 import { getRandomParagraph } from "@/util/getRandomParagraph.util";
@@ -285,7 +285,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex gap-3 mb-2 w-full justify-center items-center"
+            className="md:flex hidden gap-3 mb-2 w-full justify-center items-center"
           >
             <button
               onClick={handleChangeMode}
@@ -317,7 +317,6 @@ export const TypingtestPage = () => {
             </button>
           </motion.div>
           <DesktopTestSetting />
-          <MobileTestSetting />
         </div>
         <div className="w-full h-auto flex flex-col justify-center items-center">
           <motion.div
