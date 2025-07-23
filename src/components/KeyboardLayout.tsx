@@ -8,6 +8,11 @@ interface KeyProps {
   shanChar: string;
   isSpecial?: boolean;
   width?: "normal" | "wide" | "extra-wide" | "space";
+  isCurrent?: boolean;
+}
+
+interface KeyboardLayoutProps {
+  currentChar?: string;
 }
 
 const Key: React.FC<KeyProps> = ({
@@ -15,6 +20,7 @@ const Key: React.FC<KeyProps> = ({
   shanChar,
   isSpecial = false,
   width = "normal",
+  isCurrent = false,
 }) => {
   const { mode } = settingStore();
   const getKeyWidth = () => {
@@ -61,12 +67,20 @@ const Key: React.FC<KeyProps> = ({
     );
   };
 
+  // Get background color based on state
+  const getBackgroundColor = () => {
+    if (isCurrent) {
+      return "bg-yellow text-black border-yellow"; // Current character - yellow like in photo
+    }
+    return "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"; // Default
+  };
+
   return (
     <div
       className={cn(
-        "h-12 rounded-md border flex items-center justify-center cursor-default",
+        "h-12 rounded-md border flex items-center justify-center cursor-default transition-all duration-200",
         getKeyWidth(),
-        "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+        getBackgroundColor()
       )}
     >
       {getKeyContent()}
@@ -74,7 +88,7 @@ const Key: React.FC<KeyProps> = ({
   );
 };
 
-export const KeyboardLayout = () => {
+export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
   const { selectedKeyMap, mode } = settingStore();
   const [isShiftPressed] = useState(false); // For now, always show normal keys
 
@@ -82,6 +96,32 @@ export const KeyboardLayout = () => {
   const currentKeyMap = mode === "eng" ? "english" : selectedKeyMap;
   const keyMap = KeyMaps[currentKeyMap];
   const rows = keyMap.rows;
+
+  // Function to find which physical key produces a given character
+  const findPhysicalKeyForChar = (char: string): string | null => {
+    if (!char) return null;
+
+    // Handle space character for both modes
+    if (char === " ") {
+      return "space"; // Return "space" to match the Space key
+    }
+
+    // For English mode, the character is the key itself
+    if (mode === "eng") {
+      const result = char.toLowerCase();
+      return result;
+    }
+
+    // For Shan mode, find the key that maps to this character
+    for (const [physicalKey, mappedChar] of Object.entries(keyMap.map)) {
+      if (mappedChar === char) {
+        return physicalKey.toLowerCase();
+      }
+    }
+    return null;
+  };
+
+  const currentPhysicalKey = findPhysicalKeyForChar(currentChar || "");
 
   // Get the appropriate row based on shift state
   const getRowData = (rowIndex: number) => {
@@ -110,7 +150,12 @@ export const KeyboardLayout = () => {
     return (
       <div className="flex gap-1 justify-center">
         {keys.map((key) => (
-          <Key key={key} physicalKey={key} shanChar={row[key] || key} />
+          <Key
+            key={key}
+            physicalKey={key}
+            shanChar={row[key] || key}
+            isCurrent={currentPhysicalKey === key.toLowerCase()}
+          />
         ))}
         <Key physicalKey="⌫" shanChar="" isSpecial={true} width="wide" />
       </div>
@@ -143,6 +188,7 @@ export const KeyboardLayout = () => {
             key={key}
             physicalKey={isShiftPressed ? key.toUpperCase() : key}
             shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
+            isCurrent={currentPhysicalKey === key.toLowerCase()}
           />
         ))}
       </div>
@@ -161,13 +207,17 @@ export const KeyboardLayout = () => {
           isSpecial={true}
           width="extra-wide"
         />
-        {keys.map((key) => (
-          <Key
-            key={key}
-            physicalKey={isShiftPressed ? key.toUpperCase() : key}
-            shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
-          />
-        ))}
+        {keys.map((key) => {
+          const isCurrent = currentPhysicalKey === key.toLowerCase();
+          return (
+            <Key
+              key={key}
+              physicalKey={isShiftPressed ? key.toUpperCase() : key}
+              shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
+              isCurrent={isCurrent}
+            />
+          );
+        })}
         <Key
           physicalKey="Enter"
           shanChar=""
@@ -195,6 +245,7 @@ export const KeyboardLayout = () => {
             key={key}
             physicalKey={isShiftPressed ? key.toUpperCase() : key}
             shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
+            isCurrent={currentPhysicalKey === key.toLowerCase()}
           />
         ))}
         <Key
@@ -218,6 +269,7 @@ export const KeyboardLayout = () => {
           shanChar=""
           isSpecial={true}
           width="space"
+          isCurrent={currentPhysicalKey === "space"}
         />
         <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
         <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
