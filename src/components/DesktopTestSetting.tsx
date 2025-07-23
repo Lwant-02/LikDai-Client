@@ -48,7 +48,7 @@ export const DesktopTestSetting = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="py-2 px-7 bg-foreground rounded-lg  text-sm gap-2 md:flex hidden"
+        className="py-2 px-7 bg-foreground rounded-lg  text-sm gap-2 xl:flex hidden"
       >
         {settingOptions.map((setting) => (
           <button

@@ -285,7 +285,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:flex hidden gap-3 mb-2 w-full justify-center items-center"
+            className="xl:flex hidden gap-3 mb-2 w-full justify-center items-center"
           >
             <button
               onClick={handleChangeMode}
@@ -323,7 +323,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:flex hidden justify-center items-center gap-4 "
+            className="xl:flex hidden justify-center items-center gap-4 "
           >
             {selectedSetting === "time" ? (
               <h3 className="md:text-3xl text-xl text-yellow">
@@ -343,7 +343,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:h-[140px] h-auto w-full md:overflow-hidden  flex justify-center items-center "
+            className="xl:h-[140px] h-auto w-full xl:overflow-hidden  flex justify-center items-center"
           >
             <TypingTest
               isRunning={isRunning}
@@ -355,10 +355,10 @@ export const TypingtestPage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="md:hidden flex flex-col items-center justify-center p-6 mx-4 bg-gradient-to-br from-foreground/20 to-foreground/10 rounded-2xl border border-primary/20 backdrop-blur-sm "
+              className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-gradient-to-br from-foreground/20 to-foreground/10 rounded-2xl border border-primary/20 backdrop-blur-sm h-full w-full "
             >
               <motion.div
-                className="flex items-center justify-center w-16 h-16 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
+                className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
                 animate={{
                   scale: [1, 1.05, 1],
                   rotate: [0, 2, -2, 0],
