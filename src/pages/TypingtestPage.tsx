@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
+import { RotateCcw, Keyboard, EyeOff, Globe } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
@@ -303,34 +303,42 @@ export const TypingtestPage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="xl:flex hidden gap-3 mb-2 w-full justify-center items-center"
           >
-            <button
-              onClick={handleChangeMode}
-              className={cn(
-                "w-auto flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-                mode === "shan" && "opacity-100 text-yellow"
-              )}
-            >
-              <img
-                src="/svg/Shan-Flag.svg"
-                alt="shan-flag"
-                className="size-5 rounded-full object-cover border border-foreground"
-              />
-              <p className="text-md font-secondary">လိၵ်ႈတႆး</p>
-            </button>
-            <button
-              onClick={handleChangeMode}
-              className={cn(
-                "w-auto opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-                mode === "eng" && "opacity-100 text-yellow"
-              )}
-            >
-              <img
-                src="/images/UK-Flag.jpg"
-                alt="uk-flag"
-                className="size-5 rounded-full object-cover border border-foreground"
-              />
-              <p className="text-md font-secondary">လိၵ်ႈဢိင်းၵလဵတ်ႈ</p>
-            </button>
+            <div className="flex items-center gap-1">
+              <Globe className="size-5 text-yellow" />
+              <p className="w-auto opacity-70 text-center">Choose Language</p>
+            </div>
+            <div className="flex justify-center items-center gap-3">
+              <TooltipHover tooltipText="တႆး">
+                <span
+                  onClick={handleChangeMode}
+                  className={cn(
+                    "w-auto flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+                    mode === "shan" && "opacity-100 text-yellow"
+                  )}
+                >
+                  <img
+                    src="/svg/Shan-Flag.svg"
+                    alt="shan-flag"
+                    className="size-5 rounded-full object-cover border border-foreground"
+                  />
+                </span>
+              </TooltipHover>
+              <TooltipHover tooltipText="ဢိင်းၵလဵတ်ႈ">
+                <button
+                  onClick={handleChangeMode}
+                  className={cn(
+                    "w-auto opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
+                    mode === "eng" && "opacity-100 text-yellow"
+                  )}
+                >
+                  <img
+                    src="/images/UK-Flag.jpg"
+                    alt="uk-flag"
+                    className="size-5 rounded-full object-cover border border-foreground"
+                  />
+                </button>
+              </TooltipHover>
+            </div>
           </motion.div>
           <DesktopTestSetting />
         </div>
@@ -347,11 +355,10 @@ export const TypingtestPage = () => {
               </h3>
             ) : (
               <h3 className="md:text-3xl text-xl text-yellow">
-                Characters : {totalTypedWords}/
+                Words : {totalTypedWords}/
                 {selectedSetting === "words"
                   ? selectedWords
-                  : targetText.split(" ").length}{" "}
-                words
+                  : targetText.split(" ").length}
               </h3>
             )}
           </motion.div>
@@ -443,7 +450,7 @@ export const TypingtestPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="transform scale-50 md:scale-75 lg:scale-90 origin-top "
+                className="transform scale-50 md:scale-75 lg:scale-90 origin-top xl:block hidden"
               >
                 <KeyboardLayout currentChar={currentChar} />
               </motion.div>

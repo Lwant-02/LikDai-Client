@@ -48,7 +48,7 @@ const Key: React.FC<KeyProps> = ({
     // For English mode, show only the character since physical key = character
     if (mode === "eng") {
       return (
-        <span className="text-lg text-gray-800 dark:text-gray-200">
+        <span className="text-xl text-gray-800 dark:text-gray-200">
           {shanChar}
         </span>
       );
@@ -60,7 +60,7 @@ const Key: React.FC<KeyProps> = ({
         <span className="text-xs text-gray-500 dark:text-gray-500 leading-none">
           {physicalKey}
         </span>
-        <span className="text-lg font-secondary text-gray-800 dark:text-gray-200 leading-none mt-0.5">
+        <span className="text-xl font-secondary text-gray-800 dark:text-gray-200 leading-none mt-0.5">
           {shanChar}
         </span>
       </div>
@@ -78,7 +78,7 @@ const Key: React.FC<KeyProps> = ({
   return (
     <div
       className={cn(
-        "h-12 rounded-md border flex items-center justify-center cursor-default transition-all duration-200",
+        "h-14 rounded-md border flex items-center justify-center cursor-default transition-all duration-200",
         getKeyWidth(),
         getBackgroundColor()
       )}
@@ -155,6 +155,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
             physicalKey={key}
             shanChar={row[key] || key}
             isCurrent={currentPhysicalKey === key.toLowerCase()}
+            width="extra-wide"
           />
         ))}
         <Key physicalKey="⌫" shanChar="" isSpecial={true} width="wide" />
@@ -186,6 +187,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
         {keys.map((key) => (
           <Key
             key={key}
+            width="extra-wide"
             physicalKey={isShiftPressed ? key.toUpperCase() : key}
             shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
             isCurrent={currentPhysicalKey === key.toLowerCase()}
@@ -212,6 +214,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
           return (
             <Key
               key={key}
+              width="extra-wide"
               physicalKey={isShiftPressed ? key.toUpperCase() : key}
               shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
               isCurrent={isCurrent}
@@ -243,6 +246,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
         {keys.map((key) => (
           <Key
             key={key}
+            width="extra-wide"
             physicalKey={isShiftPressed ? key.toUpperCase() : key}
             shanChar={row[isShiftPressed ? key.toUpperCase() : key] || key}
             isCurrent={currentPhysicalKey === key.toLowerCase()}
@@ -261,9 +265,24 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
   const renderRow5 = () => {
     return (
       <div className="flex gap-1 justify-center">
-        <Key physicalKey="Ctrl" shanChar="" isSpecial={true} width="wide" />
-        <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
-        <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
+        <Key
+          physicalKey="Ctrl"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
+        <Key
+          physicalKey="Win"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
+        <Key
+          physicalKey="Alt"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
         <Key
           physicalKey={mode === "eng" ? "Space" : "လွၵ်းမိုဝ်းတႆး"}
           shanChar=""
@@ -271,15 +290,30 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
           width="space"
           isCurrent={currentPhysicalKey === "space"}
         />
-        <Key physicalKey="Alt" shanChar="" isSpecial={true} width="wide" />
-        <Key physicalKey="Win" shanChar="" isSpecial={true} width="wide" />
-        <Key physicalKey="Ctrl" shanChar="" isSpecial={true} width="wide" />
+        <Key
+          physicalKey="Alt"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
+        <Key
+          physicalKey="Win"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
+        <Key
+          physicalKey="Ctrl"
+          shanChar=""
+          isSpecial={true}
+          width="extra-wide"
+        />
       </div>
     );
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-7xl mx-auto">
       <div className="space-y-2">
         {renderRow1()}
         {renderRow2()}
