@@ -155,7 +155,7 @@ export const TypingTestCopy = ({
   };
 
   return (
-    <div className="cursor-text select-none px-3 w-full h-full relative md:flex hidden justify-center items-start flex-col gap-2">
+    <div className="cursor-text select-none px-3 w-full h-full relative xl:flex hidden justify-center items-start flex-col gap-2">
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}
@@ -246,6 +246,10 @@ export const TypingTestCopy = ({
         onKeyDown={mode === "eng" ? handleEngKeyDown : handleShanKeyDown}
         className="opacity-0 absolute pointer-events-none"
         aria-label="Typing input"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
       />
     </div>
   );

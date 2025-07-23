@@ -20,8 +20,9 @@ import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
 import { TooltipHover } from "@/components/TooltipHover";
 import { cn } from "@/lib/utils";
+import GraphemeSplitter from "grapheme-splitter";
 // import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
-// import { TypingTestCopy } from "@/components/TypingTestCopy";
+// import { TypingTestCopy } from "@/components/TypingTestCopy"; //Use to test
 
 export const TypingtestPage = () => {
   const {
@@ -56,13 +57,28 @@ export const TypingtestPage = () => {
     useCountdownTimer(selectedTimer);
   const [targetText, setTargetText] = useState<string>("");
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(false);
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(true);
   const navigate = useNavigate();
   const hasSetEndTimeRef = useRef(false);
   const correctCharCount = calculateCorrectChars(
     userInput.replace(/\s/g, ""),
     targetText.replace(/\s/g, "")
   );
+
+  // Calculate current and next characters for keyboard highlighting
+  const splitter = new GraphemeSplitter();
+  const targetUnits =
+    mode === "shan"
+      ? targetText.split("") // Keep ALL characters including spaces for Shan
+      : splitter.splitGraphemes(targetText);
+  const typedUnits =
+    mode === "shan"
+      ? userInput.split("") // Keep ALL characters including spaces for Shan
+      : splitter.splitGraphemes(userInput);
+
+  // Current character is the one at the current typing position
+  const currentCharIndex = typedUnits.length;
+  const currentChar = targetUnits[currentCharIndex] || "";
 
   //Generate random text based on selected setting
   const generateText = useCallback(() => {
@@ -429,7 +445,7 @@ export const TypingtestPage = () => {
                 transition={{ duration: 0.3 }}
                 className="transform scale-50 md:scale-75 lg:scale-90 origin-top "
               >
-                <KeyboardLayout />
+                <KeyboardLayout currentChar={currentChar} />
               </motion.div>
             )}
             <div className="flex gap-3">
