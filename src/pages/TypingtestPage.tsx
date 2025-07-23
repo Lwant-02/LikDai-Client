@@ -449,7 +449,7 @@ export const TypingtestPage = () => {
               </motion.div>
             )}
             <div className="flex gap-3">
-              <TooltipHover tooltipText="ၶိုၼ်းတေႇမႂ်ႇ">
+              <TooltipHover tooltipText="Restart Test">
                 <span
                   onClick={handleRestartTest}
                   title="Restart Test"
@@ -462,7 +462,7 @@ export const TypingtestPage = () => {
               {/* Keyboard Toggle Button */}
               <TooltipHover
                 tooltipText={
-                  isKeyboardVisible ? "လပ်ႉလွၵ်းမိုဝ်း" : "ၼႄလွၵ်းမိုဝ်း"
+                  isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"
                 }
               >
                 <span

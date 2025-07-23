@@ -16,22 +16,22 @@ import { TooltipHover } from "./TooltipHover";
 
 const navLink = [
   {
-    name: "ၼႃႈႁိူၼ်း",
+    name: "Home",
     path: "/",
     icon: <HomeIcon className="size-5" />,
   },
   {
-    name: "တီႈၽိုၵ်းတႅမ်ႈ",
+    name: "Typing Test",
     path: "/typing-test",
     icon: <Keyboard className="size-5" />,
   },
   {
-    name: "ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်",
+    name: "Leaderboards",
     path: "/leaderboards",
     icon: <Crown className="size-5 " />,
   },
   {
-    name: "လွင်ႈႁဝ်းၶႃႈ",
+    name: "About",
     path: "/about",
     icon: <InformationCircleIcon className="size-5 " />,
   },
@@ -89,7 +89,7 @@ export const Navbar = () => {
             </TooltipHover>
           ))}
           <TooltipHover
-            tooltipText={theme === "dark" ? "ၵၢင်ၶမ်ႈ" : "ၵၢင်ဝၼ်း"}
+            tooltipText={theme === "dark" ? "Dark" : "Light"}
             className="flex justify-center"
           >
             <span
@@ -107,7 +107,7 @@ export const Navbar = () => {
           </TooltipHover>
         </div>
         {accessToken ? (
-          <TooltipHover tooltipText={profile?.username || "ႁဵင်းမၢႆသုၼ်ႇတူဝ်"}>
+          <TooltipHover tooltipText={profile?.username || "Account"}>
             <Link
               to="/account"
               className={cn(
@@ -120,7 +120,7 @@ export const Navbar = () => {
             </Link>
           </TooltipHover>
         ) : (
-          <TooltipHover tooltipText="ၶဝ်ႈဝႅပ်ႉသၢႆႉ">
+          <TooltipHover tooltipText="Login">
             <Link to="/login">
               <UserIcon
                 className={cn(
