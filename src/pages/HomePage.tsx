@@ -38,6 +38,10 @@ export function HomePage() {
           name="description"
           content="Start mastering Shan typing with LikDai Pro."
         />
+        <meta
+          name="google-site-verification"
+          content="DWNWIz0ofitUjEfvUzzeCg_bVdWMoly52XEYSxFDsAg"
+        />
       </Helmet>
       <BackgroundBeamsWithCollision className="h-screen w-full overflow-hidden flex flex-col items-center justify-center gap-5 relative">
         {/* Main content */}
