@@ -71,7 +71,7 @@ export const LeaderboardTable = ({
                   )}
                 </span>
                 <div className="flex justify-center items-center gap-2">
-                  <div className="size-6 rounded-full border-1 border-yellow flex justify-center items-center ">
+                  <div className="size-7 rounded-full border-1 border-yellow flex justify-center items-center ">
                     <p className="text-xs font-bold text-yellow">
                       {formatName(entry.user.username)}
                     </p>
