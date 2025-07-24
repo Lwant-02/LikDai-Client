@@ -23,42 +23,42 @@ import { containerVariants, itemVariants } from "@/pages/AboutPage";
 
 const timelineItems = [
   {
-    title: "Choose your test type",
+    title: "လိူၵ်ႈ test ဢၼ်သူၼ်ၸႂ်",
     description:
-      "Select between timed tests, word count, quotes, or custom text.",
+      "လိူၵ်ႈၼႂ်းၵႄႈ လွင်ႈထတ်းသၢင်ၶၢဝ်းယၢမ်း၊ လွင်ႈၼပ်ႉၶေႃႈၵႂၢမ်း၊ ၵႂၢမ်းၵပ်းထုၵ်ႇ ဢမ်ႇၼၼ် တႅမ်ႈသႂ်ႇႁင်းၶေႃ။",
     icon: <span className="text-xl font-bold">1</span>,
     color: "bg-blue/20 text-blue",
   },
   {
-    title: "Select your language",
-    description: "Switch between English and Shan language modes.",
+    title: "လိူၵ်ႈၽႃႇသႃႇ",
+    description: "လိူၵ်ႈၼႂ်းၵႄႈ လိၵ်ႈတႆး လႄႈ လိၵ်ႈဢိင်းၵလဵတ်ႈ",
     icon: <span className="text-xl font-bold">2</span>,
     color: "bg-yellow/20 text-yellow",
   },
   {
-    title: "Select your desired keyboard layout",
+    title: "လိူၵ်ႈလွၵ်းမိုဝ်း",
     description:
-      "Choose from Namkhone, Panglong, Yunghkio, or Sil keyboard layouts.",
+      "လိူၵ်ႈၼႂ်းၵႄႈ လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း၊ ပၢင်လူင် ၊ ယုင်းၶဵဝ် ဢမ်ႇၼၼ် လၵ်းၸဵင်။",
     icon: <span className="text-xl font-bold">3</span>,
     color: "bg-purple/20 text-purple",
   },
   {
-    title: "Start typing",
-    description: "The timer begins automatically when you start typing.",
+    title: "တႄႇတႅမ်ႈ",
+    description: "မိူဝ်ႈတႄႇပေႃႉလိၵ်ႈၼၼ်ႉ ၶၢဝ်းယၢမ်းမၼ်း တေတႄႇမႃးႁင်းမၼ်းယဝ်ႉ။",
     icon: <span className="text-xl font-bold">4</span>,
     color: "bg-green/20 text-green",
   },
   {
-    title: "View your results",
+    title: "ထတ်းတူၺ်း result ၸဝ်ႈၵဝ်ႇ",
     description:
-      "After completing a test, review your WPM, accuracy, and other metrics.",
+      "ဝၢႆးသေတႅမ်ႈယဝ်ႉ ထတ်းတူၺ်း WPM, Accuracy, Consistency လႄႈ Metrics တၢင်ႇၸိူဝ်း။",
     icon: <span className="text-xl font-bold">5</span>,
     color: "bg-orange/20 text-orange",
   },
   {
-    title: "Track your progress",
+    title: "ၸွမ်းတူၺ်းလွင်ႈၶိုၼ်ႈယႂ်ႇၸဝ်ႈၵဝ်ႇ",
     description:
-      "Create an account to save your results and compare with others on the leaderboard.",
+      "ႁဵတ်းဢၵွင်ႉ တႃႇသိမ်းဝႆႉ result ၸဝ်ႈၵဝ်ႇသေ တႅၵ်ႈၼိူင်းၵၼ်တင်း ၵူၼ်းတၢင်ႇၵေႃႉ ဢၼ်မီးတီႈ  ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်ၼၼ်ႉ။",
     icon: <span className="text-xl font-bold">6</span>,
     color: "bg-purple/20 text-purple",
   },
@@ -167,7 +167,8 @@ export const AboutEngSection = ({
           >
             <div className="text-center">
               <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-blue">
-                Our Mission
+                Our Mission -{" "}
+                <span className="font-secondary">ယိူင်းဢၢၼ်းႁဝ်းၶႃႈ</span>
               </h3>
               <div className="prose prose-lg dark:prose-invert mx-auto">
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6">
@@ -182,6 +183,20 @@ export const AboutEngSection = ({
                   through technology, making it accessible for both native
                   speakers and learners to develop their digital literacy
                   skills.
+                </p>
+              </div>
+              <div className="prose prose-lg dark:prose-invert mx-auto mt-3">
+                <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6 font-secondary">
+                  LikDai–Pro ၼႆႉၶူင်ႊသၢင်ႈဝႆႉ တႃႇပဵၼ်လွင်ႈၵမ်ႉထႅမ်
+                  ၼႂ်းၵၢၼ်ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး ႁႂ်ႈလူင်ႉလႅၼ်ႇ လႄႈ လႅတ်းၽႆးယဝ်ႉ။
+                  ငဝ်ႈတိုၼ်း LikDai–Pro ၼႆႉဢိင်ဢဝ်တီႈ MonkeyType
+                  သေၶူင်ႊသၢင်ႈပဵၼ်မႃးယဝ်ႉ၊ ပီႈၼွင်ႉႁဝ်း ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး လႄႈ
+                  လိၵ်ႈဢိင်းၵလဵတ်ႈ ၼႂ်း LikDai–Pro ၼႆႉလႆႈယဝ်ႉဢေႃႈ။
+                </p>
+                <p className="text-lg sm:text-xl opacity-90 leading-relaxed font-secondary">
+                  ယိူင်းဢၢၼ်းႁဝ်းၶႃႈတႄႉ တႃႇထိင်းသိမ်း လႄႈ ယုၵ်ႉမုၼ်း လိၵ်ႈတႆး
+                  လိူၺ်ႈလၢႆးတၢင်းပၢႆးၸၢင်ႈ၊ ၼင်ႇႁိုဝ်ပီႈၼွင်ႉတႆး လႄႈ
+                  ၽူႈလဵပ်ႈႁဵၼ်းလိၵ်ႈတႆး လႆႈၽိုၵ်းၼမ်ႉၵတ်ႉပၢႆးၸၢင်ႈၵႂႃႇ။
                 </p>
               </div>
             </div>
@@ -456,7 +471,9 @@ export const AboutEngSection = ({
           className="max-w-4xl mx-auto"
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">How to Use</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-secondary">
+              တေႁဵတ်းႁိုဝ်ၸႂ်ႉတိုဝ်း
+            </h2>
             <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
           </motion.div>
 
@@ -467,7 +484,7 @@ export const AboutEngSection = ({
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className={`flex flex-col md:flex-row items-center md:items-start gap-4 mb-12 ${
+                  className={`flex flex-col md:flex-row items-center md:items-start gap-4 mb-12 font-secondary ${
                     index % 2 === 1 ? "md:flex-row-reverse" : ""
                   }`}
                 >
