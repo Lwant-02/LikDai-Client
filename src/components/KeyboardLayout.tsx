@@ -9,6 +9,7 @@ interface KeyProps {
   isSpecial?: boolean;
   width?: "normal" | "wide" | "extra-wide" | "space";
   isCurrent?: boolean;
+  isShiftRequired?: boolean;
 }
 
 interface KeyboardLayoutProps {
@@ -21,6 +22,7 @@ const Key: React.FC<KeyProps> = ({
   isSpecial = false,
   width = "normal",
   isCurrent = false,
+  isShiftRequired = false,
 }) => {
   const { mode } = settingStore();
   const getKeyWidth = () => {
@@ -72,6 +74,9 @@ const Key: React.FC<KeyProps> = ({
     if (isCurrent) {
       return "bg-yellow text-black border-yellow"; // Current character - yellow like in photo
     }
+    if (isShiftRequired) {
+      return "bg-orange/30 text-orange border-orange/50"; // Shift required - orange highlight
+    }
     return "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"; // Default
   };
 
@@ -121,7 +126,40 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
     return null;
   };
 
+  // Function to check if character requires shift key
+  const requiresShift = (char: string): boolean => {
+    if (!char) return false;
+
+    // Check if character is in shift rows (odd-numbered rows)
+    for (let i = 1; i < rows.length; i += 2) {
+      const shiftRow = rows[i];
+      for (const [physicalKey, mappedChar] of Object.entries(shiftRow)) {
+        if (
+          mappedChar === char &&
+          ![
+            "Shift",
+            "Caps",
+            "Tab",
+            "Enter",
+            "Space",
+            "Ctrl1",
+            "Ctrl2",
+            "Win1",
+            "Win2",
+            "Alt1",
+            "Alt2",
+            "Menu",
+          ].includes(physicalKey)
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   const currentPhysicalKey = findPhysicalKeyForChar(currentChar || "");
+  const currentRequiresShift = requiresShift(currentChar || "");
 
   // Get the appropriate row based on shift state
   const getRowData = (rowIndex: number) => {
@@ -242,6 +280,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
           shanChar=""
           isSpecial={true}
           width="extra-wide"
+          isShiftRequired={currentRequiresShift}
         />
         {keys.map((key) => (
           <Key
@@ -257,6 +296,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
           shanChar=""
           isSpecial={true}
           width="extra-wide"
+          isShiftRequired={currentRequiresShift}
         />
       </div>
     );

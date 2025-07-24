@@ -7,7 +7,7 @@ export const Footer = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="absolute bottom-1 w-full mx-auto flex md:flex-row flex-col justify-center items-center md:gap-5 gap-1 z-50"
+      className="absolute bottom-1 w-full mx-auto flex md:flex-row flex-col justify-center items-center md:gap-5 gap-1 z-10"
     >
       <p className="text-sm md:order-1 order-2">
         &copy; {year} LikDai - Pro | All rights reserved.

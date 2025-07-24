@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { RotateCcw, Keyboard, EyeOff, Globe } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import { DesktopTestSetting } from "@/components/DesktopTestSetting";
@@ -18,9 +17,12 @@ import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/components/KeyboardLayout";
 import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
-import { TooltipHover } from "@/components/TooltipHover";
-import { cn } from "@/lib/utils";
 import GraphemeSplitter from "grapheme-splitter";
+import { UpdateAnnouncement } from "@/components/UpdateAnnouncement";
+import { MobileMessage } from "@/components/MobileMessage";
+import { LanguageMode } from "@/components/LanguageMode";
+import { TimeWords } from "@/components/TimeWords";
+import { TypingToggleButtons } from "@/components/TypingToggleButtons";
 // import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
 // import { TypingTestCopy } from "@/components/TypingTestCopy"; //Use to test
 
@@ -39,7 +41,6 @@ export const TypingtestPage = () => {
     setStartTime,
     setEndTime,
     setWpmPerSecond,
-    setMode,
   } = settingStore();
   const {
     setFinalWpm,
@@ -67,18 +68,38 @@ export const TypingtestPage = () => {
 
   // Calculate current and next characters for keyboard highlighting
   const splitter = new GraphemeSplitter();
-  const targetUnits =
+  // For keyboard highlighting, we need to use GraphemeSplitter to get proper graphemes
+  // But for text display consistency, we use simple character splitting
+  const targetUnitsForKeyboard =
     mode === "shan"
-      ? targetText.split("") // Keep ALL characters including spaces for Shan
+      ? targetText.split("")
       : splitter.splitGraphemes(targetText);
-  const typedUnits =
-    mode === "shan"
-      ? userInput.split("") // Keep ALL characters including spaces for Shan
-      : splitter.splitGraphemes(userInput);
+  const typedUnitsForKeyboard =
+    mode === "shan" ? userInput.split("") : splitter.splitGraphemes(userInput);
 
   // Current character is the one at the current typing position
-  const currentCharIndex = typedUnits.length;
-  const currentChar = targetUnits[currentCharIndex] || "";
+  const currentCharIndex = typedUnitsForKeyboard.length;
+  const currentGrapheme = targetUnitsForKeyboard[currentCharIndex] || "";
+
+  // Extract the base character for keyboard highlighting
+  // For complex graphemes, we want to highlight the first/base character
+  const getBaseCharForKeyboard = (grapheme: string): string => {
+    if (!grapheme) return "";
+
+    // For space, return space
+    if (grapheme === " ") return " ";
+
+    // For Shan mode, extract the first character from the grapheme
+    // This handles cases like "ၵွ" where we want to highlight "ၵ"
+    if (mode === "shan") {
+      return grapheme.charAt(0);
+    }
+
+    // For English mode, return the grapheme as is
+    return grapheme;
+  };
+
+  const currentChar = getBaseCharForKeyboard(currentGrapheme);
 
   //Generate random text based on selected setting
   const generateText = useCallback(() => {
@@ -276,16 +297,6 @@ export const TypingtestPage = () => {
     setWpmPerSecond([]);
   };
 
-  //Change mode
-  const handleChangeMode = () => {
-    if (mode === "eng") {
-      setMode("shan");
-      setUserInput("");
-    } else {
-      setMode("eng");
-      setUserInput("");
-    }
-  };
   return (
     <>
       <Helmet>
@@ -295,78 +306,22 @@ export const TypingtestPage = () => {
           content="Test your typing speed and accuracy with LikDai - Pro."
         />
       </Helmet>
-      <article className="w-full h-full flex flex-col gap-4 items-center">
+      <article className="w-full h-full flex flex-col gap-4 items-center ">
         <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="xl:flex hidden gap-3 mb-2 w-full justify-center items-center"
-          >
-            <div className="flex items-center gap-1">
-              <Globe className="size-5 text-yellow" />
-              <p className="w-auto opacity-70 text-center">Choose Language</p>
-            </div>
-            <div className="flex justify-center items-center gap-3">
-              <TooltipHover tooltipText="တႆး">
-                <span
-                  onClick={handleChangeMode}
-                  className={cn(
-                    "w-auto flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-                    mode === "shan" && "opacity-100 text-yellow"
-                  )}
-                >
-                  <img
-                    src="/svg/Shan-Flag.svg"
-                    alt="shan-flag"
-                    className="size-5 rounded-full object-cover border border-foreground"
-                  />
-                </span>
-              </TooltipHover>
-              <TooltipHover tooltipText="ဢိင်းၵလဵတ်ႈ">
-                <button
-                  onClick={handleChangeMode}
-                  className={cn(
-                    "w-auto opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-                    mode === "eng" && "opacity-100 text-yellow"
-                  )}
-                >
-                  <img
-                    src="/images/UK-Flag.jpg"
-                    alt="uk-flag"
-                    className="size-5 rounded-full object-cover border border-foreground"
-                  />
-                </button>
-              </TooltipHover>
-            </div>
-          </motion.div>
+          <LanguageMode />
           <DesktopTestSetting />
         </div>
-        <div className="w-full h-auto flex flex-col justify-center items-center">
+        <div className="w-full h-auto flex flex-col justify-center items-center ">
+          <TimeWords
+            secondsLeft={secondsLeft}
+            totalTypedWords={totalTypedWords}
+            targetText={targetText}
+          />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="xl:flex hidden justify-center items-center gap-4 "
-          >
-            {selectedSetting === "time" ? (
-              <h3 className="md:text-3xl text-xl text-yellow">
-                Time : {secondsLeft} s
-              </h3>
-            ) : (
-              <h3 className="md:text-3xl text-xl text-yellow">
-                Words : {totalTypedWords}/
-                {selectedSetting === "words"
-                  ? selectedWords
-                  : targetText.split(" ").length}
-              </h3>
-            )}
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="xl:h-[140px] h-auto w-full xl:overflow-hidden  flex justify-center items-center"
+            className="xl:h-[140px] h-auto w-full xl:overflow-hidden  flex justify-center items-center "
           >
             <TypingTest
               isRunning={isRunning}
@@ -374,67 +329,7 @@ export const TypingtestPage = () => {
               targetText={targetText}
             />
             {/* Mobile Message */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-gradient-to-br from-foreground/20 to-foreground/10 rounded-2xl border border-primary/20 backdrop-blur-sm h-full w-full "
-            >
-              <motion.div
-                className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 2, -2, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <svg
-                  className="w-8 h-8 text-yellow "
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </motion.div>
-
-              <h3 className="text-xl font-semibold text-center mb-2 bg-gradient-to-r from-yellow to-orange bg-clip-text text-transparent">
-                Desktop Experience Required
-              </h3>
-
-              <p className="text-center text-sm opacity-80 leading-relaxed max-w-xs">
-                LikDai Pro is optimized for desktop and laptop screens to
-                provide the best typing experience with full keyboard support.
-              </p>
-
-              <div className="flex items-center mt-4 px-4 py-2 bg-primary/10 rounded-full">
-                <svg
-                  className="w-4 h-4 text-blue mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span className="text-xs text-blue font-medium">
-                  Switch to desktop for full access
-                </span>
-              </div>
-            </motion.div>
+            <MobileMessage />
           </motion.div>
 
           {/* Restart and Keyboard Toggle Button */}
@@ -455,38 +350,16 @@ export const TypingtestPage = () => {
                 <KeyboardLayout currentChar={currentChar} />
               </motion.div>
             )}
-            <div className="flex gap-3">
-              <TooltipHover tooltipText="Restart Test">
-                <span
-                  onClick={handleRestartTest}
-                  title="Restart Test"
-                  className=" opacity-70 border border-foreground py-1 px-2 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-                >
-                  <RotateCcw className="size-5 " />
-                </span>
-              </TooltipHover>
-
-              {/* Keyboard Toggle Button */}
-              <TooltipHover
-                tooltipText={
-                  isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"
-                }
-              >
-                <span
-                  onClick={() => setIsKeyboardVisible(!isKeyboardVisible)}
-                  className=" opacity-70 border border-foreground py-1 px-2 md:flex hidden rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer gap-2 justify-center items-center"
-                  title={isKeyboardVisible ? "Hide Keyboard" : "Show Keyboard"}
-                >
-                  {isKeyboardVisible ? (
-                    <EyeOff className="size-5" />
-                  ) : (
-                    <Keyboard className="size-5" />
-                  )}
-                </span>
-              </TooltipHover>
-            </div>
+            <TypingToggleButtons
+              handleRestartTest={handleRestartTest}
+              isKeyboardVisible={isKeyboardVisible}
+              setIsKeyboardVisible={setIsKeyboardVisible}
+            />
           </motion.div>
         </div>
+
+        {/* Update release message section */}
+        <UpdateAnnouncement />
       </article>
     </>
   );
