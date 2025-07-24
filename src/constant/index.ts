@@ -27,3 +27,10 @@ export const githubFrontendRepoUrl =
 
 export const githubBackendRepoUrl =
   "https://github.com/Lwant-02/LikDaiPro-Server.git";
+
+export const releseDate = "July 2025";
+
+export const releaseNote = [
+  "Update shift key support",
+  "Add update announcement section",
+];

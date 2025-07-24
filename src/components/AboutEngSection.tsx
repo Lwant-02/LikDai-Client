@@ -15,6 +15,8 @@ import {
   developerContacts,
   githubBackendRepoUrl,
   githubFrontendRepoUrl,
+  releaseNote,
+  releseDate,
   supporterContacts,
 } from "@/constant";
 import { containerVariants, itemVariants } from "@/pages/AboutPage";
@@ -644,17 +646,28 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold mb-6 "
           >
-            Release Announcement <Rocket className="inline-block size-7" />
+            Release Announcement - {releseDate} (Latest){" "}
+            <Rocket className="inline-block size-7" />
           </motion.h2>
 
-          <motion.p
+          <motion.div
             variants={itemVariants}
             className="text-lg opacity-80 max-w-2xl mx-auto "
           >
-            🎉 Welcome to our first release! We're excited to share it with you.
-            While there might be a few issues or bugs, we're working hard to
-            improve things — thanks for being part of the journey!
-          </motion.p>
+            <p>
+              We are excited to announce the latest update for LikDai-Pro. This
+              update brings several improvements and new features to enhance
+              your typing experience. Thank you for your patience and support as
+              we continue to develop and improve the app.
+            </p>
+            <br />
+            {releaseNote.length > 0 &&
+              releaseNote.map((note, index) => (
+                <li key={index} className="list-disc list-inside text-yellow ">
+                  {note}
+                </li>
+              ))}
+          </motion.div>
         </motion.div>
       </section>
     </>

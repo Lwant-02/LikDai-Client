@@ -26,7 +26,7 @@ export default function App() {
   const { accessToken } = authStore();
 
   return (
-    <main className="min-h-screen overflow-hidden mx-auto max-w-7xl md:px-0 px-2 relative">
+    <main className="min-h-screen overflow-hidden mx-auto max-w-7xl xl:px-0 px-2 relative">
       <Router>
         <Navbar />
         <Routes>

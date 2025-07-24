@@ -28,9 +28,18 @@ export const TypingTest = ({
   const [inputScrollOffset, setInputScrollOffset] = useState(0);
 
   const splitter = new GraphemeSplitter();
-  const units = splitter.splitGraphemes(targetText);
-  const typedUnits = splitter.splitGraphemes(userInput);
+  // For text highlighting, use simple character splitting to show individual components
+  // This ensures each character component (like ၵ and ႂ in ၵႂ) highlights separately
+  const units =
+    mode === "shan"
+      ? targetText.split("") // Simple split for Shan to highlight each character component
+      : splitter.splitGraphemes(targetText);
+  const typedUnits =
+    mode === "shan"
+      ? userInput.split("") // Simple split for Shan to highlight each character component
+      : splitter.splitGraphemes(userInput);
 
+  // Simple character-by-character comparison for better visual feedback
   // Calculate scroll position based on current character position
   const updateScrollPosition = useCallback(() => {
     if (!textContainerRef.current || !currentCharRef.current) return;
@@ -204,16 +213,31 @@ export const TypingTest = ({
         >
           <div className="block break-words whitespace-pre-wrap items-center justify-center">
             {typedUnits.map((typedUnit, i) => {
-              const isCorrect = i < units.length && typedUnit === units[i];
-              const isIncorrect = i < units.length && typedUnit !== units[i];
+              const targetUnit = units[i];
+
+              // Simple character comparison
+              const isCorrect = i < units.length && typedUnit === targetUnit;
+              const isIncorrect = i < units.length && typedUnit !== targetUnit;
+
+              // Debug logging for character comparison
+              if (i < 10) {
+                console.log(
+                  `Char ${i}: typed="${typedUnit}" vs target="${targetUnit}" - correct: ${isCorrect}, incorrect: ${isIncorrect}`
+                );
+              }
 
               let colorClass = "";
               if (isIncorrect) {
-                colorClass = "text-red-400 underline";
+                colorClass = "bg-red-500/30 text-red-400 rounded-sm"; // More visible error highlighting
               } else if (isCorrect) {
                 colorClass = "text-green-400";
               } else {
-                colorClass = "text-foreground";
+                // Fallback: if we have more typed characters than target, mark as incorrect
+                if (i >= units.length) {
+                  colorClass = "bg-red-500/30 text-red-400 rounded-sm";
+                } else {
+                  colorClass = "text-foreground";
+                }
               }
 
               return (
