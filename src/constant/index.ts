@@ -33,4 +33,5 @@ export const releseDate = "July 2025";
 export const releaseNote = [
   "Update shift key support",
   "Add update announcement section",
+  "Add Shan language at our mission and how to use section",
 ];
