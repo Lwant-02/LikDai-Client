@@ -22,6 +22,13 @@ export const supporterContacts = [
   { imagePath: "/svg/github.svg", link: "https://github.com/SaingHmineTun" },
 ];
 
+export const anotherSupporterContacts = [
+  {
+    imagePath: "/svg/facebook.svg",
+    link: "https://www.facebook.com/share/1JyUNRQo6H/?mibextid=wwXIfr",
+  },
+];
+
 export const githubFrontendRepoUrl =
   "https://github.com/Lwant-02/LikDaiPro-Client.git";
 
