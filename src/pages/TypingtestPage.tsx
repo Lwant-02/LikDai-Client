@@ -336,7 +336,7 @@ export const TypingtestPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16"
+            className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16  gap-1"
           >
             {isKeyboardVisible && (
               <motion.div
@@ -344,7 +344,7 @@ export const TypingtestPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="transform scale-50 md:scale-75 lg:scale-90 origin-top xl:block hidden"
+                className="transform scale-50 md:scale-75 lg:scale-90 origin-bottom  xl:block hidden"
               >
                 <KeyboardLayout currentChar={currentChar} />
               </motion.div>

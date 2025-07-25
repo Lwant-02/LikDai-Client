@@ -354,7 +354,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <div className="space-y-2">
+      <div className="space-y-1">
         {renderRow1()}
         {renderRow2()}
         {renderRow3()}
