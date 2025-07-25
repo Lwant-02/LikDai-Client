@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 
 import {
+  anotherSupporterContacts,
   developerContacts,
   githubBackendRepoUrl,
   githubFrontendRepoUrl,
-  releaseNote,
   releseDate,
   supporterContacts,
 } from "@/constant";
@@ -570,13 +570,14 @@ export const AboutEngSection = ({
 
           <motion.p
             variants={itemVariants}
-            className="text-lg opacity-80 max-w-2xl mx-auto "
+            className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
           >
-            This webiste was developed and maintained by{" "}
             <span className="font-bold text-yellow">
-              Sai Naw Main (Lwant).{" "}
+              ၸၢႆးၼေႃႇမိူင်း(လွၼ်ႉ){" "}
             </span>
-            You can contact him through the contacts below.
+            ပဵၼ် ၽူႈ ၶူင်သၢင်ႈ ႁဵတ်းဢွၵ်ႇ ၶူင်းၵၢၼ်ၼႆႉ မႃးမိူဝ်ႈ လိူၼ် July ပီႊ
+            2025 ၼႆယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၽူႈၶူင်သၢင်ႈလႆႈလူၺ်ႈ ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ
+            ၼႆႉယူႇၶႃႈ။
           </motion.p>
           <motion.div className="mb-8 mt-3" variants={itemVariants}>
             <div className="flex flex-wrap justify-center gap-4">
@@ -618,19 +619,48 @@ export const AboutEngSection = ({
 
           <motion.p
             variants={itemVariants}
-            className="text-lg opacity-80 max-w-2xl mx-auto "
+            className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
           >
-            A big thanks to{" "}
+            ယိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇၼမ်ထိုင်{" "}
             <span className="font-bold text-yellow">
-              Sai Mao (TMK-
-              <span className="font-secondary">ထုင်ႉမၢဝ်းၶမ်း</span>){" "}
-            </span>{" "}
-            for providing the Shan Quotes and other resources and supports for
-            this project. You can reach out to him through the contacts below.
+              Sai Mao (TMK-ထုင်ႉမၢဝ်းၶမ်း)
+            </span>
+            ဢၼ်လႆႈၸွႆႈထႅမ်ပၼ် Shan Quotes လႄႈ ၶူဝ်းၶွင်တၢင်ႇဢၼ် လႄႈ
+            လွင်ႈၵမ်ႉၸွႆႈ တႃႇၶူင်းၵၢၼ်ၼႆႉယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးမၢဝ်း လႆႈလူၺ်ႈ
+            ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
           </motion.p>
           <motion.div className="mb-8 mt-3" variants={itemVariants}>
             <div className="flex flex-wrap justify-center gap-4">
               {supporterContacts.map((contact, index) => (
+                <a
+                  key={index}
+                  href={contact.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-gray-200 rounded-md p-1"
+                >
+                  <img
+                    src={contact.imagePath}
+                    alt={contact.link}
+                    className="size-6"
+                  />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+          <motion.p
+            variants={itemVariants}
+            className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
+          >
+            ယဝ်ႉၵေႃႈ ၶွပ်ႈၸႂ်ထိုင်ပႃး{" "}
+            <span className="font-bold text-yellow">ၸၢႆးၸၢမ်ႇၺုၼ်ႉ </span>
+            ႁဝ်း ဢၼ်လႆႈၸွၺ်ႈ ထတ်းၶေႃႈသဵင်တႅတ်ႈ လႄႈ ၸွၺ်ႈ ၽိူမ်ႉၶေႃႈမုၼ်း
+            လိၵ်ႈတႆး တွၼ်ႈတႃႇ ၶူင်းၵၢၼ်ၼႆႉၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးၸၢမ်ႇၺုၼ်ႉ
+            လႆႈလူၺ်ႈ ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+          </motion.p>
+          <motion.div className="mb-8 mt-3" variants={itemVariants}>
+            <div className="flex flex-wrap justify-center gap-4">
+              {anotherSupporterContacts.map((contact, index) => (
                 <a
                   key={index}
                   href={contact.link}
@@ -677,13 +707,6 @@ export const AboutEngSection = ({
               your typing experience. Thank you for your patience and support as
               we continue to develop and improve the app.
             </p>
-            <br />
-            {releaseNote.length > 0 &&
-              releaseNote.map((note, index) => (
-                <li key={index} className="list-disc list-inside text-yellow ">
-                  {note}
-                </li>
-              ))}
           </motion.div>
         </motion.div>
       </section>
