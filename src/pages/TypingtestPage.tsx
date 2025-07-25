@@ -18,7 +18,6 @@ import { KeyboardLayout } from "@/components/KeyboardLayout";
 import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
 import GraphemeSplitter from "grapheme-splitter";
-import { UpdateAnnouncement } from "@/components/UpdateAnnouncement";
 import { MobileMessage } from "@/components/MobileMessage";
 import { LanguageMode } from "@/components/LanguageMode";
 import { TimeWords } from "@/components/TimeWords";
@@ -357,9 +356,6 @@ export const TypingtestPage = () => {
             />
           </motion.div>
         </div>
-
-        {/* Update release message section */}
-        <UpdateAnnouncement />
       </article>
     </>
   );
