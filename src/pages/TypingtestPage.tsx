@@ -22,6 +22,7 @@ import { MobileMessage } from "@/components/MobileMessage";
 import { LanguageMode } from "@/components/LanguageMode";
 import { TimeWords } from "@/components/TimeWords";
 import { TypingToggleButtons } from "@/components/TypingToggleButtons";
+import { Information } from "@/components/Information";
 // import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
 // import { TypingTestCopy } from "@/components/TypingTestCopy"; //Use to test
 
@@ -357,6 +358,7 @@ export const TypingtestPage = () => {
           </motion.div>
         </div>
       </article>
+      <Information />
     </>
   );
 };
