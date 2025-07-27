@@ -40,7 +40,35 @@ export const DesktopTestSetting = () => {
     setUserInput,
     soundEnabled,
     setSoundEnabled,
+    level,
   } = settingStore();
+
+  const getName = (setting: TestType) => {
+    if (mode === "eng") {
+      if (setting === "time") {
+        return "Time";
+      } else if (setting === "words") {
+        return "Words";
+      } else if (setting === "quote") {
+        return "Quote";
+      } else {
+        return "Custom";
+      }
+    } else {
+      if (setting === "time") {
+        return "ၶၢဝ်းယၢမ်း";
+      } else if (setting === "words") {
+        return "တူဝ်လိၵ်ႈ";
+      } else if (setting === "quote") {
+        return "ၵႂၢမ်းၵမ်းထုၵ်ႇ";
+      } else {
+        return "တႅမ်ႈသႂ်ႇ";
+      }
+    }
+  };
+
+  const visibleSettings =
+    level === "easy" ? settingOptions.slice(0, 1) : settingOptions;
 
   return (
     <>
@@ -50,7 +78,7 @@ export const DesktopTestSetting = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="py-2 px-7 bg-foreground rounded-lg  text-sm gap-2 xl:flex hidden"
       >
-        {settingOptions.map((setting) => (
+        {visibleSettings.map((setting) => (
           <button
             key={setting.value}
             onClick={() => {
@@ -63,7 +91,9 @@ export const DesktopTestSetting = () => {
             )}
           >
             {setting.icon}
-            <p className="text-sm font-secondary">{setting.name}</p>
+            <p className={cn("text-sm ", mode === "shan" && "font-secondary")}>
+              {getName(setting.value as TestType)}
+            </p>
           </button>
         ))}
         <span

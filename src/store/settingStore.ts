@@ -15,6 +15,8 @@ interface SettingOptions {
   wpmPerSecond: number[];
   selectedKeyMap: KeyMapNames;
   soundEnabled: boolean;
+  level: Level;
+  setLevel: (level: Level) => void;
   setSelectedKeyMap: (keyMap: KeyMapNames) => void;
   setSoundEnabled: (enabled: boolean) => void;
   setStartTime: (startTime: number | null) => void;
@@ -45,7 +47,9 @@ export const settingStore = create<SettingOptions>((set) => ({
   endTime: null,
   wpmPerSecond: [],
   selectedKeyMap: "namkhone",
+  level: "easy",
   soundEnabled: localStorage.getItem("soundEnabled") === "true" || false,
+  setLevel: (level) => set({ level }),
   setSelectedKeyMap: (keyMap) => set({ selectedKeyMap: keyMap }),
   setSoundEnabled: (enabled) => {
     set({ soundEnabled: enabled });

@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 import { TooltipHover } from "./TooltipHover";
-import { Globe } from "lucide-react";
 
 export const LanguageMode = () => {
   const { mode, setMode, setUserInput } = settingStore();
@@ -19,15 +19,17 @@ export const LanguageMode = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="xl:flex hidden gap-3 mb-2 w-full justify-center items-center"
-    >
+    <div className="xl:flex hidden gap-3 mb-2 w-auto justify-center items-center">
       <div className="flex items-center gap-1">
         <Globe className="size-5 text-yellow" />
-        <p className="w-auto opacity-70 text-center">Choose Language</p>
+        <p
+          className={cn(
+            "w-auto opacity-70 text-center",
+            mode === "shan" && "font-secondary"
+          )}
+        >
+          {mode === "eng" ? "Choose Language" : "လိူၵ်ႈၽႃႇသႃႇ"}
+        </p>
       </div>
       <div className="flex justify-center items-center gap-3">
         <TooltipHover tooltipText="တႆး">
@@ -61,6 +63,6 @@ export const LanguageMode = () => {
           </span>
         </TooltipHover>
       </div>
-    </motion.div>
+    </div>
   );
 };

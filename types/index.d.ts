@@ -6,6 +6,8 @@ type LanguageFilter = "eng" | "shan";
 
 type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
+type Level = "easy" | "hard";
+
 enum AchievementCategory {
   speed = "speed",
   accuracy = "accuracy",
