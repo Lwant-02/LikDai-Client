@@ -23,6 +23,9 @@ import { LanguageMode } from "@/components/LanguageMode";
 import { TimeWords } from "@/components/TimeWords";
 import { TypingToggleButtons } from "@/components/TypingToggleButtons";
 import { Information } from "@/components/Information";
+import { LevelMode } from "@/components/LevelMode";
+import { getRandomLetter } from "@/util/getRandomLetter";
+import { getShanRandomLetter } from "@/util/getShanRandomLetter";
 // import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
 // import { TypingTestCopy } from "@/components/TypingTestCopy"; //Use to test
 
@@ -41,6 +44,7 @@ export const TypingtestPage = () => {
     setStartTime,
     setEndTime,
     setWpmPerSecond,
+    level,
   } = settingStore();
   const {
     setFinalWpm,
@@ -106,8 +110,12 @@ export const TypingtestPage = () => {
     let newText = "";
     switch (selectedSetting) {
       case "time":
-        newText =
-          mode === "eng" ? getRandomParagraph() : getShanRandomParagraph();
+        if (level === "easy") {
+          newText = mode === "eng" ? getRandomLetter() : getShanRandomLetter();
+        } else {
+          newText =
+            mode === "eng" ? getRandomParagraph() : getShanRandomParagraph();
+        }
         break;
       case "words":
         newText =
@@ -126,7 +134,7 @@ export const TypingtestPage = () => {
           mode === "eng" ? getRandomParagraph() : getShanRandomParagraph();
     }
     setTargetText(newText);
-  }, [selectedSetting, selectedWords, mode, customText]);
+  }, [selectedSetting, selectedWords, mode, customText, level]);
 
   //Count total typed words
   useEffect(() => {
@@ -171,6 +179,7 @@ export const TypingtestPage = () => {
     setStartTime,
     setEndTime,
     setWpmPerSecond,
+    level,
   ]);
 
   //Track wpm per second
@@ -308,7 +317,15 @@ export const TypingtestPage = () => {
       </Helmet>
       <article className="w-full h-full flex flex-col gap-4 items-center ">
         <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
-          <LanguageMode />
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex justify-center items-center gap-10 w-auto"
+          >
+            <LanguageMode />
+            <LevelMode />
+          </motion.div>
           <DesktopTestSetting />
         </div>
         <div className="w-full h-auto flex flex-col justify-center items-center ">
