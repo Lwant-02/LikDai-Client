@@ -45,7 +45,7 @@ export const LeaderboardTable = ({
           <div key={index}>
             <div
               className={cn(
-                "grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
+                "grid grid-cols-4 justify-center items-center sm:grid-cols-5 md:grid-cols-8 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
                 entry.rank === 1 && "bg-yellow/10",
                 entry.rank === 2 && "bg-blue/10",
                 entry.rank === 3 && "bg-green/10"
