@@ -160,6 +160,30 @@ export const AboutEngSection = ({
             </p>
           </motion.div>
 
+          {/* Child Laborer Day Honor */}
+          <motion.div variants={itemVariants} className="text-center mb-16 ">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Honor of Child Laborers
+              </h2>
+            </div>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              LikDai-Pro is built in honor of{" "}
+              <span className="text-yellow">Child Laborers Day</span>, organized
+              by Team{" "}
+              <a
+                href="https://www.haohaa.com/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow hover:underline"
+              >
+                Hao Haa
+              </a>
+              , with the hope of promoting education, opportunity, and a better
+              future.
+            </p>
+          </motion.div>
+
           {/* Mission Statement */}
           <motion.div
             variants={itemVariants}
@@ -201,7 +225,6 @@ export const AboutEngSection = ({
               </div>
             </div>
           </motion.div>
-
           {/* Features Grid */}
           <motion.div
             variants={itemVariants}
@@ -282,7 +305,6 @@ export const AboutEngSection = ({
               </p>
             </div>
           </motion.div>
-
           {/* Contribution Section */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h3 className="text-3xl font-bold mb-8">How to Contribute</h3>
@@ -366,7 +388,6 @@ export const AboutEngSection = ({
               </div>
             </div>
           </motion.div>
-
           {/* GitHub CTA */}
           <motion.div variants={itemVariants} className="text-center">
             <div className="bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 md:p-12 border border-gray-700">
