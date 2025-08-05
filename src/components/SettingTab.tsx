@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
 import { AccountDeleteDialog } from "../features/account/components/AccountDeleteDialog";
 import { useUpdatePassword } from "@/hooks/useUser";
-import { Spinner } from "./Spinner";
+import { MiniSpinner } from "./MiniSpinner";
 
 export const SettingTab = () => {
   const { isUpdatingPassword, updatePassword } = useUpdatePassword();
@@ -113,7 +113,7 @@ export const SettingTab = () => {
                   className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-28"
                 >
                   {isUpdatingPassword ? (
-                    <Spinner size={6} />
+                    <MiniSpinner />
                   ) : (
                     <>
                       <Save className="size-4" />
