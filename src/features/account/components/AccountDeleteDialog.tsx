@@ -7,10 +7,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
-import { Spinner } from "./Spinner";
+import { Button } from "../../../components/ui/button";
 import { authStore } from "@/store/authStore";
 import { useDeleteAccount } from "@/hooks/useUser";
+import { MiniSpinner } from "../../../components/MiniSpinner";
 
 interface AccountDeleteDialogProps {
   isOpen: boolean;
@@ -80,7 +80,7 @@ export const AccountDeleteDialog = ({
           onClick={handleDeleteAccount}
           className="mt-3 h-10 text-white rounded-lg bg-red/80 w-full cursor-pointer flex justify-center items-center hover:bg-red text-base"
         >
-          {isDeletingAccount ? <Spinner size={6} /> : <>Confirm & Delete</>}
+          {isDeletingAccount ? <MiniSpinner /> : <>Confirm & Delete</>}
         </Button>
       </DialogContent>
     </Dialog>

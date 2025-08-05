@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
-import { RegisterForm } from "@/components/RegisterForm";
-import { LoginForm } from "@/components/LoginForm";
+import { RegisterForm } from "@/features/auth/components/RegisterForm";
+import { LoginForm } from "@/features/auth/components/LoginForm";
 import { authStore } from "@/store/authStore";
 
 export const LoginPage = () => {

@@ -2,12 +2,12 @@ import { Baseline, Quote, Timer, Wrench, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { TimerSetting } from "./TimerSetting";
-import { WordsSetting } from "./WordsSetting";
-import { CustomSetting } from "./CustomSetting";
+import { TimerSetting } from "../../../components/TimerSetting";
+import { WordsSetting } from "../../../components/WordsSetting";
+import { CustomSetting } from "../../../components/CustomSetting";
 import { settingStore } from "@/store/settingStore";
 import { KeyBoardSelector } from "./KeyBoardSelector";
-import { TooltipHover } from "./TooltipHover";
+import { TooltipHover } from "../../../components/TooltipHover";
 
 export const settingOptions = [
   {

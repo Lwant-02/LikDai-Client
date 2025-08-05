@@ -2,7 +2,7 @@ import { Globe } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
-import { TooltipHover } from "./TooltipHover";
+import { TooltipHover } from "../../../components/TooltipHover";
 
 export const LanguageMode = () => {
   const { mode, setMode, setUserInput } = settingStore();

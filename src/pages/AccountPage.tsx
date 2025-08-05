@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-import { AccoutHeader } from "@/components/AccoutHeader";
-import { AccountTabs } from "@/components/AccountTabs";
-import { ProfileTab } from "@/components/ProfileTab";
-import { StatsTab } from "@/components/StatsTab";
-import { HistoryTab } from "@/components/HistoryTab";
-import { AchievementsTab } from "@/components/AchievementsTab";
+import { AccoutHeader } from "@/features/account/components/AccoutHeader";
+import { AccountTabs } from "@/features/account/components/AccountTabs";
+import { ProfileTab } from "@/features/account/components/ProfileTab";
+import { StatsTab } from "@/features/account/components/StatsTab";
+import { HistoryTab } from "@/features/account/components/HistoryTab";
+import { AchievementsTab } from "@/features/account/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";

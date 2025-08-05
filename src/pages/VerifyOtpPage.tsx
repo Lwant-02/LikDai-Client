@@ -6,8 +6,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Shield, ArrowLeft, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/Spinner";
 import { useVerifyOtp, useResendOtp } from "@/hooks/useAuth";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 export const VerifyOtpPage = () => {
   const navigate = useNavigate();
@@ -211,7 +211,7 @@ export const VerifyOtpPage = () => {
             className="mt-4 h-11 rounded-lg text-primary bg-yellow hover:bg-yellow/90 w-full max-w-sm cursor-pointer flex justify-center items-center text-base font-semibold"
           >
             {isVerifyingOtp ? (
-              <Spinner size={6} color="primary" />
+              <MiniSpinner />
             ) : (
               <>
                 <Shield className="size-5 mr-2" />
@@ -232,7 +232,7 @@ export const VerifyOtpPage = () => {
               className="text-yellow  hover:bg-yellow/10 cursor-pointer border border-yellow/50"
             >
               {isResendingOtp ? (
-                <Spinner size={5} color="primary" />
+                <MiniSpinner />
               ) : (
                 <>
                   <RotateCcw className="size-4 mr-2" />

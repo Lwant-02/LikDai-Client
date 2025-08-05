@@ -4,7 +4,7 @@ import { Save, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { InputFiled } from "./InputFiled";
-import { AccountDeleteDialog } from "./AccountDeleteDialog";
+import { AccountDeleteDialog } from "../features/account/components/AccountDeleteDialog";
 import { useUpdatePassword } from "@/hooks/useUser";
 import { Spinner } from "./Spinner";
 

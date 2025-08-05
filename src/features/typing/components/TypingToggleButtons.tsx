@@ -1,5 +1,5 @@
 import { RotateCcw, Keyboard, EyeOff } from "lucide-react";
-import { TooltipHover } from "./TooltipHover";
+import { TooltipHover } from "@/components/TooltipHover";
 
 interface TypingToggleButtonsProps {
   handleRestartTest: () => void;

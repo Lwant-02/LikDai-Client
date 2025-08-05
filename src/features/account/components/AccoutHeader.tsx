@@ -1,12 +1,12 @@
 import { LogOut } from "lucide-react";
 
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { formatName } from "@/util/formatName";
 import { useLogout } from "@/hooks/useAuth";
-import { Spinner } from "./Spinner";
 import { toast } from "sonner";
 import { authStore } from "@/store/authStore";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 interface AccoutHeaderProps {
   id: string;
@@ -92,7 +92,7 @@ export const AccoutHeader = ({
         onClick={handleLogout}
       >
         {isLoggingOut ? (
-          <Spinner size={6} />
+          <MiniSpinner />
         ) : (
           <>
             <LogOut className="size-4 mr-1" />

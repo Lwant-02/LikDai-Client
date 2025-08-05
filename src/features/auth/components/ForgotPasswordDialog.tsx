@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useForgotPassword } from "@/hooks/useAuth";
-import { Spinner } from "./Spinner";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 interface ForgotPasswordDialogProps {
   isOpen: boolean;
@@ -104,7 +104,7 @@ export const ForgotPasswordDialog = ({
             disabled={isSendingEmail}
             className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
           >
-            {isSendingEmail ? <Spinner size={6} /> : <>Send Email</>}
+            {isSendingEmail ? <MiniSpinner /> : <>Send Email</>}
           </Button>
         </form>
       </DialogContent>

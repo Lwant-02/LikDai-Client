@@ -1,9 +1,9 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
-import { TimerSetting } from "./TimerSetting";
-import { WordsSetting } from "./WordsSetting";
-import { CustomSetting } from "./CustomSetting";
+import { TimerSetting } from "../../../components/TimerSetting";
+import { WordsSetting } from "../../../components/WordsSetting";
+import { CustomSetting } from "../../../components/CustomSetting";
 import { settingOptions } from "./DesktopTestSetting";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { Settings, Volume2, VolumeX } from "lucide-react";

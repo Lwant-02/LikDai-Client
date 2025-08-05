@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";
 import { settingStore } from "@/store/settingStore";
-import { TooltipHover } from "./TooltipHover";
+import { TooltipHover } from "../TooltipHover";
 
 const navLink = [
   {

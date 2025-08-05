@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 import { useState } from "react";
-import { CertificateSubmitDialog } from "./CertificateSubmitDialog";
+import { CertificateSubmitDialog } from "../../../components/CertificateSubmitDialog";
 import { Link } from "react-router-dom";
 
 interface AchievementProps {

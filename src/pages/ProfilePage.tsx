@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-import { ProfileHeader } from "@/components/ProfileHeader";
-import { ProfileTabs } from "@/components/ProfileTabs";
-import { ProfileStatsTab } from "@/components/ProfileStatsTab";
-import { ProfileHistoryTab } from "@/components/ProfileHistoryTab";
-import { ProfileAchievementsTab } from "@/components/ProfileAchievementTab";
+import { ProfileHeader } from "@/features/public_profile/components/ProfileHeader";
+import { ProfileTabs } from "@/features/public_profile/components/ProfileTabs";
+import { ProfileStatsTab } from "@/features/public_profile/components/ProfileStatsTab";
+import { ProfileHistoryTab } from "@/features/public_profile/components/ProfileHistoryTab";
+import { ProfileAchievementsTab } from "@/features/public_profile/components/ProfileAchievementTab";
 import { useGetPublicProfile } from "@/hooks/useProfile";
 import { settingStore } from "@/store/settingStore";
 
