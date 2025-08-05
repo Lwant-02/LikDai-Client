@@ -9,11 +9,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { Spinner } from "./Spinner";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
 import { ThankyouDialog } from "./ThankyouDialog";
 import { submitReport } from "@/service/submitReport";
+import { MiniSpinner } from "./MiniSpinner";
 
 interface ReportSummitDialogProps {
   isOpen: boolean;
@@ -108,7 +108,7 @@ export const ReportSummitDialog = ({
               disabled={isSubmitting}
               className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
             >
-              {isSubmitting ? <Spinner size={6} /> : <>Submit</>}
+              {isSubmitting ? <MiniSpinner /> : <>Submit</>}
             </Button>
           </form>
         </DialogContent>

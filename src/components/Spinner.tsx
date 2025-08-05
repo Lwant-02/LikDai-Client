@@ -1,15 +1,10 @@
-import { cn } from "@/lib/utils";
-import { LoaderCircle } from "lucide-react";
-
-interface SpinnerProps {
-  size?: number;
-  color?: string;
-}
-
-export const Spinner = ({ size = 1, color = "yellow" }: SpinnerProps) => {
+export const Spinner = () => {
   return (
-    <LoaderCircle
-      className={cn("animate-spin", `size-${size}`, `text-${color}`)}
-    />
+    <svg className="size-12 text-yellow animate-spin" viewBox="0 0 24 24">
+      <path
+        fill="currentColor"
+        d="M6 2v6h.01L12 12l5.99-4H18V2H6zm0 20h12v-6h-.01L12 12l-5.99 4H6v6z"
+      />
+    </svg>
   );
 };

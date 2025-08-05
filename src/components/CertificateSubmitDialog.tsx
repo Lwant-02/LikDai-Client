@@ -9,10 +9,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { Spinner } from "./Spinner";
 import { cn } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { useSubmitCertificate } from "@/hooks/useUser";
+import { MiniSpinner } from "./MiniSpinner";
 
 interface CertificateSubmitDialogProps {
   isOpen: boolean;
@@ -104,7 +104,7 @@ export const CertificateSubmitDialog = ({
               disabled={isSubmittingCertificate}
               className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
             >
-              {isSubmittingCertificate ? <Spinner size={6} /> : <>Submit</>}
+              {isSubmittingCertificate ? <MiniSpinner /> : <>Submit</>}
             </Button>
           </form>
         </DialogContent>

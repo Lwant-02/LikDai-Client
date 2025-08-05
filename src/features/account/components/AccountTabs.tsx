@@ -1,10 +1,19 @@
-import { History, Award, BarChart3 } from "lucide-react";
+import { User, Settings, History, Award, BarChart3 } from "lucide-react";
 
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
+
+interface AccountTabsProps {
+  activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
+}
 
 const tabs = [
+  {
+    id: "profile",
+    label: "Profile",
+    icon: <User className="size-4" />,
+  },
   {
     id: "stats",
     label: "Stats",
@@ -20,10 +29,14 @@ const tabs = [
     label: "Achievements",
     icon: <Award className="size-4" />,
   },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: <Settings className="size-4" />,
+  },
 ];
 
-export const ProfileTabs = () => {
-  const { profileAciveTab, setProfileAciveTab } = settingStore();
+export const AccountTabs = ({ activeTab, setActiveTab }: AccountTabsProps) => {
   return (
     <div className="flex overflow-x-auto mb-6 pb-2 gap-2 ">
       {tabs.map((tab) => (
@@ -32,11 +45,11 @@ export const ProfileTabs = () => {
           variant="ghost"
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer",
-            profileAciveTab === tab.id
+            activeTab === tab.id
               ? "bg-foreground text-yellow"
               : "hover:bg-foreground/50"
           )}
-          onClick={() => setProfileAciveTab(tab.id as TabType)}
+          onClick={() => setActiveTab(tab.id as TabType)}
         >
           {tab.icon}
           <span>{tab.label}</span>

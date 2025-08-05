@@ -3,10 +3,10 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
-import { Button } from "./ui/button";
-import { InputFiled } from "./InputFiled";
+import { Button } from "../../../components/ui/button";
+import { InputFiled } from "../../../components/InputFiled";
 import { useRegister } from "@/hooks/useAuth";
-import { Spinner } from "./Spinner";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 interface FormData {
   username: string;
@@ -123,7 +123,7 @@ export const RegisterForm = () => {
         className="h-10 mt-3 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base transition-colors duration-200 "
       >
         {isRegistering ? (
-          <Spinner size={6} />
+          <MiniSpinner />
         ) : (
           <>
             <UserPlusIcon className="size-5 bg-transparent" />

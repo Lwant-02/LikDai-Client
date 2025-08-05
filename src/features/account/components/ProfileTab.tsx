@@ -2,12 +2,12 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Edit, Save, X, Settings } from "lucide-react";
 
-import { Button } from "./ui/button";
-import { InputFiled } from "./InputFiled";
+import { Button } from "../../../components/ui/button";
+import { InputFiled } from "../../../components/InputFiled";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 import { useUpdateBio, useUpdateUsername } from "@/hooks/useUser";
-import { Spinner } from "./Spinner";
 import { queryClient } from "@/lib/queryClient";
+import { MiniSpinner } from "../../../components/MiniSpinner";
 
 interface ProfileTabProps {
   username: string;
@@ -179,7 +179,7 @@ export const ProfileTab = ({
               className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-32"
             >
               {isUpdatingUsername || isUpdatingBio ? (
-                <Spinner size={6} />
+                <MiniSpinner />
               ) : (
                 <>
                   <Save className="size-4 " />

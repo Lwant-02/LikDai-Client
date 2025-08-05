@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { InputFiled } from "@/components/InputFiled";
 import { useChangePassword } from "@/hooks/useAuth";
-import { Spinner } from "@/components/Spinner";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 interface FormData {
   newPassword: string;
@@ -162,7 +162,7 @@ export const ChangePasswordPage = () => {
             className="mt-3 h-10 rounded-lg text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
           >
             {isChangingPassword ? (
-              <Spinner size={6} />
+              <MiniSpinner />
             ) : (
               <>
                 <RotateCcwKey className="size-5 bg-transparent -rotate-90" />

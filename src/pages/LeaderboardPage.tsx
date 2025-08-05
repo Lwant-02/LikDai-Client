@@ -3,10 +3,10 @@ import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-import { LeaderboardPagination } from "@/components/LeaderboardPagination";
-import { LeaderboardHeader } from "@/components/LeaderboardHeader";
-import { LeaderboardFilter } from "@/components/LeaderboardFilter";
-import { LeaderboardTable } from "@/components/LeaderboardTable";
+import { LeaderboardPagination } from "@/features/Leaderboard/components/LeaderboardPagination";
+import { LeaderboardHeader } from "@/features/Leaderboard/components/LeaderboardHeader";
+import { LeaderboardFilter } from "@/features/Leaderboard/components/LeaderboardFilter";
+import { LeaderboardTable } from "@/features/Leaderboard/components/LeaderboardTable";
 import { useGetLeaderboard } from "@/hooks/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
 
@@ -89,7 +89,7 @@ export const LeaderboardPage = () => {
 
           {isFetchingLeaderboard ? (
             <div className="w-full flex justify-center items-center h-52">
-              <Spinner size={14} />
+              <Spinner />
             </div>
           ) : (
             <>

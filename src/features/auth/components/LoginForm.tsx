@@ -3,13 +3,13 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
-import { InputFiled } from "./InputFiled";
+import { InputFiled } from "../../../components/InputFiled";
 import { useLogin } from "@/hooks/useAuth";
-import { Spinner } from "./Spinner";
 import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
+import { MiniSpinner } from "@/components/MiniSpinner";
 
 type FormData = {
   email: string;
@@ -114,7 +114,7 @@ export const LoginForm = () => {
           className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingIn ? (
-            <Spinner size={6} />
+            <MiniSpinner />
           ) : (
             <>
               <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90 " />
