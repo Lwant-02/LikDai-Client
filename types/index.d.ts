@@ -8,6 +8,14 @@ type TabType = "profile" | "stats" | "history" | "achievements" | "settings";
 
 type Level = "easy" | "hard";
 
+type LessonLevel =
+  | "beginner"
+  | "intermediate"
+  | "advanced"
+  | "words"
+  | "quotes"
+  | "music";
+
 enum AchievementCategory {
   speed = "speed",
   accuracy = "accuracy",

@@ -44,7 +44,7 @@ export const NotFoundPage = () => {
   return (
     <>
       <Helmet>
-        <title>404 | LikDai - Pro</title>
+        <title>404 | LikDai</title>
         <meta name="description" content="Page not found for LikDai - Pro." />
       </Helmet>
 

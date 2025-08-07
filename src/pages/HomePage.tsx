@@ -33,7 +33,7 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>LikDai - Pro | Master Shan Typing</title>
+        <title>LikDai | Master Shan Typing</title>
         <meta
           name="description"
           content="Start mastering Shan typing with LikDai Pro."
@@ -52,14 +52,7 @@ export function HomePage() {
           className="z-10 flex flex-col items-center"
         >
           <div className="flex gap-2 justify-center items-center">
-            <img
-              src="/svg/Logo.svg"
-              alt="Logo"
-              className="size-16 sm:size-20 object-cover inline-block mb-4"
-            />
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-              LikDai - Pro
-            </h1>
+            <h1 className="text-4xl sm:text-6xl font-bold mb-4">LikDai</h1>
           </div>
 
           <motion.div

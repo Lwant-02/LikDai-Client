@@ -54,7 +54,7 @@ export const CertificatePage = () => {
   return (
     <>
       <Helmet>
-        <title>Certificate | LikDai - Pro</title>
+        <title>Certificate | LikDai</title>
         <meta
           name="description"
           content="Download your certificate of achievement."
@@ -114,13 +114,13 @@ export const CertificatePage = () => {
             {/* Header with Logo */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4 md:mb-6">
               <img
-                src="/svg/Logo.svg"
-                alt="LikDai-Pro Logo"
+                src="/images/Logo.png"
+                alt="LikDai Logo"
                 className="h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 object-contain"
               />
               <div className="text-center sm:text-left">
                 <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-blue">
-                  LikDai-Pro
+                  LikDai
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-600">
                   Shan Typing Excellence
@@ -172,7 +172,7 @@ export const CertificatePage = () => {
               <div className="text-center order-2">
                 <div className="w-16 sm:w-24 md:w-32 h-0.5 bg-gray-400 mb-1 md:mb-2 mx-auto" />
                 <p className="text-xs sm:text-sm font-semibold text-blue">
-                  LikDai-Pro Team
+                  LikDai Team
                 </p>
                 <p className="text-xs text-gray-600">Digital Signature</p>
               </div>

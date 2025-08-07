@@ -1,17 +1,17 @@
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface LeaderboardPaginationProps {
+interface LessonPaginationProps {
   currentPage: number;
   setCurrentPage: (page: number) => void;
   totalPages: number;
 }
 
-export const LeaderboardPagination = ({
+export const LessonPagination = ({
   currentPage,
   setCurrentPage,
   totalPages,
-}: LeaderboardPaginationProps) => {
+}: LessonPaginationProps) => {
   return (
     <div className="flex justify-center items-center gap-2 sm:gap-4 mt-6">
       <button
@@ -29,7 +29,7 @@ export const LeaderboardPagination = ({
 
       <div className="flex items-center gap-1 sm:gap-2">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-          //  show limited page numbers
+          // show limited page numbers
           if (
             page === 1 ||
             page === totalPages ||

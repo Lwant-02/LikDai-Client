@@ -45,7 +45,7 @@ export const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About | LikDai - Pro</title>
+        <title>About | LikDai</title>
         <meta
           name="description"
           content="About LikDai - Pro, the ultimate Shan typing app."
@@ -78,8 +78,8 @@ export const AboutPage = () => {
               className="text-lg opacity-80 mb-8 max-w-2xl mx-auto"
             >
               Join thousands of users who are already mastering Shan typing with
-              LikDai-Pro. It's completely free and designed to help you type
-              faster and more accurately.
+              LikDai. It's completely free and designed to help you type faster
+              and more accurately.
             </motion.p>
 
             <motion.div variants={itemVariants}>

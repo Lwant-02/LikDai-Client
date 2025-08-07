@@ -18,7 +18,7 @@ export const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title>Login | LikDai - Pro</title>
+        <title>Login | LikDai</title>
         <meta
           name="description"
           content="Login to your LikDai - Pro account."

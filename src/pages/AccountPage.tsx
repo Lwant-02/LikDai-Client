@@ -30,7 +30,7 @@ export const AccountPage = () => {
   return (
     <>
       <Helmet>
-        <title>Account | LikDai - Pro</title>
+        <title>Account | LikDai</title>
         <meta
           name="description"
           content="Manage your account settings and view your profile."
