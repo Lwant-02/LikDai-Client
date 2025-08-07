@@ -115,14 +115,7 @@ export const AboutEngSection = ({
           className="z-20 text-center px-4"
         >
           <div className="flex gap-2 justify-center items-center">
-            <img
-              src="/svg/Logo.svg"
-              alt="Logo"
-              className="size-16 sm:size-20 object-cover inline-block mb-4"
-            />
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-              LikDai - Pro
-            </h1>
+            <h1 className="text-4xl sm:text-6xl font-bold mb-4">LikDai</h1>
           </div>
           <p className="text-xl sm:text-2xl opacity-80 max-w-2xl mx-auto">
             Master Shan Typing with Precision and Speed
@@ -155,7 +148,7 @@ export const AboutEngSection = ({
             </div>
             <div className="h-1 w-24 bg-gradient-to-r from-yellow to-orange mx-auto mb-6 rounded-full" />
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              LikDai-Pro is proudly open source. Join our community and help us
+              LikDai is proudly open source. Join our community and help us
               build the future of Shan language typing education.
             </p>
           </motion.div>
@@ -168,7 +161,7 @@ export const AboutEngSection = ({
               </h2>
             </div>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              LikDai-Pro is built in honor of{" "}
+              LikDai is built in honor of{" "}
               <span className="text-yellow">Child Laborers Day</span>, organized
               by Team{" "}
               <a
@@ -196,11 +189,11 @@ export const AboutEngSection = ({
               </h3>
               <div className="prose prose-lg dark:prose-invert mx-auto">
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6">
-                  LikDai-Pro is a specialized typing platform designed to help
-                  users master Shan language typing. Inspired by MonkeyType,
-                  we've created a clean, distraction-free environment where you
-                  can practice and improve your typing skills in both English
-                  and Shan languages.
+                  LikDai is a specialized typing platform designed to help users
+                  master Shan language typing. Inspired by MonkeyType, we've
+                  created a clean, distraction-free environment where you can
+                  practice and improve your typing skills in both English and
+                  Shan languages.
                 </p>
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed">
                   Our mission is to preserve and promote the Shan language
@@ -391,7 +384,7 @@ export const AboutEngSection = ({
           {/* GitHub CTA */}
           <motion.div variants={itemVariants} className="text-center">
             <div className="bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 md:p-12 border border-gray-700">
-              <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="flex md:flex-row flex-col items-center justify-center gap-4 mb-6">
                 <svg
                   className="w-12 h-12 text-white"
                   fill="currentColor"
@@ -405,7 +398,7 @@ export const AboutEngSection = ({
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Star our repository, report issues, or submit pull requests.
-                Every contribution helps make LikDai-Pro better for everyone.
+                Every contribution helps make LikDai better for everyone.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -561,8 +554,8 @@ export const AboutEngSection = ({
             className="text-lg opacity-80 mb-8 max-w-2xl mx-auto "
           >
             If you encounter any bugs or issues or have any suggestions, please
-            share them to us. We are always looking to improve and make
-            LikDai-Pro even better for you.{" "}
+            share them to us. We are always looking to improve and make LikDai
+            even better for you.{" "}
             <span
               onClick={() => setIsSubmittingDialogOpen(true)}
               className="text-yellow cursor-pointer hover:underline"
@@ -723,7 +716,7 @@ export const AboutEngSection = ({
             className="text-lg opacity-80 max-w-2xl mx-auto "
           >
             <p>
-              We are excited to announce the latest update for LikDai-Pro. This
+              We are excited to announce the latest update for LikDai. This
               update brings several improvements and new features to enhance
               your typing experience. Thank you for your patience and support as
               we continue to develop and improve the app.

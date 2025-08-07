@@ -75,7 +75,7 @@ export const ResultPage = () => {
   return (
     <>
       <Helmet>
-        <title>Results | LikDai - Pro</title>
+        <title>Results | LikDai</title>
         <meta
           name="description"
           content="View your results and compare with others on the leaderboard."

@@ -309,7 +309,7 @@ export const TypingtestPage = () => {
   return (
     <>
       <Helmet>
-        <title>Typing Test | LikDai - Pro</title>
+        <title>Typing Test | LikDai</title>
         <meta
           name="description"
           content="Test your typing speed and accuracy with LikDai - Pro."

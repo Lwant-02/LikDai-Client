@@ -136,7 +136,7 @@ export const VerifyOtpPage = () => {
   return (
     <>
       <Helmet>
-        <title>Verify OTP | LikDai - Pro</title>
+        <title>Verify OTP | LikDai</title>
         <meta
           name="description"
           content="Verify your OTP to reset your password for LikDai - Pro."
@@ -152,7 +152,7 @@ export const VerifyOtpPage = () => {
           className="flex justify-center items-center gap-2"
         >
           <img
-            src="/svg/Logo.svg"
+            src="/images/Logo.png"
             alt="Logo"
             className="size-12 object-cover"
           />

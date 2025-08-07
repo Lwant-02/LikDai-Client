@@ -10,7 +10,7 @@ export const Footer = () => {
       className="absolute bottom-1 w-full mx-auto flex md:flex-row flex-col justify-center items-center md:gap-5 gap-1 z-10"
     >
       <p className="text-sm md:order-1 order-2">
-        &copy; {year} LikDai - Pro | All rights reserved.
+        &copy; {year} LikDai | All rights reserved.
       </p>
       <a
         className="text-sm md:order-2 order-1"

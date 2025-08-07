@@ -61,7 +61,7 @@ export const LeaderboardPage = () => {
   return (
     <>
       <Helmet>
-        <title>Leaderboards | LikDai - Pro</title>
+        <title>Leaderboards | LikDai</title>
         <meta
           name="description"
           content="Compete with others and see how you rank on the leaderboard."

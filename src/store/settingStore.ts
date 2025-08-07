@@ -16,6 +16,8 @@ interface SettingOptions {
   selectedKeyMap: KeyMapNames;
   soundEnabled: boolean;
   level: Level;
+  lessonLevel: LessonLevel;
+  setLessonLevel: (level: LessonLevel) => void;
   setLevel: (level: Level) => void;
   setSelectedKeyMap: (keyMap: KeyMapNames) => void;
   setSoundEnabled: (enabled: boolean) => void;
@@ -49,6 +51,8 @@ export const settingStore = create<SettingOptions>((set) => ({
   selectedKeyMap: "namkhone",
   level: "easy",
   soundEnabled: localStorage.getItem("soundEnabled") === "true" || false,
+  lessonLevel: "beginner",
+  setLessonLevel: (level) => set({ lessonLevel: level }),
   setLevel: (level) => set({ level }),
   setSelectedKeyMap: (keyMap) => set({ selectedKeyMap: keyMap }),
   setSoundEnabled: (enabled) => {

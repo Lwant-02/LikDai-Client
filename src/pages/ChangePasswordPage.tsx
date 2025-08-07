@@ -98,7 +98,7 @@ export const ChangePasswordPage = () => {
   return (
     <>
       <Helmet>
-        <title>Change Password | LikDai - Pro</title>
+        <title>Change Password | LikDai</title>
         <meta
           name="description"
           content="Change your password for your LikDai - Pro account."
@@ -113,7 +113,7 @@ export const ChangePasswordPage = () => {
           className="flex justify-center items-center gap-2"
         >
           <img
-            src="/svg/Logo.svg"
+            src="/images/Logo.png"
             alt="Logo"
             className="size-12 object-cover"
           />

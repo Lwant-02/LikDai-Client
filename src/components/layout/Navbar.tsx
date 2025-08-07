@@ -68,13 +68,13 @@ export const Navbar = () => {
       <div className="h-12 z-50 mx-auto w-full flex justify-between items-center ">
         <Link to="/" className="flex justify-center items-center gap-2">
           <img
-            src="/svg/Logo.svg"
+            src="/images/Logo.png"
             alt="Logo"
-            className="size-12 object-cover"
+            className="xl:size-12 size-10 object-cover xl:hidden flex"
           />
-          <p className="text-2xl font-bold md:flex hidden">LikDai - Pro</p>
+          <p className="text-2xl font-bold md:flex hidden">LikDai</p>
         </Link>
-        <div className="flex justify-center items-center gap-5 md:mr-36 mr-5">
+        <div className="flex justify-center items-center gap-5 md:mr-20 mr-5">
           {navLink.map((link) => (
             <TooltipHover tooltipText={link.name} key={link.name}>
               <Link
