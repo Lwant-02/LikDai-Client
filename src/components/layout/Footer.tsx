@@ -12,14 +12,17 @@ export const Footer = () => {
       <p className="text-sm md:order-1 order-2">
         &copy; {year} LikDai | All rights reserved.
       </p>
-      <a
-        className="text-sm md:order-2 order-1"
-        href="https://monkeytype.com/"
-        target="_blank"
-      >
-        Inspired by -{" "}
-        <strong className="text-yellow hover:underline">monkeytype</strong>
-      </a>
+      <p className="text-sm md:order-2 order-1">
+        Made with ❤️ by{" "}
+        <a
+          href="https://github.com/Lwant-02"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-yellow hover:underline"
+        >
+          Lwant
+        </a>
+      </p>
     </motion.footer>
   );
 };

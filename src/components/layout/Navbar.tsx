@@ -21,8 +21,8 @@ const navLink = [
     icon: <HomeIcon className="size-5" />,
   },
   {
-    name: "Typing Test",
-    path: "/typing-test",
+    name: "Lessons",
+    path: "/lessons",
     icon: <Keyboard className="size-5" />,
   },
   {
@@ -74,7 +74,7 @@ export const Navbar = () => {
           />
           <p className="text-2xl font-bold md:flex hidden">LikDai</p>
         </Link>
-        <div className="flex justify-center items-center gap-5 md:mr-20 mr-5">
+        <div className="flex justify-center items-center gap-5 md:mr-20 mr-1">
           {navLink.map((link) => (
             <TooltipHover tooltipText={link.name} key={link.name}>
               <Link

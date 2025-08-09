@@ -18,7 +18,7 @@ export const ResultPage = () => {
     finalConsistency,
     finalTimeTaken,
     finalCorrectCharacters,
-    finalTestType,
+    finalLevel,
     finalMode,
     finalTypedCharacters,
   } = resultStore();
@@ -40,7 +40,7 @@ export const ResultPage = () => {
       characters: finalTypedCharacters || 0,
       correct_chars: finalCorrectCharacters || 0,
       timeTaken: finalTimeTaken || 0,
-      test_type: (finalTestType || "unknown") as TestType,
+      lessonLevel: (finalLevel || "unknown") as LessonLevel,
       consistency: finalConsistency || 0,
       mode: finalMode || "eng",
     }),
@@ -52,7 +52,7 @@ export const ResultPage = () => {
       finalTimeTaken,
       finalTypedCharacters,
       finalCorrectCharacters,
-      finalTestType,
+      finalLevel,
       finalMode,
     ]
   );
@@ -118,17 +118,9 @@ export const ResultPage = () => {
             color="green"
           />
           <ResultCard
-            title="TEST"
-            value={
-              finalTestType === "words"
-                ? "Words"
-                : finalTestType === "time"
-                ? "Time"
-                : finalTestType === "quote"
-                ? "Quote"
-                : "Custom"
-            }
-            subtitle="Test Type"
+            title="LEVEL"
+            value={actualTestResults.lessonLevel}
+            subtitle="Lesson Level"
             color="orange"
             className="md:col-span-1 col-span-2"
           />
@@ -169,7 +161,7 @@ export const ResultPage = () => {
           className="opacity-70 border border-foreground py-1 px-2 mb-20 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
         >
           <RotateCcw className="size-5 rotate-40" />
-          <p>Take Another Test</p>
+          <p>Retake Test</p>
         </button>
       </article>
     </>

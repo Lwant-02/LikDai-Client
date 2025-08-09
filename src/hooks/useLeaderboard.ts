@@ -7,9 +7,15 @@ interface LeaderboardProps {
   mode: string;
   total: string;
   page: string;
+  level: string;
 }
 
-export const useGetLeaderboard = ({ mode, total, page }: LeaderboardProps) => {
+export const useGetLeaderboard = ({
+  mode,
+  total,
+  page,
+  level,
+}: LeaderboardProps) => {
   const { timeRemaining } = useNextUpdateTimer();
 
   const {
@@ -17,10 +23,10 @@ export const useGetLeaderboard = ({ mode, total, page }: LeaderboardProps) => {
     isLoading: isFetchingLeaderboard,
     refetch,
   } = useQuery<LeaderboardResponse>({
-    queryKey: ["leaderboard", mode, total, page],
+    queryKey: ["leaderboard", mode, total, page, level],
     queryFn: async () => {
       const { data } = await authAxios.get("/leaderboard/get-leaderboard", {
-        params: { mode, total, page },
+        params: { mode, total, page, level },
       });
       return data.data;
     },

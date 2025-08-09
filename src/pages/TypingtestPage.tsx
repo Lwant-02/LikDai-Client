@@ -1,50 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-import { DesktopTestSetting } from "@/features/typing/components/DesktopTestSetting";
-import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { settingStore } from "@/store/settingStore";
-import { getRandomParagraph } from "@/util/getRandomParagraph.util";
-import { getRandomWords } from "@/util/getRandomWord.util";
-import { getRandomQuote } from "@/util/getRandomQuote.util";
-import { getShanRandomParagraph } from "@/util/getShanRandomParagraph";
-import { getShanRandomWords } from "@/util/getShanRandomWord";
 import { resultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/features/typing/components/KeyboardLayout";
-import { getShanRandomQuote } from "@/util/getShanRandomQuote";
 import { TypingTest } from "@/components/TypingTest";
 import GraphemeSplitter from "grapheme-splitter";
 import { MobileMessage } from "@/features/typing/components/MobileMessage";
-import { LanguageMode } from "@/features/typing/components/LanguageMode";
-import { TimeWords } from "@/features/typing/components/TimeWords";
 import { TypingToggleButtons } from "@/features/typing/components/TypingToggleButtons";
 import { Information } from "@/components/Information";
-import { LevelMode } from "@/features/typing/components/LevelMode";
-import { getRandomLetter } from "@/util/getRandomLetter";
-import { getShanRandomLetter } from "@/util/getShanRandomLetter";
-// import { MobileTestSetting } from "@/components/MobileTestSetting"; //Remove in small screen
-// import { TypingTestCopy } from "@/components/TypingTestCopy"; //Use to test
+import { LessonGuide } from "@/features/typing/components/LessonGuide";
+import { useTimer } from "@/hooks/useTimer";
+import { DesktopTestSetting } from "@/features/typing/components/DesktopTestSetting";
+import { TimeWords } from "@/features/typing/components/TimeWords";
 
 export const TypingtestPage = () => {
   const {
-    selectedSetting,
-    selectedTimer,
-    selectedWords,
     mode,
-    customText,
     userInput,
-    setUserInput,
-    startTime,
-    endTime,
     wpmPerSecond,
-    setStartTime,
-    setEndTime,
     setWpmPerSecond,
-    level,
+    lessonLevel,
+    targetText,
+    setUserInput,
   } = settingStore();
   const {
     setFinalWpm,
@@ -53,18 +35,16 @@ export const TypingtestPage = () => {
     setFinalConsistency,
     setFinalTimeTaken,
     setFinalCorrectCharacters,
-    setFinalTestType,
+    setFinalLevel,
     setFinalMode,
     setFinalTypedCharacters,
   } = resultStore();
 
-  const { secondsLeft, resetTimer, startTimer, isRunning } =
-    useCountdownTimer(selectedTimer);
-  const [targetText, setTargetText] = useState<string>("");
+  const { isRunning, startTimer, seconds, stopTimer } = useTimer();
+  const [startTime, setStartTime] = useState<number | null>(null);
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(true);
   const navigate = useNavigate();
-  const hasSetEndTimeRef = useRef(false);
   const correctCharCount = calculateCorrectChars(
     userInput.replace(/\s/g, ""),
     targetText.replace(/\s/g, "")
@@ -72,8 +52,6 @@ export const TypingtestPage = () => {
 
   // Calculate current and next characters for keyboard highlighting
   const splitter = new GraphemeSplitter();
-  // For keyboard highlighting, we need to use GraphemeSplitter to get proper graphemes
-  // But for text display consistency, we use simple character splitting
   const targetUnitsForKeyboard =
     mode === "shan"
       ? targetText.split("")
@@ -86,7 +64,6 @@ export const TypingtestPage = () => {
   const currentGrapheme = targetUnitsForKeyboard[currentCharIndex] || "";
 
   // Extract the base character for keyboard highlighting
-  // For complex graphemes, we want to highlight the first/base character
   const getBaseCharForKeyboard = (grapheme: string): string => {
     if (!grapheme) return "";
 
@@ -104,37 +81,6 @@ export const TypingtestPage = () => {
   };
 
   const currentChar = getBaseCharForKeyboard(currentGrapheme);
-
-  //Generate random text based on selected setting
-  const generateText = useCallback(() => {
-    let newText = "";
-    switch (selectedSetting) {
-      case "time":
-        if (level === "easy") {
-          newText = mode === "eng" ? getRandomLetter() : getShanRandomLetter();
-        } else {
-          newText =
-            mode === "eng" ? getRandomParagraph() : getShanRandomParagraph();
-        }
-        break;
-      case "words":
-        newText =
-          mode === "eng"
-            ? getRandomWords(selectedWords)
-            : getShanRandomWords(selectedWords);
-        break;
-      case "quote":
-        newText = mode === "eng" ? getRandomQuote() : getShanRandomQuote();
-        break;
-      case "custom":
-        newText = customText;
-        break;
-      default:
-        newText =
-          mode === "eng" ? getRandomParagraph() : getShanRandomParagraph();
-    }
-    setTargetText(newText);
-  }, [selectedSetting, selectedWords, mode, customText, level]);
 
   //Count total typed words
   useEffect(() => {
@@ -157,34 +103,9 @@ export const TypingtestPage = () => {
     setTotalTypedWords(currentWordCount);
   }, [userInput, targetText]);
 
-  // Regenerate new text
-  useEffect(() => {
-    generateText();
-    resetTimer();
-    setUserInput("");
-    setTotalTypedWords(0);
-    setStartTime(null);
-    setEndTime(null);
-    setWpmPerSecond([]);
-  }, [
-    selectedSetting,
-    selectedWords,
-    mode,
-    customText,
-    selectedTimer,
-    generateText,
-    resetTimer,
-    setUserInput,
-    setTotalTypedWords,
-    setStartTime,
-    setEndTime,
-    setWpmPerSecond,
-    level,
-  ]);
-
   //Track wpm per second
   useEffect(() => {
-    if (!startTime || endTime) {
+    if (!seconds || !startTime) {
       setWpmPerSecond([]);
       return;
     }
@@ -200,111 +121,58 @@ export const TypingtestPage = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [startTime, endTime, correctCharCount, setWpmPerSecond]);
-
-  //Track start and end time only if the mode is not time
-  useEffect(() => {
-    if (!startTime && userInput.length === 1) {
-      setStartTime(Date.now());
-      if (selectedSetting === "time") {
-        startTimer();
-      }
-    }
-  }, [selectedSetting, userInput.length, startTime, setStartTime, startTimer]);
+  }, [seconds, correctCharCount, setWpmPerSecond]);
 
   //Navigate to result page
   useEffect(() => {
-    if (hasSetEndTimeRef.current) return;
-
-    let shouldNavigate = false;
-    let finalWordsForDisplay = 0;
-
-    switch (selectedSetting) {
-      case "time":
-        finalWordsForDisplay = targetText.split(" ").length;
-        if (
-          secondsLeft === 0 ||
-          (totalTypedWords >= finalWordsForDisplay && targetText.length > 0)
-        ) {
-          shouldNavigate = true;
-        }
-        break;
-      case "words":
-        finalWordsForDisplay = selectedWords;
-        if (totalTypedWords >= selectedWords) {
-          shouldNavigate = true;
-        }
-        break;
-      case "quote":
-      case "custom":
-        finalWordsForDisplay = targetText.split(" ").length;
-        if (totalTypedWords >= finalWordsForDisplay && targetText.length > 0) {
-          shouldNavigate = true;
-        }
-        break;
-    }
-
-    if (shouldNavigate) {
-      hasSetEndTimeRef.current = true;
-
-      const actualEndTime = Date.now();
-      setEndTime(actualEndTime);
-
-      const safeStartTime = startTime || actualEndTime;
+    if (
+      targetText.length > 0 &&
+      totalTypedWords >= targetText.split(" ").length
+    ) {
+      stopTimer();
       const totalTypedChars = userInput.replace(/\s/g, "").length;
-
       const stats = calculateFinalResult({
         correctCharCount,
         totalTypedChars,
-        startTime: safeStartTime,
-        endTime: actualEndTime,
         wpmPerSecond,
+        durationInMs: seconds * 1000,
       });
 
       setFinalWpm(stats.wpm);
       setFinalAccuracy(stats.accuracy);
       setFinalRawWpm(stats.rawWpm);
       setFinalConsistency(stats.consistency);
-      setFinalTimeTaken(
-        selectedSetting === "time" ? stats.timeTaken + 1 : stats.timeTaken
-      );
+      setFinalTimeTaken(stats.timeTaken);
       setFinalCorrectCharacters(correctCharCount);
-      setFinalTestType(selectedSetting);
+      setFinalLevel(lessonLevel);
       setFinalMode(mode);
       setFinalTypedCharacters(totalTypedChars);
 
       navigate("/results");
+
+      setUserInput("");
+      setTotalTypedWords(0);
     }
   }, [
-    secondsLeft,
     totalTypedWords,
-    selectedSetting,
-    selectedWords,
     targetText,
     navigate,
-    startTime,
     wpmPerSecond,
     correctCharCount,
-    setEndTime,
     setFinalWpm,
     setFinalAccuracy,
     setFinalRawWpm,
     setFinalConsistency,
     setFinalTimeTaken,
     setFinalCorrectCharacters,
-    setFinalTestType,
+    setFinalLevel,
   ]);
 
-  //Restart test
-  const handleRestartTest = () => {
-    generateText();
-    resetTimer();
-    setUserInput("");
-    setTotalTypedWords(0);
-    setStartTime(null);
-    setEndTime(null);
-    setWpmPerSecond([]);
-  };
+  useEffect(() => {
+    if (!targetText) {
+      navigate("/lessons");
+    }
+  }, [targetText, navigate]);
 
   return (
     <>
@@ -312,49 +180,55 @@ export const TypingtestPage = () => {
         <title>Typing Test | LikDai</title>
         <meta
           name="description"
-          content="Test your typing speed and accuracy with LikDai - Pro."
+          content="Test your typing speed and accuracy with LikDai"
         />
       </Helmet>
       <article className="w-full h-full flex flex-col gap-4 items-center ">
-        <div className="w-auto mt-5 h-auto flex justify-center flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex justify-center items-center gap-10 w-auto"
-          >
-            <LanguageMode />
-            <LevelMode />
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="w-auto mt-5 h-auto flex justify-center gap-16 items-center "
+        >
+          <div className="hidden xl:flex gap-5">
+            <h3 className="text-base capitalize text-yellow">
+              Level - {lessonLevel}
+            </h3>
+            <p className="text-base capitalize text-yellow">
+              Language - {mode === "eng" ? "English" : "Shan"}
+            </p>
+          </div>
           <DesktopTestSetting />
-        </div>
+          <LessonGuide />
+        </motion.div>
         <div className="w-full h-auto flex flex-col justify-center items-center ">
-          <TimeWords
-            secondsLeft={secondsLeft}
-            totalTypedWords={totalTypedWords}
-            targetText={targetText}
-          />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="xl:h-[140px] h-auto w-full xl:overflow-hidden  flex justify-center items-center "
+            className="xl:h-[140px] h-auto w-full xl:overflow-hidden mb-1 flex justify-center items-center "
           >
             <TypingTest
+              setStartTime={setStartTime}
+              targetText={targetText}
               isRunning={isRunning}
               startTimer={startTimer}
-              targetText={targetText}
             />
             {/* Mobile Message */}
             <MobileMessage />
           </motion.div>
+          <TimeWords
+            seconds={seconds}
+            totalTypedWords={totalTypedWords}
+            targetText={targetText}
+          />
 
-          {/* Restart and Keyboard Toggle Button */}
+          {/* Keyboard Toggle Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16  gap-1"
+            className="w-full flex justify-center items-center flex-col absolute md:bottom-8 bottom-16  gap-2"
           >
             {isKeyboardVisible && (
               <motion.div
@@ -368,7 +242,6 @@ export const TypingtestPage = () => {
               </motion.div>
             )}
             <TypingToggleButtons
-              handleRestartTest={handleRestartTest}
               isKeyboardVisible={isKeyboardVisible}
               setIsKeyboardVisible={setIsKeyboardVisible}
             />

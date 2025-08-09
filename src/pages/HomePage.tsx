@@ -1,33 +1,11 @@
-import { MoveRight, Keyboard, Award, BarChart, Globe } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
-
-const featureCards = [
-  {
-    icon: <Globe className="size-5 text-yellow" />,
-    title: "Bilingual Support",
-    description: "Practice in English & Shan",
-  },
-  {
-    icon: <Award className="size-5 text-green" />,
-    title: "Track Progress",
-    description: "Monitor your improvement",
-  },
-  {
-    icon: <BarChart className="size-5 text-blue" />,
-    title: "Leaderboards",
-    description: "Compete with others",
-  },
-  {
-    icon: <Keyboard className="size-5 text-orange" />,
-    title: "Keyboards Support",
-    description: "Support 4 Shan Keyboards",
-  },
-];
+import Logomarquee from "@/components/MarqueeScroller";
 
 export function HomePage() {
   return (
@@ -81,30 +59,8 @@ export function HomePage() {
             />
           </motion.div>
 
-          {/* Feature cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid md:grid-cols-4 grid-cols-2 gap-2 mt-4 mb-8 max-w-4xl"
-          >
-            {featureCards.map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-foreground/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center text-center"
-              >
-                <div className="bg-background/30 p-2 rounded-full mb-3">
-                  {feature.icon}
-                </div>
-                <h3 className="font-bold text-sm md:text-base mb-1">
-                  {feature.title}
-                </h3>
-                <p className="text-xs md:text-sm opacity-70">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </motion.div>
+          {/* Marquee */}
+          <Logomarquee />
 
           {/* CTA Button */}
           <motion.div
@@ -114,7 +70,7 @@ export function HomePage() {
             className="relative"
           >
             <Link
-              to="/typing-test"
+              to="/lessons"
               className="flex gap-3 justify-center items-center  border border-yellow/70 rounded-full py-2 hover:bg-yellow/10 transition-colors duration-200 cursor-pointer px-6"
             >
               <p className="text-sm md:text-base ">Start Typing Now</p>

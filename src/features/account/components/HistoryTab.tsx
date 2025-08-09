@@ -37,6 +37,9 @@ export const HistoryTab = () => {
               <th className="text-left py-2 px-4 font-medium opacity-70">
                 Language
               </th>
+              <th className="text-left py-2 px-4 font-medium opacity-70">
+                Level
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +68,9 @@ export const HistoryTab = () => {
                     />
                     <span>{test.mode === "eng" ? "English" : "Shan"}</span>
                   </div>
+                </td>
+                <td className="py-3 px-4 font-medium text-yellow capitalize">
+                  {test.lessonLevel}
                 </td>
               </tr>
             ))}

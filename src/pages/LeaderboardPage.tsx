@@ -15,15 +15,19 @@ export const LeaderboardPage = () => {
   const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
   const page = searchParams.get("page") || "1";
+  const level = searchParams.get("level") || "beginner";
   const { leaderboard, isFetchingLeaderboard } = useGetLeaderboard({
     mode,
     total,
     page,
+    level,
   });
   const isLeaderboardhas = leaderboard.leaderboard.length > 0;
 
   // State for filters
   const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("shan");
+  const [lessonLevelFilter, setLessonLevelFilter] =
+    useState<LessonLevel>("beginner");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,17 +50,27 @@ export const LeaderboardPage = () => {
     const hasMode = searchParams.has("mode");
     const hasTotal = searchParams.has("total");
     const hasPage = searchParams.has("page");
+    const hasLevel = searchParams.has("level");
 
-    if (!hasMode || !hasTotal || !hasPage) {
-      setSearchParams({ mode, total, page });
+    if (!hasMode || !hasTotal || !hasPage || !hasLevel) {
+      setSearchParams({ mode, total, page, level });
     } else {
       setSearchParams({
         mode: languageFilter,
         total,
         page: currentPage.toString(),
+        level: lessonLevelFilter,
       });
     }
-  }, [mode, total, page, searchParams, languageFilter, currentPage]);
+  }, [
+    mode,
+    total,
+    page,
+    searchParams,
+    languageFilter,
+    currentPage,
+    lessonLevelFilter,
+  ]);
 
   return (
     <>
@@ -79,6 +93,8 @@ export const LeaderboardPage = () => {
 
           {/* Filters - Responsive layout */}
           <LeaderboardFilter
+            lessonLevelFilter={lessonLevelFilter}
+            setLessonLevelFilter={setLessonLevelFilter}
             languageFilter={languageFilter}
             setLanguageFilter={setLanguageFilter}
           />

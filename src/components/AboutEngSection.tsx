@@ -7,8 +7,8 @@ import {
   Bug,
   UserCog,
   Handshake,
-  Rocket,
   Globe,
+  // CloudDownload,
 } from "lucide-react";
 
 import {
@@ -16,22 +16,22 @@ import {
   developerContacts,
   githubBackendRepoUrl,
   githubFrontendRepoUrl,
-  releseDate,
   supporterContacts,
 } from "@/constant";
 import { containerVariants, itemVariants } from "@/pages/AboutPage";
+import { FeatureCard } from "./FeatureCard";
 
 const timelineItems = [
   {
-    title: "လိူၵ်ႈ test ဢၼ်သူၼ်ၸႂ်",
-    description:
-      "လိူၵ်ႈၼႂ်းၵႄႈ လွင်ႈထတ်းသၢင်ၶၢဝ်းယၢမ်း၊ လွင်ႈၼပ်ႉၶေႃႈၵႂၢမ်း၊ ၵႂၢမ်းၵပ်းထုၵ်ႇ ဢမ်ႇၼၼ် တႅမ်ႈသႂ်ႇႁင်းၶေႃ။",
+    title: "လိူၵ်ႈၽႃႇသႃႇ",
+    description: "လိူၵ်ႈၼႂ်းၵႄႈ လိၵ်ႈတႆး လႄႈ လိၵ်ႈဢိင်းၵလဵတ်ႈ",
     icon: <span className="text-xl font-bold">1</span>,
     color: "bg-blue/20 text-blue",
   },
   {
-    title: "လိူၵ်ႈၽႃႇသႃႇ",
-    description: "လိူၵ်ႈၼႂ်းၵႄႈ လိၵ်ႈတႆး လႄႈ လိၵ်ႈဢိင်းၵလဵတ်ႈ",
+    title: "လိူၵ်ႈၸၼ်ႉ",
+    description:
+      "လိူၵ်ႈၼႂ်းၵႄႈ ၸၼ်ႉ Beginner, Intermediate, Advanced, Quotes, Music",
     icon: <span className="text-xl font-bold">2</span>,
     color: "bg-yellow/20 text-yellow",
   },
@@ -64,16 +64,16 @@ const timelineItems = [
   },
 ];
 
-const keyfeatures = [
+export const keyfeatures = [
   {
     title: "Bilingual Support",
     description: "Practice typing in both English and Shan languages.",
     icon: <Globe className="size-7 text-yellow" />,
   },
   {
-    title: "Multiple Test Modes",
+    title: "Multiple Typing Lessons",
     description:
-      "Choose from timed tests, word count challenges, quotes, or create your own custom typing exercises.",
+      "Practice typing with various lessons such as beginner, intermediate, advanced, quotes, and music.",
     icon: <Quote className="size-7 text-purple rotate-180" />,
   },
   {
@@ -94,6 +94,12 @@ const keyfeatures = [
       "Support 4 Shan Keyboards (Namkhone, Panglong, Yunghkio, Sil) and English Keyboard.",
     icon: <Keyboard className="size-7 text-orange" />,
   },
+  // {
+  //   title: "Progressive Web App",
+  //   description:
+  //     "Download the app and use it offline. No internet connection required",
+  //   icon: <CloudDownload className="size-7 text-red" />,
+  // },
 ];
 
 export const AboutEngSection = ({
@@ -204,11 +210,11 @@ export const AboutEngSection = ({
               </div>
               <div className="prose prose-lg dark:prose-invert mx-auto mt-3">
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6 font-secondary">
-                  LikDai–Pro ၼႆႉၶူင်ႊသၢင်ႈဝႆႉ တႃႇပဵၼ်လွင်ႈၵမ်ႉထႅမ်
+                  LikDai ၼႆႉၶူင်ႊသၢင်ႈဝႆႉ တႃႇပဵၼ်လွင်ႈၵမ်ႉထႅမ်
                   ၼႂ်းၵၢၼ်ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး ႁႂ်ႈလူင်ႉလႅၼ်ႇ လႄႈ လႅတ်းၽႆးယဝ်ႉ။
-                  ငဝ်ႈတိုၼ်း LikDai–Pro ၼႆႉဢိင်ဢဝ်တီႈ MonkeyType
+                  ငဝ်ႈတိုၼ်း LikDai ၼႆႉဢိင်ဢဝ်တီႈ MonkeyType
                   သေၶူင်ႊသၢင်ႈပဵၼ်မႃးယဝ်ႉ၊ ပီႈၼွင်ႉႁဝ်း ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး လႄႈ
-                  လိၵ်ႈဢိင်းၵလဵတ်ႈ ၼႂ်း LikDai–Pro ၼႆႉလႆႈယဝ်ႉဢေႃႈ။
+                  လိၵ်ႈဢိင်းၵလဵတ်ႈ ၼႂ်း LikDai ၼႆႉလႆႈယဝ်ႉဢေႃႈ။
                 </p>
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed font-secondary">
                   ယိူင်းဢၢၼ်းႁဝ်းၶႃႈတႄႉ တႃႇထိင်းသိမ်း လႄႈ ယုၵ်ႉမုၼ်း လိၵ်ႈတႆး
@@ -459,17 +465,12 @@ export const AboutEngSection = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 ">
             {keyfeatures.map((feautre) => (
-              <motion.div
-                variants={itemVariants}
+              <FeatureCard
                 key={feautre.title}
-                className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
-              >
-                <div className="bg-yellow/10 size-14 rounded-lg flex items-center justify-center mb-4">
-                  {feautre.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{feautre.title}</h3>
-                <p className="opacity-80">{feautre.description}</p>
-              </motion.div>
+                icon={feautre.icon}
+                title={feautre.title}
+                description={feautre.description}
+              />
             ))}
           </div>
         </motion.div>
@@ -690,37 +691,6 @@ export const AboutEngSection = ({
                 </a>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Release Announcement Section */}
-      <section className="px-4 pb-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <motion.h2
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl font-bold mb-6 "
-          >
-            Release Announcement - {releseDate} (Latest){" "}
-            <Rocket className="inline-block size-7" />
-          </motion.h2>
-
-          <motion.div
-            variants={itemVariants}
-            className="text-lg opacity-80 max-w-2xl mx-auto "
-          >
-            <p>
-              We are excited to announce the latest update for LikDai. This
-              update brings several improvements and new features to enhance
-              your typing experience. Thank you for your patience and support as
-              we continue to develop and improve the app.
-            </p>
           </motion.div>
         </motion.div>
       </section>

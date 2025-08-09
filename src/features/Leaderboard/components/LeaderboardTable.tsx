@@ -22,7 +22,7 @@ export const LeaderboardTable = ({
       className="w-full bg-foreground/5 rounded-lg overflow-hidden"
     >
       {/* Table header - Responsive grid */}
-      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 py-3 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
+      <div className="grid grid-cols-4 xl:grid-cols-9 py-3 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
         <div className="col-span-2 flex items-center gap-2">
           <Users className="size-4 opacity-70" />
           <span>User</span>
@@ -31,11 +31,12 @@ export const LeaderboardTable = ({
           <BarChart2 className="size-4 opacity-70" />
           <span>WPM</span>
         </div>
-        <div className="hidden sm:block">Accuracy</div>
-        <div className="hidden md:block">Raw</div>
-        <div className="hidden md:block">Consistency</div>
-        <div>Tests</div>
-        <div className="hidden md:block">Date</div>
+        <div className="hidden sm:flex">Accuracy</div>
+        <div className="hidden md:flex">Raw</div>
+        <div className="hidden md:flex">Consistency</div>
+        <div className="flex">Tests</div>
+        <div className="hidden sm:flex">Level</div>
+        <div className="hidden md:flex">Date</div>
       </div>
       <Separator />
 
@@ -45,7 +46,7 @@ export const LeaderboardTable = ({
           <div key={index}>
             <div
               className={cn(
-                "grid grid-cols-4 justify-center items-center sm:grid-cols-5 md:grid-cols-8 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
+                "grid grid-cols-4 justify-center items-center  xl:grid-cols-9 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
                 entry.rank === 1 && "bg-yellow/10",
                 entry.rank === 2 && "bg-blue/10",
                 entry.rank === 3 && "bg-green/10"
@@ -89,6 +90,9 @@ export const LeaderboardTable = ({
               <div className="hidden md:block">{entry.raw}</div>
               <div className="hidden md:block">{entry.consistency}%</div>
               <div>{entry.tests_completed}</div>
+              <div className="hidden md:block capitalize">
+                {entry.lessonLevel}
+              </div>
               <div className="hidden sm:block">
                 {formatJoinedDate(entry.updatedAt)}
               </div>
