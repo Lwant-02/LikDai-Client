@@ -109,7 +109,6 @@ interface LeaderboardEntry {
   tests_completed: number;
   mode: string;
   updatedAt: string | Date;
-  lessonLevel: string;
 }
 
 interface LeaderboardResponse {
@@ -120,7 +119,6 @@ interface LeaderboardResponse {
     raw: number;
     consistency: number;
     tests_completed: number;
-    lessonLevel: string;
     mode: string;
     user: {
       username: string;

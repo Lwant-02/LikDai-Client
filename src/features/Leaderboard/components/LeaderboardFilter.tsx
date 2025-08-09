@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
-import { CircleGauge, Languages } from "lucide-react";
+import { Languages } from "lucide-react";
 
 interface LeaderboardFilterProps {
   languageFilter: LanguageFilter;
   setLanguageFilter: (filter: LanguageFilter) => void;
-  lessonLevelFilter: LessonLevel;
-  setLessonLevelFilter: (filter: LessonLevel) => void;
 }
 
 export const LeaderboardFilter = ({
   languageFilter,
   setLanguageFilter,
-  lessonLevelFilter,
-  setLessonLevelFilter,
 }: LeaderboardFilterProps) => {
   return (
     <motion.div
@@ -39,36 +35,6 @@ export const LeaderboardFilter = ({
               }`}
             >
               {filter === "eng" ? "English" : "Shan"}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-between items-center gap-3">
-        <div className="xl:flex hidden items-center gap-2">
-          <CircleGauge className="size-5 opacity-70" />
-          <span className="text-sm opacity-70">Level:</span>
-        </div>
-
-        <div className="flex bg-foreground/50 rounded-md overflow-hidden">
-          {(
-            [
-              "beginner",
-              "intermediate",
-              "advanced",
-              "quotes",
-              "music",
-            ] as LessonLevel[]
-          ).map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setLessonLevelFilter(filter)}
-              className={`cursor-pointer px-3 py-1 text-sm capitalize ${
-                lessonLevelFilter === filter
-                  ? "bg-blue/50 text-primary"
-                  : "hover:bg-foreground/20"
-              }`}
-            >
-              {filter}
             </button>
           ))}
         </div>
