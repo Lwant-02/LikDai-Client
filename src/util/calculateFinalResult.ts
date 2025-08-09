@@ -1,20 +1,18 @@
 interface CalculateFinalResultProps {
   correctCharCount: number;
   totalTypedChars: number;
-  startTime: number | null;
-  endTime: number | null;
+  durationInMs: number;
   wpmPerSecond: number[];
 }
 
 export const calculateFinalResult = ({
   correctCharCount,
   totalTypedChars,
-  startTime,
-  endTime,
+  durationInMs,
   wpmPerSecond,
 }: CalculateFinalResultProps) => {
   // Handle cases where essential data is missing or test didn't start/complete
-  if (!startTime || !endTime || totalTypedChars === 0) {
+  if (!durationInMs || totalTypedChars === 0) {
     return {
       wpm: 0,
       rawWpm: 0,
@@ -25,8 +23,7 @@ export const calculateFinalResult = ({
   }
 
   // Calculate total duration in milliseconds and then minutes/seconds
-  const totalDurationMs = endTime - startTime;
-  const durationInSeconds = totalDurationMs / 1000;
+  const durationInSeconds = durationInMs / 1000;
   const durationInMinutes = durationInSeconds / 60;
 
   // Prevent division by zero or near-zero for very short durations

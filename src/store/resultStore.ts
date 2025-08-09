@@ -7,7 +7,7 @@ interface ResultState {
   finalConsistency: number | null;
   finalTimeTaken: number | null; // In seconds
   finalCorrectCharacters: number | null;
-  finalTestType: TestType | null;
+  finalLevel: LessonLevel | null;
   finalMode: LanguageMode | null;
   finalTypedCharacters: number | null;
   setFinalTypedCharacters: (chars: number | null) => void;
@@ -18,7 +18,7 @@ interface ResultState {
   setFinalConsistency: (consistency: number | null) => void;
   setFinalTimeTaken: (time: number | null) => void;
   setFinalCorrectCharacters: (chars: number | null) => void;
-  setFinalTestType: (type: TestType | null) => void;
+  setFinalLevel: (type: LessonLevel | null) => void;
 }
 
 export const resultStore = create<ResultState>((set) => ({
@@ -28,7 +28,7 @@ export const resultStore = create<ResultState>((set) => ({
   finalConsistency: null,
   finalTimeTaken: null,
   finalCorrectCharacters: null,
-  finalTestType: null,
+  finalLevel: null,
   finalMode: null,
   finalTypedCharacters: null,
   setFinalTypedCharacters: (chars) => set({ finalTypedCharacters: chars }),
@@ -39,5 +39,5 @@ export const resultStore = create<ResultState>((set) => ({
   setFinalConsistency: (consistency) => set({ finalConsistency: consistency }),
   setFinalTimeTaken: (time) => set({ finalTimeTaken: time }),
   setFinalCorrectCharacters: (chars) => set({ finalCorrectCharacters: chars }),
-  setFinalTestType: (type) => set({ finalTestType: type }),
+  setFinalLevel: (type) => set({ finalLevel: type }),
 }));

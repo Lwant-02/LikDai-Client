@@ -42,7 +42,7 @@ export const ResultCard = ({
       <h3 className="text-sm font-bold text-primary/80 mb-1">{title}</h3>
 
       <div className="flex justify-center items-center flex-col gap-2 w-full h-full">
-        <p className="text-3xl font-bold">{value}</p>
+        <p className="text-3xl font-bold capitalize">{value}</p>
         {subtitle && <p className="text-sm text-primary/70">{subtitle}</p>}
       </div>
     </motion.div>

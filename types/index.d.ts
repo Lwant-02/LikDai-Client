@@ -12,7 +12,6 @@ type LessonLevel =
   | "beginner"
   | "intermediate"
   | "advanced"
-  | "words"
   | "quotes"
   | "music";
 
@@ -51,7 +50,7 @@ interface TypingTestResult {
   consistency: number;
   timeTaken: number;
   mode: LanguageMode;
-  test_type: TestType;
+  lessonLevel: LessonLevel;
   characters: number;
   correct_chars: number;
 }
@@ -62,6 +61,7 @@ interface TestHistory {
   wpm: number;
   accuracy: number;
   mode: string;
+  lessonLevel: LessonLevel;
 }
 
 interface Achievement {
@@ -109,6 +109,7 @@ interface LeaderboardEntry {
   tests_completed: number;
   mode: string;
   updatedAt: string | Date;
+  lessonLevel: string;
 }
 
 interface LeaderboardResponse {
@@ -119,6 +120,7 @@ interface LeaderboardResponse {
     raw: number;
     consistency: number;
     tests_completed: number;
+    lessonLevel: string;
     mode: string;
     user: {
       username: string;

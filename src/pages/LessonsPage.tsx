@@ -15,55 +15,11 @@ import { shanIntermediateLessons } from "@/resources/shan.intermediate";
 import { shanAdvancedLessons } from "@/resources/shan.advancend";
 import { shanQuoteLessons } from "@/resources/shan.quoteLessons";
 import { engQuotesLessons } from "@/resources/eng.quoteLessons";
-
-const beginnerLessons = [
-  {
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero consequuntur, nisi cupiditate fugiat totam reiciendis porro. Rerum nostrum facere iste. Necessitatibus, a. Sint amet vel asperiores tempore, et consectetur maxime.",
-  },
-  {
-    content: "Lesson 2",
-  },
-  {
-    content: "Lesson 3",
-  },
-];
-
-const interLessons = [
-  {
-    content: "Lesson 4",
-  },
-  {
-    content: "Lesson 5",
-  },
-  {
-    content: "Lesson 6",
-  },
-];
-
-const advLessons = [
-  {
-    content: "Lesson 7",
-  },
-  {
-    content: "Lesson 8",
-  },
-  {
-    content: "Lesson 9",
-  },
-];
-
-const musicLessons = [
-  {
-    content: "Music 1",
-  },
-  {
-    content: "Music 2",
-  },
-  {
-    content: "Music 3",
-  },
-];
+import { engBeginnerLessons } from "@/resources/eng.beginner";
+import { engIntermediateLessons } from "@/resources/eng.intermediate";
+import { engAdvancedLessons } from "@/resources/eng.advancend";
+import { shanMusicLessons } from "@/resources/shan.musicLesson";
+import { engMusicLessons } from "@/resources/eng.musicLesson";
 
 export const LessonsPage = () => {
   const { lessonLevel, mode } = settingStore();
@@ -76,22 +32,23 @@ export const LessonsPage = () => {
     let lessons: { content: string }[] = [];
     switch (lessonLevel) {
       case "beginner":
-        lessons = mode === "eng" ? beginnerLessons : shanBeginnerLessons;
+        lessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
         break;
       case "intermediate":
-        lessons = mode === "eng" ? interLessons : shanIntermediateLessons;
+        lessons =
+          mode === "eng" ? engIntermediateLessons : shanIntermediateLessons;
         break;
       case "advanced":
-        lessons = mode === "eng" ? advLessons : shanAdvancedLessons;
+        lessons = mode === "eng" ? engAdvancedLessons : shanAdvancedLessons;
         break;
       case "quotes":
         lessons = mode === "eng" ? engQuotesLessons : shanQuoteLessons;
         break;
       case "music":
-        lessons = musicLessons;
+        lessons = mode === "eng" ? engMusicLessons : shanMusicLessons;
         break;
       default:
-        lessons = beginnerLessons;
+        lessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
         break;
     }
     setLessons(lessons);
@@ -205,6 +162,7 @@ export const LessonsPage = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
                 className="text-center py-16"
               >
                 <Search className="size-16 opacity-60 mx-auto mb-6" />

@@ -1,43 +1,41 @@
-import { useEffect } from "react";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-interface UseTimerProps {
-  value: string;
-  targetText: string;
-}
+export const useTimer = (initialSeconds: number = 0) => {
+  const [seconds, setSeconds] = useState<number>(initialSeconds);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-export const useTimer = ({ value, targetText }: UseTimerProps) => {
-  const [startTime, setStartTime] = useState<number | null>(null);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [finished, setFinished] = useState(false);
+  const startTimer = useCallback(() => {
+    if (intervalRef.current !== null) return;
+    setIsRunning(true);
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  if (!startTime && value.length === 1) {
-    const now = Date.now();
-    setStartTime(now);
-    timerRef.current = setInterval(() => {
-      setElapsedTime(Math.floor((Date.now() - now) / 1000));
+    intervalRef.current = setInterval(() => {
+      setSeconds((prev) => prev + 1);
     }, 1000);
-  }
-
-  useEffect(() => {
-    if (
-      value.trim().split(" ").length === targetText.trim().split(" ").length &&
-      value.trim() === targetText.trim()
-    ) {
-      setFinished(true);
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    }
-  }, [value, targetText]);
-
-  useEffect(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
   }, []);
 
-  return { elapsedTime, finished };
+  const stopTimer = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    setIsRunning(false);
+  }, []);
+
+  const resetTimer = useCallback(() => {
+    stopTimer();
+    setSeconds(initialSeconds);
+  }, [initialSeconds, stopTimer]);
+
+  useEffect(() => {
+    setSeconds(initialSeconds);
+  }, [initialSeconds]);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  return { seconds, isRunning, startTimer, stopTimer, resetTimer };
 };

@@ -21,7 +21,7 @@ import { Footer } from "./components/layout/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { authStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
-// import { LessonsPage } from "./pages/LessonsPage";
+import { LessonsPage } from "./pages/LessonsPage";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -53,6 +53,7 @@ export default function App() {
             }
           />
           <Route path="/typing-test" element={<TypingtestPage />} />
+          <Route path="/lessons" element={<LessonsPage />} />
           <Route path="/leaderboards" element={<LeaderboardPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />

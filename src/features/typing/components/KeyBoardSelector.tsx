@@ -19,7 +19,7 @@ export const KeyBoardSelector = () => {
             <div
               onClick={() => setSelectedKeyMap(key as KeyMapNames)}
               className={cn(
-                "w-auto opacity-50 font-secondary hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+                "w-auto opacity-50 text-base font-secondary hover:opacity-100 transition-opacity duration-200 cursor-pointer",
                 selectedKeyMap === key && "opacity-100 text-yellow"
               )}
             >

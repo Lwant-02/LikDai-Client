@@ -7,18 +7,19 @@ import { KeyMaps } from "@/keymaps/KeyMaps";
 import { useKeySound } from "@/hooks/useKeySound";
 
 interface TypingTestProps {
-  isRunning: boolean;
-  startTimer: () => void;
   targetText: string;
+  isRunning: boolean;
+  setStartTime: (time: number | null) => void;
+  startTimer: () => void;
 }
 
 export const TypingTest = ({
+  targetText,
   isRunning,
   startTimer,
-  targetText,
+  setStartTime,
 }: TypingTestProps) => {
-  const { selectedSetting, mode, userInput, setUserInput, selectedKeyMap } =
-    settingStore();
+  const { mode, userInput, setUserInput, selectedKeyMap } = settingStore();
   const { playKeySound } = useKeySound();
   const inputRef = useRef<HTMLInputElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,6 @@ export const TypingTest = ({
   const [inputScrollOffset, setInputScrollOffset] = useState(0);
 
   const splitter = new GraphemeSplitter();
-  // For text highlighting, use simple character splitting to show individual components
   // This ensures each character component (like ၵ and ႂ in ၵႂ) highlights separately
   const units =
     mode === "shan"
@@ -39,7 +39,6 @@ export const TypingTest = ({
       ? userInput.split("") // Simple split for Shan to highlight each character component
       : splitter.splitGraphemes(userInput);
 
-  // Simple character-by-character comparison for better visual feedback
   // Calculate scroll position based on current character position
   const updateScrollPosition = useCallback(() => {
     if (!textContainerRef.current || !currentCharRef.current) return;
@@ -126,7 +125,6 @@ export const TypingTest = ({
     if (key === "Backspace" || key.length === 1) {
       playKeySound();
     }
-
     if (key === "Backspace") {
       setUserInput(userInput.slice(0, -1));
     } else if (key.length === 1) {
@@ -141,14 +139,15 @@ export const TypingTest = ({
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
       inputRef.current?.focus();
-      if (!isRunning && selectedSetting === "time") {
+      if (!isRunning) {
         startTimer();
+        setStartTime(Date.now());
       }
     };
 
     window.addEventListener("keydown", handleGlobalKeyDown);
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-  }, [isRunning, selectedSetting, startTimer]);
+  }, [isRunning, startTimer]);
 
   // Focus input on mount
   useEffect(() => {
@@ -218,13 +217,6 @@ export const TypingTest = ({
               // Simple character comparison
               const isCorrect = i < units.length && typedUnit === targetUnit;
               const isIncorrect = i < units.length && typedUnit !== targetUnit;
-
-              // Debug logging for character comparison
-              if (i < 10) {
-                console.log(
-                  `Char ${i}: typed="${typedUnit}" vs target="${targetUnit}" - correct: ${isCorrect}, incorrect: ${isIncorrect}`
-                );
-              }
 
               let colorClass = "";
               if (isIncorrect) {

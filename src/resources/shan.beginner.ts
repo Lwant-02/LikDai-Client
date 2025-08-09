@@ -1,4 +1,5 @@
 export const shanBeginnerLessons = [
+  { content: "ၵ ၶ င ၸ သ ၺ တ ထ ၼ ပ ၽ ၾ မ ယ လ ဝ ႁ ဢ" },
   {
     content: "ငိုၼ်းႁၢႆ ၵွပ်ႈဢမ်ႇၼပ်ႉ။",
   },

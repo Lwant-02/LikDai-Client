@@ -3,36 +3,24 @@ import { create } from "zustand";
 interface SettingOptions {
   mode: LanguageMode;
   activeTab: TabType;
-  selectedSetting: TestType;
-  selectedTimer: number;
-  selectedWords: number;
-  customText: string;
   userInput: string;
   profileAciveTab: TabType;
   theme: string;
-  startTime: number | null;
-  endTime: number | null;
   wpmPerSecond: number[];
   selectedKeyMap: KeyMapNames;
   soundEnabled: boolean;
-  level: Level;
   lessonLevel: LessonLevel;
+  targetText: string;
+  setTargetText: (text: string) => void;
   setLessonLevel: (level: LessonLevel) => void;
-  setLevel: (level: Level) => void;
   setSelectedKeyMap: (keyMap: KeyMapNames) => void;
   setSoundEnabled: (enabled: boolean) => void;
-  setStartTime: (startTime: number | null) => void;
-  setEndTime: (endTime: number | null) => void;
   setWpmPerSecond: (wpmPerSecond: number[]) => void;
   setTheme: (theme: string) => void;
   setProfileAciveTab: (tab: TabType) => void;
   setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
-  setCustomText: (customText: string) => void;
   setMode: (mode: LanguageMode) => void;
-  setSelectedSetting: (selectedSetting: TestType) => void;
-  setSelectedTimer: (selectedTimer: number) => void;
-  setSelectedWords: (selectedWords: number) => void;
 }
 
 export const settingStore = create<SettingOptions>((set) => ({
@@ -45,22 +33,18 @@ export const settingStore = create<SettingOptions>((set) => ({
   activeTab: "profile",
   profileAciveTab: "stats",
   theme: localStorage.getItem("theme") || "dark",
-  startTime: null,
-  endTime: null,
   wpmPerSecond: [],
   selectedKeyMap: "namkhone",
-  level: "easy",
   soundEnabled: localStorage.getItem("soundEnabled") === "true" || false,
   lessonLevel: "beginner",
+  targetText: "",
+  setTargetText: (text) => set({ targetText: text }),
   setLessonLevel: (level) => set({ lessonLevel: level }),
-  setLevel: (level) => set({ level }),
   setSelectedKeyMap: (keyMap) => set({ selectedKeyMap: keyMap }),
   setSoundEnabled: (enabled) => {
     set({ soundEnabled: enabled });
     localStorage.setItem("soundEnabled", enabled.toString());
   },
-  setStartTime: (startTime) => set({ startTime }),
-  setEndTime: (endTime) => set({ endTime }),
   setWpmPerSecond: (wpmPerSecond) => set({ wpmPerSecond }),
   setTheme: (theme) => {
     set({ theme });
@@ -69,15 +53,5 @@ export const settingStore = create<SettingOptions>((set) => ({
   setProfileAciveTab: (tab) => set({ profileAciveTab: tab }),
   setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),
-  setCustomText: (customText) => set({ customText }),
-  setMode: (mode) => {
-    const newText =
-      mode === "shan"
-        ? "ၼႆႉပဵၼ်လိၵ်ႈ ဢၼ်ပၼ်တူဝ်ယၢင်ႇ"
-        : "This is a sample text for English.";
-    set({ mode: mode, customText: newText });
-  },
-  setSelectedSetting: (selectedSetting) => set({ selectedSetting }),
-  setSelectedTimer: (selectedTimer) => set({ selectedTimer }),
-  setSelectedWords: (selectedWords) => set({ selectedWords }),
+  setMode: (mode) => set({ mode: mode }),
 }));
