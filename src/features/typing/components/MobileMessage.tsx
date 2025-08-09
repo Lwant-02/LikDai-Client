@@ -40,8 +40,8 @@ export const MobileMessage = () => {
       </h3>
 
       <p className="text-center text-sm opacity-80 leading-relaxed max-w-xs">
-        LikDai Pro is optimized for desktop and laptop screens to provide the
-        best typing experience with full keyboard support.
+        LikDai is optimized for desktop and laptop screens to provide the best
+        typing experience with full keyboard support.
       </p>
 
       <div className="flex items-center mt-4 px-4 py-2 bg-primary/10 rounded-full">

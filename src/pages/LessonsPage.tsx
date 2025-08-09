@@ -91,7 +91,7 @@ export const LessonsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Lessons | LikDai Pro</title>
+        <title>Lessons | LikDai</title>
         <meta
           name="description"
           content="Master typing with structured lessons for all skill levels."

@@ -14,7 +14,7 @@ export function HomePage() {
         <title>LikDai | Master Shan Typing</title>
         <meta
           name="description"
-          content="Start mastering Shan typing with LikDai Pro."
+          content="Start mastering Shan typing with LikDai."
         />
         <meta
           name="google-site-verification"
