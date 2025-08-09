@@ -19,7 +19,7 @@ export const LeaderboardFilter = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="mb-6 sm:mb-8 flex flex-wrap xl:gap-7 gap-3 xl:flex-row flex-col justify-start items-start"
+      className="mb-6 sm:mb-8 flex flex-wrap xl:gap-7 gap-3 flex-col justify-start items-start"
     >
       <div className="flex justify-between items-center gap-3">
         <div className="xl:flex hidden items-center gap-2">
