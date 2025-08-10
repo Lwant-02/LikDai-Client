@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -49,6 +49,11 @@ export const TypingtestPage = () => {
     userInput.replace(/\s/g, ""),
     targetText.replace(/\s/g, "")
   );
+
+  //Get search params
+  const [searchParams] = useSearchParams();
+  const lessonNumber = Number(searchParams.get("lesson")) || 1;
+  const level = searchParams.get("level") || "beginner";
 
   // Calculate current and next characters for keyboard highlighting
   const splitter = new GraphemeSplitter();
@@ -148,7 +153,7 @@ export const TypingtestPage = () => {
       setFinalMode(mode);
       setFinalTypedCharacters(totalTypedChars);
 
-      navigate("/results");
+      navigate(`/results?lesson=${lessonNumber}&level=${level}`);
 
       setUserInput("");
       setTotalTypedWords(0);
@@ -169,7 +174,7 @@ export const TypingtestPage = () => {
   ]);
 
   useEffect(() => {
-    if (!targetText) {
+    if (!lessonNumber || !level) {
       navigate("/lessons");
     }
   }, [targetText, navigate]);

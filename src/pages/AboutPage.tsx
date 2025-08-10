@@ -86,7 +86,7 @@ export const AboutPage = () => {
               <Button
                 size="lg"
                 className="bg-yellow hover:bg-yellow/80 text-background font-bold text-lg px-8 py-6 cursor-pointer"
-                onClick={() => navigate("/typing-test")}
+                onClick={() => navigate("/lessons")}
               >
                 Start Typing Now
               </Button>

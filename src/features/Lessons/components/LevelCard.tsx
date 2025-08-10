@@ -3,6 +3,7 @@ import { BookOpen, Target, Star, Quote, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
+import { getProperTitle } from "@/pages/LessonsPage";
 
 const Levels = [
   {
@@ -43,7 +44,34 @@ const Levels = [
 ];
 
 export const LevelCard = () => {
-  const { lessonLevel, setLessonLevel } = settingStore();
+  const { lessonLevel, setLessonLevel, mode } = settingStore();
+
+  const getProperDescription = (level: LessonLevel): string => {
+    switch (level) {
+      case "beginner":
+        return mode === "eng"
+          ? "Start your typing journey"
+          : "တႄႇၶၢဝ်းတၢင်းပေႃႉလိၵ်ႈ";
+      case "intermediate":
+        return mode === "eng"
+          ? "Improve your skills"
+          : "ယုၵ်ႉမုၼ်းၼမ်ႉၵတ်ႉၸဝ်ႈၵဝ်ႇ";
+      case "advanced":
+        return mode === "eng"
+          ? "Master typing challenges"
+          : "လွင်ႈၶဵင်ႇတႃႉ မေႃပေႃႉလိၵ်ႈ";
+      case "quotes":
+        return mode === "eng"
+          ? "Type inspiring quotes"
+          : "ပေႃႉၵႂၢမ်းပၼ်ႁႅင်းၸႂ်";
+      case "music":
+        return mode === "eng" ? "Type along to music" : "ပေႃႉၸွမ်းၽဵင်းၵႂၢမ်း";
+      default:
+        return mode === "eng"
+          ? "Start your typing journey"
+          : "တႄႇၶၢဝ်းတၢင်းပေႃႉလိၵ်ႈ";
+    }
+  };
   return (
     <div className="flex overflow-x-auto w-full xl:justify-center items-center justify-start  gap-2 ">
       {Levels.map((level) => (
@@ -60,10 +88,22 @@ export const LevelCard = () => {
         >
           <span className="flex flex-col items-center">
             {level.icon}
-            <span className="text-base font-bold capitalize">
-              {level.title}
+            <span
+              className={cn(
+                "text-base font-bold capitalize",
+                mode === "shan" && "font-secondary"
+              )}
+            >
+              {getProperTitle(level.title as LessonLevel, mode)}
             </span>
-            <span className="text-sm opacity-70">{level.description}</span>
+            <span
+              className={cn(
+                "text-sm opacity-70",
+                mode === "shan" && "font-secondary"
+              )}
+            >
+              {getProperDescription(level.title as LessonLevel)}
+            </span>
           </span>
         </Button>
       ))}

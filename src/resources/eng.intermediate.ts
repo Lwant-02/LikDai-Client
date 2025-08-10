@@ -185,10 +185,6 @@ export const engIntermediateLessons = [
   },
   {
     content:
-      "Set a comfortable pace during practice. Avoid rushing, which causes errors and frustration.",
-  },
-  {
-    content:
       "Maintain good posture by sitting upright with feet flat on the floor. This supports longer typing sessions without discomfort.",
   },
   {
@@ -197,23 +193,7 @@ export const engIntermediateLessons = [
   },
   {
     content:
-      "Take time to learn keyboard shortcuts. They improve efficiency in digital tasks beyond typing.",
-  },
-  {
-    content:
       "Typing is an essential part of digital literacy. It enables communication, content creation, and information access.",
-  },
-  {
-    content:
-      "Technology facilitates remote work and learning. Typing skills support these modern ways of living.",
-  },
-  {
-    content:
-      "Motivation fluctuates. Set reminders and create a positive environment to encourage regular typing practice.",
-  },
-  {
-    content:
-      "Multitasking reduces typing efficiency. Focus on typing practice without distractions for better results.",
   },
   {
     content:
@@ -221,146 +201,82 @@ export const engIntermediateLessons = [
   },
   {
     content:
-      "Typing speed is measured in words per minute (WPM). Accuracy percentage reflects error rate.",
+      "Every morning, Sarah takes a brisk walk through the park to enjoy the fresh air and watch the birds singing among the trees. She believes this routine helps her stay healthy and improves her mood throughout the busy day ahead.",
   },
   {
     content:
-      "Visualizing the keyboard layout mentally can help reinforce finger placement.",
+      "The old library in town holds many ancient books and manuscripts that tell stories of the past. Visitors often come to explore the dusty shelves, hoping to discover forgotten tales and learn about history through the written words preserved over centuries.",
   },
   {
     content:
-      "Typing requires hand-eye coordination and rhythm. Practice develops these faculties.",
+      "During the summer vacation, the children gathered around the campfire to roast marshmallows and share spooky stories. The warm glow of the fire and the crackling sounds created an unforgettable atmosphere filled with laughter and a bit of harmless fear.",
   },
   {
     content:
-      "The fastest typists use all fingers and avoid unnecessary movements.",
+      "Tom’s passion for photography led him to travel to remote places, capturing breathtaking landscapes and vibrant wildlife. Each photo tells a unique story, revealing the beauty of nature and the diversity of life that many people rarely get to see.",
   },
   {
     content:
-      "Proofreading your typed text enhances accuracy and attention to detail.",
+      "In the small village, people celebrate the harvest festival with traditional dances, colorful decorations, and delicious homemade food. It’s a time when everyone comes together to give thanks for a good season and to enjoy the company of friends and family.",
   },
   {
     content:
-      "Taking typing lessons or courses can provide structured learning and faster progress.",
+      "Anna carefully studied the blueprint of the new building, making sure every detail was perfect before construction began. Her attention to detail and dedication ensured the project would be completed on time and meet all safety standards required by the city.",
   },
   {
     content:
-      "Using ergonomic accessories like wrist rests can improve comfort.",
-  },
-  {
-    content: "Typing in different languages can be challenging but rewarding.",
+      "The young scientist conducted several experiments in the laboratory, hoping to find a solution to a complex problem. Despite many failures, she remained determined and eventually made a breakthrough that could change the way people think about renewable energy.",
   },
   {
     content:
-      "Practicing with real-world texts like emails or reports makes skills applicable.",
-  },
-  {
-    content: "Regular typing builds endurance and prevents cramping.",
-  },
-  {
-    content: "Typing mistakes are often caused by rushing or fatigue.",
-  },
-  {
-    content: "Adjust keyboard sensitivity and height for comfort.",
-  },
-  {
-    content: "Typing with both hands rather than one speeds up performance.",
-  },
-  {
-    content: "Start slow, then gradually increase your speed.",
-  },
-  {
-    content: "Using all fingers prevents strain and increases efficiency.",
-  },
-  {
-    content: "Watching your progress over time can boost motivation.",
-  },
-  {
-    content: "Typing practice should be a fun and engaging activity.",
-  },
-  {
-    content: "Focus on maintaining rhythm and flow rather than perfection.",
-  },
-  {
-    content: "Remember to relax your hands and wrists during typing.",
+      "Every Sunday afternoon, the neighborhood children gather at the community center to play games, do crafts, and share stories. This tradition helps them build friendships and develop important social skills in a fun and supportive environment.",
   },
   {
     content:
-      "Typing well can reduce time spent on tasks and increase productivity.",
+      "Mark enjoys gardening in his free time, growing a variety of vegetables and flowers in his backyard. He finds it relaxing and rewarding to nurture plants from tiny seeds into healthy, flourishing greenery that adds beauty to his home.",
   },
   {
     content:
-      "Learning to type well supports academic and professional success.",
+      "The city’s annual art festival attracts painters, sculptors, and musicians from around the country. It provides a platform for creative expression and allows visitors to experience diverse forms of art in one vibrant and lively event.",
   },
   {
     content:
-      "Taking care of your hands prevents injuries like carpal tunnel syndrome.",
-  },
-  {
-    content: "Typing is a foundational skill for digital communication.",
-  },
-  {
-    content: "Set achievable goals and reward yourself for progress.",
-  },
-  {
-    content: "Using speech-to-text can complement typing but not replace it.",
+      "Lena enjoys reading mystery novels in her cozy little nook by the window. She imagines herself solving the puzzles alongside the characters, which makes the stories even more exciting and keeps her turning the pages late into the night.",
   },
   {
     content:
-      "Explore different typing apps and tools to find what works for you.",
-  },
-  {
-    content: "Typing regularly sharpens your focus and cognitive skills.",
-  },
-  {
-    content: "Engage in typing challenges and competitions for motivation.",
+      "The mountain trail was challenging, but the breathtaking view at the summit made every step worthwhile. Hikers rested and took photos, feeling a deep sense of accomplishment and awe at the beauty of nature spread out before them.",
   },
   {
     content:
-      "Use your non-dominant hand during typing to develop coordination.",
-  },
-  {
-    content: "Typing fluently supports clear and fast communication.",
-  },
-  {
-    content: "Consistency over time leads to mastery.",
-  },
-  {
-    content: "Break down long practice sessions into manageable intervals.",
-  },
-  {
-    content: "Typing speed and accuracy improve with patience and effort.",
-  },
-  {
-    content: "Practice typing on different devices to adapt skills.",
-  },
-  {
-    content: "Remember to stretch and exercise your hands regularly.",
-  },
-  {
-    content: "Typing enables quick note-taking and information sharing.",
-  },
-  {
-    content: "Use online resources to learn new typing techniques.",
-  },
-  {
-    content: "Effective typing reduces the cognitive load during writing.",
-  },
-  {
-    content: "Encourage others to practice typing and share tips.",
+      "At the farmers market, people gather every Saturday morning to buy fresh produce, homemade bread, and handcrafted goods. It’s a lively place where neighbors meet, share recipes, and support local farmers and artisans.",
   },
   {
     content:
-      "Typing is a lifelong skill that improves with continuous practice.",
-  },
-  {
-    content: "Celebrate every improvement to stay motivated.",
-  },
-  {
-    content: "Typing is a gateway to learning coding and programming.",
+      "The old clock tower chimed loudly at noon, signaling the start of the town’s annual parade. Children waved flags and wore colorful costumes as music filled the streets, creating a festive atmosphere that brought joy to everyone.",
   },
   {
     content:
-      "Stay positive and enjoy the process of improving your typing skills.",
+      "Sofia’s painting captured the soft glow of the sunset over the lake, with warm colors blending seamlessly. Art lovers admired her work, praising the way she used light and shadow to evoke peaceful emotions in the scene.",
+  },
+  {
+    content:
+      "Every evening, the family gathered around the dinner table to share stories about their day. These moments strengthened their bond and created happy memories that would last a lifetime.",
+  },
+  {
+    content:
+      "Jason volunteered at the animal shelter every weekend, helping care for abandoned pets. His kindness and patience made a big difference, and many animals found loving homes thanks to his efforts.",
+  },
+  {
+    content:
+      "During the science fair, students showcased innovative projects exploring renewable energy, robotics, and environmental conservation. The event inspired creativity and sparked interest in technology and science among young learners.",
+  },
+  {
+    content:
+      "The local theater group rehearsed tirelessly for the upcoming play, perfecting every line and gesture. Their dedication paid off when the audience gave them a standing ovation on opening night.",
+  },
+  {
+    content:
+      "Emily planted a small herb garden on her balcony, growing basil, mint, and rosemary. She enjoyed using fresh herbs in her cooking, adding flavor and aroma to her favorite dishes.",
   },
 ];

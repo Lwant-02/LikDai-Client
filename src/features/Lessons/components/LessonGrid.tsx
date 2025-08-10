@@ -66,7 +66,15 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center xl:w-32 w-10 bg-gradient-to-br from-yellow to-orange rounded-xl text-white font-bold text-lg">
-              <span className="xl:flex hidden">Lesson-</span> {index + 1}
+              <span
+                className={cn(
+                  "xl:flex hidden",
+                  mode === "shan" && "font-secondary"
+                )}
+              >
+                {mode === "shan" ? "ၵၢၼ်ၽိုၵ်း" : "Lesson"}-
+              </span>{" "}
+              {index + 1}
             </div>
           </div>
           <div className="flex items-end gap-2">
