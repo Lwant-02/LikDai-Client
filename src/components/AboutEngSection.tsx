@@ -8,7 +8,7 @@ import {
   UserCog,
   Handshake,
   Globe,
-  // CloudDownload,
+  CloudDownload,
 } from "lucide-react";
 
 import {
@@ -94,12 +94,32 @@ export const keyfeatures = [
       "Support 4 Shan Keyboards (Namkhone, Panglong, Yunghkio, Sil) and English Keyboard.",
     icon: <Keyboard className="size-7 text-orange" />,
   },
-  // {
-  //   title: "Progressive Web App",
-  //   description:
-  //     "Download the app and use it offline. No internet connection required",
-  //   icon: <CloudDownload className="size-7 text-red" />,
-  // },
+  {
+    title: "Progressive Web App",
+    description: "Download the app and use it on your device directly.",
+    icon: <CloudDownload className="size-7 text-red" />,
+  },
+];
+
+const downloadSteps = [
+  {
+    icon: "/svg/chrome.svg",
+    title: "Step 1: Open LikDai",
+    description:
+      "Launch LikDai in your Chrome or Edge browser on your laptop or desktop.",
+  },
+  {
+    icon: "/svg/download.svg",
+    title: "Step 2: Click Install",
+    description:
+      "In the top right of your browser, click the install icon or the '+' button.",
+  },
+  {
+    icon: "/svg/pop-up.svg",
+    title: "Step 3: Confirm Installation",
+    description:
+      "A pop-up will appear. Click 'Install' to add LikDai to your device.",
+  },
 ];
 
 export const AboutEngSection = ({
@@ -156,6 +176,38 @@ export const AboutEngSection = ({
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               LikDai is proudly open source. Join our community and help us
               build the future of Shan language typing education.
+            </p>
+          </motion.div>
+
+          {/* Remark section */}
+          <motion.div variants={itemVariants} className="text-center mb-16 ">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Tuk Heng Hackathon Winner
+              </h2>
+            </div>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              LikDai is the first winner of{" "}
+              <a
+                href="https://tukhenghackathon.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow"
+              >
+                Tuk Heng Hackathon
+              </a>
+              , organized by Team{" "}
+              <a
+                href="https://www.haohaa.com/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow hover:underline"
+              >
+                Hao Haa
+              </a>
+              . This project is built with the hope of promoting Shan language
+              typing education and hope to make it gives advantages to Shan
+              language learners.
             </p>
           </motion.div>
 
@@ -304,6 +356,7 @@ export const AboutEngSection = ({
               </p>
             </div>
           </motion.div>
+
           {/* Contribution Section */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h3 className="text-3xl font-bold mb-8">How to Contribute</h3>
@@ -476,8 +529,62 @@ export const AboutEngSection = ({
         </motion.div>
       </section>
 
+      {/* How to Download */}
+      <section className="pt-7 px-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={containerVariants}
+          className="max-w-6xl mx-auto"
+        >
+          {/* Header */}
+          <motion.div variants={itemVariants} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Install LikDai on Your Computer
+            </h2>
+            <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
+            <p className="text-lg opacity-80 max-w-2xl mx-auto">
+              Get the best experience by installing LikDai as a Progressive Web
+              App (PWA) directly on your desktop or laptop.
+            </p>
+          </motion.div>
+
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            {downloadSteps.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                variants={itemVariants}
+                className="bg-white dark:bg-gray-800 flex flex-col justify-center items-center p-6 rounded-2xl shadow-md text-center relative"
+              >
+                {/* Number Badge */}
+                <span className="absolute -top-4 -left-4 bg-yellow text-black font-bold w-10 h-10 flex items-center justify-center rounded-full shadow">
+                  {index + 1}
+                </span>
+
+                {/* Icon */}
+                <div className="size-16 rounded-full flex items-center bg-white justify-center mb-4 p-3">
+                  <img
+                    src={feature.icon}
+                    alt={feature.title}
+                    className="size-fit"
+                  />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+
+                {/* Description */}
+                <p className="opacity-80">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
       {/* How to Use Section */}
-      <section className="pt-5 px-4">
+      <section className="pt-7 px-4">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -487,7 +594,7 @@ export const AboutEngSection = ({
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-secondary">
-              တေႁဵတ်းႁိုဝ်ၸႂ်ႉတိုဝ်း
+              လၢႆးၸႂ်ႉတိုဝ်း
             </h2>
             <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
           </motion.div>

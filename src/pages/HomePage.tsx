@@ -41,7 +41,7 @@ export function HomePage() {
           >
             <TypeAnimation
               sequence={[
-                "Master Shan Typing with LikDai-Pro",
+                "Master Shan Typing with LikDai",
                 1000,
                 "Practice Fast. Type Smart.",
                 1000,

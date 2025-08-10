@@ -20,6 +20,28 @@ import { engIntermediateLessons } from "@/resources/eng.intermediate";
 import { engAdvancedLessons } from "@/resources/eng.advancend";
 import { shanMusicLessons } from "@/resources/shan.musicLesson";
 import { engMusicLessons } from "@/resources/eng.musicLesson";
+import { cn } from "@/lib/utils";
+
+//Get Lessons Text
+export const getProperTitle = (
+  level: LessonLevel,
+  mode: LanguageMode
+): string => {
+  switch (level) {
+    case "beginner":
+      return mode === "eng" ? "Beginner" : "ၸၼ်ႉဢွၼ်ႇ";
+    case "intermediate":
+      return mode === "eng" ? "Intermediate" : "ၸၼ်ႉၵၢင်";
+    case "advanced":
+      return mode === "eng" ? "Advanced" : "ၸၼ်ႉသုင်";
+    case "quotes":
+      return mode === "eng" ? "Quotes" : "ၵႂၢမ်းၵပ်းထုၵ်ႇ";
+    case "music":
+      return mode === "eng" ? "Music" : "ၽဵင်းၵႂၢမ်း";
+    default:
+      return mode === "eng" ? "Beginner" : "ၽူႈတႄႇတင်ႈ";
+  }
+};
 
 export const LessonsPage = () => {
   const { lessonLevel, mode } = settingStore();
@@ -70,23 +92,10 @@ export const LessonsPage = () => {
     setCurrentPage(1);
   }, [searchQuery, lessonLevel, mode]);
 
-  //Get Lessons Text
-  const getLessonLevelText = (level: LessonLevel): string => {
-    switch (level) {
-      case "beginner":
-        return "Beginner";
-      case "intermediate":
-        return "Intermediate";
-      case "advanced":
-        return "Advanced";
-      case "quotes":
-        return "Quotes";
-      case "music":
-        return "Music";
-      default:
-        return "Beginner";
-    }
-  };
+  //Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <>
@@ -148,8 +157,13 @@ export const LessonsPage = () => {
                 <div className="p-2 rounded-xl bg-gradient-to-br from-yellow to-orange">
                   <CircleGauge className="size-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold">
-                  {getLessonLevelText(lessonLevel)}
+                <h2
+                  className={cn(
+                    "text-3xl font-bold",
+                    mode === "shan" && "font-secondary"
+                  )}
+                >
+                  {getProperTitle(lessonLevel, mode)}
                 </h2>
               </div>
               <div className="flex items-center gap-2 text-sm opacity-80 bg-foreground/40 backdrop-blur-sm px-4 py-2 rounded-full">
