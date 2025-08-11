@@ -1,5 +1,4 @@
-import { RotateCcw } from "lucide-react";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useEffect, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
@@ -9,6 +8,7 @@ import { ResultsChart } from "@/components/ResultsChart";
 import { authStore } from "@/store/authStore";
 import { resultStore } from "@/store/resultStore";
 import { saveFinalResults } from "@/service/saveFinalResults";
+import { ResultNextButton } from "@/components/ResultNextButton";
 
 export const ResultPage = () => {
   const {
@@ -25,11 +25,6 @@ export const ResultPage = () => {
   const { accessToken } = authStore();
   const navigate = useNavigate();
   const hanSavedRef = useRef(false);
-
-  //Get search params
-  const [searchParams] = useSearchParams();
-  const lessonNumber = Number(searchParams.get("lesson")) || 1;
-  const level = searchParams.get("level") || "beginner";
 
   // Format time for display (e.g., "1:30")
   const formatTime = (seconds: number) => {
@@ -160,16 +155,7 @@ export const ResultPage = () => {
             color="yellow"
           />
         </div>
-        <button
-          type="button"
-          onClick={() =>
-            navigate(`/typing-test?lesson=${lessonNumber}&level=${level}`)
-          }
-          className="opacity-70 border border-foreground py-1 px-2 mb-20 rounded-lg hover:opacity-100 transition-opacity duration-200 cursor-pointer flex gap-2 justify-center items-center"
-        >
-          <RotateCcw className="size-5 rotate-40" />
-          <p>Retake Test</p>
-        </button>
+        <ResultNextButton />
       </article>
     </>
   );
