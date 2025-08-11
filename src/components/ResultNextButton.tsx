@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { settingStore } from "@/store/settingStore";
 import { shanBeginnerLessons } from "@/resources/shan.beginner";
@@ -13,8 +13,9 @@ import { engAdvancedLessons } from "@/resources/eng.advancend";
 import { engQuotesLessons } from "@/resources/eng.quoteLessons";
 import { engMusicLessons } from "@/resources/eng.musicLesson";
 
-export const LessonGuide = () => {
+export const ResultNextButton = () => {
   const { setTargetText, mode } = settingStore();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const lessonNumber = Number(searchParams.get("lesson")) || 1;
@@ -40,11 +41,21 @@ export const LessonGuide = () => {
     }
   };
 
+  const nextLesson = () => {
+    goToLesson(lessonIndex + 1);
+    navigate(`/typing-test?lesson=${lessonNumber + 1}&level=${level}`);
+  };
+
+  const prevLesson = () => {
+    goToLesson(lessonIndex - 1);
+    navigate(`/typing-test?lesson=${lessonNumber - 1}&level=${level}`);
+  };
+
   return (
-    <div className="py-2 text-sm gap-7 xl:flex hidden justify-between items-center">
+    <div className="py-2 text-sm gap-7 flex justify-between items-center mb-20">
       {/* Prev */}
       <div
-        onClick={() => goToLesson(lessonIndex - 1)}
+        onClick={() => prevLesson()}
         className={`gap-1 transition-opacity duration-200 cursor-pointer flex justify-center items-center ${
           lessonIndex === 0
             ? "opacity-30 pointer-events-none"
@@ -62,7 +73,7 @@ export const LessonGuide = () => {
 
       {/* Next */}
       <div
-        onClick={() => goToLesson(lessonIndex + 1)}
+        onClick={() => nextLesson()}
         className={`gap-1 transition-opacity duration-200 cursor-pointer flex justify-center items-center ${
           lessonIndex === lessons.length - 1
             ? "opacity-30 pointer-events-none"

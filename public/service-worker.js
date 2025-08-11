@@ -1,12 +1,12 @@
-const CACHE_NAME = "likdai-cache-v1";
+const CACHE_NAME = "likdai";
 const urlsToCache = [
   "/",
   "/index.html",
   "/manifest.json",
   "/assets/index.css",
   "/assets/index.js",
-  "/icons/icon-192x192.png",
-  "/icons/icon-512x512.png",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
   "/images/Logo.png",
   "/images/UK-Flag.jpg",
   "/images/step-2.png",
@@ -27,38 +27,49 @@ const urlsToCache = [
   "/svg/speed.svg",
 ];
 
+const preCache = async () => {
+  const cache = await caches.open(CACHE_NAME);
+  return cache.addAll(urlsToCache);
+};
+
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-  );
+  console.log("Service Worker: Installed");
+  self.skipWaiting();
+  event.waitUntil(preCache());
 });
+
+const cleanCache = async () => {
+  const keys = await caches.keys();
+  const keysToDelete = keys
+    .filter((key) => key !== CACHE_NAME)
+    .map((key) => caches.delete(key));
+  return Promise.all(keysToDelete);
+};
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((key) => key !== CACHE_NAME)
-            .map((key) => caches.delete(key))
-        )
-      )
-  );
+  console.log("Service Worker: Activated");
+  event.waitUntil(cleanCache().then(() => self.clients.claim()));
 });
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      caches
-        .match("/index.html")
-        .then((response) => response || fetch(event.request))
-    );
-    return;
+const fetchAssets = async (event) => {
+  try {
+    const networkResponse = await fetch(event.request);
+    return networkResponse;
+  } catch (error) {
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(event.request);
+    if (cachedResponse) {
+      return cachedResponse;
+    } else {
+      return new Response("Offline and no cached data found.", {
+        status: 503,
+        statusText: "Service Unavailable",
+        headers: new Headers({ "Content-Type": "text/plain" }),
+      });
+    }
   }
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then((response) => response || fetch(event.request))
-  );
+};
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(fetchAssets(event));
 });
