@@ -1,4 +1,4 @@
-import { BookOpen, Target, Star, Quote, Music } from "lucide-react";
+import { BookOpen, Target, Star, Quote } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -34,13 +34,13 @@ const Levels = [
     color: "text-orange",
     gradient: "from-orange/20 to-orange/30",
   },
-  {
-    title: "music",
-    description: "Type along to music",
-    icon: <Music className="size-6" />,
-    color: "text-yellow",
-    gradient: "from-yellow/20 to-yellow/30",
-  },
+  // {
+  //   title: "music",
+  //   description: "Type along to music",
+  //   icon: <Music className="size-6" />,
+  //   color: "text-yellow",
+  //   gradient: "from-yellow/20 to-yellow/30",
+  // },
 ];
 
 export const LevelCard = () => {
@@ -64,8 +64,8 @@ export const LevelCard = () => {
         return mode === "eng"
           ? "Type inspiring quotes"
           : "ပေႃႉၵႂၢမ်းပၼ်ႁႅင်းၸႂ်";
-      case "music":
-        return mode === "eng" ? "Type along to music" : "ပေႃႉၸွမ်းၽဵင်းၵႂၢမ်း";
+      // case "music":
+      //   return mode === "eng" ? "Type along to music" : "ပေႃႉၸွမ်းၽဵင်းၵႂၢမ်း";
       default:
         return mode === "eng"
           ? "Start your typing journey"

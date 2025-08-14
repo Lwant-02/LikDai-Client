@@ -73,7 +73,7 @@ export const keyfeatures = [
   {
     title: "Multiple Typing Lessons",
     description:
-      "Practice typing with various lessons such as beginner, intermediate, advanced, quotes, and music.",
+      "Practice typing with various lessons such as beginner, intermediate, advanced and quotes",
     icon: <Quote className="size-7 text-purple rotate-180" />,
   },
   {
