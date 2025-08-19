@@ -77,3 +77,14 @@ export const useResendOtp = () => {
   });
   return { resendOtp, isResendingOtp };
 };
+
+export const useGoogleLoginHook = () => {
+  const { mutateAsync: googleLogin, isPending: isLoggingInWithGoogle } =
+    useMutation({
+      mutationFn: async (payload: { email: string; name: string }) => {
+        const res = await authAxios.post("/auth/google-login", payload);
+        return res.data;
+      },
+    });
+  return { googleLogin, isLoggingInWithGoogle };
+};

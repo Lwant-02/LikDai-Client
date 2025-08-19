@@ -64,7 +64,7 @@ export const AccoutHeader = ({
       <div className="flex items-center gap-4 mb-4 md:mb-0">
         <div className="relative">
           <div className="size-16 rounded-full border-2 border-yellow flex justify-center items-center ">
-            <p className="text-2xl font-bold text-yellow">
+            <p className="text-xl font-bold text-yellow">
               {formatName(username)}
             </p>
           </div>

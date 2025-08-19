@@ -92,7 +92,7 @@ export const RegisterForm = () => {
         }
         placeholder="Username"
         label="Username"
-        helperText="Username must contain numbers and lowercase letters only."
+        helperText="Username must be at least 3 characters and not more than 20 characters."
       />
       <InputFiled
         type="email"
