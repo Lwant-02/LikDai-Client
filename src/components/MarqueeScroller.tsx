@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { item } from "@/pages/HomePage";
 
 const KhaChar = () => (
   <div className="text-7xl font-bold text-yellow flex justify-center items-center font-secondary">
@@ -246,12 +248,12 @@ function Logomarquee() {
   };
 
   return (
-    <div className="items-center overflow-hidden my-7">
+    <motion.div variants={item} className="items-center overflow-hidden my-7">
       <div className="w-full max-w-6xl flex flex-col gap-y-6">
         <Marquee logos={logos1} />
         <Marquee logos={logos2} direction="reverse" />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

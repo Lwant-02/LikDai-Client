@@ -1,6 +1,9 @@
-export const MiniSpinner = () => {
+interface MiniSpinnerProps {
+  color?: string;
+}
+export const MiniSpinner = ({ color = "text-yellow" }: MiniSpinnerProps) => {
   return (
-    <div className="text-yellow">
+    <div className={color}>
       <svg
         className="size-7"
         fill="currentColor"

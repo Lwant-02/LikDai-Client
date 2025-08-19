@@ -156,7 +156,7 @@ export const VerifyOtpPage = () => {
             alt="Logo"
             className="size-12 object-cover"
           />
-          <p className="text-2xl font-bold">LikDai - Pro</p>
+          <p className="text-2xl font-bold">LikDai</p>
         </motion.div>
 
         {/* Main Form */}
@@ -211,7 +211,7 @@ export const VerifyOtpPage = () => {
             className="mt-4 h-11 rounded-lg text-primary bg-yellow hover:bg-yellow/90 w-full max-w-sm cursor-pointer flex justify-center items-center text-base font-semibold"
           >
             {isVerifyingOtp ? (
-              <MiniSpinner />
+              <MiniSpinner color="text-white" />
             ) : (
               <>
                 <Shield className="size-5 mr-2" />

@@ -2,11 +2,13 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 import { Button } from "../../../components/ui/button";
 import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
 import { InputFiled } from "../../../components/InputFiled";
-import { useLogin } from "@/hooks/useAuth";
+import { useGoogleLoginHook, useLogin } from "@/hooks/useAuth";
 import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { MiniSpinner } from "@/components/MiniSpinner";
@@ -18,6 +20,7 @@ type FormData = {
 
 export const LoginForm = () => {
   const { isLoggingIn, loginUser } = useLogin();
+  const { googleLogin, isLoggingInWithGoogle } = useGoogleLoginHook();
   const { setAccessToken } = authStore();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
@@ -71,6 +74,68 @@ export const LoginForm = () => {
       },
     });
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const token = response.access_token;
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const { email, name } = res.data;
+        await googleLogin(
+          { email, name },
+          {
+            onSuccess: (accessToken) => {
+              setAccessToken(accessToken);
+              navigate("/account", { replace: true });
+              setFormData({
+                email: "",
+                password: "",
+              });
+              toast("✅️ Success", {
+                description: <p className="text-white">Login successful!</p>,
+                style: {
+                  backgroundColor: "#1f7d53 ",
+                },
+              });
+            },
+            onError: (error: any) => {
+              if (error.code === "ERR_NETWORK") {
+                toast("❌️ Oops!", {
+                  description: (
+                    <p className="text-white">
+                      Request timed out! Please try again later.
+                    </p>
+                  ),
+                });
+                return;
+              }
+              toast("❌️ Oops!", {
+                description: (
+                  <p className="text-white">
+                    {error.response.data.message ||
+                      "Something went wrong. Please try again."}
+                  </p>
+                ),
+              });
+            },
+          }
+        );
+      } catch (error: any) {
+        console.log(error);
+        toast("❌️ Oops!", {
+          description: (
+            <p className="text-white">
+              {error.response.data.message ||
+                "Something went wrong. Please try again."}
+            </p>
+          ),
+        });
+      }
+    },
+  });
 
   return (
     <>
@@ -131,6 +196,22 @@ export const LoginForm = () => {
             Forgot Password?
           </button>
         </div>
+        <Button
+          variant="destructive"
+          type="button"
+          disabled={isLoggingInWithGoogle}
+          onClick={() => handleGoogleLogin()}
+          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+        >
+          {isLoggingInWithGoogle ? (
+            <MiniSpinner />
+          ) : (
+            <>
+              <img src="/svg/google-svg.svg" alt="Google" className="size-6" />
+              <p>Continue with Google</p>
+            </>
+          )}
+        </Button>
       </motion.form>
       <ForgotPasswordDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </>
