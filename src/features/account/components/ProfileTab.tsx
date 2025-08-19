@@ -41,11 +41,12 @@ export const ProfileTab = ({
       return;
     }
     //Check if username is include letter and number
-    if (!/^(?=.*[a-z])(?=.*\d)[a-z0-9]+$/i.test(UserUsername)) {
+    if (UserUsername.length < 3 || UserUsername.length > 20) {
       toast("ⓘ Notice", {
         description: (
           <p className="text-white">
-            Username must contain at least one letter and one number.
+            Username must be at least 3 characters and not more than 20
+            characters.
           </p>
         ),
       });
@@ -252,7 +253,7 @@ export const ProfileTab = ({
               onChange={(e) => setUserUsername(e.target.value)}
               placeholder="Username"
               label="Username"
-              helperText="Username must be contain numbers and lowercase letters only."
+              helperText="Username must be at least 3 characters and not more than 20 characters."
             />
           )}
         </form>
