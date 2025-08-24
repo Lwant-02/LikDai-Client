@@ -153,3 +153,17 @@
 .animate-fade-in {
   animation: fade-in 0.4s ease-out forwards;
 }
+
+@keyframes bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+.bounce-x {
+  animation: bounce-x 1.5s infinite;
+}
