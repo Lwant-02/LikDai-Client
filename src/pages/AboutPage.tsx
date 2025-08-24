@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ReportSummitDialog } from "@/components/ReportSummitDialog";
 import { AboutEngSection } from "@/components/AboutEngSection";
+import { settingStore } from "@/store/settingStore";
 
 // Animation variants
 export const containerVariants = {
@@ -25,6 +26,8 @@ export const itemVariants = {
 };
 
 export const AboutPage = () => {
+  const { isFromHome, setInstallPromptEvent, installPromptEvent } =
+    settingStore();
   const [isSubmittingDialogOpen, setIsSubmittingDialogOpen] =
     useState<boolean>(false);
   const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
@@ -37,6 +40,36 @@ export const AboutPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   });
+
+  useEffect(() => {
+    if (isFromHome) {
+      const downloadSection = document.getElementById("download");
+      if (downloadSection) {
+        downloadSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [isFromHome]);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault(); // Prevent Chrome from showing its banner automatically
+      setInstallPromptEvent(e as BeforeInstallPromptEvent); // Save for later
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    const prompt = installPromptEvent;
+    if (!prompt) return;
+    prompt.prompt();
+    try {
+      const choice = await prompt.userChoice;
+      console.log("PWA install:", choice.outcome);
+    } finally {
+      setInstallPromptEvent(null);
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -55,6 +88,7 @@ export const AboutPage = () => {
         {/* English Section */}
         <AboutEngSection
           setIsSubmittingDialogOpen={setIsSubmittingDialogOpen}
+          handleInstallClick={handleInstallClick}
         />
 
         {/* CTA Section */}

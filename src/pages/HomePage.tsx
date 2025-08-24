@@ -1,4 +1,4 @@
-import { MoveRight } from "lucide-react";
+import { ArrowRight, MoveRight } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 import Logomarquee from "@/components/MarqueeScroller";
+import { settingStore } from "@/store/settingStore";
 
 export const container: Variants = {
   hidden: { opacity: 0 },
@@ -27,6 +28,7 @@ export const item: Variants = {
 };
 
 export function HomePage() {
+  const { setIsFromHome } = settingStore();
   return (
     <>
       <Helmet>
@@ -109,6 +111,18 @@ export function HomePage() {
               <span className="font-bold text-blue">Free</span>
               <span>Forever</span>
             </div>
+          </motion.div>
+          <motion.div
+            variants={item}
+            className="flex justify-center items-center mt-7"
+          >
+            <Link
+              onClick={() => setIsFromHome(true)}
+              to="/about"
+              className="text-sm text-yellow hover:text-yellow/80 transition-colors duration-300 flex justify-center items-center bounce-x "
+            >
+              Download App <ArrowRight className="size-4 ml-2 " />
+            </Link>
           </motion.div>
         </motion.div>
       </BackgroundBeamsWithCollision>

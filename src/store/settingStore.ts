@@ -11,6 +11,9 @@ interface SettingOptions {
   soundEnabled: boolean;
   lessonLevel: LessonLevel;
   targetText: string;
+  isFromHome: boolean;
+  installPromptEvent: BeforeInstallPromptEvent | null;
+  setIsFromHome: (isFromHome: boolean) => void;
   setTargetText: (text: string) => void;
   setLessonLevel: (level: LessonLevel) => void;
   setSelectedKeyMap: (keyMap: KeyMapNames) => void;
@@ -21,6 +24,7 @@ interface SettingOptions {
   setActiveTab: (tab: TabType) => void;
   setUserInput: (v: string) => void;
   setMode: (mode: LanguageMode) => void;
+  setInstallPromptEvent: (event: BeforeInstallPromptEvent | null) => void;
 }
 
 export const settingStore = create<SettingOptions>((set) => ({
@@ -38,6 +42,9 @@ export const settingStore = create<SettingOptions>((set) => ({
   soundEnabled: localStorage.getItem("soundEnabled") === "true" || false,
   lessonLevel: "beginner",
   targetText: "",
+  isFromHome: false,
+  installPromptEvent: null,
+  setIsFromHome: (isFromHome) => set({ isFromHome }),
   setTargetText: (text) => set({ targetText: text }),
   setLessonLevel: (level) => set({ lessonLevel: level }),
   setSelectedKeyMap: (keyMap) => set({ selectedKeyMap: keyMap }),
@@ -54,4 +61,5 @@ export const settingStore = create<SettingOptions>((set) => ({
   setActiveTab: (tab) => set({ activeTab: tab }),
   setUserInput: (v) => set({ userInput: v }),
   setMode: (mode) => set({ mode: mode }),
+  setInstallPromptEvent: (event) => set({ installPromptEvent: event }),
 }));
