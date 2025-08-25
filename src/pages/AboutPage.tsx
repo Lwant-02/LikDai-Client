@@ -50,15 +50,6 @@ export const AboutPage = () => {
     }
   }, [isFromHome]);
 
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault(); // Prevent Chrome from showing its banner automatically
-      setInstallPromptEvent(e as BeforeInstallPromptEvent); // Save for later
-    };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
-
   const handleInstallClick = async () => {
     const prompt = installPromptEvent;
     if (!prompt) return;

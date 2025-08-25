@@ -22,9 +22,24 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { authStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
 import { LessonsPage } from "./pages/LessonsPage";
+import { useEffect } from "react";
+import { settingStore } from "./store/settingStore";
 
 export default function App() {
   const { accessToken } = authStore();
+
+  //Put this global and store it in settingStore so AboutPage.tsx install button can fire immediately
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      settingStore
+        .getState()
+        .setInstallPromptEvent(e as BeforeInstallPromptEvent);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden mx-auto max-w-7xl xl:px-0 px-2 relative">

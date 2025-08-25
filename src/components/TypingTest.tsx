@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 import { KeyMaps } from "@/keymaps/KeyMaps";
 import { useKeySound } from "@/hooks/useKeySound";
+import { AlertDialog } from "./AlertDialog";
 
 interface TypingTestProps {
   targetText: string;
@@ -27,6 +28,8 @@ export const TypingTest = ({
   const currentCharRef = useRef<HTMLSpanElement>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
   const [inputScrollOffset, setInputScrollOffset] = useState(0);
+  const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
+  const UNICODE_REGEX = /[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]/;
 
   const splitter = new GraphemeSplitter();
   // This ensures each character component (like ၵ and ႂ in ၵႂ) highlights separately
@@ -71,11 +74,6 @@ export const TypingTest = ({
     }
   }, [scrollOffset]);
 
-  // Update scroll position when user input changes
-  useEffect(() => {
-    updateScrollPosition();
-  }, [userInput, updateScrollPosition]);
-
   // Calculate input scroll position
   const updateInputScrollPosition = useCallback(() => {
     if (!inputContainerRef.current) return;
@@ -91,11 +89,6 @@ export const TypingTest = ({
       setInputScrollOffset(0);
     }
   }, [inputScrollOffset]);
-
-  // Update input scroll position when user input changes
-  useEffect(() => {
-    updateInputScrollPosition();
-  }, [userInput, updateInputScrollPosition]);
 
   //Handle Eng typing
   const handleEngKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -133,20 +126,40 @@ export const TypingTest = ({
     e.preventDefault();
   };
 
+  // Update scroll position when target text changes
+  useEffect(() => {
+    updateScrollPosition();
+  }, [userInput, updateScrollPosition]);
+
+  // Update input scroll position when user input changes
+  useEffect(() => {
+    updateInputScrollPosition();
+  }, [userInput, updateInputScrollPosition]);
+
   // Global keyboard focus logic
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-      inputRef.current?.focus();
-      if (!isRunning) {
-        startTimer();
-        setStartTime(Date.now());
+      if (UNICODE_REGEX.test(e.key)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setIsAlertDialogOpen(true);
+        return;
+      }
+      if (e.ctrlKey || e.metaKey || e.altKey) {
+        console.log("control key get pressed!");
+        return;
+      } else {
+        inputRef.current?.focus();
+        if (!isRunning) {
+          startTimer();
+          setStartTime(Date.now());
+        }
       }
     };
 
-    window.addEventListener("keydown", handleGlobalKeyDown);
-    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+    window.addEventListener("keydown", handleGlobalKeyDown, true);
+    return () =>
+      window.removeEventListener("keydown", handleGlobalKeyDown, true);
   }, [isRunning, startTimer]);
 
   // Focus input on mount
@@ -266,6 +279,11 @@ export const TypingTest = ({
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
+      />
+      <AlertDialog
+        isOpen={isAlertDialogOpen}
+        setIsOpen={setIsAlertDialogOpen}
+        mode={mode}
       />
     </div>
   );
