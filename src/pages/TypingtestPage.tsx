@@ -40,7 +40,7 @@ export const TypingtestPage = () => {
     setFinalTypedCharacters,
   } = resultStore();
 
-  const { isRunning, startTimer, seconds, stopTimer } = useTimer();
+  const { isRunning, startTimer, seconds, stopTimer, resetTimer } = useTimer();
   const [startTime, setStartTime] = useState<number | null>(null);
   const [totalTypedWords, setTotalTypedWords] = useState<number>(0);
   const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(true);
@@ -173,8 +173,14 @@ export const TypingtestPage = () => {
     setFinalLevel,
   ]);
 
+  //Reset timer and user input when lesson number changes
   useEffect(() => {
-    if (!lessonNumber || !level) {
+    resetTimer();
+    setUserInput("");
+  }, [lessonNumber]);
+
+  useEffect(() => {
+    if (!targetText) {
       navigate("/lessons");
     }
   }, [targetText, navigate]);
