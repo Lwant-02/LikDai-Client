@@ -78,7 +78,7 @@ export const LeaderboardTable = ({
                   </div>
                   <Link
                     to={`/profile/${entry.user.username}`}
-                    className="font-medium truncate"
+                    className="font-medium truncate max-w-sm"
                   >
                     {entry.user.username}
                   </Link>

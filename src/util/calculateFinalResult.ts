@@ -63,10 +63,10 @@ export const calculateFinalResult = ({
   }
 
   return {
-    wpm: Math.round(wpm),
-    rawWpm: Math.round(rawWpm),
-    accuracy: Math.round(accuracy),
-    consistency: parseFloat(consistency.toFixed(2)),
+    wpm: Math.min(200, Math.max(0, Math.round(wpm))),
+    rawWpm: Math.min(200, Math.max(0, Math.round(rawWpm))),
+    accuracy: Math.min(100, Math.max(0, Math.round(accuracy))),
+    consistency: Math.min(100, Math.max(0, parseFloat(consistency.toFixed(2)))),
     timeTaken: Math.round(durationInSeconds),
   };
 };

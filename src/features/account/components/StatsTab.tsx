@@ -8,6 +8,8 @@ export const StatsTab = () => {
   const { isFetchingStats, stats } = useGetStats();
   const { pathname } = useLocation();
 
+  console.log(stats);
+
   if (isFetchingStats) {
     return (
       <div className="w-full h-96  flex justify-center items-center ">
