@@ -32,7 +32,7 @@ export const TypingTest = ({
   const UNICODE_REGEX = /[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]/;
 
   const splitter = new GraphemeSplitter();
-  // This ensures each character component (like ၵ and ႂ in ၵႂ) highlights separately
+  // Use GraphemeSplitter for both modes to properly handle Unicode characters
   const units =
     mode === "shan"
       ? targetText.split("") // Simple split for Shan to highlight each character component
@@ -229,11 +229,10 @@ export const TypingTest = ({
 
               // Simple character comparison
               const isCorrect = i < units.length && typedUnit === targetUnit;
-              const isIncorrect = i < units.length && typedUnit !== targetUnit;
 
               let colorClass = "";
-              if (isIncorrect) {
-                colorClass = "bg-red-500/30 text-red-400 rounded-sm"; // More visible error highlighting
+              if (!isCorrect) {
+                colorClass = "bg-red-500/30! text-red-400! rounded-sm"; // More visible error highlighting
               } else if (isCorrect) {
                 colorClass = "text-green-400";
               } else {
@@ -245,15 +244,16 @@ export const TypingTest = ({
                 }
               }
 
+              const finalClassName = cn(
+                "relative md:text-3xl text-2xl leading-loose transition-all duration-300 ease-in-out ",
+                mode === "shan" && "font-secondary",
+                colorClass
+              );
+
               return (
                 <span
                   key={i}
-                  className={cn(
-                    "relative md:text-3xl text-2xl",
-                    mode === "shan" ? "font-secondary" : "",
-                    colorClass,
-                    "leading-loose transition-all duration-300 ease-in-out"
-                  )}
+                  className={finalClassName}
                   lang={mode === "shan" ? "shn" : "en"}
                 >
                   {typedUnit}
