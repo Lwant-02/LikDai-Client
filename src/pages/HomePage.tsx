@@ -32,11 +32,6 @@ export function HomePage() {
   return (
     <>
       <Helmet>
-        <title>LikDai | Master Shan Typing</title>
-        <meta
-          name="description"
-          content="Start mastering Shan typing with LikDai."
-        />
         <meta
           name="google-site-verification"
           content="DWNWIz0ofitUjEfvUzzeCg_bVdWMoly52XEYSxFDsAg"
