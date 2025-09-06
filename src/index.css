@@ -5,11 +5,18 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "NamTengWebPro";
+  src: url("/fonts/NamTengWebPro.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Padauk", sans-serif;
+  --font-secondary: "NamTengWebPro", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -22,7 +29,7 @@
 }
 :root {
   --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "Padauk", sans-serif;
+  --font-secondary: "NamTengWebPro", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
