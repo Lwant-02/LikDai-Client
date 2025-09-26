@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
@@ -13,6 +14,7 @@ interface LessonGridProps {
 export const LessonGrid = ({ content, index }: LessonGridProps) => {
   const { mode, lessonLevel, setTargetText } = settingStore();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const getlevelColor = (level: LessonLevel) => {
     switch (level) {
@@ -29,26 +31,6 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
       default:
         return "bg-gray/10 text-gray border-gray/20";
     }
-  };
-
-  const getlevelText = (level: LessonLevel) => {
-    if (mode === "shan") {
-      switch (level) {
-        case "beginner":
-          return "Beginner";
-        case "intermediate":
-          return "Intermediate";
-        case "advanced":
-          return "Advanced";
-        case "quotes":
-          return "Quote";
-        case "music":
-          return "Music";
-        default:
-          return level;
-      }
-    }
-    return level.charAt(0).toUpperCase() + level.slice(1);
   };
 
   return (
@@ -72,7 +54,7 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
                   mode === "shan" && "font-secondary"
                 )}
               >
-                {mode === "shan" ? "ၵၢၼ်ၽိုၵ်း" : "Lesson"}-
+                {t("lesson_page.lessons")}-
               </span>{" "}
               {index + 1}
             </div>
@@ -83,7 +65,7 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
                 "text-xs font-semibold px-3 py-1 rounded-full border capitalize opacity-70"
               )}
             >
-              {getWordNumber(content)} words
+              {getWordNumber(content)} {t("lesson_page.word")}
             </span>
             <span
               className={cn(
@@ -91,7 +73,7 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
                 getlevelColor(lessonLevel)
               )}
             >
-              {getlevelText(lessonLevel)}
+              {t(`lesson_page.${lessonLevel}.title`)}
             </span>
           </div>
         </div>

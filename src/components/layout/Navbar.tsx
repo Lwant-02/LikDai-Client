@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Crown, Keyboard, Moon, Sun } from "lucide-react";
+import { Crown, Keyboard, Languages, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   UserIcon,
   HomeIcon,
@@ -13,39 +15,50 @@ import { useGetProfile } from "@/hooks/useUser";
 import { settingStore } from "@/store/settingStore";
 import { TooltipHover } from "../TooltipHover";
 
-const navLink = [
-  {
-    name: "Home",
-    path: "/",
-    icon: <HomeIcon className="size-5" />,
-  },
-  {
-    name: "Lessons",
-    path: "/lessons",
-    icon: <Keyboard className="size-5" />,
-  },
-  {
-    name: "Leaderboards",
-    path: "/leaderboards",
-    icon: <Crown className="size-5 " />,
-  },
-  {
-    name: "About",
-    path: "/about",
-    icon: <InformationCircleIcon className="size-5 " />,
-  },
-];
-
 export const Navbar = () => {
   const { pathname } = useLocation();
+  const { i18n, t } = useTranslation();
   const { accessToken } = authStore();
   const { profile } = useGetProfile();
   const { theme, setTheme } = settingStore();
+  const [language, setLanguage] = useState<TranslationMode>(() => {
+    const saved = localStorage.getItem("language") as TranslationMode | null;
+    return saved ?? "en";
+  });
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
   const isCertificatePage = pathname.includes("/certificate");
   const isVerifyOtpPage = pathname.includes("/verify-otp");
+
+  const navLink = [
+    {
+      name: t("nav_bar.home"),
+      path: "/",
+      icon: <HomeIcon className="size-5" />,
+    },
+    {
+      name: t("nav_bar.lessons"),
+      path: "/lessons",
+      icon: <Keyboard className="size-5" />,
+    },
+    {
+      name: t("nav_bar.leaderboards"),
+      path: "/leaderboards",
+      icon: <Crown className="size-5 " />,
+    },
+    {
+      name: t("nav_bar.about"),
+      path: "/about",
+      icon: <InformationCircleIcon className="size-5 " />,
+    },
+  ];
+
+  useEffect(() => {
+    if (language) {
+      localStorage.setItem("language", language);
+    }
+  }, [language]);
 
   if (
     isChangePasswordPage ||
@@ -71,7 +84,9 @@ export const Navbar = () => {
             alt="Logo"
             className="xl:size-12 size-10 object-cover xl:hidden flex"
           />
-          <p className="text-2xl font-bold md:flex hidden">LikDai</p>
+          <p className="text-2xl font-bold md:flex hidden">
+            {t("home_page.title")}
+          </p>
         </Link>
         <div className="flex justify-center items-center gap-5 mr-1">
           {navLink.map((link) => (
@@ -88,7 +103,21 @@ export const Navbar = () => {
             </TooltipHover>
           ))}
           <TooltipHover
-            tooltipText={theme === "dark" ? "Dark" : "Light"}
+            tooltipText={t(`nav_bar.language.${language === "en" ? 0 : 1}`)}
+            className="flex justify-center"
+          >
+            <span
+              onClick={() => {
+                i18n.changeLanguage(language === "en" ? "shn" : "en");
+                setLanguage(language === "en" ? "shn" : "en");
+              }}
+              className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
+            >
+              <Languages className="size-5 " />
+            </span>
+          </TooltipHover>
+          <TooltipHover
+            tooltipText={t(`nav_bar.theme.${theme === "dark" ? 1 : 0}`)}
             className="flex justify-center"
           >
             <span
@@ -106,7 +135,7 @@ export const Navbar = () => {
           </TooltipHover>
         </div>
         {accessToken ? (
-          <TooltipHover tooltipText={profile?.username || "Account"}>
+          <TooltipHover tooltipText={profile?.username || t("nav_bar.account")}>
             <Link
               to="/account"
               className={cn(
@@ -119,7 +148,7 @@ export const Navbar = () => {
             </Link>
           </TooltipHover>
         ) : (
-          <TooltipHover tooltipText="Login">
+          <TooltipHover tooltipText={t("nav_bar.login")}>
             <Link to="/login">
               <UserIcon
                 className={cn(

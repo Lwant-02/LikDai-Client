@@ -10,6 +10,7 @@ import {
   Globe,
   CloudDownload,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import {
   anotherSupporterContacts,
@@ -22,86 +23,6 @@ import { containerVariants, itemVariants } from "@/pages/AboutPage";
 import { FeatureCard } from "./FeatureCard";
 import { Button } from "./ui/button";
 
-const timelineItems = [
-  {
-    title: "လိူၵ်ႈၽႃႇသႃႇ",
-    description: "လိူၵ်ႈၼႂ်းၵႄႈ လိၵ်ႈတႆး လႄႈ လိၵ်ႈဢိင်းၵလဵတ်ႈ",
-    icon: <span className="text-xl font-bold">1</span>,
-    color: "bg-blue/20 text-blue",
-  },
-  {
-    title: "လိူၵ်ႈၸၼ်ႉ",
-    description:
-      "လိူၵ်ႈၼႂ်းၵႄႈ ၸၼ်ႉ Beginner, Intermediate, Advanced, Quotes, Music",
-    icon: <span className="text-xl font-bold">2</span>,
-    color: "bg-yellow/20 text-yellow",
-  },
-  {
-    title: "လိူၵ်ႈလွၵ်းမိုဝ်း",
-    description:
-      "လိူၵ်ႈၼႂ်းၵႄႈ လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း၊ ပၢင်လူင် ၊ ယုင်းၶဵဝ် ဢမ်ႇၼၼ် လၵ်းၸဵင်။",
-    icon: <span className="text-xl font-bold">3</span>,
-    color: "bg-purple/20 text-purple",
-  },
-  {
-    title: "တႄႇတႅမ်ႈ",
-    description: "မိူဝ်ႈတႄႇပေႃႉလိၵ်ႈၼၼ်ႉ ၶၢဝ်းယၢမ်းမၼ်း တေတႄႇမႃးႁင်းမၼ်းယဝ်ႉ။",
-    icon: <span className="text-xl font-bold">4</span>,
-    color: "bg-green/20 text-green",
-  },
-  {
-    title: "ထတ်းတူၺ်း result ၸဝ်ႈၵဝ်ႇ",
-    description:
-      "ဝၢႆးသေတႅမ်ႈယဝ်ႉ ထတ်းတူၺ်း WPM, Accuracy, Consistency လႄႈ Metrics တၢင်ႇၸိူဝ်း။",
-    icon: <span className="text-xl font-bold">5</span>,
-    color: "bg-orange/20 text-orange",
-  },
-  {
-    title: "ၸွမ်းတူၺ်းလွင်ႈၶိုၼ်ႈယႂ်ႇၸဝ်ႈၵဝ်ႇ",
-    description:
-      "ႁဵတ်းဢၵွင်ႉ တႃႇသိမ်းဝႆႉ result ၸဝ်ႈၵဝ်ႇသေ တႅၵ်ႈၼိူင်းၵၼ်တင်း ၵူၼ်းတၢင်ႇၵေႃႉ ဢၼ်မီးတီႈ  ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်ၼၼ်ႉ။",
-    icon: <span className="text-xl font-bold">6</span>,
-    color: "bg-purple/20 text-purple",
-  },
-];
-
-export const keyfeatures = [
-  {
-    title: "Bilingual Support",
-    description: "Practice typing in both English and Shan languages.",
-    icon: <Globe className="size-7 text-yellow" />,
-  },
-  {
-    title: "Multiple Typing Lessons",
-    description:
-      "Practice typing with various lessons such as beginner, intermediate, advanced and quotes",
-    icon: <Quote className="size-7 text-purple rotate-180" />,
-  },
-  {
-    title: "Achievements",
-    description:
-      "Earn badges and unlock achievements as you improve your typing speed, accuracy, and consistency over time.",
-    icon: <Award className="size-7 text-blue" />,
-  },
-  {
-    title: "Leaderboards",
-    description:
-      "Compete with others on the leaderboard to see how you rank against other users.",
-    icon: <BarChart className="size-7 text-green" />,
-  },
-  {
-    title: "Keyboards Support",
-    description:
-      "Support 4 Shan Keyboards (Namkhone, Panglong, Yunghkio, Sil) and English Keyboard.",
-    icon: <Keyboard className="size-7 text-orange" />,
-  },
-  {
-    title: "Progressive Web App",
-    description: "Download the app and use it on your device directly.",
-    icon: <CloudDownload className="size-7 text-red" />,
-  },
-];
-
 export const AboutEngSection = ({
   setIsSubmittingDialogOpen,
   handleInstallClick,
@@ -109,6 +30,80 @@ export const AboutEngSection = ({
   setIsSubmittingDialogOpen: (value: boolean) => void;
   handleInstallClick: () => void;
 }) => {
+  const { t } = useTranslation();
+
+  const timelineItems = [
+    {
+      title: t("about_page.usage.usage_1_title"),
+      description: t("about_page.usage.usage_1_description"),
+      icon: <span className="text-xl font-bold">1</span>,
+      color: "bg-blue/20 text-blue",
+    },
+    {
+      title: t("about_page.usage.usage_2_title"),
+      description: t("about_page.usage.usage_2_description"),
+      icon: <span className="text-xl font-bold">2</span>,
+      color: "bg-yellow/20 text-yellow",
+    },
+    {
+      title: t("about_page.usage.usage_3_title"),
+      description: t("about_page.usage.usage_3_description"),
+      icon: <span className="text-xl font-bold">3</span>,
+      color: "bg-purple/20 text-purple",
+    },
+    {
+      title: t("about_page.usage.usage_4_title"),
+      description: t("about_page.usage.usage_4_description"),
+      icon: <span className="text-xl font-bold">4</span>,
+      color: "bg-green/20 text-green",
+    },
+    {
+      title: t("about_page.usage.usage_5_title"),
+      description: t("about_page.usage.usage_5_description"),
+      icon: <span className="text-xl font-bold">5</span>,
+      color: "bg-orange/20 text-orange",
+    },
+    {
+      title: t("about_page.usage.usage_6_title"),
+      description: t("about_page.usage.usage_6_description"),
+      icon: <span className="text-xl font-bold">6</span>,
+      color: "bg-purple/20 text-purple",
+    },
+  ];
+
+  const keyfeatures = [
+    {
+      title: t("about_page.key_features.feature_1_title"),
+      description: t("about_page.key_features.feature_1_description"),
+      icon: <Globe className="size-7 text-yellow" />,
+    },
+    {
+      title: t("about_page.key_features.feature_2_title"),
+      description: t("about_page.key_features.feature_2_description"),
+      icon: <Quote className="size-7 text-purple rotate-180" />,
+    },
+    {
+      title: t("about_page.key_features.feature_3_title"),
+      description: t("about_page.key_features.feature_3_description"),
+      icon: <Award className="size-7 text-blue" />,
+    },
+    {
+      title: t("about_page.key_features.feature_4_title"),
+      description: t("about_page.key_features.feature_4_description"),
+      icon: <BarChart className="size-7 text-green" />,
+    },
+    {
+      title: t("about_page.key_features.feature_5_title"),
+      description: t("about_page.key_features.feature_5_description"),
+      icon: <Keyboard className="size-7 text-orange" />,
+    },
+    {
+      title: t("about_page.key_features.feature_6_title"),
+      description: t("about_page.key_features.feature_6_description"),
+      icon: <CloudDownload className="size-7 text-red" />,
+    },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -122,11 +117,13 @@ export const AboutEngSection = ({
           transition={{ duration: 0.8 }}
           className="z-20 text-center px-4"
         >
-          <div className="flex gap-2 justify-center items-center">
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">LikDai</h1>
+          <div className="flex gap-2 py-3 justify-center items-center">
+            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
+              {t("home_page.title")}
+            </h1>
           </div>
-          <p className="text-xl sm:text-2xl opacity-80 max-w-2xl mx-auto">
-            Master Shan Typing with Precision and Speed
+          <p className="text-xl sm:text-2xl py-1 opacity-80 max-w-2xl mx-auto">
+            {t("about_page.description")}
           </p>
         </motion.div>
       </section>
@@ -144,20 +141,15 @@ export const AboutEngSection = ({
           <motion.div variants={itemVariants} className="text-center mb-16 ">
             <div className="flex items-center justify-center gap-3 mb-4">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Tuk Heng Hackathon Winner
+                {t("about_page.hackathon.title")}
               </h2>
             </div>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              LikDai is the first winner of{" "}
-              <a
-                href="https://tukhenghackathon.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-yellow"
-              >
-                Tuk Heng Hackathon
-              </a>
-              , organized by Team{" "}
+              {t("about_page.hackathon.description1")}{" "}
+              <span className="text-yellow">
+                {t("about_page.hackathon.name")}
+              </span>
+              , {t("about_page.hackathon.description2")}{" "}
               <a
                 href="https://www.haohaa.com/en"
                 target="_blank"
@@ -166,35 +158,10 @@ export const AboutEngSection = ({
               >
                 Hao Haa
               </a>
-              . This project is built with the hope of promoting Shan language
-              typing education and hope to make it gives advantages to Shan
-              language learners.
+              {t("about_page.hackathon.description3")}
             </p>
           </motion.div>
 
-          {/* Child Laborer Day Honor */}
-          <motion.div variants={itemVariants} className="text-center mb-16 ">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Honor of Child Laborers
-              </h2>
-            </div>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              LikDai is built in honor of{" "}
-              <span className="text-yellow">Child Laborers Day</span>, organized
-              by Team{" "}
-              <a
-                href="https://www.haohaa.com/en"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-yellow hover:underline"
-              >
-                Hao Haa
-              </a>
-              , with the hope of promoting education, opportunity, and a better
-              future.
-            </p>
-          </motion.div>
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -211,8 +178,7 @@ export const AboutEngSection = ({
             </div>
             <div className="h-1 w-24 bg-gradient-to-r from-yellow to-orange mx-auto mb-6 rounded-full" />
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              LikDai is proudly open source. Join our community and help us
-              build the future of Shan language typing education.
+              {t("about_page.open_source.description")}
             </p>
           </motion.div>
 
@@ -223,36 +189,14 @@ export const AboutEngSection = ({
           >
             <div className="text-center">
               <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-blue">
-                Our Mission -{" "}
-                <span className="font-secondary">ယိူင်းဢၢၼ်းႁဝ်းၶႃႈ</span>
+                {t("about_page.mission.title")}
               </h3>
               <div className="prose prose-lg dark:prose-invert mx-auto">
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6">
-                  LikDai is a specialized typing platform designed to help users
-                  master Shan language typing. Inspired by MonkeyType, we've
-                  created a clean, distraction-free environment where you can
-                  practice and improve your typing skills in both English and
-                  Shan languages.
+                  {t("about_page.mission.1")}
                 </p>
                 <p className="text-lg sm:text-xl opacity-90 leading-relaxed">
-                  Our mission is to preserve and promote the Shan language
-                  through technology, making it accessible for both native
-                  speakers and learners to develop their digital literacy
-                  skills.
-                </p>
-              </div>
-              <div className="prose prose-lg dark:prose-invert mx-auto mt-3">
-                <p className="text-lg sm:text-xl opacity-90 leading-relaxed mb-6 font-secondary">
-                  LikDai ၼႆႉၶူင်ႊသၢင်ႈဝႆႉ တႃႇပဵၼ်လွင်ႈၵမ်ႉထႅမ်
-                  ၼႂ်းၵၢၼ်ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး ႁႂ်ႈလူင်ႉလႅၼ်ႇ လႄႈ လႅတ်းၽႆးယဝ်ႉ။
-                  ငဝ်ႈတိုၼ်း LikDai ၼႆႉဢိင်ဢဝ်တီႈ MonkeyType
-                  သေၶူင်ႊသၢင်ႈပဵၼ်မႃးယဝ်ႉ၊ ပီႈၼွင်ႉႁဝ်း ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး လႄႈ
-                  လိၵ်ႈဢိင်းၵလဵတ်ႈ ၼႂ်း LikDai ၼႆႉလႆႈယဝ်ႉဢေႃႈ။
-                </p>
-                <p className="text-lg sm:text-xl opacity-90 leading-relaxed font-secondary">
-                  ယိူင်းဢၢၼ်းႁဝ်းၶႃႈတႄႉ တႃႇထိင်းသိမ်း လႄႈ ယုၵ်ႉမုၼ်း လိၵ်ႈတႆး
-                  လိူၺ်ႈလၢႆးတၢင်းပၢႆးၸၢင်ႈ၊ ၼင်ႇႁိုဝ်ပီႈၼွင်ႉတႆး လႄႈ
-                  ၽူႈလဵပ်ႈႁဵၼ်းလိၵ်ႈတႆး လႆႈၽိုၵ်းၼမ်ႉၵတ်ႉပၢႆးၸၢင်ႈၵႂႃႇ။
+                  {t("about_page.mission.2")}
                 </p>
               </div>
             </div>
@@ -279,11 +223,10 @@ export const AboutEngSection = ({
                 </svg>
               </div>
               <h4 className="text-xl font-semibold mb-3 text-green">
-                Free & Open
+                {t("about_page.features.feature_1.title")}
               </h4>
               <p className="text-gray-600 dark:text-gray-400">
-                Completely free to use with full source code available on
-                GitHub. No hidden costs or premium features.
+                {t("about_page.features.feature_1.description")}
               </p>
             </div>
 
@@ -304,11 +247,10 @@ export const AboutEngSection = ({
                 </svg>
               </div>
               <h4 className="text-xl font-semibold mb-3 text-blue">
-                Community Driven
+                {t("about_page.features.feature_2.title")}
               </h4>
               <p className="text-gray-600 dark:text-gray-400">
-                Built by the community, for the community. Every contribution
-                helps preserve and promote Shan language.
+                {t("about_page.features.feature_2.description")}
               </p>
             </div>
 
@@ -329,18 +271,19 @@ export const AboutEngSection = ({
                 </svg>
               </div>
               <h4 className="text-xl font-semibold mb-3 text-purple">
-                Modern Tech
+                {t("about_page.features.feature_3.title")}
               </h4>
               <p className="text-gray-600 dark:text-gray-400">
-                Built with React, TypeScript, and modern web technologies for
-                the best user experience.
+                {t("about_page.features.feature_3.description")}
               </p>
             </div>
           </motion.div>
 
           {/* Contribution Section */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h3 className="text-3xl font-bold mb-8">How to Contribute</h3>
+            <h3 className="text-3xl font-bold mb-8">
+              {t("about_page.contribute.title")}
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-yellow/5 to-orange/5 dark:from-yellow/10 dark:to-orange/10 rounded-xl p-8 border border-yellow/20">
                 <div className="w-16 h-16 bg-yellow/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -359,24 +302,23 @@ export const AboutEngSection = ({
                   </svg>
                 </div>
                 <h4 className="text-xl font-semibold mb-4 text-yellow">
-                  Developers
+                  {t("about_page.contribute.developer.title")}
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Help us improve the platform by contributing code, fixing
-                  bugs, or adding new features.
+                  {t("about_page.contribute.developer.description")}
                 </p>
                 <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-yellow rounded-full"></span>
-                    <span>Frontend Development (React/TypeScript)</span>
+                    <span>{t("about_page.contribute.developer.list_1")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-yellow rounded-full"></span>
-                    <span>Backend Development (Node.js)</span>
+                    <span>{t("about_page.contribute.developer.list_2")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-yellow rounded-full"></span>
-                    <span>UI/UX Improvements</span>
+                    <span>{t("about_page.contribute.developer.list_3")}</span>
                   </div>
                 </div>
               </div>
@@ -398,24 +340,23 @@ export const AboutEngSection = ({
                   </svg>
                 </div>
                 <h4 className="text-xl font-semibold mb-4 text-green">
-                  Content Contributors
+                  {t("about_page.contribute.content.title")}
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Help expand our Shan language content, improve translations,
-                  or add new typing exercises.
+                  {t("about_page.contribute.content.description")}
                 </p>
                 <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-green rounded-full"></span>
-                    <span>Shan Language Content</span>
+                    <span>{t("about_page.contribute.content.list_1")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-green rounded-full"></span>
-                    <span>Translation & Localization</span>
+                    <span>{t("about_page.contribute.content.list_2")}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-green rounded-full"></span>
-                    <span>Educational Materials</span>
+                    <span>{t("about_page.contribute.content.list_3")}</span>
                   </div>
                 </div>
               </div>
@@ -433,12 +374,11 @@ export const AboutEngSection = ({
                   <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                 </svg>
                 <h3 className="text-3xl font-bold text-white">
-                  Join Us on GitHub
+                  {t("about_page.github_title")}
                 </h3>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Star our repository, report issues, or submit pull requests.
-                Every contribution helps make LikDai better for everyone.
+                {t("about_page.github_description")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -488,12 +428,11 @@ export const AboutEngSection = ({
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Key Features
+              {t("about_page.key_features.title")}
             </h2>
             <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
             <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              Everything you need to master typing in both English and Shan
-              languages
+              {t("about_page.key_features.description")}
             </p>
           </motion.div>
 
@@ -522,12 +461,11 @@ export const AboutEngSection = ({
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Install LikDai on Your Computer
+              {t("about_page.install.title")}
             </h2>
             <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
             <p className="text-lg opacity-80 max-w-2xl mx-auto">
-              Get the best experience by installing LikDai as a Progressive Web
-              App (PWA) directly on your desktop or laptop.
+              {t("about_page.install.description")}
             </p>
           </motion.div>
 
@@ -539,14 +477,14 @@ export const AboutEngSection = ({
                 className="size-fit "
               />
             </div>
-            <p className="my-4">Download LikDai on your computer</p>
+            <p className="my-4">{t("about_page.install.text")}</p>
             <Button
               size="lg"
               type="button"
               onClick={handleInstallClick}
               className="bg-yellow hover:bg-yellow/80 text-background font-bold text-lg px-8 py-6 cursor-pointer"
             >
-              Download Now
+              {t("about_page.install.button")}
             </Button>
           </div>
         </motion.div>
@@ -563,7 +501,7 @@ export const AboutEngSection = ({
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-secondary">
-              လၢႆးၸႂ်ႉတိုဝ်း
+              {t("about_page.usage.title")}
             </h2>
             <div className="h-1 w-20 bg-yellow mx-auto mb-8 rounded-full" />
           </motion.div>
@@ -622,7 +560,7 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold mb-6 "
           >
-            Report a Bug or Give Feedbacks{" "}
+            {t("about_page.report_title")}{" "}
             <Bug className="inline-block size-7" />
           </motion.h2>
 
@@ -630,14 +568,12 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-lg opacity-80 mb-8 max-w-2xl mx-auto "
           >
-            If you encounter any bugs or issues or have any suggestions, please
-            share them to us. We are always looking to improve and make LikDai
-            even better for you.{" "}
+            {t("about_page.report_description")}{" "}
             <span
               onClick={() => setIsSubmittingDialogOpen(true)}
               className="text-yellow cursor-pointer hover:underline"
             >
-              Report now
+              {t("about_page.report_button")}
             </span>
           </motion.p>
         </motion.div>
@@ -656,7 +592,8 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold mb-6 "
           >
-            About Developer <UserCog className="inline-block size-7" />
+            {t("about_page.developer")}{" "}
+            <UserCog className="inline-block size-7" />
           </motion.h2>
 
           <motion.p
@@ -664,11 +601,9 @@ export const AboutEngSection = ({
             className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
           >
             <span className="font-bold text-yellow">
-              ၸၢႆးၼေႃႇမိူင်း(လွၼ်ႉ){" "}
+              {t("about_page.developer_name")}{" "}
             </span>
-            ပဵၼ် ၽူႈ ၶူင်ႊသၢင်ႈ ႁဵတ်းဢွၵ်ႇ ၶူင်းၵၢၼ်ၼႆႉ မႃးမိူဝ်ႈ လိူၼ် July ပီႊ
-            2025 ၼႆယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၽူႈၶူင်ႊသၢင်ႈလႆႈလူၺ်ႈ ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ
-            ၼႆႉယူႇၶႃႈ။
+            {t("about_page.developer_description")}
           </motion.p>
           <motion.div className="mb-8 mt-3" variants={itemVariants}>
             <div className="flex flex-wrap justify-center gap-4">
@@ -705,20 +640,20 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold mb-6 "
           >
-            Supports & Resources <Handshake className="inline-block size-7" />
+            {t("about_page.support_title")}{" "}
+            <Handshake className="inline-block size-7" />
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
             className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
           >
-            ယိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇၼမ်ထိုင်{" "}
+            {t("about_page.reference_description")}
+            {"  "}
             <span className="font-bold text-yellow">
-              Sai Mao (TMK-ထုင်ႉမၢဝ်းၶမ်း)
+              {t("about_page.reference_name")}{" "}
             </span>
-            ဢၼ်လႆႈၸွႆႈထႅမ်ပၼ် Shan Quotes လႄႈ ၶူဝ်းၶွင်တၢင်ႇဢၼ် လႄႈ
-            လွင်ႈၵမ်ႉၸွႆႈ တႃႇၶူင်းၵၢၼ်ၼႆႉယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးမၢဝ်း လႆႈလူၺ်ႈ
-            ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+            {t("about_page.reference_description_2")}
           </motion.p>
           <motion.div className="mb-8 mt-3" variants={itemVariants}>
             <div className="flex flex-wrap justify-center gap-4">
@@ -743,11 +678,11 @@ export const AboutEngSection = ({
             variants={itemVariants}
             className="text-lg opacity-80 max-w-2xl mx-auto font-secondary"
           >
-            ယဝ်ႉၵေႃႈ ၶွပ်ႈၸႂ်ထိုင်ပႃး{" "}
-            <span className="font-bold text-yellow">ၸၢႆးၸၢမ်ႇၺုၼ်ႉ </span>
-            ႁဝ်း ဢၼ်လႆႈၸွၺ်ႈ ထတ်းၶေႃႈသဵင်တႅတ်ႈ လႄႈ ၸွၺ်ႈ ၽိူမ်ႉၶေႃႈမုၼ်း
-            လိၵ်ႈတႆး တွၼ်ႈတႃႇ ၶူင်းၵၢၼ်ၼႆႉၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးၸၢမ်ႇၺုၼ်ႉ
-            လႆႈလူၺ်ႈ ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+            {t("about_page.support_description")}{" "}
+            <span className="font-bold text-yellow">
+              {t("about_page.support_name")}{" "}
+            </span>
+            {t("about_page.support_description_2")}
           </motion.p>
           <motion.div className="mb-8 mt-3" variants={itemVariants}>
             <div className="flex flex-wrap justify-center gap-4">

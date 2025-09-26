@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronsUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { ReportSummitDialog } from "@/components/ReportSummitDialog";
@@ -26,6 +27,7 @@ export const itemVariants = {
 };
 
 export const AboutPage = () => {
+  const { t } = useTranslation();
   const { isFromHome, setInstallPromptEvent, installPromptEvent } =
     settingStore();
   const [isSubmittingDialogOpen, setIsSubmittingDialogOpen] =
@@ -95,16 +97,14 @@ export const AboutPage = () => {
               variants={itemVariants}
               className="text-3xl sm:text-4xl font-bold mb-6"
             >
-              Ready to Improve Your Typing Skills?
+              {t("about_page.footer.title")}
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
               className="text-lg opacity-80 mb-8 max-w-2xl mx-auto"
             >
-              Join thousands of users who are already mastering Shan typing with
-              LikDai. It's completely free and designed to help you type faster
-              and more accurately.
+              {t("about_page.footer.description")}
             </motion.p>
 
             <motion.div variants={itemVariants}>
@@ -113,7 +113,7 @@ export const AboutPage = () => {
                 className="bg-yellow hover:bg-yellow/80 text-background font-bold text-lg px-8 py-6 cursor-pointer"
                 onClick={() => navigate("/lessons")}
               >
-                Start Typing Now
+                {t("home_page.button")}
               </Button>
             </motion.div>
           </motion.div>

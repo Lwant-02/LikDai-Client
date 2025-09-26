@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 import { LeaderboardPagination } from "@/features/Leaderboard/components/LeaderboardPagination";
 import { LeaderboardHeader } from "@/features/Leaderboard/components/LeaderboardHeader";
@@ -12,6 +13,7 @@ import { Spinner } from "@/components/Spinner";
 
 export const LeaderboardPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
   const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
   const page = searchParams.get("page") || "1";
@@ -85,7 +87,7 @@ export const LeaderboardPage = () => {
           />
 
           <p className="md:text-2xl text-xl font-bolds mb-3">
-            {languageFilter === "eng" ? "English" : "Shan"} All Time
+            {t(`leaderboard_page.description.${languageFilter}`)}
           </p>
 
           {isFetchingLeaderboard ? (
@@ -113,14 +115,13 @@ export const LeaderboardPage = () => {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="mt-4 text-xs sm:text-sm text-center mb-20"
                   >
-                    Leaderboards are updated every 15 minutes. Only verified
-                    accounts are displayed.
+                    {t("leaderboard_page.note")}
                   </motion.p>
                 </>
               ) : (
                 <div className="w-full flex justify-center items-center h-52">
                   <p className="text-center text-lg opacity-70">
-                    Currently, there are no leaderboards to display.
+                    {t("leaderboard_page.no_data")}
                   </p>
                 </div>
               )}

@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import { cn } from "@/lib/utils";
 
 export const LessonHeader = () => {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -13,15 +15,14 @@ export const LessonHeader = () => {
       <div className="flex items-center justify-center gap-2 mb-4 ">
         <h1
           className={cn(
-            "text-5xl font-bold bg-gradient-to-r from-yellow to-orange bg-clip-text text-transparent"
+            "text-5xl font-bold bg-gradient-to-r py-3 from-yellow to-orange bg-clip-text text-transparent"
           )}
         >
-          Typing Lessons
+          {t("lesson_page.title")}
         </h1>
       </div>
       <p className="text-xl opacity-80 max-w-2xl mx-auto">
-        Choose your level and start improving your typing skills with structured
-        lessons
+        {t("lesson_page.description")}
       </p>
     </motion.div>
   );

@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 
 export const LessonLanguageSelector = () => {
+  const { t } = useTranslation();
   const { mode, setMode } = settingStore();
   const handleLanguageChange = () => {
     setMode(mode === "eng" ? "shan" : "eng");
@@ -19,7 +22,9 @@ export const LessonLanguageSelector = () => {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
             <Globe className="size-6 text-yellow" />
-            <span className="text-lg font-semibold">Language</span>
+            <span className="text-lg font-semibold">
+              {t("lesson_page.lang_mode.title")}
+            </span>
           </div>
           <div className="flex gap-3">
             <span
@@ -34,7 +39,9 @@ export const LessonLanguageSelector = () => {
                 alt="Shan"
                 className="size-5 rounded-full object-cover border border-foreground"
               />
-              <span className="font-semibold">Shan</span>
+              <span className="font-semibold">
+                {t("lesson_page.lang_mode.1")}
+              </span>
             </span>
             <span
               onClick={handleLanguageChange}
@@ -48,7 +55,9 @@ export const LessonLanguageSelector = () => {
                 alt="English"
                 className="size-5 rounded-full object-cover border border-foreground"
               />
-              <span className="font-semibold">English</span>
+              <span className="font-semibold">
+                {t("lesson_page.lang_mode.0")}
+              </span>
             </span>
           </div>
         </div>

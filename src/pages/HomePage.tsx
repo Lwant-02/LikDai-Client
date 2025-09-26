@@ -3,6 +3,7 @@ import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 import { BackgroundBeamsWithCollision } from "@/components/BackgroundBeams";
 import Logomarquee from "@/components/MarqueeScroller";
@@ -29,6 +30,8 @@ export const item: Variants = {
 
 export function HomePage() {
   const { setIsFromHome } = settingStore();
+  const { t } = useTranslation();
+
   return (
     <>
       <Helmet>
@@ -49,21 +52,23 @@ export function HomePage() {
             variants={item}
             className="flex gap-2 justify-center items-center"
           >
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">LikDai</h1>
+            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
+              {t("home_page.title")}
+            </h1>
           </motion.div>
 
           <motion.div variants={item} className="mt-2 mb-4">
             <TypeAnimation
               sequence={[
-                "Master Shan Typing with LikDai",
+                t("home_page.type_animation.0"),
                 1000,
-                "Practice Fast. Type Smart.",
+                t("home_page.type_animation.1"),
                 1000,
-                "Challenge Yourself. Improve Every Day.",
+                t("home_page.type_animation.2"),
                 1000,
-                "Track Your Speed and Accuracy",
+                t("home_page.type_animation.3"),
                 1000,
-                "Become a Shan Typing Pro!",
+                t("home_page.type_animation.4"),
                 1000,
               ]}
               speed={50}
@@ -82,7 +87,7 @@ export function HomePage() {
               to="/lessons"
               className="flex gap-3 justify-center items-center  border border-yellow/50 rounded-lg py-2 hover:border-yellow transition-colors duration-200 cursor-pointer px-6"
             >
-              <p className="text-sm md:text-base ">Start Typing Now</p>
+              <p className="text-sm md:text-base ">{t("home_page.button")}</p>
               <MoveRight className="size-4" />
             </Link>
           </motion.div>
@@ -94,17 +99,19 @@ export function HomePage() {
           >
             <div className="flex flex-col items-center">
               <span className="font-bold text-yellow">1000+</span>
-              <span>Lessons</span>
+              <span>{t("home_page.lesson")}</span>
             </div>
             <div className="h-8 w-px bg-primary/20" />
             <div className="flex flex-col items-center">
               <span className="font-bold text-green">2</span>
-              <span>Languages</span>
+              <span>{t("home_page.language")}</span>
             </div>
             <div className="h-8 w-px bg-primary/20" />
             <div className="flex flex-col items-center">
-              <span className="font-bold text-blue">Free</span>
-              <span>Forever</span>
+              <span className="font-bold text-blue">
+                {t("home_page.free.title")}
+              </span>
+              <span>{t("home_page.free.description")}</span>
             </div>
           </motion.div>
           <motion.div
@@ -116,7 +123,7 @@ export function HomePage() {
               to="/about"
               className="text-sm text-yellow hover:text-yellow/80 transition-colors duration-300 flex justify-center items-center bounce-x "
             >
-              Download App <ArrowRight className="size-4 ml-2 " />
+              {t("home_page.download")} <ArrowRight className="size-4 ml-2 " />
             </Link>
           </motion.div>
         </motion.div>

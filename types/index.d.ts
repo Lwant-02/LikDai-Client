@@ -1,5 +1,7 @@
 type LanguageMode = "eng" | "shan";
 
+type TranslationMode = "en" | "shn";
+
 type TestType = "time" | "words" | "quote" | "custom";
 
 type LanguageFilter = "eng" | "shan";

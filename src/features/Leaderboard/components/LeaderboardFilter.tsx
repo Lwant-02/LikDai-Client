@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Languages } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface LeaderboardFilterProps {
   languageFilter: LanguageFilter;
@@ -10,6 +11,7 @@ export const LeaderboardFilter = ({
   languageFilter,
   setLanguageFilter,
 }: LeaderboardFilterProps) => {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,7 +22,9 @@ export const LeaderboardFilter = ({
       <div className="flex justify-between items-center gap-3">
         <div className="xl:flex hidden items-center gap-2">
           <Languages className="size-5 opacity-70" />
-          <span className="text-sm opacity-70">Language:</span>
+          <span className="text-sm opacity-70">
+            {t("lesson_page.lang_mode.title")}:
+          </span>
         </div>
 
         <div className="flex bg-foreground/50 rounded-md overflow-hidden">
@@ -34,7 +38,7 @@ export const LeaderboardFilter = ({
                   : "hover:bg-foreground/20"
               }`}
             >
-              {filter === "eng" ? "English" : "Shan"}
+              {t(`lesson_page.lang_mode.${filter === "eng" ? 0 : 1}`)}
             </button>
           ))}
         </div>
