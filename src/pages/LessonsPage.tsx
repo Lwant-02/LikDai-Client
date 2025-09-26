@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { CircleGauge, Search, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { settingStore } from "@/store/settingStore";
 import { LessonHeader } from "@/features/Lessons/components/LessonHeader";
@@ -22,32 +23,12 @@ import { shanMusicLessons } from "@/resources/shan.musicLesson";
 import { engMusicLessons } from "@/resources/eng.musicLesson";
 import { cn } from "@/lib/utils";
 
-//Get Lessons Text
-export const getProperTitle = (
-  level: LessonLevel,
-  mode: LanguageMode
-): string => {
-  switch (level) {
-    case "beginner":
-      return mode === "eng" ? "Beginner" : "ၸၼ်ႉဢွၼ်ႇ";
-    case "intermediate":
-      return mode === "eng" ? "Intermediate" : "ၸၼ်ႉၵၢင်";
-    case "advanced":
-      return mode === "eng" ? "Advanced" : "ၸၼ်ႉသုင်";
-    case "quotes":
-      return mode === "eng" ? "Quotes" : "ၵႂၢမ်းၵပ်းထုၵ်ႇ";
-    case "music":
-      return mode === "eng" ? "Music" : "ၽဵင်းၵႂၢမ်း";
-    default:
-      return mode === "eng" ? "Beginner" : "ၽူႈတႄႇတင်ႈ";
-  }
-};
-
 export const LessonsPage = () => {
   const { lessonLevel, mode } = settingStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [lessons, setLessons] = useState<{ content: string }[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useTranslation();
   const lessonsPerPage = 10;
 
   const getLevelLessons = () => {
@@ -138,7 +119,7 @@ export const LessonsPage = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search lessons..."
+                placeholder={t("lesson_page.search_btn")}
                 className="bg-foreground border-none focus:ring-1! ring-primary/30 h-12 rounded-lg pl-10"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 opacity-60 size-5" />
@@ -163,12 +144,14 @@ export const LessonsPage = () => {
                     mode === "shan" && "font-secondary"
                   )}
                 >
-                  {getProperTitle(lessonLevel, mode)}
+                  {t(`lesson_page.${lessonLevel}.title`)}
                 </h2>
               </div>
               <div className="flex items-center gap-2 text-sm opacity-80 bg-foreground/40 backdrop-blur-sm px-4 py-2 rounded-full">
                 <Zap className="size-4" />
-                <span>{filteredLessons.length} lessons</span>
+                <span>
+                  {filteredLessons.length} {t("lesson_page.lessons")}
+                </span>
               </div>
             </div>
 
@@ -180,9 +163,11 @@ export const LessonsPage = () => {
                 className="text-center py-16"
               >
                 <Search className="size-16 opacity-60 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold mb-4">No lessons found</h3>
+                <h3 className="text-2xl font-bold mb-4">
+                  {t("lesson_page.not_found.title")}
+                </h3>
                 <p className="opacity-80 text-lg">
-                  Try adjusting your search terms
+                  {t("lesson_page.not_found.description")}
                 </p>
               </motion.div>
             ) : (

@@ -1,9 +1,9 @@
 import { BookOpen, Target, Star, Quote } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
-import { getProperTitle } from "@/pages/LessonsPage";
 
 const Levels = [
   {
@@ -44,34 +44,22 @@ const Levels = [
 ];
 
 export const LevelCard = () => {
+  const { t } = useTranslation();
   const { lessonLevel, setLessonLevel, mode } = settingStore();
 
-  const getProperDescription = (level: LessonLevel): string => {
+  const getTitle = (level: LessonLevel) => {
     switch (level) {
       case "beginner":
-        return mode === "eng"
-          ? "Start your typing journey"
-          : "တႄႇၶၢဝ်းတၢင်းပေႃႉလိၵ်ႈ";
+        return t("lesson_page.beginner.title");
       case "intermediate":
-        return mode === "eng"
-          ? "Improve your skills"
-          : "ယုၵ်ႉမုၼ်းၼမ်ႉၵတ်ႉၸဝ်ႈၵဝ်ႇ";
+        return t("lesson_page.intermediate.title");
       case "advanced":
-        return mode === "eng"
-          ? "Master typing challenges"
-          : "လွင်ႈၶဵင်ႇတႃႉ မေႃပေႃႉလိၵ်ႈ";
+        return t("lesson_page.advanced.title");
       case "quotes":
-        return mode === "eng"
-          ? "Type inspiring quotes"
-          : "ပေႃႉၵႂၢမ်းပၼ်ႁႅင်းၸႂ်";
-      // case "music":
-      //   return mode === "eng" ? "Type along to music" : "ပေႃႉၸွမ်းၽဵင်းၵႂၢမ်း";
-      default:
-        return mode === "eng"
-          ? "Start your typing journey"
-          : "တႄႇၶၢဝ်းတၢင်းပေႃႉလိၵ်ႈ";
+        return t("lesson_page.quotes.title");
     }
   };
+
   return (
     <div className="flex overflow-x-auto w-full xl:justify-center items-center justify-start  gap-2 ">
       {Levels.map((level) => (
@@ -94,7 +82,7 @@ export const LevelCard = () => {
                 mode === "shan" && "font-secondary"
               )}
             >
-              {getProperTitle(level.title as LessonLevel, mode)}
+              {getTitle(level.title as LessonLevel)}
             </span>
             <span
               className={cn(
@@ -102,7 +90,7 @@ export const LevelCard = () => {
                 mode === "shan" && "font-secondary"
               )}
             >
-              {getProperDescription(level.title as LessonLevel)}
+              {t(`lesson_page.${level.title}.description`)}
             </span>
           </span>
         </Button>
