@@ -86,8 +86,9 @@ Make sure you have [Node.js](https://nodejs.org/) (version 18 or higher) and a p
     -   Fill in the required environment variables (like API keys, database URLs, etc.).
     ```sh
     # Example .env file
-    VITE_APP_API_URL=http://localhost:8001/api
-    VITE_APP_GOOGLE_CLIENT_ID=your_google_client_id_here
+    VITE_BACKEND_URL="http://localhost:8001/api"
+    VITE_WEBSITE_URL="http://localhost:3000"
+    VITE_GOOGLE_CLIENT_ID="your_google_client_id"
     ```
 
 5.  **Run the development server:**
