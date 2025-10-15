@@ -1,6 +1,6 @@
 # ⚙️ LikDai - Shan Typing Tutor
 
-![LikDai Screenshot](https://res.cloudinary.com/dt28nxrrx/image/upload/v1753285362/Screenshot_2568-07-23_at_10.41.16_PM_epq5ti.png)
+![LikDai Screenshot](https://res.cloudinary.com/dxmvqasul/image/upload/v1760537975/Screenshot_2568-10-15_at_9.16.43_PM_lqmxxn.png)
 
 **LikDai** is a responsive and intuitive web-based typing tutor designed to help you master typing in the **Shan (Tai Yai) language**, as well as English. It provides a modern learning experience with real-time feedback, performance tracking, and a clean user interface to enhance your typing efficiency and language skills.
 
