@@ -11,6 +11,7 @@ The project is built with a modern tech stack and is fully open source.
 ## 🚀 Key Features
 
 -   🎯 **Multi-Language Support**: Practice typing in both **Shan (Tai Yai)** and **English**.
+-   🌍 **Internationalization (i18n)**: The user interface is available in multiple languages for a global audience.
 -   🔐 **Secure Authentication**:
     -   Sign up and log in with your **Email & Password**.
     -   Log in quickly and securely with **Google OAuth**.
@@ -41,8 +42,11 @@ This project is built using a modern frontend stack to ensure a fast, reliable, 
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **UI Components**: [Shadcn/ui](https://ui.shadcn.com/)
 
-### State Management & Libraries
+### Key Libraries & Utilities
 -   **Global State**: [Zustand](https://github.com/pmndrs/zustand)
+-   **Data Visualization**: [Recharts](https://recharts.org/)
+-   **Internationalization**: [react-i18next](https://react.i18next.com/)
+-   **SEO**: [React Helmet Async](https://github.com/staylor/react-helmet-async)
 -   **Grapheme Splitting**: [GraphemeSplitter](https://github.com/orling/grapheme-splitter) for accurate complex script character handling.
 
 ### Development Tools
@@ -82,7 +86,7 @@ Make sure you have [Node.js](https://nodejs.org/) (version 18 or higher) and a p
     -   Fill in the required environment variables (like API keys, database URLs, etc.).
     ```sh
     # Example .env file
-    VITE_APP_API_URL=http://localhost:8000/api
+    VITE_APP_API_URL=http://localhost:8001/api
     VITE_APP_GOOGLE_CLIENT_ID=your_google_client_id_here
     ```
 
