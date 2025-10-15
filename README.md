@@ -8,7 +8,7 @@
 
 ## 🚀 Features
 
-- 🎯 **Typing Practice for Shan and English**
+- 🎯 **Typing Practice for Shan(Thai Yai) and English**
 - ⌨️ **Virtual Keyboard Support**
 - 🟡 **Real-Time Caret Animation**
 - 📊 **Live Accuracy & WPM Stats**
