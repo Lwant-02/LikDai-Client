@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 interface KeyProps {
   physicalKey: string;
   shanChar: string;
+  shiftChar?: string;
   isSpecial?: boolean;
   width?: "normal" | "wide" | "extra-wide" | "space";
   isCurrent?: boolean;
@@ -19,6 +20,7 @@ interface KeyboardLayoutProps {
 const Key: React.FC<KeyProps> = ({
   physicalKey,
   shanChar,
+  shiftChar,
   isSpecial = false,
   width = "normal",
   isCurrent = false,
@@ -49,6 +51,18 @@ const Key: React.FC<KeyProps> = ({
 
     // For English mode, show only the character since physical key = character
     if (mode === "eng") {
+      if (shiftChar) {
+        return (
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-[10px] text-gray-500 dark:text-gray-500 leading-none">
+              {shiftChar}
+            </span>
+            <span className="text-lg text-gray-800 dark:text-gray-200 leading-none mt-0.5">
+              {shanChar}
+            </span>
+          </div>
+        );
+      }
       return (
         <span className="text-xl text-gray-800 dark:text-gray-200">
           {shanChar}
@@ -57,6 +71,18 @@ const Key: React.FC<KeyProps> = ({
     }
 
     // For Shan mode, show both physical key and Shan character
+    if (shiftChar) {
+      return (
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-[10px] text-gray-500 dark:text-gray-500 leading-none">
+            {shiftChar}
+          </span>
+          <span className="text-lg font-secondary text-gray-800 dark:text-gray-200 leading-none mt-0.5">
+            {shanChar}
+          </span>
+        </div>
+      );
+    }
     return (
       <div className="flex flex-col items-center justify-center">
         <span className="text-xs text-gray-500 dark:text-gray-500 leading-none">
@@ -85,7 +111,7 @@ const Key: React.FC<KeyProps> = ({
       className={cn(
         "h-14 rounded-md border flex items-center justify-center cursor-default transition-all duration-200",
         getKeyWidth(),
-        getBackgroundColor()
+        getBackgroundColor(),
       )}
     >
       {getKeyContent()}
@@ -102,6 +128,23 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
   const keyMap = KeyMaps[currentKeyMap];
   const rows = keyMap.rows;
 
+  // Map shift symbols back to their base physical keys
+  const shiftToBaseKey: Record<string, string> = {
+    "~": "`",
+    "!": "1",
+    "@": "2",
+    "#": "3",
+    $: "4",
+    "%": "5",
+    "^": "6",
+    "&": "7",
+    "*": "8",
+    "(": "9",
+    ")": "0",
+    _: "-",
+    "+": "=",
+  };
+
   // Function to find which physical key produces a given character
   const findPhysicalKeyForChar = (char: string): string | null => {
     if (!char) return null;
@@ -113,14 +156,35 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
 
     // For English mode, the character is the key itself
     if (mode === "eng") {
+      // If it's a shift symbol on the number row, return the base key
+      if (shiftToBaseKey[char]) {
+        return shiftToBaseKey[char];
+      }
       const result = char.toLowerCase();
       return result;
     }
 
-    // For Shan mode, find the key that maps to this character
-    for (const [physicalKey, mappedChar] of Object.entries(keyMap.map)) {
-      if (mappedChar === char) {
-        return physicalKey.toLowerCase();
+    // For Shan mode, first check normal rows (even-indexed)
+    for (let i = 0; i < rows.length; i += 2) {
+      const normalRow = rows[i];
+      for (const [physicalKey, mappedChar] of Object.entries(normalRow)) {
+        if (mappedChar === char) {
+          return physicalKey.toLowerCase();
+        }
+      }
+    }
+
+    // Then check shift rows (odd-indexed) and return the corresponding base key
+    for (let i = 1; i < rows.length; i += 2) {
+      const shiftRow = rows[i];
+      for (const [shiftKey, mappedChar] of Object.entries(shiftRow)) {
+        if (mappedChar === char) {
+          // For row1 shift keys, map back to base physical key
+          if (shiftToBaseKey[shiftKey]) {
+            return shiftToBaseKey[shiftKey];
+          }
+          return shiftKey.toLowerCase();
+        }
       }
     }
     return null;
@@ -169,6 +233,7 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
 
   const renderRow1 = () => {
     const row = getRowData(0);
+    const shiftRow = rows[1]; // row1Shift is always at index 1
     const keys = [
       "`",
       "1",
@@ -185,17 +250,42 @@ export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
       "=",
     ];
 
+    // Map normal keys to their corresponding shift keys
+    const shiftKeyMap: Record<string, string> = {
+      "`": "~",
+      "1": "!",
+      "2": "@",
+      "3": "#",
+      "4": "$",
+      "5": "%",
+      "6": "^",
+      "7": "&",
+      "8": "*",
+      "9": "(",
+      "0": ")",
+      "-": "_",
+      "=": "+",
+    };
+
     return (
       <div className="flex gap-1 justify-center">
-        {keys.map((key) => (
-          <Key
-            key={key}
-            physicalKey={key}
-            shanChar={row[key] || key}
-            isCurrent={currentPhysicalKey === key.toLowerCase()}
-            width="extra-wide"
-          />
-        ))}
+        {keys.map((key) => {
+          const shiftKey = shiftKeyMap[key];
+          const shiftChar = shiftKey ? shiftRow[shiftKey] : undefined;
+          return (
+            <Key
+              key={key}
+              physicalKey={key}
+              shanChar={row[key] || key}
+              shiftChar={shiftChar}
+              isCurrent={currentPhysicalKey === key.toLowerCase()}
+              isShiftRequired={
+                currentRequiresShift && currentPhysicalKey === key.toLowerCase()
+              }
+              width="extra-wide"
+            />
+          );
+        })}
         <Key physicalKey="⌫" shanChar="" isSpecial={true} width="wide" />
       </div>
     );

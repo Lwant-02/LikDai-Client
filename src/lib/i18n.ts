@@ -200,16 +200,16 @@ i18n.use(initReactI18next).init({
           report_button: "Report Now",
           developer: "Developer",
           developer_description:
-            "is the developer of this project in July 2025. You can contact the developer by reading the article below.",
+            "is the developer of this project in July 2025. You can contact the developer via contacts below.",
           developer_name: "Sai Naw Main (Lwant)",
           support_title: "Support & Reference",
           support_description: "I would also like to ",
           support_description_2:
-            "for helping me with the proofreading and providing the information in Tamil for this project. You can contact Jam Yun by reading the following article.",
+            "for helping me with the proofreading and providing the information in Tamil for this project. You can contact him via contacts below.",
           support_name: "Jai Tzarm Nyunt",
           reference_description: "Special thanks to",
           reference_description_2:
-            "for providing Shan Quotes and other materials and support for this project. You can contact Jay Maw by reading the article below.",
+            "for providing Shan Quotes and other materials and support for this project. You can contact him via contacts below.",
           reference_name: "Sai Mao (TMK)",
           footer: {
             title: "Ready to Improve Your Typing Skills?",
