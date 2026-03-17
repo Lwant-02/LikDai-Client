@@ -52,7 +52,7 @@ export function HomePage() {
             variants={item}
             className="flex gap-2 justify-center items-center"
           >
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">
+            <h1 className="text-4xl sm:text-6xl font-bold ">
               {t("home_page.title")}
             </h1>
           </motion.div>

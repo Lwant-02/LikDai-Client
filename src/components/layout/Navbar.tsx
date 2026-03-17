@@ -80,13 +80,13 @@ export const Navbar = () => {
       <div className="h-12 z-50 mx-auto w-full flex justify-between items-center ">
         <Link to="/" className="flex justify-center items-center gap-2">
           <img
-            src="/images/Logo.png"
+            src="/icons/favicon.svg"
             alt="Logo"
-            className="xl:size-12 size-10 object-cover xl:hidden flex"
+            className="xl:size-14 size-10 object-cover flex"
           />
-          <p className="text-2xl font-bold md:flex hidden">
+          {/* <p className="text-2xl font-bold md:flex hidden">
             {t("home_page.title")}
-          </p>
+          </p> */}
         </Link>
         <div className="flex justify-center items-center gap-5 mr-1">
           {navLink.map((link) => (
@@ -95,7 +95,7 @@ export const Navbar = () => {
                 to={link.path}
                 className={cn(
                   "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                  pathname.endsWith(link.path) && "opacity-100"
+                  pathname.endsWith(link.path) && "opacity-100",
                 )}
               >
                 {link.icon}
@@ -140,7 +140,7 @@ export const Navbar = () => {
               to="/account"
               className={cn(
                 "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center gap-1",
-                pathname.endsWith("/account") && "opacity-100"
+                pathname.endsWith("/account") && "opacity-100",
               )}
             >
               <UserIcon className="size-5" />
@@ -153,7 +153,7 @@ export const Navbar = () => {
               <UserIcon
                 className={cn(
                   "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                  pathname.endsWith("/login") && "opacity-100"
+                  pathname.endsWith("/login") && "opacity-100",
                 )}
               />
             </Link>

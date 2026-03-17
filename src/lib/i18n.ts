@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const savedLanguage = localStorage.getItem(
-  "language"
+  "language",
 ) as TranslationMode | null;
 
 i18n.use(initReactI18next).init({
@@ -206,7 +206,7 @@ i18n.use(initReactI18next).init({
           support_description: "I would also like to ",
           support_description_2:
             "for helping me with the proofreading and providing the information in Tamil for this project. You can contact him via contacts below.",
-          support_name: "Jai Tzarm Nyunt",
+          support_name: "Tzai Tzarm Nyunt",
           reference_description: "Special thanks to",
           reference_description_2:
             "for providing Shan Quotes and other materials and support for this project. You can contact him via contacts below.",
