@@ -65,7 +65,7 @@ export const LessonsPage = () => {
   const filteredLessons = useMemo(() => {
     if (!searchQuery.trim()) return lessons;
     return lessons.filter((lesson) =>
-      lesson.content.toLowerCase().includes(searchQuery.toLowerCase())
+      lesson.content.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [searchQuery, lessons]);
 
@@ -81,16 +81,16 @@ export const LessonsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Lessons | LikDai</title>
+        <title>Lessons - LikDai | လွင်ႈသွၼ်ႁဵၼ်း</title>
         <meta
           name="description"
-          content="Master typing with structured lessons for all skill levels."
+          content="Start your Shan / Dai / Tai typing lessons (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) with LikDai. Step-by-step guides to mastering the keyboard."
         />
       </Helmet>
 
       <div className="min-h-screen pb-10">
         {/* Header */}
-        <div className="container mx-auto px-4 py-8">
+        <div className="layout py-8">
           <LessonHeader />
 
           {/* Language Selection */}
@@ -138,12 +138,7 @@ export const LessonsPage = () => {
                 <div className="p-2 rounded-xl bg-gradient-to-br from-yellow to-orange">
                   <CircleGauge className="size-6 text-white" />
                 </div>
-                <h2
-                  className={cn(
-                    "text-3xl font-bold",
-                    mode === "shan" && "font-secondary"
-                  )}
-                >
+                <h2 className={cn("text-3xl font-bold")}>
                   {t(`lesson_page.${lessonLevel}.title`)}
                 </h2>
               </div>
@@ -175,7 +170,7 @@ export const LessonsPage = () => {
                 {filteredLessons
                   .slice(
                     (currentPage - 1) * lessonsPerPage,
-                    currentPage * lessonsPerPage
+                    currentPage * lessonsPerPage,
                   )
                   .map((lesson, index) => (
                     <LessonGrid

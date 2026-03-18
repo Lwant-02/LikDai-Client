@@ -152,18 +152,16 @@ export const ProfileTab = ({
           <div className="flex gap-2">
             <Button
               variant="outline"
-              size="sm"
               onClick={() => setIsEditUsername(true)}
-              className="bg-foreground/30 cursor-pointer w-32"
+              className="bg-foreground/30 cursor-pointer w-32 btn"
             >
               <Edit className="size-4 mr-1" />
               Edit Username
             </Button>
             <Button
               variant="outline"
-              size="sm"
               onClick={() => setIsEditBio(true)}
-              className="bg-foreground/30 cursor-pointer w-32"
+              className="bg-foreground/30 cursor-pointer w-32 btn"
             >
               <Edit className="size-4 mr-1" />
               Edit Bio
@@ -262,7 +260,7 @@ export const ProfileTab = ({
       <div className="mt-6">
         <Button
           variant="outline"
-          className="bg-foreground/30 hover:bg-foreground/50 cursor-pointer"
+          className="bg-foreground/30 hover:bg-foreground/50 cursor-pointer btn"
           onClick={() => setActiveTab("settings")}
         >
           <Settings className="size-4 mr-1" />

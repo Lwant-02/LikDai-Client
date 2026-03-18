@@ -34,18 +34,11 @@ const Levels = [
     color: "text-orange",
     gradient: "from-orange/20 to-orange/30",
   },
-  // {
-  //   title: "music",
-  //   description: "Type along to music",
-  //   icon: <Music className="size-6" />,
-  //   color: "text-yellow",
-  //   gradient: "from-yellow/20 to-yellow/30",
-  // },
 ];
 
 export const LevelCard = () => {
   const { t } = useTranslation();
-  const { lessonLevel, setLessonLevel, mode } = settingStore();
+  const { lessonLevel, setLessonLevel } = settingStore();
 
   const getTitle = (level: LessonLevel) => {
     switch (level) {
@@ -70,26 +63,16 @@ export const LevelCard = () => {
             "flex items-center gap-2 px-4 py-11 w-44 rounded-lg cursor-pointer",
             lessonLevel === level.title
               ? `bg-foreground ${level.color}`
-              : "hover:bg-foreground/50"
+              : "hover:bg-foreground/50",
           )}
           onClick={() => setLessonLevel(level.title as LessonLevel)}
         >
           <span className="flex flex-col items-center">
             {level.icon}
-            <span
-              className={cn(
-                "text-base font-bold capitalize",
-                mode === "shan" && "font-secondary"
-              )}
-            >
+            <span className={cn("text-base font-bold capitalize")}>
               {getTitle(level.title as LessonLevel)}
             </span>
-            <span
-              className={cn(
-                "text-sm opacity-70",
-                mode === "shan" && "font-secondary"
-              )}
-            >
+            <span className={cn("text-sm opacity-70")}>
               {t(`lesson_page.${level.title}.description`)}
             </span>
           </span>

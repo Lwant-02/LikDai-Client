@@ -9,7 +9,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { useSubmitCertificate } from "@/hooks/useUser";
 import { MiniSpinner } from "./MiniSpinner";
@@ -94,15 +93,13 @@ export const CertificateSubmitDialog = ({
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter your full name here..."
-              className={cn(
-                "bg-background/30 border-none focus:ring-1! ring-primary/30 rounded-lg "
-              )}
+              className="bg-background/30 focus:ring-1! ring-primary/30 h-10 rounded-full px-5 border border-primary/10"
             />
             <Button
               variant="destructive"
               type="submit"
               disabled={isSubmittingCertificate}
-              className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+              className="mt-3 btn h-10 border border-primary/10 text-primary bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background/80 transition-colors duration-300 text-base"
             >
               {isSubmittingCertificate ? <MiniSpinner /> : <>Submit</>}
             </Button>

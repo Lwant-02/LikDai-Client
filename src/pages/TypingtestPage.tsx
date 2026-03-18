@@ -47,7 +47,7 @@ export const TypingtestPage = () => {
   const navigate = useNavigate();
   const correctCharCount = calculateCorrectChars(
     userInput.replace(/\s/g, ""),
-    targetText.replace(/\s/g, "")
+    targetText.replace(/\s/g, ""),
   );
 
   //Get search params
@@ -188,13 +188,13 @@ export const TypingtestPage = () => {
   return (
     <>
       <Helmet>
-        <title>Typing Test | LikDai</title>
+        <title>Shan Typing Test - LikDai | ၽိုၵ်းပေႃႉလိၵ်ႈတႆး</title>
         <meta
           name="description"
-          content="Test your typing speed and accuracy with LikDai"
+          content="Test your Shan / Dai / Tai typing speed and accuracy (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) with LikDai's intuitive typing evaluator."
         />
       </Helmet>
-      <article className="w-full h-full flex flex-col gap-4 items-center ">
+      <article className="w-full layout h-full flex flex-col gap-4 items-center pt-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

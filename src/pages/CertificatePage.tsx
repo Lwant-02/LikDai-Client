@@ -54,14 +54,13 @@ export const CertificatePage = () => {
   return (
     <>
       <Helmet>
-        <title>Certificate | LikDai</title>
+        <title>Certificate - LikDai | ဝႂ်ၶပ်ႉမၢႆ</title>
         <meta
           name="description"
-          content="Download your certificate of achievement."
+          content="Download and share your LikDai certificate of achievement for mastering Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)."
         />
       </Helmet>
       <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-8">
-        {/* Interactive Message */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,7 +81,6 @@ export const CertificatePage = () => {
           </p>
         </motion.div>
 
-        {/* Certificate Display */}
         <motion.div
           ref={certificateRef}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -90,10 +88,8 @@ export const CertificatePage = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="relative w-full max-w-4xl bg-white text-gray-900  shadow-2xl overflow-hidden aspect-[3/5] sm:aspect-[4/3] md:aspect-[4/3] sm:block hidden"
         >
-          {/* Decorative Border */}
           <div className="absolute inset-2 md:inset-4 border-2 md:border-4 border-yellow rounded-lg md:rounded-xl">
             <div className="absolute inset-1 md:inset-2 border md:border-2 border-blue rounded-md md:rounded-lg">
-              {/* Corner Decorations */}
               <div className="absolute top-0 left-0 w-4 h-4 md:w-8 md:h-8">
                 <Star className="size-3 md:size-6 text-yellow fill-yellow" />
               </div>
@@ -109,18 +105,16 @@ export const CertificatePage = () => {
             </div>
           </div>
 
-          {/* Certificate Content */}
           <div className="relative z-10 h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12 text-center">
-            {/* Header with Logo */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4 md:mb-6">
               <img
-                src="/images/Logo.png"
+                src="/icons/favicon.svg"
                 alt="LikDai Logo"
                 className="h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 object-contain"
               />
               <div className="text-center sm:text-left">
-                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-blue">
-                  LikDai
+                <h1 className="text-lg text-center sm:text-xl md:text-2xl font-bold text-yellow">
+                  လိၵ်ႈတႆး
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-600">
                   Shan Typing Excellence
@@ -128,7 +122,6 @@ export const CertificatePage = () => {
               </div>
             </div>
 
-            {/* Certificate Title */}
             <div className="mb-4 md:mb-8">
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue mb-2">
                 Certificate of Achievement
@@ -136,14 +129,12 @@ export const CertificatePage = () => {
               <div className="w-16 sm:w-24 md:w-32 h-0.5 md:h-1 bg-gradient-to-r from-yellow to-blue mx-auto rounded-full"></div>
             </div>
 
-            {/* Award Icon */}
             <div className="mb-3 md:mb-6">
               <div className="relative">
                 <Award className="size-12 sm:size-16 md:size-20 lg:size-24 text-yellow fill-yellow/20" />
               </div>
             </div>
 
-            {/* Recipient Information */}
             <div className="mb-4 md:mb-8">
               <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-2 md:mb-4">
                 This certificate is proudly presented to
@@ -158,7 +149,6 @@ export const CertificatePage = () => {
               </p>
             </div>
 
-            {/* Footer Information */}
             <div className="flex flex-row justify-between items-center sm:items-end w-full mt-auto gap-2 sm:gap-4">
               <div className="text-center sm:text-left order-1">
                 <p className="text-xs sm:text-sm text-gray-600 mb-1">
@@ -171,7 +161,7 @@ export const CertificatePage = () => {
 
               <div className="text-center order-2">
                 <div className="w-16 sm:w-24 md:w-32 h-0.5 bg-gray-400 mb-1 md:mb-2 mx-auto" />
-                <p className="text-xs sm:text-sm font-semibold text-blue">
+                <p className="text-xs sm:text-sm font-semibold text-yellow">
                   LikDai Team
                 </p>
                 <p className="text-xs text-gray-600">Digital Signature</p>
@@ -188,7 +178,6 @@ export const CertificatePage = () => {
             </div>
           </div>
 
-          {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-4 left-4 md:top-10 md:left-10 w-8 h-8 md:w-20 md:h-20 border md:border-2 border-blue rounded-full"></div>
             <div className="absolute top-8 right-8 md:top-20 md:right-20 w-6 h-6 md:w-16 md:h-16 border md:border-2 border-yellow rounded-full"></div>
@@ -196,33 +185,29 @@ export const CertificatePage = () => {
             <div className="absolute bottom-4 right-4 md:bottom-10 md:right-10 w-10 h-10 md:w-24 md:h-24 border md:border-2 border-purple rounded-full"></div>
           </div>
         </motion.div>
-        {/* Action Buttons - Desktop Only (md and above) */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
           className="hidden md:flex w-full justify-center items-center gap-6 mt-8"
         >
-          <Button
+          <button
             onClick={() => navigate("/account")}
-            variant="outline"
-            size="lg"
-            className="bg-transparent hover:bg-blue hover:text-white border-2 border-blue text-blue font-semibold px-8 py-3 rounded-md cursor-pointer transition-all duration-300 transform hover:scale-105"
+            className="btn hover:bg-blue hover:text-white border border-blue cursor-pointer text-blue transition-all duration-300"
           >
-            <ArrowLeft className="size-5 mr-2" />
+            <ArrowLeft className="size-5" />
             Back to Account
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={handleDownloadCertificate}
-            size="lg"
-            className="bg-gradient-to-r from-yellow to-orange hover:from-yellow/90 hover:to-orange/90 text-white font-semibold px-8 py-3 rounded-md cursor-pointer shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+            className="btn hover:bg-yellow hover:text-white border border-yellow cursor-pointer text-yellow transition-all duration-300"
           >
-            <Download className="size-5 mr-2" />
+            <Download className="size-5" />
             Download Certificate
-          </Button>
+          </button>
         </motion.div>
 
-        {/* Mobile Message - Show only on small screens */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -256,7 +241,6 @@ export const CertificatePage = () => {
           </Button>
         </motion.div>
 
-        {/* Additional Info - Desktop Only */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

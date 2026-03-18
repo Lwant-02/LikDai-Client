@@ -2,6 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useEffect, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
@@ -54,7 +55,7 @@ export const ResultPage = () => {
       finalCorrectCharacters,
       finalLevel,
       finalMode,
-    ]
+    ],
   );
 
   //Save results to db
@@ -75,14 +76,19 @@ export const ResultPage = () => {
   return (
     <>
       <Helmet>
-        <title>Results | LikDai</title>
+        <title>Typing Results - LikDai | ၽွၼ်းလႆႈ</title>
         <meta
           name="description"
-          content="View your results and compare with others on the leaderboard."
+          content="Review your Shan / Dai / Tai typing test results (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) on LikDai. Analyze your speed, accuracy, and performance metrics."
         />
       </Helmet>
 
-      <article className="w-full min-h-screen flex flex-col gap-8 items-center p-4">
+      <motion.article
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full layout min-h-screen flex flex-col gap-8 items-center pt-16"
+      >
         <h1 className="text-3xl font-bold mt-4">Result Details</h1>
         {!accessToken && (
           <div className="w-full h-auto flex flex-col gap-4 items-center ">
@@ -156,7 +162,7 @@ export const ResultPage = () => {
           />
         </div>
         <ResultNextButton />
-      </article>
+      </motion.article>
     </>
   );
 };

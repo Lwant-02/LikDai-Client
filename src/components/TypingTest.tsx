@@ -68,7 +68,7 @@ export const TypingTest = ({
       // 20px buffer from top
       const newScrollOffset = Math.max(
         0,
-        currentCharTop - containerHeight / 2 + currentCharHeight / 2
+        currentCharTop - containerHeight / 2 + currentCharHeight / 2,
       );
       setScrollOffset(newScrollOffset);
     }
@@ -170,9 +170,7 @@ export const TypingTest = ({
   // Style helpers
   const getTextClasses = () => {
     const baseClasses = "relative md:text-4xl text-2xl";
-    return mode === "eng"
-      ? baseClasses
-      : cn(baseClasses, "font-secondary leading-relaxed");
+    return mode === "eng" ? baseClasses : cn(baseClasses, "leading-relaxed");
   };
 
   return (
@@ -200,7 +198,7 @@ export const TypingTest = ({
                     getTextClasses(),
                     "leading-loose transition-all duration-300 ease-in-out ",
                     isCurrent &&
-                      "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs  ring-1 ring-yellow/40"
+                      "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs  ring-1 ring-yellow/40",
                   )}
                   lang={mode === "shan" ? "shn" : "en"}
                 >
@@ -246,8 +244,8 @@ export const TypingTest = ({
 
               const finalClassName = cn(
                 "relative md:text-3xl text-2xl leading-loose transition-all duration-300 ease-in-out ",
-                mode === "shan" && "font-secondary",
-                colorClass
+                mode === "shan" && "font-tachileik",
+                colorClass,
               );
 
               return (

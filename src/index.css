@@ -1,21 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Share+Tech&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@100;200;300;400;500;600;700;800;900&family=Padauk:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @font-face {
-  font-family: "NamTengWebPro";
-  src: url("/fonts/NamTengWebPro.ttf") format("truetype");
-  font-weight: bold;
+  font-family: "GHKKengtung";
+  src: url("/fonts/GHKKengtung.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GHKTachileik";
+  src: url("/fonts/GHKTachileik.ttf") format("truetype");
+  font-weight: normal;
   font-style: normal;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "NamTengWebPro", sans-serif;
+  --font-primary: "Roboto Mono", monospace;
+  --font-kengtung: "GHKKengtung", sans-serif;
+  --font-tachileik: "GHKTachileik", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -27,8 +34,9 @@
   --color-purple: #7965c1;
 }
 :root {
-  --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "NamTengWebPro", sans-serif;
+  --font-primary: "Roboto Mono", monospace;
+  --font-kengtung: "GHKKengtung", sans-serif;
+  --font-tachileik: "GHKTachileik", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -41,8 +49,9 @@
 }
 
 .light {
-  --font-primary: "Share Tech", sans-serif;
-  --font-secondary: "NamTengWebPro", sans-serif;
+  --font-primary: "Roboto Mono", monospace;
+  --font-kengtung: "GHKKengtung", sans-serif;
+  --font-tachileik: "GHKTachileik", sans-serif;
   --color-background: #ffffff;
   --color-foreground: #f1f0e8;
   --color-primary: #040303;
@@ -56,7 +65,16 @@
 
 @layer base {
   body {
-    @apply bg-background text-primary font-secondary font-normal transition-colors duration-200;
+    @apply bg-background text-primary font-tachileik font-normal transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .layout {
+    @apply mx-auto max-w-7xl xl:px-0 px-3;
+  }
+  .btn {
+    @apply inline-flex items-center gap-3 px-8 py-2 font-semibold rounded-full overflow-hidden;
   }
 }
 

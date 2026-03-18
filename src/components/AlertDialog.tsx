@@ -20,12 +20,7 @@ export const AlertDialog = ({ isOpen, setIsOpen, mode }: AlertDialogProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
         <DialogHeader>
-          <DialogTitle
-            className={cn(
-              "text-center text-3xl",
-              mode === "shan" && "font-secondary"
-            )}
-          >
+          <DialogTitle className={cn("text-center text-3xl")}>
             {mode === "eng"
               ? "Wrong Keyboard Layout!"
               : "လွၵ်းမိုဝ်းၶီးပွတ်ႇၽိတ်း!"}
@@ -39,12 +34,7 @@ export const AlertDialog = ({ isOpen, setIsOpen, mode }: AlertDialogProps) => {
           loop
           autoplay
         />
-        <p
-          className={cn(
-            "text-center text-lg font-semibold",
-            mode === "shan" && "font-secondary"
-          )}
-        >
+        <p className={cn("text-center text-lg font-semibold")}>
           {mode === "eng"
             ? "Please use the in-app keyboard layout. You do not need to change your system keyboard layout."
             : "ၶႅၼ်းတေႃႈ ၸႂ်ႉတိုဝ်း လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ဢၼ်မီးၼႂ်း ဢႅပ်ႉၼၼ်ႉၶႃႈလႄႈ။ ၽူႈၸႂ်ႉတိုဝ်းႁဝ်း ဢမ်ႇလူဝ်ႇလႅၵ်ႈ လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ၼႂ်း System ၸဝ်ႈၵဝ်ႇၶႃႈ။"}

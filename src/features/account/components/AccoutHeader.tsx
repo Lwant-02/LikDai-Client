@@ -88,7 +88,7 @@ export const AccoutHeader = ({
       <Button
         variant="destructive"
         disabled={isLoggingOut}
-        className="bg-foreground text-primary hover:bg-foreground cursor-pointer w-32"
+        className="bg-foreground text-primary btn hover:bg-foreground cursor-pointer w-32"
         onClick={handleLogout}
       >
         {isLoggingOut ? (

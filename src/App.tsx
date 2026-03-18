@@ -24,6 +24,9 @@ import { CertificatePage } from "./pages/CertificatePage";
 import { LessonsPage } from "./pages/LessonsPage";
 import { useEffect } from "react";
 import { settingStore } from "./store/settingStore";
+import { PolicyPage } from "./pages/PolicyPage";
+import { FeedbackDialog } from "./components/FeedbackDialog";
+import { SongPage } from "./pages/SongPage";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -42,9 +45,10 @@ export default function App() {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-hidden mx-auto max-w-7xl xl:px-0 px-2 relative">
+    <main className="min-h-screen relative">
       <Router>
         <Navbar />
+        <FeedbackDialog />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -74,6 +78,8 @@ export default function App() {
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/verify-otp" element={<VerifyOtpPage />} />
           <Route path="/results" element={<ResultPage />} />
+          <Route path="/policy" element={<PolicyPage />} />
+          <Route path="/songs" element={<SongPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />
           <Route path="/certificate" element={<CertificatePage />} />

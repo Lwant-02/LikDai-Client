@@ -5,9 +5,7 @@ import { ChevronsUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@/components/ui/button";
-import { ReportSummitDialog } from "@/components/ReportSummitDialog";
-import { AboutEngSection } from "@/components/AboutEngSection";
+import { AllInformation } from "@/components/AllInformation";
 import { settingStore } from "@/store/settingStore";
 
 // Animation variants
@@ -16,7 +14,7 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -30,8 +28,6 @@ export const AboutPage = () => {
   const { t } = useTranslation();
   const { isFromHome, setInstallPromptEvent, installPromptEvent } =
     settingStore();
-  const [isSubmittingDialogOpen, setIsSubmittingDialogOpen] =
-    useState<boolean>(false);
   const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -71,69 +67,56 @@ export const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About | LikDai</title>
+        <title>About LikDai | လွင်ႈလိၵ်ႈတႆး</title>
         <meta
           name="description"
-          content="About LikDai - Pro, the ultimate Shan typing app."
+          content="Learn more about LikDai, the dedicated platform for learning and practicing the Shan / Dai / Tai keyboard and language (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)."
         />
       </Helmet>
-      <article className="min-h-screen relative">
-        {/* English Section */}
-        <AboutEngSection
-          setIsSubmittingDialogOpen={setIsSubmittingDialogOpen}
-          handleInstallClick={handleInstallClick}
-        />
 
-        {/* CTA Section */}
-        <section className="px-4 pb-20">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-            className="max-w-4xl mx-auto text-center"
+      <main className="min-h-screen py-20 relative overflow-hidden">
+        <motion.div
+          className="layout"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* English Section */}
+          <AllInformation handleInstallClick={handleInstallClick} />
+
+          {/* CTA Section */}
+          <motion.section
+            variants={itemVariants}
+            className="pt-10 pb-6 text-center mt-10"
           >
-            <motion.h2
-              variants={itemVariants}
-              className="text-3xl sm:text-4xl font-bold mb-6"
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              ၽွမ်ႉတႃႇတေ ယုၵ်ႉမုၼ်းၼမ်ႉၵတ်ႉ ပေႃႉလိၵ်ႈယဝ်ႉႁႃႉ?
+            </h2>
+            <p className="text-lg opacity-80 mb-8 max-w-2xl mx-auto">
+              ၶဝ်ႈႁူမ်ႈၸွမ်း ၽူႈၸႂ်ႉတိုဝ်း ဢၼ်မေႃပေႃႉလိၵ်ႈတႆး ၼပ်ႉႁူဝ်ႁဵင်တီႈ{" "}
+              <span className="font-bold text-yellow">လိၵ်ႈတႆး </span> ၶႃႈ။
+              မၼ်းဢမ်ႇလႆႈသဵင်ႈငိုၼ်းသင်သေ ႁဵတ်းဝႆႉ တႃႇၸွၺ်ႈထႅမ် ႁႂ်ႈၸဝ်ႈၵဝ်ႇ
+              ပေႃႉလိၵ်ႈလႆႈဝႆးဝႆး လႄႈ တႅတ်ႈတေႃးလိူဝ်ၵဝ်ႇ။
+            </p>
+            <button
+              className="bg-yellow hover:bg-yellow/80 text-background btn cursor-pointer"
+              onClick={() => navigate("/lessons")}
             >
-              {t("about_page.footer.title")}
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-lg opacity-80 mb-8 max-w-2xl mx-auto"
-            >
-              {t("about_page.footer.description")}
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <Button
-                size="lg"
-                className="bg-yellow hover:bg-yellow/80 text-background font-bold text-lg px-8 py-6 cursor-pointer"
-                onClick={() => navigate("/lessons")}
-              >
-                {t("home_page.button")}
-              </Button>
-            </motion.div>
-          </motion.div>
-        </section>
+              {t("home_page.button")}
+            </button>
+          </motion.section>
+        </motion.div>
 
         {/* Back to top button */}
         {isUserScrolled && (
           <button
             onClick={scrollToTop}
-            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer"
+            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer shadow-lg"
           >
             <ChevronsUp className="size-6" />
           </button>
         )}
-      </article>
-      {/* Dialog to report a bug */}
-      <ReportSummitDialog
-        isOpen={isSubmittingDialogOpen}
-        setIsOpen={setIsSubmittingDialogOpen}
-      />
+      </main>
     </>
   );
 };

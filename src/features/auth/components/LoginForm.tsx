@@ -81,7 +81,7 @@ export const LoginForm = () => {
         const token = response.access_token;
         const res = await axios.get(
           "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
-          { headers: { Authorization: `Bearer ${token}` } }
+          { headers: { Authorization: `Bearer ${token}` } },
         );
         const { email, name } = res.data;
         await googleLogin(
@@ -121,7 +121,7 @@ export const LoginForm = () => {
                 ),
               });
             },
-          }
+          },
         );
       } catch (error: any) {
         console.log(error);
@@ -176,7 +176,7 @@ export const LoginForm = () => {
           variant="destructive"
           type="submit"
           disabled={isLoggingIn}
-          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingIn ? (
             <MiniSpinner />
@@ -201,7 +201,7 @@ export const LoginForm = () => {
           type="button"
           disabled={isLoggingInWithGoogle}
           onClick={() => handleGoogleLogin()}
-          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingInWithGoogle ? (
             <MiniSpinner />

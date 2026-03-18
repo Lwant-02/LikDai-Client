@@ -8,7 +8,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
 import { ThankyouDialog } from "./ThankyouDialog";
@@ -99,17 +98,16 @@ export const ReportSummitDialog = ({
               onChange={(e) => setText(e.target.value)}
               placeholder="Report your issue or your suggestions or feedbacks here..."
               className={cn(
-                "bg-background/30 border-none focus:ring-1! ring-primary/30 h-40  rounded-lg resize-none"
+                "bg-background/30 border border-primary/10 focus:ring-1! ring-primary/30 h-40  rounded-xl resize-none",
               )}
             />
-            <Button
-              variant="destructive"
+            <button
               type="submit"
-              disabled={isSubmitting}
-              className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+              disabled={isSubmitting || !text}
+              className="mt-3 btn h-10 border border-primary/10 text-primary bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background/80 transition-colors duration-300 text-base"
             >
               {isSubmitting ? <MiniSpinner /> : <>Submit</>}
-            </Button>
+            </button>
           </form>
         </DialogContent>
       </Dialog>

@@ -12,8 +12,8 @@ export const LeaderboardHeader = ({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
       <div className="flex items-center gap-3">
-        <Trophy className="size-7 sm:size-8 text-yellow" />
-        <h1 className="text-2xl sm:text-3xl font-bold">
+        <Trophy className="size-7 sm:size-10 text-yellow" />
+        <h1 className="text-3xl sm:text-4xl font-bold pt-1">
           {t("leaderboard_page.title")}
         </h1>
       </div>

@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Keyboard, Home } from "lucide-react";
+import { Keyboard } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-
-import { Button } from "@/components/ui/button";
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -44,8 +42,8 @@ export const NotFoundPage = () => {
   return (
     <>
       <Helmet>
-        <title>404 | LikDai</title>
-        <meta name="description" content="Page not found for LikDai - Pro." />
+        <title>404 Not Found - LikDai | ဢမ်ႇႁၼ်ၼႃႈလိၵ်ႈ</title>
+        <meta name="description" content="The page you are looking for on LikDai could not be found. Return home to practice Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)." />
       </Helmet>
 
       <article className="min-h-screen w-full flex flex-col items-center justify-center px-4">
@@ -81,11 +79,12 @@ export const NotFoundPage = () => {
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold mb-4"
           >
-            Page Not Found
+            ၼႃႈလိၵ်ႈဢမ်ႇႁၼ်
           </motion.h1>
 
-          <motion.p variants={itemVariants} className="text-lg opacity-70 mb-8">
-            Oops! It seems you've typed your way to a page that doesn't exist.
+          <motion.p variants={itemVariants} className="text-lg opacity-50 mb-8">
+            သူၸဝ်ႈ ပေႃႉလိၵ်ႈၽိတ်းၵႂႃႇႁိုဝ်? ၼႃႈလိၵ်ႈဢၼ်ၼႆႉ ဢမ်ႇမီးၶႃႈ။
+            ပွၵ်ႈၶိုၼ်း ၼႃႈႁိူၼ်းသေ ၵႂႃႇၽိုၵ်းပေႃႉလိၵ်ႈၸွမ်းၵၼ်မႂ်ႇၶႃႈ။
           </motion.p>
 
           {/* Animated keyboard illustration */}
@@ -141,15 +140,14 @@ export const NotFoundPage = () => {
           {/* Action buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row justify-center"
           >
-            <Button
+            <button
               onClick={() => navigate("/")}
-              className="bg-yellow hover:bg-yellow/80 text-background flex items-center gap-2 cursor-pointer"
+              className="bg-primary text-background hover:bg-yellow transition-colors duration-300 btn cursor-pointer tracking-wider"
             >
-              <Home className="size-4" />
-              Return Home
-            </Button>
+              မိူဝ်းၼႃႈႁိူၼ်းၶိုၼ်း
+            </button>
           </motion.div>
         </motion.div>
       </article>

@@ -1,71 +1,60 @@
 import { Link, useLocation } from "react-router-dom";
-import { Crown, Keyboard, Languages, Moon, Sun } from "lucide-react";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  UserIcon,
-  HomeIcon,
-  InformationCircleIcon,
-} from "@heroicons/react/24/outline";
+import { Moon, Sun } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { authStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";
 import { settingStore } from "@/store/settingStore";
-import { TooltipHover } from "../TooltipHover";
+import { MobileDrawer } from "@/components/MobileDrawer";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
-  const { i18n, t } = useTranslation();
   const { accessToken } = authStore();
   const { profile } = useGetProfile();
   const { theme, setTheme } = settingStore();
-  const [language, setLanguage] = useState<TranslationMode>(() => {
-    const saved = localStorage.getItem("language") as TranslationMode | null;
-    return saved ?? "en";
-  });
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
   const isCertificatePage = pathname.includes("/certificate");
   const isVerifyOtpPage = pathname.includes("/verify-otp");
+  const isTypingTestOrResultPage =
+    pathname.includes("/typing-test") || pathname.includes("/result");
 
   const navLink = [
     {
-      name: t("nav_bar.home"),
+      name: "ၼႃႈႁိူၼ်း",
       path: "/",
-      icon: <HomeIcon className="size-5" />,
     },
     {
-      name: t("nav_bar.lessons"),
+      name: "ၵၢၼ်ၽိုၵ်း",
       path: "/lessons",
-      icon: <Keyboard className="size-5" />,
     },
     {
-      name: t("nav_bar.leaderboards"),
+      name: "ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်",
       path: "/leaderboards",
-      icon: <Crown className="size-5 " />,
     },
     {
-      name: t("nav_bar.about"),
+      name: "လွင်ႈႁဝ်းၶႃႈ",
       path: "/about",
-      icon: <InformationCircleIcon className="size-5 " />,
+    },
+    {
+      name: "လၵ်းၼမ်း",
+      path: "/policy",
+    },
+    {
+      name: "ၽဵင်းၵႂၢမ်း",
+      path: "/songs",
     },
   ];
-
-  useEffect(() => {
-    if (language) {
-      localStorage.setItem("language", language);
-    }
-  }, [language]);
 
   if (
     isChangePasswordPage ||
     isHomePage ||
     isNotFoundPage ||
     isCertificatePage ||
-    isVerifyOtpPage
+    isVerifyOtpPage ||
+    isTypingTestOrResultPage
   ) {
     return null;
   }
@@ -75,90 +64,83 @@ export const Navbar = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full h-auto z-20 flex justify-center items-center py-3"
+      className="w-full h-auto z-20 flex justify-center items-center py-3 sticky top-0 px-3 md:px-4 xl:px-0"
     >
-      <div className="h-12 z-50 mx-auto w-full flex justify-between items-center ">
+      <div className="h-16 rounded-full px-5! z-50 bg-background border border-primary/20 backdrop-blur-sm shadow-sm layout w-full flex justify-between items-center">
         <Link to="/" className="flex justify-center items-center gap-2">
           <img
             src="/icons/favicon.svg"
             alt="Logo"
-            className="xl:size-14 size-10 object-cover flex"
+            className="size-10 object-cover flex"
           />
-          {/* <p className="text-2xl font-bold md:flex hidden">
-            {t("home_page.title")}
-          </p> */}
+          <p className="xl:text-3xl text-2xl text-center font-bold xl:pt-2 pt-1">
+            လိၵ်ႈတႆး
+          </p>
         </Link>
-        <div className="flex justify-center items-center gap-5 mr-1">
+
+        <div className="hidden xl:flex justify-center items-center gap-5 ">
           {navLink.map((link) => (
-            <TooltipHover tooltipText={link.name} key={link.name}>
-              <Link
-                to={link.path}
-                className={cn(
-                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
-                  pathname.endsWith(link.path) && "opacity-100",
-                )}
-              >
-                {link.icon}
-              </Link>
-            </TooltipHover>
-          ))}
-          <TooltipHover
-            tooltipText={t(`nav_bar.language.${language === "en" ? 0 : 1}`)}
-            className="flex justify-center"
-          >
-            <span
-              onClick={() => {
-                i18n.changeLanguage(language === "en" ? "shn" : "en");
-                setLanguage(language === "en" ? "shn" : "en");
-              }}
-              className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
-            >
-              <Languages className="size-5 " />
-            </span>
-          </TooltipHover>
-          <TooltipHover
-            tooltipText={t(`nav_bar.theme.${theme === "dark" ? 1 : 0}`)}
-            className="flex justify-center"
-          >
-            <span
-              onClick={() => {
-                setTheme(theme === "dark" ? "light" : "dark");
-              }}
-              className="cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200"
-            >
-              {theme === "dark" ? (
-                <Moon className="size-5 " />
-              ) : (
-                <Sun className="size-5 " />
+            <Link
+              key={link.name}
+              to={link.path}
+              className={cn(
+                "opacity-50 hover:opacity-100 transition-opacity duration-200",
+                pathname.endsWith(link.path) && "opacity-100",
               )}
-            </span>
-          </TooltipHover>
-        </div>
-        {accessToken ? (
-          <TooltipHover tooltipText={profile?.username || t("nav_bar.account")}>
+            >
+              {link.name}
+            </Link>
+          ))}
+
+          <div
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className={cn(
+              "cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200",
+              theme === "dark" && "scale-100",
+            )}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={theme === "dark" ? "dark" : "light"}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
+                transition={{ duration: 0.2 }}
+              >
+                {theme === "dark" ? (
+                  <Sun className="size-5" />
+                ) : (
+                  <Moon className="size-5" />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {accessToken ? (
             <Link
               to="/account"
               className={cn(
-                "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center gap-1",
+                "opacity-50 hover:opacity-100 transition-opacity duration-200 flex justify-center",
                 pathname.endsWith("/account") && "opacity-100",
               )}
             >
-              <UserIcon className="size-5" />
-              <p className="hidden md:flex text-sm ">{profile?.username}</p>
+              <p className="hidden md:flex">{profile?.username}</p>
             </Link>
-          </TooltipHover>
-        ) : (
-          <TooltipHover tooltipText={t("nav_bar.login")}>
+          ) : (
             <Link to="/login">
-              <UserIcon
+              <p
                 className={cn(
-                  "size-5 opacity-50 hover:opacity-100 transition-opacity duration-200",
+                  "opacity-50 hover:opacity-100 transition-opacity duration-200",
                   pathname.endsWith("/login") && "opacity-100",
                 )}
-              />
+              >
+                လွၵ်ႉဢိၼ်ႇ
+              </p>
             </Link>
-          </TooltipHover>
-        )}
+          )}
+        </div>
+
+        <MobileDrawer navLink={navLink} />
       </div>
     </motion.nav>
   );

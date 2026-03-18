@@ -73,7 +73,7 @@ export const SettingTab = () => {
             ),
           });
         },
-      }
+      },
     );
     setNewPassword("");
     setConfirmPassword("");
@@ -98,7 +98,7 @@ export const SettingTab = () => {
               <Button
                 variant="outline"
                 type="button"
-                className="bg-foreground/30 hover:bg-foreground/50 cursor-pointer"
+                className="bg-foreground/30 btn hover:bg-foreground/50 cursor-pointer w-40"
                 onClick={() => setIsChangePassword(true)}
               >
                 Change Password
@@ -110,7 +110,7 @@ export const SettingTab = () => {
                   size="sm"
                   type="submit"
                   disabled={isUpdatingPassword}
-                  className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-28"
+                  className="bg-green/20 btn hover:bg-green/30 text-green cursor-pointer w-28"
                 >
                   {isUpdatingPassword ? (
                     <MiniSpinner />
@@ -131,7 +131,7 @@ export const SettingTab = () => {
                     setConfirmPassword("");
                     setCurrentPassword("");
                   }}
-                  className="bg-red/20 hover:bg-red/30 text-red cursor-pointer w-28"
+                  className="bg-red/20 btn hover:bg-red/30 text-red cursor-pointer w-28"
                 >
                   <X className="size-4" />
                   Cancel
@@ -175,7 +175,7 @@ export const SettingTab = () => {
             <div className="space-y-2">
               <Button
                 variant="destructive"
-                className="cursor-pointer justify-start bg-red w-32"
+                className="cursor-pointer text-center bg-red w-40 btn"
                 onClick={() => setIsOpen(true)}
               >
                 Delete Account

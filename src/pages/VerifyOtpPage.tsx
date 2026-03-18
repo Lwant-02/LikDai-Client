@@ -97,7 +97,7 @@ export const VerifyOtpPage = () => {
             ),
           });
         },
-      }
+      },
     );
   };
 
@@ -130,16 +130,16 @@ export const VerifyOtpPage = () => {
   };
 
   if (!email) {
-    return null; // Will redirect in useEffect
+    return null;
   }
 
   return (
     <>
       <Helmet>
-        <title>Verify OTP | LikDai</title>
+        <title>Verify OTP - LikDai | ယိုၼ်းယၼ် OTP</title>
         <meta
           name="description"
-          content="Verify your OTP to reset your password for LikDai - Pro."
+          content="Verify your OTP code to reset your LikDai password and continue your Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) experience."
         />
       </Helmet>
 
@@ -152,11 +152,11 @@ export const VerifyOtpPage = () => {
           className="flex justify-center items-center gap-2"
         >
           <img
-            src="/images/Logo.png"
+            src="/icons/favicon.svg"
             alt="Logo"
             className="size-12 object-cover"
           />
-          <p className="text-2xl font-bold">LikDai</p>
+          <p className="text-3xl font-bold">လိၵ်ႈတႆး</p>
         </motion.div>
 
         {/* Main Form */}
@@ -169,7 +169,7 @@ export const VerifyOtpPage = () => {
           {/* Header */}
           <div className="flex justify-center items-center gap-2 text-center">
             <Shield className="size-7 text-yellow" />
-            <p className="text-2xl font-bold">Verify OTP</p>
+            <p className="text-2xl font-bold pt-1">Verify OTP</p>
           </div>
 
           {/* Description */}
@@ -205,31 +205,30 @@ export const VerifyOtpPage = () => {
           </div>
 
           {/* Verify Button */}
-          <Button
+          <button
             onClick={handleVerifyOtp}
             disabled={isVerifyingOtp || otp.join("").length !== 6}
-            className="mt-4 h-11 rounded-lg text-primary bg-yellow hover:bg-yellow/90 w-full max-w-sm cursor-pointer flex justify-center items-center text-base font-semibold"
+            className="mt-4  gap-2 text-primary bg-yellow hover:bg-yellow/90 w-full max-w-sm btn cursor-pointer flex justify-center items-center text-base font-semibold"
           >
             {isVerifyingOtp ? (
               <MiniSpinner color="text-white" />
             ) : (
               <>
-                <Shield className="size-5 mr-2" />
-                Verify OTP
+                <Shield className="size-5" />
+                <span className="pt-1">Verify OTP</span>
               </>
             )}
-          </Button>
+          </button>
 
           {/* Resend OTP */}
           <div className="flex flex-col items-center gap-3">
             <p className="text-sm text-muted-foreground">
               Didn't receive the code?
             </p>
-            <Button
-              variant="ghost"
+            <button
               onClick={handleResendOtp}
               disabled={isResendingOtp}
-              className="text-yellow  hover:bg-yellow/10 cursor-pointer border border-yellow/50"
+              className="text-yellow  hover:bg-yellow/10 cursor-pointer border border-yellow/50 btn"
             >
               {isResendingOtp ? (
                 <MiniSpinner />
@@ -239,7 +238,7 @@ export const VerifyOtpPage = () => {
                   Resend OTP
                 </>
               )}
-            </Button>
+            </button>
           </div>
 
           {/* Back to Login */}

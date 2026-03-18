@@ -87,7 +87,7 @@ export const ChangePasswordPage = () => {
             ),
           });
         },
-      }
+      },
     );
   };
 
@@ -98,10 +98,10 @@ export const ChangePasswordPage = () => {
   return (
     <>
       <Helmet>
-        <title>Change Password | LikDai</title>
+        <title>Change Password - LikDai | လၢႆႈမၢႆလပ်ႉ</title>
         <meta
           name="description"
-          content="Change your password for your LikDai - Pro account."
+          content="Change the password for your LikDai account to secure your Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) progress and profile."
         />
       </Helmet>
 
@@ -113,11 +113,11 @@ export const ChangePasswordPage = () => {
           className="flex justify-center items-center gap-2"
         >
           <img
-            src="/images/Logo.png"
+            src="/icons/favicon.svg"
             alt="Logo"
             className="size-12 object-cover"
           />
-          <p className="text-2xl font-bold ">LikDai - Pro</p>
+          <p className="text-3xl pt-1 font-bold ">လိၵ်ႈတႆး</p>
         </motion.div>
         <motion.form
           initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export const ChangePasswordPage = () => {
             variant="destructive"
             type="submit"
             disabled={isChangingPassword}
-            className="mt-3 h-10 rounded-lg text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+            className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
           >
             {isChangingPassword ? (
               <MiniSpinner />

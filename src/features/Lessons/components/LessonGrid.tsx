@@ -12,7 +12,7 @@ interface LessonGridProps {
 }
 
 export const LessonGrid = ({ content, index }: LessonGridProps) => {
-  const { mode, lessonLevel, setTargetText } = settingStore();
+  const { lessonLevel, setTargetText } = settingStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -48,12 +48,7 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center xl:w-32 w-10 bg-gradient-to-br from-yellow to-orange rounded-xl text-white font-bold text-lg">
-              <span
-                className={cn(
-                  "xl:flex hidden",
-                  mode === "shan" && "font-secondary"
-                )}
-              >
+              <span className={cn("xl:flex hidden")}>
                 {t("lesson_page.lessons")}-
               </span>{" "}
               {index + 1}
@@ -62,7 +57,7 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
           <div className="flex items-end gap-2">
             <span
               className={cn(
-                "text-xs font-semibold px-3 py-1 rounded-full border capitalize opacity-70"
+                "text-xs font-semibold px-3 py-1 rounded-full border capitalize opacity-70",
               )}
             >
               {getWordNumber(content)} {t("lesson_page.word")}
@@ -70,19 +65,14 @@ export const LessonGrid = ({ content, index }: LessonGridProps) => {
             <span
               className={cn(
                 "text-xs font-semibold px-3 py-1 rounded-full border capitalize ",
-                getlevelColor(lessonLevel)
+                getlevelColor(lessonLevel),
               )}
             >
               {t(`lesson_page.${lessonLevel}.title`)}
             </span>
           </div>
         </div>
-        <h3
-          className={cn(
-            "text-xl font-bold w-full line-clamp-1",
-            mode === "shan" && "font-secondary"
-          )}
-        >
+        <h3 className={cn("text-xl font-bold w-full line-clamp-1")}>
           {content}
         </h3>
       </div>

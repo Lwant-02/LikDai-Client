@@ -19,14 +19,14 @@ export const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title>Login | LikDai</title>
+        <title>Login - LikDai | ၶဝ်ႈလွၵ်ႉဢိၼ် (Login)</title>
         <meta
           name="description"
-          content="Login to your LikDai - Pro account."
+          content="Log in to your LikDai account to track your Shan / Dai / Tai typing progress (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) and access exclusive features."
         />
       </Helmet>
-      <article className="flex justify-center items-center w-full h-full ">
-        <div className="w-full h-auto grid md:grid-cols-2 grid-cols-1 gap-10 md:my-28 mt-10 md:mb-0 mb-20 md:px-0 px-3">
+      <article className="flex justify-center items-center layout ">
+        <div className="w-full h-auto grid md:grid-cols-2 grid-cols-1 gap-10 md:my-28 mt-10 md:mb-0 mb-20 ">
           <RegisterForm />
           <span className="w-full h-1 bg-foreground/40 md:hidden rounded-full flex " />
           <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>

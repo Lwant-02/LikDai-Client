@@ -10,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useForgotPassword } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
 
@@ -96,16 +95,15 @@ export const ForgotPasswordDialog = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="bg-background/30 border-none focus:ring-1! ring-primary/30 h-10  rounded-lg"
+            className="bg-background/30 border border-primary/10 focus:ring-1! ring-primary/30 h-10 rounded-full px-5 "
           />
-          <Button
-            variant="destructive"
+          <button
             type="submit"
             disabled={isSendingEmail}
-            className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+            className="mt-3 btn h-10 border border-primary/10 text-primary bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background/80 transition-colors duration-300 text-base"
           >
             {isSendingEmail ? <MiniSpinner /> : <>Send Email</>}
-          </Button>
+          </button>
         </form>
       </DialogContent>
     </Dialog>

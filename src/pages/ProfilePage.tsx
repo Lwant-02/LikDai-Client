@@ -33,10 +33,10 @@ export const ProfilePage = () => {
   return (
     <>
       <Helmet>
-        <title>{username} | Profile</title>
+        <title>{username} - Profile | ၼႃႈပရေႃးၾၢႆ</title>
         <meta
           name="description"
-          content={`View ${username}'s profile on LikDai - Pro.`}
+          content={`View the LikDai profile for ${username} and discover their achievements in Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး).`}
         />
       </Helmet>
 
@@ -45,7 +45,7 @@ export const ProfilePage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full "
+          className="w-full layout"
         >
           {/* Header */}
           <ProfileHeader {...profile} />

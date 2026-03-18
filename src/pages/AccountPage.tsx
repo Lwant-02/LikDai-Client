@@ -30,10 +30,10 @@ export const AccountPage = () => {
   return (
     <>
       <Helmet>
-        <title>Account | LikDai</title>
+        <title>Account Settings - LikDai | ၶေႃႈမုၼ်းသုၼ်ႇတူဝ်</title>
         <meta
           name="description"
-          content="Manage your account settings and view your profile."
+          content="Manage your LikDai account settings, update your profile, and track your Shan / Dai / Tai typing journey (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)."
         />
       </Helmet>
       <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
@@ -41,7 +41,7 @@ export const AccountPage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full"
+          className="w-full layout"
         >
           {/* Header */}
           <AccoutHeader {...profile} />

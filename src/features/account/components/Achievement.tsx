@@ -45,7 +45,7 @@ export const Achievement = ({
           "p-4 rounded-lg border ",
           unlocked
             ? "border-yellow bg-yellow/10"
-            : "border-primary/20 bg-foreground/20 opacity-60"
+            : "border-primary/20 bg-foreground/20 opacity-60",
         )}
       >
         <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export const Achievement = ({
                       "text-sm text-green",
                       !unlocked
                         ? " cursor-not-allowed"
-                        : "cursor-pointer hover:underline"
+                        : "cursor-pointer hover:underline",
                     )}
                     onClick={() => setIsDialogOpen(true)}
                   >

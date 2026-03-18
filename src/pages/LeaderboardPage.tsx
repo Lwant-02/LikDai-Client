@@ -11,6 +11,21 @@ import { LeaderboardTable } from "@/features/Leaderboard/components/LeaderboardT
 import { useGetLeaderboard } from "@/hooks/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export const LeaderboardPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation();
@@ -36,7 +51,7 @@ export const LeaderboardPage = () => {
     (entry, index) => ({
       ...entry,
       rank: index + 1,
-    })
+    }),
   );
 
   // Reset page when changing language filter
@@ -64,38 +79,44 @@ export const LeaderboardPage = () => {
   return (
     <>
       <Helmet>
-        <title>Leaderboards | LikDai</title>
+        <title>Leaderboard - LikDai | သဵၼ်ႈမၢႆၵူၼ်းၵတ်ႉ</title>
         <meta
           name="description"
-          content="Compete with others and see how you rank on the leaderboard."
+          content="Check the LikDai leaderboard to see top Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) speeds and compete with other learners around the world."
         />
       </Helmet>
       <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-5xl"
+           variants={containerVariants}
+           initial="hidden"
+           animate="visible"
+           className="w-full layout space-y-4"
         >
           {/* Header - Responsive layout */}
-          <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
+          <motion.div variants={itemVariants} className="w-full">
+            <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
+          </motion.div>
 
           {/* Filters - Responsive layout */}
-          <LeaderboardFilter
-            languageFilter={languageFilter}
-            setLanguageFilter={setLanguageFilter}
-          />
+          <motion.div variants={itemVariants} className="w-full">
+            <LeaderboardFilter
+              languageFilter={languageFilter}
+              setLanguageFilter={setLanguageFilter}
+            />
+          </motion.div>
 
-          <p className="md:text-2xl text-xl font-bolds mb-3">
-            {t(`leaderboard_page.description.${languageFilter}`)}
-          </p>
+          <motion.div variants={itemVariants} className="w-full">
+            <p className="md:text-2xl text-xl font-bold mb-3">
+              {t(`leaderboard_page.description.${languageFilter}`)}
+            </p>
+          </motion.div>
 
           {isFetchingLeaderboard ? (
-            <div className="w-full flex justify-center items-center h-52">
+            <motion.div variants={itemVariants} className="w-full flex justify-center items-center h-52">
               <Spinner />
-            </div>
+            </motion.div>
           ) : (
-            <>
+            <motion.div variants={itemVariants} className="w-full space-y-4">
               {leaderboard.leaderboard.length > 0 ? (
                 <>
                   {/* Leaderboard table - Responsive layout */}
@@ -109,14 +130,9 @@ export const LeaderboardPage = () => {
                   />
 
                   {/* Info text */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.7 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-4 text-xs sm:text-sm text-center mb-20"
-                  >
+                  <p className="mt-4 text-xs sm:text-sm text-center mb-20 opacity-70">
                     {t("leaderboard_page.note")}
-                  </motion.p>
+                  </p>
                 </>
               ) : (
                 <div className="w-full flex justify-center items-center h-52">
@@ -125,7 +141,7 @@ export const LeaderboardPage = () => {
                   </p>
                 </div>
               )}
-            </>
+            </motion.div>
           )}
         </motion.div>
       </article>

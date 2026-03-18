@@ -48,7 +48,7 @@ export const LeaderboardTable = ({
                 "grid grid-cols-4 justify-center items-center  xl:grid-cols-8 py-3 px-4 text-xs sm:text-sm hover:bg-foreground/10 transition-colors",
                 entry.rank === 1 && "bg-yellow/10",
                 entry.rank === 2 && "bg-blue/10",
-                entry.rank === 3 && "bg-green/10"
+                entry.rank === 3 && "bg-green/10",
               )}
             >
               <div className="col-span-2 flex items-center gap-2 sm:gap-3">
@@ -58,10 +58,10 @@ export const LeaderboardTable = ({
                     entry.rank === 1
                       ? "text-yellow"
                       : entry.rank === 2
-                      ? "text-blue"
-                      : entry.rank === 3
-                      ? "text-green"
-                      : "opacity-70"
+                        ? "text-blue"
+                        : entry.rank === 3
+                          ? "text-green"
+                          : "opacity-70",
                   )}
                 >
                   {entry.rank === 1 ? (
@@ -72,7 +72,7 @@ export const LeaderboardTable = ({
                 </span>
                 <div className="flex justify-center items-center gap-2">
                   <div className="size-7 rounded-full border-1 border-yellow flex justify-center items-center ">
-                    <p className="text-xs font-bold text-yellow">
+                    <p className="text-xs font-bold text-yellow text-center">
                       {formatName(entry.user.username)}
                     </p>
                   </div>
