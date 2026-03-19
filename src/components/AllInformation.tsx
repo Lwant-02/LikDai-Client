@@ -17,6 +17,7 @@ import {
 } from "@/constant";
 import { itemVariants } from "@/pages/AboutPage";
 import { FeatureCard } from "./FeatureCard";
+import { ABOUT_CONTENT } from "@/content/about.content";
 
 export const AllInformation = ({
   handleInstallClick,
@@ -25,37 +26,27 @@ export const AllInformation = ({
 }) => {
   const keyfeatures = [
     {
-      title: "ၵမ်ႉထႅမ်သွင်ၽႃႇသႃႇ",
-      description: "ၽိုၵ်းပေႃႉလိၵ်ႈ ဢိင်းၵလဵတ်ႈ လႄႈ လိၵ်ႈတႆး သွင်ၽႃႇသႃႇ",
+      ...ABOUT_CONTENT.section2.features[0],
       icon: <Globe className="size-7 text-yellow" />,
     },
     {
-      title: "ၵၢၼ်ၽိုၵ်းတႅမ်ႈၼမ်လၢႆ",
-      description:
-        "ၽိုၵ်းပေႃႉလိၵ်ႈ လူၺ်ႈၵၢၼ်ၽိုၵ်းလၢႆလၢႆဢၼ် မိူၼ်ၼင်ႇ ၸၼ်ႉဢွၼ်ႇ၊ ၸၼ်ႉၵၢင်၊ ၸၼ်ႉသုင် လႄႈ ၵႂၢမ်းၵပ်းထုၵ်ႇ",
+      ...ABOUT_CONTENT.section2.features[1],
       icon: <Award className="size-7 text-blue" />,
     },
     {
-      title: "လွင်ႈဢွင်ႇမၢၼ်",
-      description:
-        "လႆႈႁပ်ႉပၢႆႉလႄႈ ပိုတ်ႇပၼ်လွင်ႈဢွင်ႇမၢၼ် မိူဝ်ႈၸဝ်ႈၵဝ်ႇ ႁဵတ်းႁႂ်ႈ လွင်ႈပေႃႉလိၵ်ႈ ဝႆးလိူဝ်မႃး",
+      ...ABOUT_CONTENT.section2.features[2],
       icon: <Code className="size-7 text-green" />,
     },
     {
-      title: "ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်",
-      description:
-        "ၶေႉၶဵင်ႇၵၼ်တင်းတၢင်ႇၵေႃႉ တီႈၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ် တႃႇတေႁူႉဝႃႈ ၽႂ်ဝႆး တႅတ်ႈၼႅတ်ႈ လိူဝ်ၵၼ်။",
+      ...ABOUT_CONTENT.section2.features[3],
       icon: <Trophy className="size-7 text-purple" />,
     },
     {
-      title: "ၵမ်ႉထႅမ်ပၼ် ၶီးပူတ်ႉ",
-      description:
-        "ၵမ်ႉထႅမ်ပၼ် ၶီးပူတ်ႉ 4 ဢၼ် မိူၼ်ၼင်ႇ ၼမ်ႉၶူင်း၊ ပၢင်လူင်၊ ယုင်းၶဵဝ် လႄႈ လၵ်းၸဵင်",
+      ...ABOUT_CONTENT.section2.features[4],
       icon: <Keyboard className="size-7 text-orange" />,
     },
     {
-      title: "Progressive Web App (PWA)",
-      description: "လူတ်ႇဢဝ်ဢႅပ်ႉၼႆႉသေ ၸႂ်ႉတိုဝ်းၼႂ်းၶိူင်ႈၸဝ်ႈၵဝ်ႇၵမ်းသိုဝ်ႈ။",
+      ...ABOUT_CONTENT.section2.features[5],
       icon: <CloudDownload className="size-7 text-red" />,
     },
   ];
@@ -64,10 +55,10 @@ export const AllInformation = ({
     <>
       <motion.div variants={itemVariants} className="text-center mb-16">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
-          လိၵ်ႈတႆး
+          {ABOUT_CONTENT.header.title}
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-          ပေႃႉလိၵ်ႈတႆး လူၺ်ႈလၢႆးတႅတ်ႈတေႃးလႄႈဝႆး
+          {ABOUT_CONTENT.header.subtitle}
         </p>
       </motion.div>
 
@@ -82,16 +73,20 @@ export const AllInformation = ({
               <Code className="w-6 h-6 text-blue-500" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold">
-              1. တိုၵ်ႉႁႅင်း Hackathon
+              {ABOUT_CONTENT.section1.title}
             </h2>
           </div>
 
           <div className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg mb-8">
             <p>
-              <span className="font-bold text-yellow">လိၵ်ႈတႆး </span> ၼႆႉ
-              ပဵၼ်ၽူႈလႆႈသူး တီႈပၢင်ၶေႉၶဵင်ႇ{" "}
-              <span className="text-yellow">တိုၵ်ႉႁႅင်း Hackathon</span>, လႄႈ
-              ၸုမ်းဢၼ်ၸတ်းႁဵတ်းၼၼ်ႉၵေႃႈပဵၼ် ၸုမ်း{" "}
+              <span className="font-bold text-yellow">
+                {ABOUT_CONTENT.cta.likdai}
+              </span>
+              {ABOUT_CONTENT.section1.p1.part1}
+              <span className="text-yellow">
+                {ABOUT_CONTENT.section1.p1.part2}
+              </span>
+              {ABOUT_CONTENT.section1.p1.part3}
               <a
                 href="https://www.haohaa.com/en"
                 target="_blank"
@@ -100,37 +95,36 @@ export const AllInformation = ({
               >
                 Hao Haa
               </a>{" "}
-              ၼႆၶႃႈ။ ၶူင်းၵၢၼ်ဢၼ်ၼႆႉ လႆႈၵေႃႇသၢင်ႈမႃး လူၺ်ႈတၢင်းမုင်ႈမွင်း
-              တႃႇပူၵ်းပွင်ပၢႆးပၺ်ႇၺႃႇ ၵၢၼ်ပေႃႉလိၵ်ႈ ၽႃႇသႃႇတႆး လႄႈ မုင်ႈမွင်းဝႃႈ
-              တေႁဵတ်းႁႂ်ႈမၼ်းပၼ်ၽွၼ်းလီ တႃႇၽူႈလဵပ်ႈႁဵၼ်းၽႃႇသႃႇတႆးႁဝ်း။
+              {ABOUT_CONTENT.section1.p1.part4}
             </p>
           </div>
 
-          <div className="bg-background/50 border border-blue-500/20 p-6 rounded-xl mb-8">
+          <div className="bg-background/50 border border-blue-500/20 p-6 rounded-3xl mb-8">
             <h3 className="text-xl sm:text-2xl font-bold mb-4 text-blue-500">
-              ယိူင်းဢၢၼ်းႁဝ်းၶႃႈ
+              {ABOUT_CONTENT.section1.goalsTitle}
             </h3>
             <ul className="list-none space-y-4">
               <li className="flex items-start gap-3">
                 <span className="text-blue-500 font-bold text-xl mt-1">•</span>
                 <span className="opacity-90 leading-relaxed">
-                  <span className="font-bold text-yellow">လိၵ်ႈတႆး </span>{" "}
-                  ၼႆႉၶူင်ႊသၢင်ႈဝႆႉ တႃႇပဵၼ်လွင်ႈၵမ်ႉထႅမ်
-                  ၼႂ်းၵၢၼ်ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး ႁႂ်ႈလူင်ႉလႅၼ်ႇ လႄႈ လႅတ်းၽႆးယဝ်ႉ။
-                  ငဝ်ႈတိုၼ်း{" "}
-                  <span className="font-bold text-yellow">လိၵ်ႈတႆး </span>{" "}
-                  ၼႆႉဢိင်ဢဝ်တီႈ MonkeyType သေၶူင်ႊသၢင်ႈပဵၼ်မႃးယဝ်ႉ၊ ပီႈၼွင်ႉႁဝ်း
-                  ၽိုၵ်းတႅမ်ႈလိၵ်ႈတႆး လႄႈ လိၵ်ႈဢိင်းၵလဵတ်ႈ ၼႂ်း{" "}
-                  <span className="font-bold text-yellow">လိၵ်ႈတႆး </span>{" "}
-                  ၼႆႉလႆႈယဝ်ႉဢေႃႈ။
+                  <span className="font-bold text-yellow">
+                    {ABOUT_CONTENT.cta.likdai}
+                  </span>
+                  {ABOUT_CONTENT.section1.goal1.part1}
+                  <span className="font-bold text-yellow">
+                    {ABOUT_CONTENT.cta.likdai}
+                  </span>
+                  {ABOUT_CONTENT.section1.goal1.part2}
+                  <span className="font-bold text-yellow">
+                    {ABOUT_CONTENT.cta.likdai}
+                  </span>
+                  {ABOUT_CONTENT.section1.goal1.part3}
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-blue-500 font-bold text-xl mt-1">•</span>
                 <span className="opacity-90 leading-relaxed">
-                  ယိူင်းဢၢၼ်းႁဝ်းၶႃႈတႄႉ တႃႇထိင်းသိမ်း လႄႈ ယုၵ်ႉမုၼ်း လိၵ်ႈတႆး
-                  လိူၺ်ႈလၢႆးတၢင်းပၢႆးၸၢင်ႈ၊ ၼင်ႇႁိုဝ်ပီႈၼွင်ႉတႆး လႄႈ
-                  ၽူႈလဵပ်ႈႁဵၼ်းလိၵ်ႈတႆး လႆႈၽိုၵ်းၼမ်ႉၵတ်ႉပၢႆးၸၢင်ႈၵႂႃႇ။
+                  {ABOUT_CONTENT.section1.goal2}
                 </span>
               </li>
             </ul>
@@ -147,11 +141,11 @@ export const AllInformation = ({
               <Award className="w-6 h-6 text-green-500" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold">
-              2. ၾၢင်ႁၢင်ႊပိူင်လူင်
+              {ABOUT_CONTENT.section2.title}
             </h2>
           </div>
           <p className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg mb-8">
-            ၵူႊလွင်ႈလွင်ႈတႃႇမေႃပေႃႉလိၵ်ႈ ဢိင်းၵလဵတ်ႈ လႄႈ လိၵ်ႈတႆးသွင်ၽႃႇသႃႇ
+            {ABOUT_CONTENT.section2.subtitle}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -177,7 +171,7 @@ export const AllInformation = ({
               <CloudDownload className="w-6 h-6 text-purple" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold">
-              3. ၸၼ်ဢဝ်ဢႅပ်ႉသႂ်ႇၼႂ်းၶွမ်း
+              {ABOUT_CONTENT.section3.title}
             </h2>
           </div>
 
@@ -191,13 +185,11 @@ export const AllInformation = ({
               <div className="flex-1 space-y-8 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow/10 border border-yellow/20 text-yellow font-semibold text-sm mb-2">
                   <CloudDownload className="size-4" />
-                  <span>Progressive Web App</span>
+                  <span>{ABOUT_CONTENT.section3.pwaTag}</span>
                 </div>
 
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 mt-4">
-                  တိတ်ႉတင်ႈ လိၵ်ႈတႆး ပဵၼ် PWA သေ ၸႂ်ႉတိုဝ်းလႆႈငၢႆႈငၢႆႈ။
-                  ဢမ်ႇတၢပ်ႈလူဝ်ႇ ၶဝ်ႈ Browser သေ ၸႂ်ႉလႆႈ လူၺ်ႈၶဝ်ႈ
-                  ဢႅပ်ႉတီႈၶွမ်းဢဝ်။
+                  {ABOUT_CONTENT.section3.desc}
                 </p>
 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4">
@@ -205,13 +197,17 @@ export const AllInformation = ({
                     <div className="p-2 bg-blue/10 text-blue rounded-lg">
                       <Trophy className="size-4" />
                     </div>
-                    <span className="text-sm font-medium">Native Vibe</span>
+                    <span className="text-sm font-medium">
+                      {ABOUT_CONTENT.section3.badge1}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 bg-background p-3 rounded-xl border border-foreground/5 shadow-sm">
                     <div className="p-2 bg-orange/10 text-orange rounded-lg">
                       <Code className="size-4" />
                     </div>
-                    <span className="text-sm font-medium">Lightweight</span>
+                    <span className="text-sm font-medium">
+                      {ABOUT_CONTENT.section3.badge2}
+                    </span>
                   </div>
                 </div>
 
@@ -224,7 +220,7 @@ export const AllInformation = ({
                     <span className="absolute inset-0 bg-yellow translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                     <CloudDownload className="size-6 relative z-10 group-hover:animate-bounce" />
                     <span className="relative z-10 ">
-                      တိတ်ႉတင်ႈ (Install App)
+                      {ABOUT_CONTENT.section3.button}
                     </span>
                   </button>
                 </div>
@@ -284,7 +280,7 @@ export const AllInformation = ({
               <UserCog className="w-6 h-6 text-orange" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold">
-              4. ၽူႈၶူင်ႊသၢင်ႈ လႄႈ ၽူၵမ်ႉထႅမ်
+              {ABOUT_CONTENT.section4.title}
             </h2>
           </div>
 
@@ -292,11 +288,9 @@ export const AllInformation = ({
             <div>
               <p>
                 <span className="font-bold text-yellow">
-                  ၸၢႆးၼေႃႇမိူင်း(လွၼ်ႉ){" "}
+                  {ABOUT_CONTENT.section4.dev.name}
                 </span>
-                ပဵၼ် ၽူႈ ၶူင်ႊသၢင်ႈ ႁဵတ်းဢွၵ်ႇ ၶူင်းၵၢၼ်ၼႆႉ မႃးမိူဝ်ႈ လိူၼ် July
-                ပီႊ 2025 ၼႆယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၽူႈၶူင်ႊသၢင်ႈလႆႈလူၺ်ႈ
-                ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+                {ABOUT_CONTENT.section4.dev.desc}
               </p>
               <div className="flex flex-wrap gap-4 mt-4">
                 {developerContacts.map((contact, index) => (
@@ -305,12 +299,12 @@ export const AllInformation = ({
                     href={contact.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-white p-2 border border-foreground/5 rounded-md hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center justify-center border text-yellow border-foreground px-4 py-2 rounded-xl cursor-pointer hover:bg-foreground/5 transition-colors"
                   >
                     <img
                       src={contact.imagePath}
                       alt={contact.link}
-                      className="size-6 rounded-md"
+                      className="h-6 w-auto dark:invert"
                     />
                   </a>
                 ))}
@@ -320,13 +314,11 @@ export const AllInformation = ({
             <div className="bg-green-500/5 border-l-4 border-green-500 p-4 rounded-r-xl space-y-6">
               <div>
                 <p className="mb-4">
-                  ယိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇၼမ်ထိုင်{" "}
+                  {ABOUT_CONTENT.section4.sup1.thanks}
                   <span className="font-bold text-yellow">
-                    ၸၢႆးမၢဝ်း (ထုင်ႉမၢဝ်းၶမ်း){" "}
+                    {ABOUT_CONTENT.section4.sup1.name}
                   </span>
-                  ဢၼ်လႆႈၸွၺ်ႈထႅမ်ပၼ် Shan Quotes လႄႈ လွင်ႈၵမ်ႉၸွၺ်ႈ
-                  တႃႇၶူင်းၵၢၼ်ၼႆႉယူႇၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးမၢဝ်း လႆႈလူၺ်ႈ
-                  ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+                  {ABOUT_CONTENT.section4.sup1.desc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   {supporterContacts.map((contact, index) => (
@@ -335,12 +327,12 @@ export const AllInformation = ({
                       href={contact.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white p-1 border border-foreground/5 rounded-md hover:bg-gray-100 transition-colors"
+                      className="inline-flex items-center justify-center border text-yellow border-foreground/80 px-4 py-2 rounded-xl cursor-pointer hover:bg-foreground/5 transition-colors"
                     >
                       <img
                         src={contact.imagePath}
                         alt={contact.link}
-                        className="h-8 object-contain"
+                        className="h-6 w-auto dark:invert"
                       />
                     </a>
                   ))}
@@ -349,11 +341,11 @@ export const AllInformation = ({
 
               <div>
                 <p className="mb-4">
-                  ယဝ်ႉၵေႃႈ ၶွပ်ႈၸႂ်ထိုင်ပႃး{" "}
-                  <span className="font-bold text-yellow">ၸၢႆးၸၢမ်ႇၺုၼ်ႉ </span>
-                  ႁဝ်း ဢၼ်လႆႈၸွၺ်ႈ ထတ်းၶေႃႈသဵင်တႅတ်ႈ လႄႈ ၸွၺ်ႈ ၽိူမ်ႉၶေႃႈမုၼ်း
-                  လိၵ်ႈတႆး တွၼ်ႈတႃႇ ၶူင်းၵၢၼ်ၼႆႉၶႃႈ။ ၵပ်းသိုပ်ႇ ၸၢႆးၸၢမ်ႇၺုၼ်ႉ
-                  လႆႈလူၺ်ႈ ႁဵၼ်းလိၵ်ႈတၢင်းတႂ်ႈ ၼႆႉယူႇၶႃႈ။
+                  {ABOUT_CONTENT.section4.sup2.thanks}
+                  <span className="font-bold text-yellow">
+                    {ABOUT_CONTENT.section4.sup2.name}
+                  </span>
+                  {ABOUT_CONTENT.section4.sup2.desc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   {anotherSupporterContacts.map((contact, index) => (
@@ -362,12 +354,12 @@ export const AllInformation = ({
                       href={contact.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white p-1 border border-foreground/5 rounded-md hover:bg-gray-100 transition-colors"
+                      className="inline-flex items-center justify-center border text-yellow border-foreground/80 px-4 py-2 rounded-xl cursor-pointer hover:bg-foreground/5 transition-colors"
                     >
                       <img
                         src={contact.imagePath}
                         alt={contact.link}
-                        className="h-8 object-contain"
+                        className="h-6 w-auto dark:invert"
                       />
                     </a>
                   ))}

@@ -42,10 +42,6 @@ export const Navbar = () => {
       name: "လၵ်းၼမ်း",
       path: "/policy",
     },
-    {
-      name: "ၽဵင်းၵႂၢမ်း",
-      path: "/songs",
-    },
   ];
 
   if (
@@ -63,7 +59,7 @@ export const Navbar = () => {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
+      transition={{ duration: 0.2 }}
       className="w-full h-auto z-20 flex justify-center items-center py-3 sticky top-0 px-3 md:px-4 xl:px-0"
     >
       <div className="h-16 rounded-full px-5! z-50 bg-background border border-primary/20 backdrop-blur-sm shadow-sm layout w-full flex justify-between items-center">

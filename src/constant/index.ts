@@ -34,3 +34,24 @@ export const githubFrontendRepoUrl =
 
 export const githubBackendRepoUrl =
   "https://github.com/Lwant-02/LikDaiPro-Server.git";
+
+export const SONGS = [
+  {
+    id: "1",
+    title: "Lofi Study Focus",
+    artist: "Chill Beats",
+    url: "/songs/test-song.mp3",
+    category: "Lofi",
+    color: "text-green",
+    bg: "bg-green/10",
+  },
+  {
+    id: "2",
+    title: "Focus",
+    artist: "Chill Beats",
+    url: "/songs/test-two.mp3",
+    category: "Lofi",
+    color: "text-green",
+    bg: "bg-green/10",
+  },
+];

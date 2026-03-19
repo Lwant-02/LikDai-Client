@@ -11,7 +11,7 @@ export const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
     <motion.div
       variants={itemVariants}
       key={title}
-      className="bg-foreground/40 backdrop-blur-sm rounded-xl p-6 hover:bg-foreground/20 transition-colors"
+      className="bg-foreground/40 backdrop-blur-sm rounded-3xl p-6 hover:bg-foreground/20 transition-colors"
     >
       <div className="bg-yellow/10 size-14 rounded-lg flex items-center justify-center mb-4">
         {icon}

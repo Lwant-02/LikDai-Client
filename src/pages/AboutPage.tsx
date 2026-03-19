@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import { AllInformation } from "@/components/AllInformation";
 import { settingStore } from "@/store/settingStore";
+import { ABOUT_CONTENT } from "@/content/about.content";
 
 // Animation variants
 export const containerVariants = {
@@ -67,11 +68,8 @@ export const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About LikDai | လွင်ႈလိၵ်ႈတႆး</title>
-        <meta
-          name="description"
-          content="Learn more about LikDai, the dedicated platform for learning and practicing the Shan / Dai / Tai keyboard and language (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)."
-        />
+        <title>{ABOUT_CONTENT.metaTitle}</title>
+        <meta name="description" content={ABOUT_CONTENT.metaDescription} />
       </Helmet>
 
       <main className="min-h-screen py-20 relative overflow-hidden">
@@ -81,7 +79,6 @@ export const AboutPage = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* English Section */}
           <AllInformation handleInstallClick={handleInstallClick} />
 
           {/* CTA Section */}
@@ -90,13 +87,14 @@ export const AboutPage = () => {
             className="pt-10 pb-6 text-center mt-10"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              ၽွမ်ႉတႃႇတေ ယုၵ်ႉမုၼ်းၼမ်ႉၵတ်ႉ ပေႃႉလိၵ်ႈယဝ်ႉႁႃႉ?
+              {ABOUT_CONTENT.cta.title}
             </h2>
             <p className="text-lg opacity-80 mb-8 max-w-2xl mx-auto">
-              ၶဝ်ႈႁူမ်ႈၸွမ်း ၽူႈၸႂ်ႉတိုဝ်း ဢၼ်မေႃပေႃႉလိၵ်ႈတႆး ၼပ်ႉႁူဝ်ႁဵင်တီႈ{" "}
-              <span className="font-bold text-yellow">လိၵ်ႈတႆး </span> ၶႃႈ။
-              မၼ်းဢမ်ႇလႆႈသဵင်ႈငိုၼ်းသင်သေ ႁဵတ်းဝႆႉ တႃႇၸွၺ်ႈထႅမ် ႁႂ်ႈၸဝ်ႈၵဝ်ႇ
-              ပေႃႉလိၵ်ႈလႆႈဝႆးဝႆး လႄႈ တႅတ်ႈတေႃးလိူဝ်ၵဝ်ႇ။
+              {ABOUT_CONTENT.cta.descOne}
+              <span className="font-bold text-yellow">
+                {ABOUT_CONTENT.cta.likdai}
+              </span>
+              {ABOUT_CONTENT.cta.descTwo}
             </p>
             <button
               className="bg-yellow hover:bg-yellow/80 text-background btn cursor-pointer"

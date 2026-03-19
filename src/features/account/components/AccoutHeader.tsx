@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { authStore } from "@/store/authStore";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { ACCOUNT_PROFILE_CONTENT } from "@/content/account.content";
 
 interface AccoutHeaderProps {
   id: string;
@@ -30,7 +31,7 @@ export const AccoutHeader = ({
       onSuccess: () => {
         setAccessToken(null);
         toast("✅️ Success", {
-          description: <p className="text-white">Logout successful!</p>,
+          description: <p className="text-white">ဢွၵ်ႇဢၵွင်ႉယဝ်ႉ လီငၢမ်းၶႃႈ</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },
@@ -41,7 +42,7 @@ export const AccoutHeader = ({
           toast("❌️ Oops!", {
             description: (
               <p className="text-white">
-                Request timed out! Please try again later.
+                မီးလွင်ႈၽိတ်းပိူင်ႈဝႆႉ။ ၶိုၼ်းၶတ်းၸႂ်တူၺ်းၶႃႈ။
               </p>
             ),
           });
@@ -51,7 +52,7 @@ export const AccoutHeader = ({
           description: (
             <p className="text-white">
               {error.response.data.message ||
-                "Something went wrong. Please try again."}
+                "မီးလွင်ႈၽိတ်းပိူင်ႈဝႆႉ။ ၶိုၼ်းၶတ်းၸႂ်တူၺ်းၶႃႈ။"}
             </p>
           ),
         });
@@ -75,14 +76,16 @@ export const AccoutHeader = ({
         <div>
           <h1 className="text-2xl font-bold">{username}</h1>
           <p className="text-sm opacity-70">
-            Member since - {formatJoinedDate(joinedAt)}
+            {ACCOUNT_PROFILE_CONTENT.joinDate} - {formatJoinedDate(joinedAt)}
           </p>
         </div>
       </div>
       <div className=" w-auto md:mb-0 mb-4 text-center">
-        <h1 className="text-xl font-bold">Your Bio</h1>
+        <h1 className="text-xl font-bold">
+          {ACCOUNT_PROFILE_CONTENT.bioTitle}
+        </h1>
         <p className="text-sm opacity-70 ">
-          {bio ? bio : "You have not set your bio yet."}
+          {bio ? bio : ACCOUNT_PROFILE_CONTENT.noBio}
         </p>
       </div>
       <Button
@@ -96,7 +99,7 @@ export const AccoutHeader = ({
         ) : (
           <>
             <LogOut className="size-4 mr-1" />
-            Logout
+            {ACCOUNT_PROFILE_CONTENT.logout}
           </>
         )}
       </Button>

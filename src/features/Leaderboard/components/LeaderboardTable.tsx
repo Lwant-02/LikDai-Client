@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { formatName } from "@/util/formatName";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { LEADERBOARD_CONTENT } from "@/content/leaderboard.content";
 
 interface LeaderboardTableProps {
   leaderboardData: LeaderboardEntry[];
@@ -19,23 +20,27 @@ export const LeaderboardTable = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="w-full bg-foreground/5 rounded-lg overflow-hidden"
+      className="w-full bg-foreground/5 rounded-3xl border border-primary/20 overflow-hidden"
     >
       {/* Table header - Responsive grid */}
-      <div className="grid grid-cols-4 xl:grid-cols-8 py-3 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
+      <div className="grid grid-cols-4 xl:grid-cols-8 py-4 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">
         <div className="col-span-2 flex items-center gap-2">
           <Users className="size-4 opacity-70" />
-          <span>User</span>
+          <span>{LEADERBOARD_CONTENT.table.user}</span>
         </div>
         <div className="flex items-center gap-2">
           <BarChart2 className="size-4 opacity-70" />
-          <span>WPM</span>
+          <span>{LEADERBOARD_CONTENT.table.wpm}</span>
         </div>
-        <div className="hidden sm:flex">Accuracy</div>
-        <div className="hidden md:flex">Raw</div>
-        <div className="hidden md:flex">Consistency</div>
-        <div className="flex">Tests</div>
-        <div className="hidden md:flex">Date</div>
+        <div className="hidden sm:flex">
+          {LEADERBOARD_CONTENT.table.accuracy}
+        </div>
+        <div className="hidden md:flex">{LEADERBOARD_CONTENT.table.raw}</div>
+        <div className="hidden md:flex">
+          {LEADERBOARD_CONTENT.table.consistency}
+        </div>
+        <div className="flex">{LEADERBOARD_CONTENT.table.test}</div>
+        <div className="hidden md:flex">{LEADERBOARD_CONTENT.table.date}</div>
       </div>
       <Separator />
 

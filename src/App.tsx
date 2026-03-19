@@ -26,7 +26,7 @@ import { useEffect } from "react";
 import { settingStore } from "./store/settingStore";
 import { PolicyPage } from "./pages/PolicyPage";
 import { FeedbackDialog } from "./components/FeedbackDialog";
-import { SongPage } from "./pages/SongPage";
+import { MusicPlayer } from "./components/MusicPlayer";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -48,6 +48,7 @@ export default function App() {
     <main className="min-h-screen relative">
       <Router>
         <Navbar />
+        <MusicPlayer />
         <FeedbackDialog />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -79,7 +80,6 @@ export default function App() {
           <Route path="/verify-otp" element={<VerifyOtpPage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/policy" element={<PolicyPage />} />
-          <Route path="/songs" element={<SongPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/404" />} />
           <Route path="/certificate" element={<CertificatePage />} />
@@ -96,6 +96,7 @@ export default function App() {
             border: "none",
             color: "#F5F5F5",
             borderRadius: "8px",
+            fontFamily: "'GHKTachileik', sans-serif",
           },
         }}
         position="top-right"

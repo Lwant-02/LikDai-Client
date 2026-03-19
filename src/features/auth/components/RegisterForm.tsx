@@ -7,6 +7,7 @@ import { Button } from "../../../components/ui/button";
 import { InputFiled } from "../../../components/InputFiled";
 import { useRegister } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
 
 interface FormData {
   username: string;
@@ -90,9 +91,9 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, username: e.target.value }))
         }
-        placeholder="Username"
-        label="Username"
-        helperText="Username must be at least 3 characters and not more than 20 characters."
+        placeholder={COMMON_INPUT_CONTENT.namePlaceholder}
+        label={COMMON_INPUT_CONTENT.name}
+        helperText={COMMON_INPUT_CONTENT.nameHelperText}
       />
       <InputFiled
         type="email"
@@ -101,9 +102,9 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, email: e.target.value }))
         }
-        placeholder="Email"
-        label="Email"
-        helperText="Email must be a valid email address."
+        placeholder={COMMON_INPUT_CONTENT.emailPlaceholder}
+        label={COMMON_INPUT_CONTENT.email}
+        helperText={COMMON_INPUT_CONTENT.emailHelperText}
       />
       <InputFiled
         type="password"
@@ -112,9 +113,9 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, password: e.target.value }))
         }
-        placeholder="Password"
-        label="Password"
-        helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+        placeholder={COMMON_INPUT_CONTENT.passwordPlaceholder}
+        label={COMMON_INPUT_CONTENT.password}
+        helperText={COMMON_INPUT_CONTENT.passwordHelperText}
       />
       <Button
         variant="destructive"

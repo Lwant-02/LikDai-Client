@@ -80,7 +80,7 @@ export const ReportSummitDialog = ({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+        <DialogContent className="sm:max-w-md bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
           <DialogHeader>
             <DialogTitle>Report a Bug or Give Feedbacks 🐞</DialogTitle>
             <DialogDescription className="text-sm opacity-70">
@@ -104,7 +104,7 @@ export const ReportSummitDialog = ({
             <button
               type="submit"
               disabled={isSubmitting || !text}
-              className="mt-3 btn h-10 border border-primary/10 text-primary bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background/80 transition-colors duration-300 text-base"
+              className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
             >
               {isSubmitting ? <MiniSpinner /> : <>Submit</>}
             </button>

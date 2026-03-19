@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Lock, Eye, FileText, Mail } from "lucide-react";
 import { developerContacts } from "@/constant";
+import { POLICY_CONTENT } from "@/content/policy.content";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,11 +23,8 @@ export const PolicyPage = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy - LikDai | ပိူင်ၵၢၼ် လွင်ႈႁူမ်ႇလူမ်ႈ</title>
-        <meta
-          name="description"
-          content="Read the LikDai Privacy Policy and Terms of Service (ပိူင်ၵၢၼ် လွင်ႈႁူမ်ႇလူမ်ႈ လႄႈ လွင်ႈသုၼ်ႇတူဝ်) designed for our Shan / Dai / Tai typing community."
-        />
+        <title>{POLICY_CONTENT.metaTitle}</title>
+        <meta name="description" content={POLICY_CONTENT.metaDescription} />
       </Helmet>
 
       <main className="min-h-screen py-20 relative overflow-hidden">
@@ -38,11 +36,11 @@ export const PolicyPage = () => {
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
-              ပိူင်ၵၢၼ် လွင်ႈႁူမ်ႇလူမ်ႈ
+              {POLICY_CONTENT.header.title}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              ၶေႃႈမုၼ်းလႄႈ လွင်ႈႁူမ်ႇလူမ်ႈ လွင်ႈသုၼ်ႇတူဝ် တွၼ်ႈတႃႇ ၽူႈၸႂ်ႉတိုဝ်း{" "}
-              <span className="text-yellow">လိၵ်းတႆး</span>
+              {POLICY_CONTENT.header.subtitle}
+              <span className="text-yellow">{POLICY_CONTENT.likdai}</span>
             </p>
           </motion.div>
 
@@ -55,22 +53,20 @@ export const PolicyPage = () => {
                 <div className="p-3 bg-primary/10 rounded-xl ">
                   <FileText className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">1. ၶေႃႈၼမ်း</h2>
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  {POLICY_CONTENT.section1.title}
+                </h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg">
                 <p>
-                  ႁပ်ႉတွၼ်ႈသူၸဝ်ႈ ၸူး{" "}
-                  <span className="text-yellow">လိၵ်းတႆး</span> ၶႃႈ။
-                  ပိူင်ၵၢၼ်လွင်ႈႁူမ်ႇလူမ်ႈၼႆႉ တေလၢတ်ႈၼႄ လွင်ႈဝႃႈ ႁဝ်းၶႃႈ
-                  ၵဵပ်းႁွမ်တွမ်၊ ၸႂ်ႉတိုဝ်း လႄႈ ၵႅတ်ႇၶႄ ပၼ် ၶေႃႈမုၼ်းသူၸဝ်ႈ
-                  ၸိူင်ႉႁိုဝ် ၼႆယဝ်ႉ။
+                  {POLICY_CONTENT.section1.p1}
+                  <span className="text-yellow">{POLICY_CONTENT.likdai}</span>
+                  {POLICY_CONTENT.section1.p1b}
                 </p>
                 <p>
-                  မိူဝ်ႈသူၸဝ်ႈ ၸႂ်ႉတိုဝ်း{" "}
-                  <span className="text-yellow">လိၵ်းတႆး</span> ၼၼ်ႉ ပွင်ႇဝႃႈ
-                  သူၸဝ်ႈ ၽွမ်ႉၸႂ် ၸွမ်းၼင်ႇ ပိူင်ၵၢၼ် ဢၼ်လႆႈတႅမ်ႈဝႆႉ
-                  ၼႂ်းၼႃႈလိၵ်ႈၼႆႉယဝ်ႉ။ ၶေႃႈမုၼ်း ၸိူဝ်းၼႆႉ မီးလွင်ႈလမ်ႇလွင်ႈ
-                  တႃႇႁႂ်ႈ ၵၢၼ်ၸႂ်ႉတိုဝ်း ၶႅမ်ႉလႅပ်ႈလီ လႄႈ လွတ်ႈၽေးလီငၢမ်း။
+                  {POLICY_CONTENT.section1.p2}
+                  <span className="text-yellow">{POLICY_CONTENT.likdai}</span>
+                  {POLICY_CONTENT.section1.p2b}
                 </p>
               </div>
             </motion.section>
@@ -84,14 +80,14 @@ export const PolicyPage = () => {
                   <Eye className="w-6 h-6 text-blue-500" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold">
-                  2. ၶေႃႈမုၼ်း ဢၼ်ႁဝ်းၶႃႈ လႆႈၵဵပ်းႁွမ်တွမ်ဝႆႉ
+                  {POLICY_CONTENT.section2.title}
                 </h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg">
                 <p>
-                  တွၼ်ႈတႃႇ တေႁႂ်ႈ ၵၢၼ်ၸႂ်ႉတိုဝ်း{" "}
-                  <span className="text-yellow">လိၵ်းတႆး</span> ၶႅမ်ႉလႅပ်ႈလီၼၼ်ႉ
-                  ႁဝ်းၶႃႈ လႆႈၵဵပ်းဝႆႉ ၶေႃႈမုၼ်း ၸိူဝ်းၼႆႉ -
+                  {POLICY_CONTENT.section2.p1}
+                  <span className="text-yellow">{POLICY_CONTENT.likdai}</span>
+                  {POLICY_CONTENT.section2.p1b}
                 </p>
                 <ul className="list-none space-y-2 mt-4">
                   <li className="flex items-start gap-3 bg-background/50 p-4">
@@ -100,10 +96,9 @@ export const PolicyPage = () => {
                     </span>
                     <div>
                       <strong className="block mb-1 opacity-80">
-                        ၶေႃႈမုၼ်း သုၼ်ႇတူဝ်:
+                        {POLICY_CONTENT.section2.list1.title}
                       </strong>
-                      ၸိုဝ်ႈ၊ ဢီးမေးလ် (Email) လႄႈ ၶေႃႈမုၼ်း ဢၼ်ၵဵဝ်ႇလူၺ်ႈ
-                      လွင်ႈတိတ်းတေႃႇ တႃႇႁႂ်ႈၸွႆႈထႅမ်လႆႈ။
+                      {POLICY_CONTENT.section2.list1.desc}
                     </div>
                   </li>
                   <li className="flex items-start gap-3 bg-background/50 p-4">
@@ -112,10 +107,9 @@ export const PolicyPage = () => {
                     </span>
                     <div>
                       <strong className="block mb-1 opacity-80">
-                        ၶေႃႈမုၼ်း လွင်ႈၸႂ်ႉတိုဝ်း:
+                        {POLICY_CONTENT.section2.list2.title}
                       </strong>
-                      လွင်ႈလဵၼ်ႈ၊ လွင်ႈၽိုၵ်းၽွၼ်ႉ၊ လွင်ႈၶိုၼ်ႈယႂ်ႇ (Progress)
-                      ၼႂ်းၵၢၼ်ၽိုၵ်း ပိုတ်ႉလိၵ်ႈတႆး လႄႈ လွင်ႈမၢႆတွင်း (Score)။
+                      {POLICY_CONTENT.section2.list2.desc}
                     </div>
                   </li>
                 </ul>
@@ -131,28 +125,19 @@ export const PolicyPage = () => {
                   <Lock className="w-6 h-6 text-green-500" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold">
-                  3. လွၵ်းလၢႆး လွင်ႈၵႅတ်ႇၶႄ ၶေႃႈမုၼ်း
+                  {POLICY_CONTENT.section3.title}
                 </h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg">
-                <p>
-                  ၶေႃႈမုၼ်းသူၸဝ်ႈ ၼၼ်ႉ ႁဝ်းၶႃႈ ဢဝ်ၵႅတ်ႇၶႄဝႆႉ ပၼ်လွတ်ႈၽေးလီငၢမ်း။
-                  ႁဝ်းၶႃႈ တေဢမ်ႇဢဝ် ၶေႃႈမုၼ်းသူၸဝ်ႈ ၵႂႃႇၶၢႆပၼ် ၽူႈတၢင်ႇၵေႃႉ
-                  ဢမ်ႇၼၼ် ၸုမ်းတၢင်ႇၸုမ်း လႃးလႃး။
-                </p>
+                <p>{POLICY_CONTENT.section3.p1}</p>
                 <div className="bg-green-500/5 border-l-4 border-green-500 p-4 rounded-r-xl my-4">
                   <p className="">
-                    ႁဝ်းၶႃႈ ၸႂ်ႉတိုဝ်း ၶေႃႈမုၼ်း တွၼ်ႈတႃႇ ႁဵတ်းႁႂ်ႈ{" "}
-                    <span className="text-yellow">လိၵ်းတႆး</span>{" "}
-                    ၶႅမ်ႉလႅပ်ႈမႃးတိၵ်းတိၵ်း လႄႈ တွၼ်ႈတႃႇ ပၼ်တၢင်းၸွႆႈထႅမ်
-                    မပ်ႉၽိူမ်ႉထႅမ် ၽူႈၸႂ်ႉတိုဝ်း ၵူၺ်း။
+                    {POLICY_CONTENT.section3.p2}
+                    <span className="text-yellow">{POLICY_CONTENT.likdai}</span>
+                    {POLICY_CONTENT.section3.p2b}
                   </p>
                 </div>
-                <p>
-                  လွင်ႈသိမ်းၶေႃႈမုၼ်းၼၼ်ႉ ႁဝ်းၶႃႈ ၸႂ်ႉတိုဝ်း လွၵ်းလၢႆး
-                  ဢၼ်မီးလွင်ႈႁူမ်ႇလူမ်ႈ ၶၼ်ႉသုင် (Security Standards) တွၼ်ႈတႃႇ
-                  ၵႅတ်ႇၶႄ လွင်ႈဢဝ်ၶေႃႈမုၼ်းၵႂႃႇၸႂ်ႉတိုဝ်း ၽိတ်းပိူင်။
-                </p>
+                <p>{POLICY_CONTENT.section3.p3}</p>
               </div>
             </motion.section>
 
@@ -165,15 +150,11 @@ export const PolicyPage = () => {
                   <Mail className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold">
-                  4. တိတ်းတေႃႇ ႁဝ်းၶႃႈ
+                  {POLICY_CONTENT.section4.title}
                 </h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-loose text-base md:text-lg">
-                <p>
-                  ပေႃးဝႃႈ ၽူႈၸႂ်ႉတိုဝ်းႁဝ်း မီးၶေႃႈထၢမ် လွင်ႈပိူင်ၵၢၼ်ႁူမ်ႇလူမ်ႈ
-                  ဢမ်ႇၼၼ် လွင်ႈတၢင်ႇၸိူဝ်း ၸိုင်ၸၢင်ႈတိတ်းတေႃႇ ႁဝ်းၶႃႈလႆႈ
-                  ၵူႈၶၢဝ်းယၢမ်း -
-                </p>
+                <p>{POLICY_CONTENT.section4.p1}</p>
                 <div className="mt-6 flex flex-wrap gap-4">
                   {developerContacts.map((contact, index) => (
                     <a
@@ -186,7 +167,7 @@ export const PolicyPage = () => {
                       <img
                         src={contact.imagePath}
                         alt={contact.link}
-                        className="h-6 w-auto mix-blend-screen dark:invert"
+                        className="h-6 w-auto dark:invert"
                       />
                     </a>
                   ))}
@@ -199,7 +180,7 @@ export const PolicyPage = () => {
               className="pt-10 pb-6 text-center"
             >
               <div className="inline-block px-4 py-2 rounded-full text-sm border border-green-400/80">
-                မႄးမႂ်ႇမႂ်ႇ လႃႈသုတ်း - လိူၼ်မၢတ်ႉၶျ် (March) ၊ ပီႊ 2026
+                {POLICY_CONTENT.footer}
               </div>
             </motion.div>
           </div>

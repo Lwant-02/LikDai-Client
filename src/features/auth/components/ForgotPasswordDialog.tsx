@@ -78,7 +78,7 @@ export const ForgotPasswordDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+      <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
           <DialogTitle>Forgot Password</DialogTitle>
           <DialogDescription className="text-sm opacity-70">
@@ -100,7 +100,7 @@ export const ForgotPasswordDialog = ({
           <button
             type="submit"
             disabled={isSendingEmail}
-            className="mt-3 btn h-10 border border-primary/10 text-primary bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background/80 transition-colors duration-300 text-base"
+            className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
           >
             {isSendingEmail ? <MiniSpinner /> : <>Send Email</>}
           </button>

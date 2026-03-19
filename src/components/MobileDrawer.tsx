@@ -46,7 +46,7 @@ export function MobileDrawer({ navLink }: MobileDrawerProps) {
                 alt="Logo"
                 className="size-8 object-cover flex"
               />
-              <p className="text-xl font-bold text-primary">လိၵ်ႈတႆး</p>
+              <p className="text-xl font-bold text-primary pt-1">လိၵ်ႈတႆး</p>
             </Link>
           </SheetTitle>
           <SheetDescription className="sr-only">Mobile drawer</SheetDescription>

@@ -19,7 +19,7 @@ export const useGetProfile = () => {
       retry: 1,
       refetchOnWindowFocus: false,
       staleTime: Infinity,
-    }
+    },
   );
   return { profile, isFetchingProfile };
 };

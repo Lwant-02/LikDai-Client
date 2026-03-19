@@ -12,6 +12,7 @@ import { useGoogleLoginHook, useLogin } from "@/hooks/useAuth";
 import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
 
 type FormData = {
   email: string;
@@ -157,9 +158,9 @@ export const LoginForm = () => {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, email: e.target.value }))
           }
-          placeholder="Email"
-          label="Email"
-          helperText="Email must be a valid email address."
+          placeholder={COMMON_INPUT_CONTENT.emailPlaceholder}
+          label={COMMON_INPUT_CONTENT.email}
+          helperText={COMMON_INPUT_CONTENT.emailHelperText}
         />
         <InputFiled
           type="password"
@@ -168,9 +169,9 @@ export const LoginForm = () => {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, password: e.target.value }))
           }
-          placeholder="Password"
-          label="Password"
-          helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+          placeholder={COMMON_INPUT_CONTENT.passwordPlaceholder}
+          label={COMMON_INPUT_CONTENT.password}
+          helperText={COMMON_INPUT_CONTENT.passwordHelperText}
         />
         <Button
           variant="destructive"

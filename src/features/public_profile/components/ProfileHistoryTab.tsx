@@ -1,3 +1,4 @@
+import { ACCOUNT_HISTORY_CONTENT } from "@/content/account.content";
 import { useGetPublicHistory } from "@/hooks/useProfile";
 
 interface ProfileHistoryTabProps {
@@ -17,26 +18,28 @@ export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold">User's Recent Tests</h2>
+      <h2 className="text-xl font-bold">
+        {ACCOUNT_HISTORY_CONTENT.publicHistory}
+      </h2>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-3xl border border-primary/20 overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-primary/20">
-              <th className="text-left py-2 px-4 font-medium opacity-70">
-                Date
+              <th className="text-left py-3 px-5 font-medium opacity-70">
+                {ACCOUNT_HISTORY_CONTENT.date}
               </th>
-              <th className="text-left py-2 px-4 font-medium opacity-70">
-                WPM
+              <th className="text-left py-3 px-5 font-medium opacity-70">
+                {ACCOUNT_HISTORY_CONTENT.wpm}
               </th>
-              <th className="text-left py-2 px-4 font-medium opacity-70">
-                Accuracy
+              <th className="text-left py-3 px-5 font-medium opacity-70">
+                {ACCOUNT_HISTORY_CONTENT.accuracy}
               </th>
-              <th className="text-left py-2 px-4 font-medium opacity-70">
-                Language
+              <th className="text-left py-3 px-5 font-medium opacity-70">
+                {ACCOUNT_HISTORY_CONTENT.language}
               </th>
-              <th className="text-left py-2 px-4 font-medium opacity-70">
-                Level
+              <th className="text-left py-3 px-5 font-medium opacity-70">
+                {ACCOUNT_HISTORY_CONTENT.lessonLevel}
               </th>
             </tr>
           </thead>
@@ -46,14 +49,14 @@ export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
                 key={index}
                 className="border-b border-primary/10 hover:bg-foreground/20 transition-colors"
               >
-                <td className="py-3 px-4">
+                <td className="py-3 px-5">
                   {new Date(test.createdAt).toLocaleDateString()}
                 </td>
-                <td className="py-3 px-4 font-medium text-blue">{test.wpm}</td>
-                <td className="py-3 px-4 font-medium text-green">
+                <td className="py-3 px-5 font-medium text-blue">{test.wpm}</td>
+                <td className="py-3 px-5 font-medium text-green">
                   {test.accuracy}%
                 </td>
-                <td className="py-3 px-4">
+                <td className="py-3 px-5">
                   <div className="flex items-center gap-2">
                     <img
                       src={
@@ -67,7 +70,7 @@ export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
                     <span>{test.mode === "eng" ? "English" : "Shan"}</span>
                   </div>
                 </td>
-                <td className="py-3 px-4 font-medium text-yellow capitalize">
+                <td className="py-3 px-5 font-medium text-yellow capitalize">
                   {test.lessonLevel}
                 </td>
               </tr>
@@ -78,7 +81,7 @@ export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
       {history.length === 0 && (
         <div className="w-full h-96 flex justify-center items-center ">
           <p className="text-center text-lg opacity-70">
-            This user do not have any test history yet!
+            {ACCOUNT_HISTORY_CONTENT.noPublicHistory}
           </p>
         </div>
       )}

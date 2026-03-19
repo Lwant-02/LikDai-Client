@@ -18,7 +18,7 @@ interface AlertDialogProps {
 export const AlertDialog = ({ isOpen, setIsOpen, mode }: AlertDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+      <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
           <DialogTitle className={cn("text-center text-3xl")}>
             {mode === "eng"

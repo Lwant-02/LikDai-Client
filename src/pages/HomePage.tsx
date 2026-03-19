@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 
 import { settingStore } from "@/store/settingStore";
 import { ShanCharFloat } from "@/components/ShanCharFloat";
+import { HOME_CONTENT } from "@/content/home.content";
 
 export const container: Variants = {
   hidden: { opacity: 0 },
@@ -35,24 +36,22 @@ export function HomePage() {
           name="google-site-verification"
           content="DWNWIz0ofitUjEfvUzzeCg_bVdWMoly52XEYSxFDsAg"
         />
-        <title>LikDai - Shan Typing Tutor | ၽိုၵ်းပေႃႉလိၵ်ႈတႆး</title>
-        <meta
-          name="description"
-          content="The ultimate Shan / Dai / Tai typing app to learn and practice typing in the Shan language (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး). Improve your skills with LikDai."
-        />
+        <title>{HOME_CONTENT.metaTitle}</title>
+        <meta name="description" content={HOME_CONTENT.metaDescription} />
       </Helmet>
       <div className="h-screen w-full overflow-hidden flex bg-background flex-col items-center justify-center xl:px-0 px-2">
         <ShanCharFloat />
-        <motion.div
-          variants={item}
-          className="absolute top-5 left-1/2 -translate-x-1/2 z-5"
-        >
-          <div className="flex justify-center items-center px-4 py-1 rounded-full sm:w-fit w-[345px] text-sm font-medium border border-foreground/20">
-            <Dot className="size-6 text-green animate-pulse" />
-            ၶိုၼ်းမႄး ႁၢင်ႊၽၢင်ဝႅပ်ႉသၢႆႉ (UI) ဢၼ်မႂ်ႇဝႆႉ တႃႇႁႂ်ႈ
-            လွင်ႈၸႂ်ႉတိုဝ်းသူၸဝ်ႈ ၶႅမ်ႉလိူဝ်ၵဝ်ႇ
-          </div>
-        </motion.div>
+        {HOME_CONTENT.bannerLabel && (
+          <motion.div
+            variants={item}
+            className="absolute top-5 left-1/2 -translate-x-1/2 z-5"
+          >
+            <div className="flex justify-center items-center px-4 py-1 rounded-full sm:w-fit w-[345px] text-sm font-medium border border-foreground/20">
+              <Dot className="size-6 text-green animate-pulse" />
+              {HOME_CONTENT.bannerLabel}
+            </div>
+          </motion.div>
+        )}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -65,7 +64,7 @@ export function HomePage() {
           initial="hidden"
           animate="show"
           variants={container}
-          className="z-50 flex flex-col items-center"
+          className="z-30 flex flex-col items-center"
         >
           <motion.div
             variants={item}
@@ -76,15 +75,15 @@ export function HomePage() {
               alt="Logo"
               className="xl:size-[100px] size-16 object-cover flex"
             />
-            <h1 className="text-5xl sm:text-8xl pt-5">လိၵ်ႈတႆး</h1>
+            <h1 className="text-5xl sm:text-8xl pt-5">{HOME_CONTENT.likdai}</h1>
           </motion.div>
 
           <motion.div variants={item}>
             <p className="sm:text-3xl text-lg text-center my-7 leading-relaxed">
-              <span className="text-yellow">လိၵ်ႈတႆး</span> ၼႆႉ ပဵၼ်ဢွင်ႈတီႈ
-              တွၼ်ႈတႃႇၽိုၵ်းပေႃႉလိၵ်ႈတႆး ႁႂ်ႈမိုတ်ႈမိုဝ်းလႄႈ ဝႆးမႃး။ <br />{" "}
-              ၸွၺ်ႈပၼ်လႆႈ ၵူၼ်းႁဵၼ်းမႂ်ႇလႄႈ ၵူၼ်းၶႂ်ႈၽိုၵ်းပေႃႉလိၵ်ႈ ႁႂ်ႈပေႃး
-              ပေႃႉလႆႈဝႆး
+              <span className="text-yellow">{HOME_CONTENT.likdai}</span>{" "}
+              {HOME_CONTENT.descriptionOne}
+              <br />
+              {HOME_CONTENT.descriptionTwo}
             </p>
           </motion.div>
 
@@ -94,17 +93,21 @@ export function HomePage() {
           >
             <div className="flex flex-col items-center">
               <span className="font-bold text-yellow text-base">1000+</span>
-              <span className="text-base">ၵၢၼ်ၽိုၵ်း</span>
+              <span className="text-base">
+                {HOME_CONTENT.stats.typingLessons}
+              </span>
             </div>
             <div className="h-8 w-px bg-primary/20" />
             <div className="flex flex-col items-center">
               <span className="font-bold text-green text-base">2</span>
-              <span className="text-base">ၽႃႇသႃႇ</span>
+              <span className="text-base">{HOME_CONTENT.stats.languages}</span>
             </div>
             <div className="h-8 w-px bg-primary/20" />
             <div className="flex flex-col items-center">
               <span className="font-bold text-blue text-base">ၾရီႊ</span>
-              <span className="text-base">တႃႇၵူႊၵေႃႉ</span>
+              <span className="text-base">
+                {HOME_CONTENT.stats.forEveryone}
+              </span>
             </div>
           </motion.div>
           <motion.div variants={item} className="relative mt-10 mb-5">
@@ -112,7 +115,9 @@ export function HomePage() {
               to="/lessons"
               className="group relative bg-primary text-background btn transition-all hover:scale-105 hover:shadow-xl hover:shadow-secondary/20"
             >
-              <span className="relative z-10 text-base">တႄႇပေႃႉတေႃႈလဵဝ်</span>
+              <span className="relative z-10 text-base">
+                {HOME_CONTENT.buttonLabel}
+              </span>
               <Rocket className="size-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               <div className="absolute inset-0 bg-yellow translate-y-full group-hover:translate-y-[0%] transition-transform duration-300 ease-out" />
             </Link>
@@ -126,7 +131,8 @@ export function HomePage() {
               to="/about"
               className="text-base text-yellow hover:text-yellow/80 transition-colors duration-300 flex justify-center items-center bounce-x "
             >
-              ၸၼ်ဢဝ်ဢႅပ်ႉ <ArrowRight className="size-4 ml-2 " />
+              {HOME_CONTENT.buttonHelperLabel}
+              <ArrowRight className="size-4 ml-2 " />
             </Link>
           </motion.div>
         </motion.div>
