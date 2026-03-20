@@ -97,7 +97,7 @@ export const SettingTab = () => {
         <h2 className="text-xl font-bold">{ACCOUNT_SETTINGS_CONTENT.title}</h2>
 
         <div className="space-y-4">
-          <div className="p-4 bg-foreground/40 rounded-3xl">
+          <div className="p-4 bg-foreground/80 rounded-3xl">
             <h3 className="font-semibold mb-3 text-lg">
               {ACCOUNT_SETTINGS_CONTENT.accountManage}
             </h3>
@@ -174,7 +174,7 @@ export const SettingTab = () => {
               </div>
             </DialogContent>
           </Dialog>
-          <div className="p-4 bg-foreground/40 rounded-3xl">
+          <div className="p-4 bg-foreground/80 rounded-3xl">
             <h3 className="font-semibold mb-3">
               {ACCOUNT_SETTINGS_CONTENT.accountManage}
             </h3>

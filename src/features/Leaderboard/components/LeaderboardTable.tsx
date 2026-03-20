@@ -20,7 +20,7 @@ export const LeaderboardTable = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="w-full bg-foreground/5 rounded-3xl border border-primary/20 overflow-hidden"
+      className="w-full bg-background/80 rounded-3xl border border-primary/20 overflow-hidden"
     >
       {/* Table header - Responsive grid */}
       <div className="grid grid-cols-4 xl:grid-cols-8 py-4 px-4 bg-foreground/10 text-xs sm:text-sm font-medium">

@@ -199,7 +199,7 @@ export const TypingtestPage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-auto mt-5 h-auto flex justify-center gap-16 items-center "
+          className="w-auto mt-5 h-auto flex justify-center gap-16 items-center"
         >
           <div className="hidden xl:flex gap-5">
             <h3 className="text-base capitalize text-yellow">

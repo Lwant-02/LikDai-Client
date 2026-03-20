@@ -22,7 +22,7 @@ export const ProfileHistoryTab = ({ username }: ProfileHistoryTabProps) => {
         {ACCOUNT_HISTORY_CONTENT.publicHistory}
       </h2>
 
-      <div className="overflow-x-auto rounded-3xl border border-primary/20 overflow-hidden">
+      <div className="overflow-x-auto rounded-3xl border border-primary/20 overflow-hidden bg-foreground/80">
         <table className="w-full">
           <thead>
             <tr className="border-b border-primary/20">

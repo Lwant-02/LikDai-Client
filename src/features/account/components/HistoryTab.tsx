@@ -22,7 +22,7 @@ export const HistoryTab = () => {
           : ACCOUNT_HISTORY_CONTENT.publicHistory}
       </h2>
 
-      <div className="overflow-x-auto rounded-3xl border border-primary/20 overflow-hidden">
+      <div className="overflow-x-auto rounded-3xl border bg-foreground/80 border-primary/20 overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-primary/20">

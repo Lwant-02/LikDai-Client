@@ -8,6 +8,7 @@ import { Shield, ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useVerifyOtp, useResendOtp } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { OTP_CONTENT } from "@/content/otp.content";
 
 export const VerifyOtpPage = () => {
   const navigate = useNavigate();
@@ -136,11 +137,8 @@ export const VerifyOtpPage = () => {
   return (
     <>
       <Helmet>
-        <title>Verify OTP - LikDai | ယိုၼ်းယၼ် OTP</title>
-        <meta
-          name="description"
-          content="Verify your OTP code to reset your LikDai password and continue your Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) experience."
-        />
+        <title>{OTP_CONTENT.metadata}</title>
+        <meta name="description" content={OTP_CONTENT.description} />
       </Helmet>
 
       <article className="flex justify-center items-center h-screen w-full flex-col gap-7 md:px-0 px-3">
@@ -169,17 +167,17 @@ export const VerifyOtpPage = () => {
           {/* Header */}
           <div className="flex justify-center items-center gap-2 text-center">
             <Shield className="size-7 text-yellow" />
-            <p className="text-2xl font-bold pt-1">Verify OTP</p>
+            <p className="text-2xl font-bold pt-1">{OTP_CONTENT.title}</p>
           </div>
 
           {/* Description */}
           <div className="text-center space-y-2">
             <p className="text-base text-muted-foreground">
-              We've sent a 6-digit verification code to
+              {OTP_CONTENT.descOne}
             </p>
             <p className="text-base font-semibold text-yellow">{email}</p>
             <p className="text-sm text-muted-foreground">
-              Enter the code below to reset your password
+              {OTP_CONTENT.descTwo}
             </p>
           </div>
 
@@ -208,14 +206,14 @@ export const VerifyOtpPage = () => {
           <button
             onClick={handleVerifyOtp}
             disabled={isVerifyingOtp || otp.join("").length !== 6}
-            className="mt-4  gap-2 text-primary bg-yellow hover:bg-yellow/90 w-full max-w-sm btn cursor-pointer flex justify-center items-center text-base font-semibold"
+            className="mt-4  gap-2 text-primary bg-yellow hover:bg-yellow/90 w-full max-w-[350px] btn cursor-pointer flex justify-center items-center text-base font-semibold"
           >
             {isVerifyingOtp ? (
               <MiniSpinner color="text-white" />
             ) : (
               <>
                 <Shield className="size-5" />
-                <span className="pt-1">Verify OTP</span>
+                <span className="pt-1">{OTP_CONTENT.title}</span>
               </>
             )}
           </button>
@@ -223,7 +221,7 @@ export const VerifyOtpPage = () => {
           {/* Resend OTP */}
           <div className="flex flex-col items-center gap-3">
             <p className="text-sm text-muted-foreground">
-              Didn't receive the code?
+              {OTP_CONTENT.didntGetOtp}
             </p>
             <button
               onClick={handleResendOtp}
@@ -235,7 +233,7 @@ export const VerifyOtpPage = () => {
               ) : (
                 <>
                   <RotateCcw className="size-4 mr-2" />
-                  Resend OTP
+                  {OTP_CONTENT.resendOtp}
                 </>
               )}
             </button>
@@ -248,7 +246,7 @@ export const VerifyOtpPage = () => {
             className="text-muted-foreground hover:text-primary/70 cursor-pointer"
           >
             <ArrowLeft className="size-4 mr-2" />
-            Back to Login
+            {OTP_CONTENT.back}
           </Button>
         </motion.div>
       </article>

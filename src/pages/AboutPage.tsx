@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronsUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
 
 import { AllInformation } from "@/components/AllInformation";
 import { settingStore } from "@/store/settingStore";
 import { ABOUT_CONTENT } from "@/content/about.content";
+import { HOME_CONTENT } from "@/content/home.content";
 
 // Animation variants
 export const containerVariants = {
@@ -26,7 +26,6 @@ export const itemVariants = {
 };
 
 export const AboutPage = () => {
-  const { t } = useTranslation();
   const { isFromHome, setInstallPromptEvent, installPromptEvent } =
     settingStore();
   const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
@@ -72,7 +71,7 @@ export const AboutPage = () => {
         <meta name="description" content={ABOUT_CONTENT.metaDescription} />
       </Helmet>
 
-      <main className="min-h-screen py-20 relative overflow-hidden">
+      <main className="min-h-screen py-8 relative overflow-hidden">
         <motion.div
           className="layout"
           variants={containerVariants}
@@ -100,7 +99,7 @@ export const AboutPage = () => {
               className="bg-yellow hover:bg-yellow/80 text-background btn cursor-pointer"
               onClick={() => navigate("/lessons")}
             >
-              {t("home_page.button")}
+              {HOME_CONTENT.buttonLabel}
             </button>
           </motion.section>
         </motion.div>

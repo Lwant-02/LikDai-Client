@@ -13,6 +13,7 @@ import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { MiniSpinner } from "@/components/MiniSpinner";
 import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { LOGIN_CONTENT } from "@/content/login.content";
 
 type FormData = {
   email: string;
@@ -149,7 +150,7 @@ export const LoginForm = () => {
       >
         <div className="flex justify-center items-center gap-2">
           <ArrowDownTrayIcon className="size-7 -rotate-90 " />
-          <p className="text-2xl font-bold">Login</p>
+          <p className="text-2xl font-bold">{LOGIN_CONTENT.login}</p>
         </div>
         <InputFiled
           type="email"
@@ -184,7 +185,7 @@ export const LoginForm = () => {
           ) : (
             <>
               <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90 " />
-              Sign In
+              {LOGIN_CONTENT.login}
             </>
           )}
         </Button>
@@ -194,7 +195,7 @@ export const LoginForm = () => {
             onClick={() => setIsDialogOpen(true)}
             className="hover:text-primary text-sm text-primary/50 cursor-pointer"
           >
-            Forgot Password?
+            {LOGIN_CONTENT.forgotPass}
           </button>
         </div>
         <Button
@@ -209,7 +210,7 @@ export const LoginForm = () => {
           ) : (
             <>
               <img src="/svg/google-svg.svg" alt="Google" className="size-6" />
-              <p>Continue with Google</p>
+              <p>{LOGIN_CONTENT.loginWithGoogle}</p>
             </>
           )}
         </Button>

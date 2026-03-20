@@ -9,9 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { useForgotPassword } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { LOGIN_CONTENT } from "@/content/login.content";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { InputFiled } from "@/components/InputFiled";
 
 interface ForgotPasswordDialogProps {
   isOpen: boolean;
@@ -80,29 +82,30 @@ export const ForgotPasswordDialog = ({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
-          <DialogTitle>Forgot Password</DialogTitle>
+          <DialogTitle>{LOGIN_CONTENT.forgotPassDialogTitle}</DialogTitle>
           <DialogDescription className="text-sm opacity-70">
-            Enter your email address to reset your password.
+            {LOGIN_CONTENT.description}
           </DialogDescription>
         </DialogHeader>
         <form
           className="flex items-center gap-2 flex-col "
           onSubmit={handleSubmit}
         >
-          <Input
+          <InputFiled
             type="email"
             id="email_login"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            className="bg-background/30 border border-primary/10 focus:ring-1! ring-primary/30 h-10 rounded-full px-5 "
+            placeholder={COMMON_INPUT_CONTENT.emailPlaceholder}
+            label={COMMON_INPUT_CONTENT.email}
+            helperText={COMMON_INPUT_CONTENT.emailHelperText}
           />
           <button
             type="submit"
             disabled={isSendingEmail}
             className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
           >
-            {isSendingEmail ? <MiniSpinner /> : <>Send Email</>}
+            {isSendingEmail ? <MiniSpinner /> : <>{LOGIN_CONTENT.btn}</>}
           </button>
         </form>
       </DialogContent>

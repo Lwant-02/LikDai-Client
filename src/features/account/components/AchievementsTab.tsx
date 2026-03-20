@@ -49,7 +49,7 @@ export const AchievementsTab = () => {
           );
         })}
       </div>
-      <div className="mt-4 p-4 bg-foreground/40 rounded-3xl">
+      <div className="mt-4 p-4 bg-foreground/80 rounded-3xl">
         <h3 className="font-semibold mb-2">
           {ACCOUNT_ACHIEVEMENTS_CONTENT.progress}
         </h3>

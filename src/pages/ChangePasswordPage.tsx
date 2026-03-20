@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { InputFiled } from "@/components/InputFiled";
 import { useChangePassword } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { CHANGE_PASS_CONTENT } from "@/content/change-pass.content";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
 
 interface FormData {
   newPassword: string;
@@ -98,11 +100,8 @@ export const ChangePasswordPage = () => {
   return (
     <>
       <Helmet>
-        <title>Change Password - LikDai | လၢႆႈမၢႆလပ်ႉ</title>
-        <meta
-          name="description"
-          content="Change the password for your LikDai account to secure your Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) progress and profile."
-        />
+        <title>{CHANGE_PASS_CONTENT.metadata}</title>
+        <meta name="description" content={CHANGE_PASS_CONTENT.description} />
       </Helmet>
 
       <article className="flex justify-center items-center h-screen w-full flex-col gap-7 md:px-0 px-3">
@@ -128,7 +127,7 @@ export const ChangePasswordPage = () => {
         >
           <div className="flex justify-center items-center gap-2">
             <RotateCcwKey className="size-7 -rotate-90 " />
-            <p className="text-2xl font-bold">Change Password</p>
+            <p className="text-2xl font-bold">{CHANGE_PASS_CONTENT.title}</p>
           </div>
           <InputFiled
             type="password"
@@ -137,9 +136,9 @@ export const ChangePasswordPage = () => {
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, newPassword: e.target.value }))
             }
-            placeholder="New Password"
-            label="New Password"
-            helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+            placeholder={COMMON_INPUT_CONTENT.newPasswordPlaceholder}
+            label={COMMON_INPUT_CONTENT.newPassword}
+            helperText={COMMON_INPUT_CONTENT.passwordHelperText}
           />
           <InputFiled
             type="password"
@@ -151,9 +150,9 @@ export const ChangePasswordPage = () => {
                 confirmPassword: e.target.value,
               }))
             }
-            placeholder="Confirm Password"
-            label="Confirm Password"
-            helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+            placeholder={COMMON_INPUT_CONTENT.confirmPasswordPlaceholder}
+            label={COMMON_INPUT_CONTENT.confirmPassword}
+            helperText={COMMON_INPUT_CONTENT.passwordHelperText}
           />
           <Button
             variant="destructive"
@@ -166,7 +165,7 @@ export const ChangePasswordPage = () => {
             ) : (
               <>
                 <RotateCcwKey className="size-5 bg-transparent -rotate-90" />
-                Confirm
+                {CHANGE_PASS_CONTENT.confirm}
               </>
             )}
           </Button>

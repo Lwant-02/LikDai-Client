@@ -56,14 +56,14 @@ export const ShanCharFloat = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0 opacity-70">
       {chars.map((item) => (
         <motion.div
           key={item.id}
           className={`absolute ${item.color}`}
           initial={{ opacity: 0, scale: 0.5, y: 0 }}
           animate={{
-            opacity: [0.1, 0.3, 0.1],
+            opacity: [0.1, 0.2, 0.1],
             scale: [1, 1.1, 1],
             y: [0, -20, 0],
             x: [0, 10, 0],

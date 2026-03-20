@@ -27,14 +27,14 @@ export const PolicyPage = () => {
         <meta name="description" content={POLICY_CONTENT.metaDescription} />
       </Helmet>
 
-      <main className="min-h-screen py-20 relative overflow-hidden">
+      <main className="min-h-screen py-8 relative overflow-hidden">
         <motion.div
           className="layout"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
+          <motion.div variants={itemVariants} className="text-start mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
               {POLICY_CONTENT.header.title}
             </h1>

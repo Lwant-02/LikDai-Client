@@ -27,6 +27,8 @@ import { settingStore } from "./store/settingStore";
 import { PolicyPage } from "./pages/PolicyPage";
 import { FeedbackDialog } from "./components/FeedbackDialog";
 import { MusicPlayer } from "./components/MusicPlayer";
+import { NormalTypingPage } from "./pages/NormalTypingPage";
+import { ShanCharFloat } from "./components/ShanCharFloat";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -46,61 +48,65 @@ export default function App() {
 
   return (
     <main className="min-h-screen relative">
-      <Router>
-        <Navbar />
-        <MusicPlayer />
-        <FeedbackDialog />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/login"
-            element={
-              !accessToken ? (
-                <LoginPage />
-              ) : (
-                <Navigate to="/account" replace={true} />
-              )
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              accessToken ? (
-                <AccountPage />
-              ) : (
-                <Navigate to="/login" replace={true} />
-              )
-            }
-          />
-          <Route path="/typing-test" element={<TypingtestPage />} />
-          <Route path="/lessons" element={<LessonsPage />} />
-          <Route path="/leaderboards" element={<LeaderboardPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/change-password" element={<ChangePasswordPage />} />
-          <Route path="/verify-otp" element={<VerifyOtpPage />} />
-          <Route path="/results" element={<ResultPage />} />
-          <Route path="/policy" element={<PolicyPage />} />
-          <Route path="/profile/:username" element={<ProfilePage />} />
-          <Route path="*" element={<Navigate to="/404" />} />
-          <Route path="/certificate" element={<CertificatePage />} />
-          <Route path="/404" element={<NotFoundPage />} />
-        </Routes>
-      </Router>
-      <Footer />
-      <Toaster
-        toastOptions={{
-          duration: 5000,
-          style: {
-            fontSize: "14px",
-            backgroundColor: "#3674b5 ",
-            border: "none",
-            color: "#F5F5F5",
-            borderRadius: "8px",
-            fontFamily: "'GHKTachileik', sans-serif",
-          },
-        }}
-        position="top-right"
-      />
+      <ShanCharFloat />
+      <div className="z-10">
+        <Router>
+          <Navbar />
+          <MusicPlayer />
+          <FeedbackDialog />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/login"
+              element={
+                !accessToken ? (
+                  <LoginPage />
+                ) : (
+                  <Navigate to="/account" replace={true} />
+                )
+              }
+            />
+            <Route
+              path="/account"
+              element={
+                accessToken ? (
+                  <AccountPage />
+                ) : (
+                  <Navigate to="/login" replace={true} />
+                )
+              }
+            />
+            <Route path="/typing-test" element={<TypingtestPage />} />
+            <Route path="/normal-typing" element={<NormalTypingPage />} />
+            <Route path="/lessons" element={<LessonsPage />} />
+            <Route path="/leaderboards" element={<LeaderboardPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/change-password" element={<ChangePasswordPage />} />
+            <Route path="/verify-otp" element={<VerifyOtpPage />} />
+            <Route path="/results" element={<ResultPage />} />
+            <Route path="/policy" element={<PolicyPage />} />
+            <Route path="/profile/:username" element={<ProfilePage />} />
+            <Route path="*" element={<Navigate to="/404" />} />
+            <Route path="/certificate" element={<CertificatePage />} />
+            <Route path="/404" element={<NotFoundPage />} />
+          </Routes>
+        </Router>
+        <Footer />
+        <Toaster
+          toastOptions={{
+            duration: 5000,
+            style: {
+              fontSize: "14px",
+              backgroundColor: "#3674b5 ",
+              border: "none",
+              color: "#F5F5F5",
+              borderRadius: "10px",
+              fontFamily: "'GHKTachileik', sans-serif",
+            },
+          }}
+          position="top-right"
+        />
+      </div>
     </main>
   );
 }

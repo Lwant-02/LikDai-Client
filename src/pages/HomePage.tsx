@@ -4,7 +4,6 @@ import { motion, type Variants } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
 import { settingStore } from "@/store/settingStore";
-import { ShanCharFloat } from "@/components/ShanCharFloat";
 import { HOME_CONTENT } from "@/content/home.content";
 
 export const container: Variants = {
@@ -40,7 +39,6 @@ export function HomePage() {
         <meta name="description" content={HOME_CONTENT.metaDescription} />
       </Helmet>
       <div className="h-screen w-full overflow-hidden flex bg-background flex-col items-center justify-center xl:px-0 px-2">
-        <ShanCharFloat />
         {HOME_CONTENT.bannerLabel && (
           <motion.div
             variants={item}

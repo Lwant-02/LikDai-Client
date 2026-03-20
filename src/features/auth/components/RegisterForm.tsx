@@ -8,6 +8,7 @@ import { InputFiled } from "../../../components/InputFiled";
 import { useRegister } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
 import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { LOGIN_CONTENT } from "@/content/login.content";
 
 interface FormData {
   username: string;
@@ -82,7 +83,7 @@ export const RegisterForm = () => {
     >
       <div className="flex justify-center items-center gap-2">
         <UserPlusIcon className="size-7 " />
-        <p className="text-2xl font-bold">Register</p>
+        <p className="text-2xl font-bold">{LOGIN_CONTENT.register}</p>
       </div>
       <InputFiled
         type="text"
@@ -128,7 +129,7 @@ export const RegisterForm = () => {
         ) : (
           <>
             <UserPlusIcon className="size-5 bg-transparent" />
-            Sign Up
+            {LOGIN_CONTENT.register}
           </>
         )}
       </Button>
