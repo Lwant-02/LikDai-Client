@@ -1,7 +1,6 @@
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
@@ -141,10 +140,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      <form
         className="flex flex-col justify-start items-center gap-4 "
         onSubmit={handleSumit}
       >
@@ -214,7 +210,7 @@ export const LoginForm = () => {
             </>
           )}
         </Button>
-      </motion.form>
+      </form>
       <ForgotPasswordDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </>
   );

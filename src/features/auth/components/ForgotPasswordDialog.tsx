@@ -14,6 +14,7 @@ import { MiniSpinner } from "@/components/MiniSpinner";
 import { LOGIN_CONTENT } from "@/content/login.content";
 import { COMMON_INPUT_CONTENT } from "@/content/common.content";
 import { InputFiled } from "@/components/InputFiled";
+import { cn } from "@/lib/utils";
 
 interface ForgotPasswordDialogProps {
   isOpen: boolean;
@@ -103,7 +104,10 @@ export const ForgotPasswordDialog = ({
           <button
             type="submit"
             disabled={isSendingEmail}
-            className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
+            className={cn(
+              "mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base",
+              !email && "cursor-not-allowed opacity-50",
+            )}
           >
             {isSendingEmail ? <MiniSpinner /> : <>{LOGIN_CONTENT.btn}</>}
           </button>

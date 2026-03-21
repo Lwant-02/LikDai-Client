@@ -104,7 +104,10 @@ export const ReportSummitDialog = ({
             <button
               type="submit"
               disabled={isSubmitting || !text}
-              className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
+              className={cn(
+                "mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base",
+                !text && "cursor-not-allowed opacity-50",
+              )}
             >
               {isSubmitting ? <MiniSpinner /> : <>Submit</>}
             </button>

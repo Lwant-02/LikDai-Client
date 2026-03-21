@@ -225,7 +225,7 @@ export const TypingtestPage = () => {
               isRunning={isRunning}
               startTimer={startTimer}
             />
-            {/* Mobile Message */}
+
             <MobileMessage />
           </motion.div>
           <TimeWords

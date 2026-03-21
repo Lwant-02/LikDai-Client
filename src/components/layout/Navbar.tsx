@@ -130,7 +130,7 @@ export const Navbar = () => {
                   pathname.endsWith("/login") && "opacity-100",
                 )}
               >
-                လွၵ်ႉဢိၼ်ႇ
+                ၶဝ်ႈဢၵွင်ႉ
               </p>
             </Link>
           )}

@@ -1,7 +1,6 @@
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
 
 import { Button } from "../../../components/ui/button";
 import { InputFiled } from "../../../components/InputFiled";
@@ -74,10 +73,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
+    <form
       className="flex flex-col justify-start items-center gap-4"
       onSubmit={handleSubmit}
     >
@@ -133,6 +129,6 @@ export const RegisterForm = () => {
           </>
         )}
       </Button>
-    </motion.form>
+    </form>
   );
 };

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 import { ShanCharFloat } from "@/components/ShanCharFloat";
@@ -28,7 +28,6 @@ interface LessonCardProps {
     title: string;
     description: string;
     category: string;
-    englishDescription: string;
     image: string;
     link: string;
     type: string;
@@ -36,15 +35,15 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ category }: LessonCardProps) => {
+  const navigate = useNavigate();
   const liveType = category.type === "ၸႂ်ႉလႆႈယဝ်ႉ";
   return (
-    <motion.div
+    <div
       key={category.id}
-      variants={itemVariants}
-      className="group relative h-96 cursor-pointer overflow-hidden bg-background/80 backdrop-blur-xl border border-primary/20 hover:border-yellow/80 transition-colors duration-300 shadow-2xl rounded-3xl"
+      className="group relative h-96 cursor-pointer overflow-hidden bg-background/80 backdrop-blur-xl border border-primary/20 hover:border-yellow/80 transition-all duration-300 shadow-2xl rounded-3xl hover:-translate-y-2"
     >
       <div className="absolute top-4 right-4 z-20">
-        <span className="inline-block px-3 py-1 rounded-full bg-yellow text-background text-sm font-bold uppercase tracking-wider mb-2 border border-yellow/30">
+        <span className="inline-block px-3 py-1 rounded-full bg-yellow text-white text-sm font-bold uppercase tracking-wider mb-2 border border-yellow/30">
           {category.type}
         </span>
       </div>
@@ -52,6 +51,8 @@ const LessonCard = ({ category }: LessonCardProps) => {
         <img
           src={category.image}
           alt={category.category}
+          loading="lazy"
+          fetchPriority="high"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
@@ -59,19 +60,27 @@ const LessonCard = ({ category }: LessonCardProps) => {
 
       <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end text-white">
         <div className="mb-4">
-          <span className="inline-block px-3 py-1 rounded-full bg-blue text-background text-sm font-bold uppercase tracking-wider mb-3 border border-blue/30">
+          <span
+            className={cn(
+              "inline-block px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-3 border",
+              category.id === "normal"
+                ? "bg-blue text-white border-blue/30"
+                : "bg-green text-white border-green/30",
+            )}
+          >
             {category.category}
           </span>
           <h2 className="text-3xl font-bold mb-2">{category.title}</h2>
-          <p className="text-sm opacity-90 line-clamp-1 mb-4 group-hover:line-clamp-none transition-all duration-300">
+          <p className="opacity-90 line-clamp-1 mb-4 group-hover:line-clamp-none transition-all duration-300">
             {category.description}
           </p>
         </div>
 
-        <Link
-          to={category.link}
+        <button
+          disabled={!liveType}
+          onClick={() => navigate(category.link)}
           className={cn(
-            "flex items-center gap-1 text-yellow font-bold hover:text-yellow/80",
+            "flex items-center gap-1 text-yellow font-bold hover:text-yellow/80 cursor-pointer",
             !liveType && "cursor-not-allowed opacity-50",
           )}
         >
@@ -81,9 +90,9 @@ const LessonCard = ({ category }: LessonCardProps) => {
               : LESSONS_CONTENT.otherType}
           </span>
           <ArrowRight className="size-5" />
-        </Link>
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -95,7 +104,7 @@ export const LessonsPage = () => {
         <meta name="description" content={LESSONS_CONTENT.metaDescription} />
       </Helmet>
 
-      <div className="min-h-screen py-8 relative overflow-hidden">
+      <div className="min-h-screen pt-8 relative overflow-hidden pb-32">
         <ShanCharFloat />
 
         <motion.div
@@ -116,7 +125,9 @@ export const LessonsPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {LESSONS_CONTENT.categories.map((category) => (
-              <LessonCard key={category.id} category={category} />
+              <motion.div key={category.id} variants={itemVariants}>
+                <LessonCard category={category} />
+              </motion.div>
             ))}
           </div>
         </motion.div>
