@@ -34,8 +34,11 @@ interface LessonCardProps {
   };
 }
 
+import { useState } from "react";
+
 const LessonCard = ({ category }: LessonCardProps) => {
   const navigate = useNavigate();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const liveType = category.type === "ၸႂ်ႉလႆႈယဝ်ႉ";
   return (
     <div
@@ -47,13 +50,19 @@ const LessonCard = ({ category }: LessonCardProps) => {
           {category.type}
         </span>
       </div>
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-foreground/20">
         <img
           src={category.image}
           alt={category.category}
-          loading="lazy"
-          fetchPriority="high"
-          className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          className={cn(
+            "w-full h-full object-cover transition-all duration-700 ease-out",
+            isImageLoaded
+              ? "opacity-100 blur-0 scale-100"
+              : "opacity-0 blur-md scale-105",
+          )}
+          onLoad={() => setIsImageLoaded(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
       </div>
