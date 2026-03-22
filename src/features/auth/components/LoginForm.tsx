@@ -47,7 +47,7 @@ export const LoginForm = () => {
           password: "",
         });
         toast("✅️ Success", {
-          description: <p className="text-white">Login successful!</p>,
+          description: <p className="text-white">Login success!</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },

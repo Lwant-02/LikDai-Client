@@ -17,5 +17,3 @@ export const COMMON_INPUT_CONTENT = {
   currentPasswordPlaceholder: "သႂ်ႇ မၢႆလပ်ႉ ဢၼ်ၸႂ်ႉဝႆႉ",
   currentPasswordHelperText: "လူဝ်ႇ မၢႆလပ်ႉ ဢၼ်ၸႂ်ႉဝႆႉ။",
 };
-
-export const COMMON_TOAST_CONTENT = {};

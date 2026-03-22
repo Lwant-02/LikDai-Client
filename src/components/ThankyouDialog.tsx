@@ -18,7 +18,9 @@ export const ThankyouDialog = ({ isOpen, setIsOpen }: ThankyouDialogProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
-          <DialogTitle className="text-center text-3xl">Thank You!</DialogTitle>
+          <DialogTitle className="text-center text-3xl">
+            ယိၼ်းၸူမ်းယဝ်ႉၶႃႈ!
+          </DialogTitle>
           <DialogDescription className="sr-only">
             Thank you dialog
           </DialogDescription>
@@ -29,8 +31,9 @@ export const ThankyouDialog = ({ isOpen, setIsOpen }: ThankyouDialogProps) => {
           autoplay
         />
         <p className="text-center text-lg font-semibold">
-          Thank you very much for your contribution! Your report and feedbacks
-          will help us improve the app and make it better for everyone.
+          ယိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇၼမ်ၶႃႈ ဢၼ်လႆႈၸွၺ်ႈထႅမ်မႃး! ၶေႃႈမုၼ်းလႄႈ
+          ၶေႃႈတွပ်ႇ ၸဝ်ႈၵဝ်ႇ တေၸွၺ်ႈထႅမ် ႁႂ်ႈႁဝ်းၶႃႈ ႁဵတ်းႁႂ်ႈ ဢႅပ်ႉၼႆႉ
+          လီလိူဝ်မႃး တႃႇၵူႊၵေႃႉယူႇၶႃႈ။
         </p>
       </DialogContent>
     </Dialog>

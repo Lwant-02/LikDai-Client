@@ -31,7 +31,7 @@ export const AccoutHeader = ({
       onSuccess: () => {
         setAccessToken(null);
         toast("✅️ Success", {
-          description: <p className="text-white">ဢွၵ်ႇဢၵွင်ႉယဝ်ႉ လီငၢမ်းၶႃႈ</p>,
+          description: <p className="text-white">Logout successfully!</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },
@@ -42,7 +42,7 @@ export const AccoutHeader = ({
           toast("❌️ Oops!", {
             description: (
               <p className="text-white">
-                မီးလွင်ႈၽိတ်းပိူင်ႈဝႆႉ။ ၶိုၼ်းၶတ်းၸႂ်တူၺ်းၶႃႈ။
+                Request timed out! Please try again later.
               </p>
             ),
           });
@@ -52,7 +52,7 @@ export const AccoutHeader = ({
           description: (
             <p className="text-white">
               {error.response.data.message ||
-                "မီးလွင်ႈၽိတ်းပိူင်ႈဝႆႉ။ ၶိုၼ်းၶတ်းၸႂ်တူၺ်းၶႃႈ။"}
+                "Something went wrong. Please try again."}
             </p>
           ),
         });

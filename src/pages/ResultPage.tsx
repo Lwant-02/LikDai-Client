@@ -3,6 +3,7 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import { useEffect, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
@@ -10,6 +11,7 @@ import { authStore } from "@/store/authStore";
 import { resultStore } from "@/store/resultStore";
 import { saveFinalResults } from "@/service/saveFinalResults";
 import { ResultNextButton } from "@/components/ResultNextButton";
+import { RESULT_CONTENT } from "@/content/result.content";
 
 export const ResultPage = () => {
   const {
@@ -76,12 +78,23 @@ export const ResultPage = () => {
   return (
     <>
       <Helmet>
-        <title>Typing Results - LikDai | ၽွၼ်းလႆႈ</title>
-        <meta
-          name="description"
-          content="Review your Shan / Dai / Tai typing test results (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) on LikDai. Analyze your speed, accuracy, and performance metrics."
-        />
+        <title>{RESULT_CONTENT.metaTitle}</title>
+        <meta name="description" content={RESULT_CONTENT.metaDescription} />
       </Helmet>
+
+      {/* Back Button */}
+      <motion.button
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={() => navigate("/normal-typing")}
+        className="absolute top-10 left-[80px] flex items-center gap-2 text-primary/70 hover:text-primary transition-colors z-50 px-4 py-2 hover:bg-foreground/10 rounded-full cursor-pointer"
+      >
+        <ArrowLeft className="size-5" />
+        <span className="font-semibold hidden sm:inline">
+          {RESULT_CONTENT.back}
+        </span>
+      </motion.button>
 
       <motion.article
         initial={{ opacity: 0, y: -20 }}
@@ -89,24 +102,25 @@ export const ResultPage = () => {
         transition={{ duration: 0.5 }}
         className="w-full layout min-h-screen flex flex-col gap-8 items-center pt-16"
       >
-        <h1 className="text-3xl font-bold mt-4">Result Details</h1>
+        <h1 className="text-3xl font-bold mt-4">
+          {RESULT_CONTENT.resultDetails}
+        </h1>
         {!accessToken && (
           <div className="w-full h-auto flex flex-col gap-4 items-center ">
-            <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-lg">
+            <div className="bg-gradient-to-b flex justify-center items-center gap-2 shadow-sm border border-yellow/70 from-yellow/20 to-transparent p-3 text-center w-full rounded-full">
               <UsersIcon className="size-6 text-yellow md:flex hidden" />
               <p className="text-yellow">
-                You are in the guest mode.Your results will not be saved.{" "}
+                {RESULT_CONTENT.guestMode}{" "}
                 <span
                   onClick={() => navigate("/login")}
                   className="text-purple cursor-pointer underline"
                 >
-                  Login to save your results.
+                  {RESULT_CONTENT.guestResultsNotSaved}
                 </span>
               </p>
             </div>
-            <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-lg">
-              Guest results will not be saved. Please login to save your
-              results.
+            <div className="bg-gradient-to-b shadow-sm border text-red border-red/70 from-red/20 to-transparent p-3 text-center w-full rounded-full">
+              {RESULT_CONTENT.loginToSave}
             </div>
           </div>
         )}

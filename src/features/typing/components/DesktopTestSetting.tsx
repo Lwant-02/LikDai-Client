@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { settingStore } from "@/store/settingStore";
 import { KeyBoardSelector } from "@/features/typing/components/KeyBoardSelector";
 import { TooltipHover } from "../../../components/TooltipHover";
+import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
 export const DesktopTestSetting = () => {
   const { mode, soundEnabled, setSoundEnabled } = settingStore();
@@ -15,11 +16,15 @@ export const DesktopTestSetting = () => {
         <span
           className={cn(
             "h-6 w-1 bg-primary/20 rounded-lg",
-            mode === "eng" && "hidden"
+            mode === "eng" && "hidden",
           )}
         />
         <TooltipHover
-          tooltipText={soundEnabled ? "ပိၵ်ႉသဵင်" : "ပိုတ်ႇသဵင်"}
+          tooltipText={
+            soundEnabled
+              ? TYPING_TEST_CONTENT.soundOff
+              : TYPING_TEST_CONTENT.soundOn
+          }
           className="flex justify-center items-center"
         >
           <div
@@ -28,12 +33,16 @@ export const DesktopTestSetting = () => {
           >
             {soundEnabled ? (
               <div className="flex gap-2 items-center">
-                <p className="text-base xl:flex hidden">Sound On</p>
+                <p className="text-base xl:flex hidden">
+                  {TYPING_TEST_CONTENT.soundOn}
+                </p>
                 <Volume2 className="size-5 text-yellow" />
               </div>
             ) : (
               <div className="flex gap-2 items-center">
-                <p className="text-base xl:flex hidden">Sound Off</p>
+                <p className="text-base xl:flex hidden">
+                  {TYPING_TEST_CONTENT.soundOff}
+                </p>
                 <VolumeX className="size-5" />
               </div>
             )}

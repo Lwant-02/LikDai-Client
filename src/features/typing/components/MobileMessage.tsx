@@ -6,7 +6,7 @@ export const MobileMessage = () => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl h-full w-full "
+      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl aspect-video "
     >
       <motion.div
         className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
@@ -35,7 +35,7 @@ export const MobileMessage = () => {
         </svg>
       </motion.div>
 
-      <h3 className="text-xl font-semibold text-center mb-2 bg-gradient-to-r from-yellow to-orange bg-clip-text text-transparent">
+      <h3 className="text-xl font-semibold text-center mb-2 text-yellow">
         လူဝ်ႇလႆႈၸႂ်ႉၼိူဝ် ၶွမ်ႇပိဝ်ႇတႃႇ
       </h3>
 

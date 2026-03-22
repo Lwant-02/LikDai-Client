@@ -40,7 +40,7 @@ export const LeaderboardPagination = ({
                 key={page}
                 onClick={() => setCurrentPage(page)}
                 className={cn(
-                  "size-7 sm:size-9 rounded-3xl border border-primary/20 text-center flex items-center justify-center text-xs",
+                  "size-7 sm:size-8 rounded-xl border border-primary/20 flex items-center justify-center text-xs",
                   currentPage === page
                     ? "bg-background/80"
                     : "hover:bg-background/50",

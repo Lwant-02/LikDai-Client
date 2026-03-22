@@ -281,7 +281,6 @@ export const TypingTest = ({
       <AlertDialog
         isOpen={isAlertDialogOpen}
         setIsOpen={setIsAlertDialogOpen}
-        mode={mode}
       />
     </div>
   );

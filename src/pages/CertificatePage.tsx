@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { useGetCertificate } from "@/hooks/useUser";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { CERTIFICATE_CONTENT } from "@/content/certificate.content";
 
 export const CertificatePage = () => {
   const { certificate, isFetchingCertificate } = useGetCertificate();
@@ -34,7 +35,7 @@ export const CertificatePage = () => {
         .toPng(certificateRef.current)
         .then(function (dataUrl) {
           const link = document.createElement("a");
-          link.download = `${certificate.fullName}_certificate.png`; // Set filename
+          link.download = `${certificate.fullName}-likdai-certificate.png`;
           link.href = dataUrl;
           link.click();
         })
@@ -54,11 +55,8 @@ export const CertificatePage = () => {
   return (
     <>
       <Helmet>
-        <title>Certificate - LikDai | ဝႂ်ၶပ်ႉမၢႆ</title>
-        <meta
-          name="description"
-          content="Download and share your LikDai certificate of achievement for mastering Shan / Dai / Tai typing (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး)."
-        />
+        <title>{CERTIFICATE_CONTENT.metaTitle}</title>
+        <meta name="description" content={CERTIFICATE_CONTENT.description} />
       </Helmet>
       <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-8">
         <motion.div
@@ -70,14 +68,12 @@ export const CertificatePage = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
             <Trophy className="size-6 sm:size-8 text-yellow animate-bounce" />
             <p className="text-xl sm:text-2xl md:text-3xl font-bold text-center">
-              Congratulations on your achievement!
+              {CERTIFICATE_CONTENT.pageTitle}
             </p>
             <Trophy className="size-6 sm:size-8 text-yellow animate-bounce sm:flex hidden" />
           </div>
           <p className="text-sm sm:text-base md:text-lg opacity-70 max-w-xs sm:max-w-md md:max-w-2xl mx-auto">
-            You have successfully completed all typing challenges and earned
-            this certificate of excellence. Download your certificate to
-            showcase your typing mastery!
+            {CERTIFICATE_CONTENT.shortDesc}
           </p>
         </motion.div>
 
@@ -197,14 +193,14 @@ export const CertificatePage = () => {
             className="btn hover:bg-blue hover:text-white border border-blue cursor-pointer text-blue transition-all duration-300"
           >
             <ArrowLeft className="size-5" />
-            Back to Account
+            {CERTIFICATE_CONTENT.backBtn}
           </button>
           <button
             onClick={handleDownloadCertificate}
             className="btn hover:bg-yellow hover:text-white border border-yellow cursor-pointer text-yellow transition-all duration-300"
           >
             <Download className="size-5" />
-            Download Certificate
+            {CERTIFICATE_CONTENT.downloadBtn}
           </button>
         </motion.div>
 
@@ -214,30 +210,28 @@ export const CertificatePage = () => {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="md:hidden w-full flex flex-col items-center gap-4 mt-6"
         >
-          <div className="bg-blue/10 border border-blue/20 rounded-xl p-6 text-center max-w-md mx-4">
+          <div className="bg-foreground/80 border border-primary/20 rounded-3xl p-6 text-center max-w-md mx-4">
             <div className="flex items-center justify-center mb-3">
-              <Download className="size-6 text-blue mr-2" />
-              <h3 className="text-lg font-semibold text-blue">
-                Download on Desktop
+              <Download className="size-6 mr-2" />
+              <h3 className="text-lg font-semibold">
+                {CERTIFICATE_CONTENT.onDesk}
               </h3>
             </div>
-            <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-              For the best certificate viewing and downloading experience,
-              please access this page on a larger screen (tablet or desktop).
+            <p className="text-sm mb-4 leading-relaxed">
+              {CERTIFICATE_CONTENT.descOne}
             </p>
-            <p className="text-xs text-gray-600">
-              Your certificate will be available in high quality for download
-              and sharing.
+            <p className="text-xs mb-4 leading-relaxed">
+              {CERTIFICATE_CONTENT.descTwo}
             </p>
           </div>
 
           <Button
             onClick={() => navigate("/account")}
             variant="outline"
-            className="w-full max-w-xs bg-transparent hover:bg-blue hover:text-white border-2 border-blue text-blue font-semibold px-6 py-3 rounded-xl transition-all duration-300"
+            className="w-full btn max-w-xs bg-transparent hover:bg-blue hover:text-white border-2 border-blue text-blue font-semibold px-6 py-3 rounded-xl transition-all duration-300"
           >
             <ArrowLeft className="size-4 mr-2" />
-            Back to Account
+            {CERTIFICATE_CONTENT.backBtn}
           </Button>
         </motion.div>
 
@@ -247,10 +241,7 @@ export const CertificatePage = () => {
           transition={{ duration: 0.5, delay: 1.0 }}
           className="hidden md:block text-center mt-6 opacity-70"
         >
-          <p className="text-sm">
-            Share your achievement on social media and inspire others to learn
-            Shan typing!
-          </p>
+          <p className="text-sm">{CERTIFICATE_CONTENT.info}</p>
         </motion.div>
       </div>
     </>

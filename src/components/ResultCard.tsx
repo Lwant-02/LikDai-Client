@@ -31,10 +31,10 @@ export const ResultCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "w-full border rounded-lg md:h-44 h-28 flex py-3 px-4 items-center flex-col relative overflow-hidden",
+        "w-full border rounded-full md:h-44 h-28 flex py-3 px-4 items-center flex-col relative overflow-hidden",
         "bg-gradient-to-b shadow-sm",
         colorVariants[color],
-        className
+        className,
       )}
     >
       <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-foreground/5 blur-xl" />

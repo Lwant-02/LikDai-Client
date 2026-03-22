@@ -12,18 +12,15 @@ import { cn } from "@/lib/utils";
 interface AlertDialogProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  mode: LanguageMode;
 }
 
-export const AlertDialog = ({ isOpen, setIsOpen, mode }: AlertDialogProps) => {
+export const AlertDialog = ({ isOpen, setIsOpen }: AlertDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
           <DialogTitle className={cn("text-center text-3xl")}>
-            {mode === "eng"
-              ? "Wrong Keyboard Layout!"
-              : "လွၵ်းမိုဝ်းၶီးပွတ်ႇၽိတ်း!"}
+            လွၵ်းမိုဝ်းၶီးပွတ်ႇၽိတ်း!
           </DialogTitle>
           <DialogDescription className="sr-only">
             Wrong keyboard layout dialog
@@ -35,9 +32,9 @@ export const AlertDialog = ({ isOpen, setIsOpen, mode }: AlertDialogProps) => {
           autoplay
         />
         <p className={cn("text-center text-lg font-semibold")}>
-          {mode === "eng"
-            ? "Please use the in-app keyboard layout. You do not need to change your system keyboard layout."
-            : "ၶႅၼ်းတေႃႈ ၸႂ်ႉတိုဝ်း လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ဢၼ်မီးၼႂ်း ဢႅပ်ႉၼၼ်ႉၶႃႈလႄႈ။ ၽူႈၸႂ်ႉတိုဝ်းႁဝ်း ဢမ်ႇလူဝ်ႇလႅၵ်ႈ လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ၼႂ်း System ၸဝ်ႈၵဝ်ႇၶႃႈ။"}
+          ၶႅၼ်းတေႃႈ ၸႂ်ႉတိုဝ်း လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ဢၼ်မီးၼႂ်း ဢႅပ်ႉၼၼ်ႉၶႃႈလႄႈ။
+          ၽူႈၸႂ်ႉတိုဝ်းႁဝ်း ဢမ်ႇလူဝ်ႇလႅၵ်ႈ လွၵ်းမိုဝ်း ၶီးပွတ်ႇ ၼႂ်း System
+          ၸဝ်ႈၵဝ်ႇၶႃႈ။
         </p>
       </DialogContent>
     </Dialog>

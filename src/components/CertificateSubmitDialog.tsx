@@ -79,9 +79,10 @@ export const CertificateSubmitDialog = ({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-md bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
           <DialogHeader>
-            <DialogTitle>Submit Your Full Name</DialogTitle>
+            <DialogTitle>သူင်ႇၸိုဝ်ႈတဵမ်ထူၼ်ႈ</DialogTitle>
             <DialogDescription className="text-sm opacity-70">
-              Please enter your full name to display on your certificate.
+              ၶႅၼ်းတေႃႈ တႅမ်ႈသႂ်ႇၸိုဝ်ႈၸဝ်ႈၵဝ်ႇ တဵမ်ထူၼ်ႈ ႁႂ်ႈၼႄလႆႈ
+              တီႈဝႂ်ႁပ်ႉႁွင်း ၸဝ်ႈၵဝ်ႇ။
             </DialogDescription>
           </DialogHeader>
           <form
@@ -92,7 +93,7 @@ export const CertificateSubmitDialog = ({
               id="custom_text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Enter your full name here..."
+              placeholder="တႅမ်ႈသႂ်ႇၸိုဝ်ႈၸဝ်ႈၵဝ်ႇ တီႈၼႆႈၶႃႈ..."
               className="bg-background/30 focus:ring-1! ring-primary/30 h-10 rounded-full px-5 border border-primary/10"
             />
             <Button
@@ -101,7 +102,7 @@ export const CertificateSubmitDialog = ({
               disabled={isSubmittingCertificate}
               className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
             >
-              {isSubmittingCertificate ? <MiniSpinner /> : <>Submit</>}
+              {isSubmittingCertificate ? <MiniSpinner /> : <>သူင်ႇၸူး</>}
             </Button>
           </form>
         </DialogContent>
