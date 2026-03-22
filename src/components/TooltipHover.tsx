@@ -14,7 +14,7 @@ export const TooltipHover = ({
   return (
     <Tooltip>
       <TooltipTrigger className={className}>{children}</TooltipTrigger>
-      <TooltipContent className="text-orange bg-primary py-2 font-secondary font-semibold">
+      <TooltipContent className="text-orange bg-primary py-2 font-semibold">
         {tooltipText}
       </TooltipContent>
     </Tooltip>

@@ -34,16 +34,16 @@ export const ProfileAchievement = ({
   return (
     <div
       className={cn(
-        "p-4 rounded-lg border ",
+        "p-4 rounded-3xl overflow-hidden border ",
         unlocked
           ? "border-yellow bg-yellow/10"
-          : "border-primary/20 bg-foreground/20 opacity-60"
+          : "border-primary/20 bg-foreground/80 opacity-60",
       )}
     >
       <div className="flex items-center gap-3">
         <div
           className={`rounded-full shrink-0 flex justify-center items-center  w-10 h-10 ${
-            unlocked ? "bg-yellow/20" : "bg-foreground/30"
+            unlocked ? "bg-yellow/20" : "bg-foreground/80"
           }`}
         >
           <img

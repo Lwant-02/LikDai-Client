@@ -1,198 +1,136 @@
-import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { CircleGauge, Search, Zap } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-import { settingStore } from "@/store/settingStore";
-import { LessonHeader } from "@/features/Lessons/components/LessonHeader";
-import { LessonLanguageSelector } from "@/features/Lessons/components/LessonLanguageSelector";
-import { LevelCard } from "@/features/Lessons/components/LevelCard";
-import { LessonGrid } from "@/features/Lessons/components/LessonGrid";
-import { Input } from "@/components/ui/input";
-import { LessonPagination } from "@/features/Lessons/components/LessonPagination";
-import { shanBeginnerLessons } from "@/resources/shan.beginner";
-import { shanIntermediateLessons } from "@/resources/shan.intermediate";
-import { shanAdvancedLessons } from "@/resources/shan.advancend";
-import { shanQuoteLessons } from "@/resources/shan.quoteLessons";
-import { engQuotesLessons } from "@/resources/eng.quoteLessons";
-import { engBeginnerLessons } from "@/resources/eng.beginner";
-import { engIntermediateLessons } from "@/resources/eng.intermediate";
-import { engAdvancedLessons } from "@/resources/eng.advancend";
-import { shanMusicLessons } from "@/resources/shan.musicLesson";
-import { engMusicLessons } from "@/resources/eng.musicLesson";
+import { ShanCharFloat } from "@/components/ShanCharFloat";
+import { LESSONS_CONTENT } from "@/content/lessons.content";
 import { cn } from "@/lib/utils";
 
-export const LessonsPage = () => {
-  const { lessonLevel, mode } = settingStore();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [lessons, setLessons] = useState<{ content: string }[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const { t } = useTranslation();
-  const lessonsPerPage = 10;
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
-  const getLevelLessons = () => {
-    let lessons: { content: string }[] = [];
-    switch (lessonLevel) {
-      case "beginner":
-        lessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
-        break;
-      case "intermediate":
-        lessons =
-          mode === "eng" ? engIntermediateLessons : shanIntermediateLessons;
-        break;
-      case "advanced":
-        lessons = mode === "eng" ? engAdvancedLessons : shanAdvancedLessons;
-        break;
-      case "quotes":
-        lessons = mode === "eng" ? engQuotesLessons : shanQuoteLessons;
-        break;
-      case "music":
-        lessons = mode === "eng" ? engMusicLessons : shanMusicLessons;
-        break;
-      default:
-        lessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
-        break;
-    }
-    setLessons(lessons);
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+interface LessonCardProps {
+  category: {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    image: string;
+    link: string;
+    type: string;
   };
+}
 
-  useMemo(() => {
-    getLevelLessons();
-  }, [lessonLevel, mode]);
+const LessonCard = ({ category }: LessonCardProps) => {
+  const navigate = useNavigate();
+  const liveType = category.type === "ၸႂ်ႉလႆႈယဝ်ႉ";
+  return (
+    <div
+      key={category.id}
+      className="group relative h-96 cursor-pointer overflow-hidden bg-background/80 backdrop-blur-xl border border-primary/20 hover:border-yellow/80 transition-all duration-300 shadow-2xl rounded-3xl hover:-translate-y-2"
+    >
+      <div className="absolute top-4 right-4 z-20">
+        <span className="inline-block px-3 py-1 rounded-full bg-yellow text-white text-sm font-bold uppercase tracking-wider mb-2 border border-yellow/30">
+          {category.type}
+        </span>
+      </div>
+      <div className="absolute inset-0 z-0">
+        <img
+          src={category.image}
+          alt={category.category}
+          loading="lazy"
+          fetchPriority="high"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+      </div>
 
-  //Filter lessons
-  const filteredLessons = useMemo(() => {
-    if (!searchQuery.trim()) return lessons;
-    return lessons.filter((lesson) =>
-      lesson.content.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, lessons]);
+      <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end text-white">
+        <div className="mb-4">
+          <span
+            className={cn(
+              "inline-block px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-3 border",
+              category.id === "normal"
+                ? "bg-blue text-white border-blue/30"
+                : "bg-green text-white border-green/30",
+            )}
+          >
+            {category.category}
+          </span>
+          <h2 className="text-3xl font-bold mb-2">{category.title}</h2>
+          <p className="opacity-90 line-clamp-1 mb-4 group-hover:line-clamp-none transition-all duration-300">
+            {category.description}
+          </p>
+        </div>
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, lessonLevel, mode]);
+        <button
+          disabled={!liveType}
+          onClick={() => navigate(category.link)}
+          className={cn(
+            "flex items-center gap-1 text-yellow font-bold hover:text-yellow/80 cursor-pointer",
+            !liveType && "cursor-not-allowed opacity-50",
+          )}
+        >
+          <span>
+            {category.id === "normal"
+              ? LESSONS_CONTENT.normalType
+              : LESSONS_CONTENT.otherType}
+          </span>
+          <ArrowRight className="size-5" />
+        </button>
+      </div>
+    </div>
+  );
+};
 
-  //Scroll to top when page changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
-
+export const LessonsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Lessons | LikDai</title>
-        <meta
-          name="description"
-          content="Master typing with structured lessons for all skill levels."
-        />
+        <title>{LESSONS_CONTENT.metaTitle}</title>
+        <meta name="description" content={LESSONS_CONTENT.metaDescription} />
       </Helmet>
 
-      <div className="min-h-screen pb-10">
-        {/* Header */}
-        <div className="container mx-auto px-4 py-8">
-          <LessonHeader />
+      <div className="min-h-screen pt-8 relative overflow-hidden pb-32">
+        <ShanCharFloat />
 
-          {/* Language Selection */}
-          <LessonLanguageSelector />
-
-          {/* Level Selection */}
+        <motion.div
+          className="layout relative z-10"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className=" mb-9 flex justify-center items-center w-full py-2"
+            variants={itemVariants}
+            className="flex justify-center items-start flex-col mb-16"
           >
-            <LevelCard />
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-primary">
+              {LESSONS_CONTENT.title}
+            </h1>
+            <p className="text-xl opacity-80">{LESSONS_CONTENT.subtitle}</p>
           </motion.div>
 
-          {/* Search Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-8"
-          >
-            <div className="relative max-w-xl mx-auto">
-              <Input
-                id="search_lesson"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t("lesson_page.search_btn")}
-                className="bg-foreground border-none focus:ring-1! ring-primary/30 h-12 rounded-lg pl-10"
-              />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 opacity-60 size-5" />
-            </div>
-          </motion.div>
-
-          {/* Lessons Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-8 mb-10"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-gradient-to-br from-yellow to-orange">
-                  <CircleGauge className="size-6 text-white" />
-                </div>
-                <h2
-                  className={cn(
-                    "text-3xl font-bold",
-                    mode === "shan" && "font-secondary"
-                  )}
-                >
-                  {t(`lesson_page.${lessonLevel}.title`)}
-                </h2>
-              </div>
-              <div className="flex items-center gap-2 text-sm opacity-80 bg-foreground/40 backdrop-blur-sm px-4 py-2 rounded-full">
-                <Zap className="size-4" />
-                <span>
-                  {filteredLessons.length} {t("lesson_page.lessons")}
-                </span>
-              </div>
-            </div>
-
-            {filteredLessons.length === 0 ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-center py-16"
-              >
-                <Search className="size-16 opacity-60 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold mb-4">
-                  {t("lesson_page.not_found.title")}
-                </h3>
-                <p className="opacity-80 text-lg">
-                  {t("lesson_page.not_found.description")}
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {LESSONS_CONTENT.categories.map((category) => (
+              <motion.div key={category.id} variants={itemVariants}>
+                <LessonCard category={category} />
               </motion.div>
-            ) : (
-              <div className="grid xl:grid-cols-2 grid-cols-1 gap-3">
-                {filteredLessons
-                  .slice(
-                    (currentPage - 1) * lessonsPerPage,
-                    currentPage * lessonsPerPage
-                  )
-                  .map((lesson, index) => (
-                    <LessonGrid
-                      key={index}
-                      content={lesson.content}
-                      index={(currentPage - 1) * lessonsPerPage + index}
-                    />
-                  ))}
-              </div>
-            )}
-          </motion.div>
-          <LessonPagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalPages={Math.ceil(filteredLessons.length / lessonsPerPage) || 1}
-          />
-        </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </>
   );

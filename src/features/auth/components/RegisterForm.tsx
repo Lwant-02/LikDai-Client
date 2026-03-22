@@ -1,12 +1,13 @@
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
 
 import { Button } from "../../../components/ui/button";
 import { InputFiled } from "../../../components/InputFiled";
 import { useRegister } from "@/hooks/useAuth";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { LOGIN_CONTENT } from "@/content/login.content";
 
 interface FormData {
   username: string;
@@ -72,16 +73,13 @@ export const RegisterForm = () => {
   };
 
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="flex flex-col justify-center items-center gap-4"
+    <form
+      className="flex flex-col justify-start items-center gap-4"
       onSubmit={handleSubmit}
     >
       <div className="flex justify-center items-center gap-2">
         <UserPlusIcon className="size-7 " />
-        <p className="text-2xl font-bold">Register</p>
+        <p className="text-2xl font-bold">{LOGIN_CONTENT.register}</p>
       </div>
       <InputFiled
         type="text"
@@ -90,9 +88,9 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, username: e.target.value }))
         }
-        placeholder="Username"
-        label="Username"
-        helperText="Username must be at least 3 characters and not more than 20 characters."
+        placeholder={COMMON_INPUT_CONTENT.namePlaceholder}
+        label={COMMON_INPUT_CONTENT.name}
+        helperText={COMMON_INPUT_CONTENT.nameHelperText}
       />
       <InputFiled
         type="email"
@@ -101,9 +99,9 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, email: e.target.value }))
         }
-        placeholder="Email"
-        label="Email"
-        helperText="Email must be a valid email address."
+        placeholder={COMMON_INPUT_CONTENT.emailPlaceholder}
+        label={COMMON_INPUT_CONTENT.email}
+        helperText={COMMON_INPUT_CONTENT.emailHelperText}
       />
       <InputFiled
         type="password"
@@ -112,25 +110,25 @@ export const RegisterForm = () => {
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, password: e.target.value }))
         }
-        placeholder="Password"
-        label="Password"
-        helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+        placeholder={COMMON_INPUT_CONTENT.passwordPlaceholder}
+        label={COMMON_INPUT_CONTENT.password}
+        helperText={COMMON_INPUT_CONTENT.passwordHelperText}
       />
       <Button
         variant="destructive"
         disabled={isRegistering}
         type="submit"
-        className="h-10 mt-3 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base transition-colors duration-200 "
+        className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
       >
         {isRegistering ? (
           <MiniSpinner />
         ) : (
           <>
             <UserPlusIcon className="size-5 bg-transparent" />
-            Sign Up
+            {LOGIN_CONTENT.register}
           </>
         )}
       </Button>
-    </motion.form>
+    </form>
   );
 };

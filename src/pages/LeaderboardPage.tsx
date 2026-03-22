@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
+import { Trophy } from "lucide-react";
 
 import { LeaderboardPagination } from "@/features/Leaderboard/components/LeaderboardPagination";
 import { LeaderboardHeader } from "@/features/Leaderboard/components/LeaderboardHeader";
@@ -10,10 +10,25 @@ import { LeaderboardFilter } from "@/features/Leaderboard/components/Leaderboard
 import { LeaderboardTable } from "@/features/Leaderboard/components/LeaderboardTable";
 import { useGetLeaderboard } from "@/hooks/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
+import { LEADERBOARD_CONTENT } from "@/content/leaderboard.content";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export const LeaderboardPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useTranslation();
   const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
   const page = searchParams.get("page") || "1";
@@ -36,7 +51,7 @@ export const LeaderboardPage = () => {
     (entry, index) => ({
       ...entry,
       rank: index + 1,
-    })
+    }),
   );
 
   // Reset page when changing language filter
@@ -64,38 +79,49 @@ export const LeaderboardPage = () => {
   return (
     <>
       <Helmet>
-        <title>Leaderboards | LikDai</title>
+        <title>{LEADERBOARD_CONTENT.metaTitle}</title>
         <meta
           name="description"
-          content="Compete with others and see how you rank on the leaderboard."
+          content={LEADERBOARD_CONTENT.metaDescription}
         />
       </Helmet>
       <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-5xl"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full layout space-y-4"
         >
           {/* Header - Responsive layout */}
-          <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
+          <motion.div variants={itemVariants} className="w-full">
+            <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
+          </motion.div>
 
           {/* Filters - Responsive layout */}
-          <LeaderboardFilter
-            languageFilter={languageFilter}
-            setLanguageFilter={setLanguageFilter}
-          />
+          <motion.div variants={itemVariants} className="w-full">
+            <LeaderboardFilter
+              languageFilter={languageFilter}
+              setLanguageFilter={setLanguageFilter}
+            />
+          </motion.div>
 
-          <p className="md:text-2xl text-xl font-bolds mb-3">
-            {t(`leaderboard_page.description.${languageFilter}`)}
-          </p>
+          <motion.div variants={itemVariants} className="w-full">
+            <p className="md:text-2xl text-xl font-bold mb-3">
+              {languageFilter === "eng"
+                ? LEADERBOARD_CONTENT.engTitle
+                : LEADERBOARD_CONTENT.shnTitle}
+            </p>
+          </motion.div>
 
           {isFetchingLeaderboard ? (
-            <div className="w-full flex justify-center items-center h-52">
+            <motion.div
+              variants={itemVariants}
+              className="w-full flex justify-center items-center h-52"
+            >
               <Spinner />
-            </div>
+            </motion.div>
           ) : (
-            <>
+            <motion.div variants={itemVariants} className="w-full space-y-4">
               {leaderboard.leaderboard.length > 0 ? (
                 <>
                   {/* Leaderboard table - Responsive layout */}
@@ -109,23 +135,24 @@ export const LeaderboardPage = () => {
                   />
 
                   {/* Info text */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.7 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-4 text-xs sm:text-sm text-center mb-20"
-                  >
-                    {t("leaderboard_page.note")}
-                  </motion.p>
+                  <p className="mt-4 text-xs sm:text-sm text-center mb-20 opacity-70">
+                    {LEADERBOARD_CONTENT.infoText}
+                  </p>
                 </>
               ) : (
-                <div className="w-full flex justify-center items-center h-52">
-                  <p className="text-center text-lg opacity-70">
-                    {t("leaderboard_page.no_data")}
+                <motion.div
+                  variants={itemVariants}
+                  className="w-full flex flex-col justify-center items-center h-64 bg-foreground/5 border border-foreground/10 rounded-3xl border-dashed"
+                >
+                  <div className="p-5 bg-yellow/50 shadow-sm rounded-full mb-4 border border-foreground/5">
+                    <Trophy className="size-10 sm:size-12 text-yellows opacity-90" />
+                  </div>
+                  <p className="text-center text-lg sm:text-xl font-medium opacity-80">
+                    {LEADERBOARD_CONTENT.noData}
                   </p>
-                </div>
+                </motion.div>
               )}
-            </>
+            </motion.div>
           )}
         </motion.div>
       </article>

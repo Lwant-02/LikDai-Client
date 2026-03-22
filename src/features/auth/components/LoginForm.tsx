@@ -1,7 +1,6 @@
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
@@ -12,6 +11,8 @@ import { useGoogleLoginHook, useLogin } from "@/hooks/useAuth";
 import { authStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { MiniSpinner } from "@/components/MiniSpinner";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { LOGIN_CONTENT } from "@/content/login.content";
 
 type FormData = {
   email: string;
@@ -46,7 +47,7 @@ export const LoginForm = () => {
           password: "",
         });
         toast("✅️ Success", {
-          description: <p className="text-white">Login successful!</p>,
+          description: <p className="text-white">Login success!</p>,
           style: {
             backgroundColor: "#1f7d53 ",
           },
@@ -81,7 +82,7 @@ export const LoginForm = () => {
         const token = response.access_token;
         const res = await axios.get(
           "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
-          { headers: { Authorization: `Bearer ${token}` } }
+          { headers: { Authorization: `Bearer ${token}` } },
         );
         const { email, name } = res.data;
         await googleLogin(
@@ -121,7 +122,7 @@ export const LoginForm = () => {
                 ),
               });
             },
-          }
+          },
         );
       } catch (error: any) {
         console.log(error);
@@ -139,16 +140,13 @@ export const LoginForm = () => {
 
   return (
     <>
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      <form
         className="flex flex-col justify-start items-center gap-4 "
         onSubmit={handleSumit}
       >
         <div className="flex justify-center items-center gap-2">
           <ArrowDownTrayIcon className="size-7 -rotate-90 " />
-          <p className="text-2xl font-bold">Login</p>
+          <p className="text-2xl font-bold">{LOGIN_CONTENT.login}</p>
         </div>
         <InputFiled
           type="email"
@@ -157,9 +155,9 @@ export const LoginForm = () => {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, email: e.target.value }))
           }
-          placeholder="Email"
-          label="Email"
-          helperText="Email must be a valid email address."
+          placeholder={COMMON_INPUT_CONTENT.emailPlaceholder}
+          label={COMMON_INPUT_CONTENT.email}
+          helperText={COMMON_INPUT_CONTENT.emailHelperText}
         />
         <InputFiled
           type="password"
@@ -168,22 +166,22 @@ export const LoginForm = () => {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, password: e.target.value }))
           }
-          placeholder="Password"
-          label="Password"
-          helperText="Password must be at least 8 characters long and contain at least one letter and one number."
+          placeholder={COMMON_INPUT_CONTENT.passwordPlaceholder}
+          label={COMMON_INPUT_CONTENT.password}
+          helperText={COMMON_INPUT_CONTENT.passwordHelperText}
         />
         <Button
           variant="destructive"
           type="submit"
           disabled={isLoggingIn}
-          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingIn ? (
             <MiniSpinner />
           ) : (
             <>
               <ArrowDownTrayIcon className="size-5 bg-transparent -rotate-90 " />
-              Sign In
+              {LOGIN_CONTENT.login}
             </>
           )}
         </Button>
@@ -193,7 +191,7 @@ export const LoginForm = () => {
             onClick={() => setIsDialogOpen(true)}
             className="hover:text-primary text-sm text-primary/50 cursor-pointer"
           >
-            Forgot Password?
+            {LOGIN_CONTENT.forgotPass}
           </button>
         </div>
         <Button
@@ -201,18 +199,18 @@ export const LoginForm = () => {
           type="button"
           disabled={isLoggingInWithGoogle}
           onClick={() => handleGoogleLogin()}
-          className="mt-3 h-10 text-primary rounded-lg bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
+          className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground/50 w-full max-w-sm cursor-pointer flex justify-center items-center hover:bg-foreground text-base"
         >
           {isLoggingInWithGoogle ? (
             <MiniSpinner />
           ) : (
             <>
               <img src="/svg/google-svg.svg" alt="Google" className="size-6" />
-              <p>Continue with Google</p>
+              <p>{LOGIN_CONTENT.loginWithGoogle}</p>
             </>
           )}
         </Button>
-      </motion.form>
+      </form>
       <ForgotPasswordDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </>
   );

@@ -9,7 +9,7 @@ export const KeyBoardSelector = () => {
     <div
       className={cn(
         "grid gap-4",
-        mode === "eng" ? "grid-cols-1" : "grid-cols-4"
+        mode === "eng" ? "grid-cols-1" : "grid-cols-4",
       )}
     >
       {Object.entries(KeyMaps).map(([key, value]) => {
@@ -19,8 +19,8 @@ export const KeyBoardSelector = () => {
             <div
               onClick={() => setSelectedKeyMap(key as KeyMapNames)}
               className={cn(
-                "w-auto opacity-50 text-base font-secondary hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-                selectedKeyMap === key && "opacity-100 text-yellow"
+                "w-auto opacity-50 text-base hover:opacity-100 transition-opacity duration-200 cursor-pointer",
+                selectedKeyMap === key && "opacity-100 text-yellow",
               )}
             >
               {value.name}

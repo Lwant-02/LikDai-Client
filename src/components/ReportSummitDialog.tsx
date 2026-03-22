@@ -8,7 +8,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
 import { ThankyouDialog } from "./ThankyouDialog";
@@ -81,12 +80,15 @@ export const ReportSummitDialog = ({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+        <DialogContent className="sm:max-w-md bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
           <DialogHeader>
-            <DialogTitle>Report a Bug or Give Feedbacks 🐞</DialogTitle>
+            <DialogTitle>
+              တၢင်ႇလၢတ်ႈ လွင်ႈၽိတ်းပိူင်ႈ ဢမ်ႇၼၼ် ပၼ်တၢင်းႁၼ်ထိုင် 🐞
+            </DialogTitle>
             <DialogDescription className="text-sm opacity-70">
-              Please explain the issue you are facing or any feedbacks or
-              suggestions you have. we will get back to you as soon as possible.
+              ၶႅၼ်းတေႃႈ သပ်းလႅင်းၼႄ လွင်ႈတၢင်း ဢၼ်ၸဝ်ႈၵဝ်ႇ လႆႈႁူပ်ႉထူပ်း ဢမ်ႇၼၼ်
+              ၶေႃႈႁၼ်ထိုင် ဢမ်ႇၼၼ် ၶေႃႈတၢင်ႇၼႄ ဢၼ်ၸဝ်ႈၵဝ်ႇ မီးဝႆႉၼၼ်ႉ သေၵမ်း။
+              ႁဝ်းၶႃႈတေၶိုၼ်းတွင်ႈထၢမ်လႆႈဝႆးဝႆးၶႃႈ။
             </DialogDescription>
           </DialogHeader>
           <form
@@ -97,19 +99,21 @@ export const ReportSummitDialog = ({
               id="custom_text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Report your issue or your suggestions or feedbacks here..."
+              placeholder="တၢင်ႇလၢတ်ႈၼႄပၼ်ႁႃ ဢမ်ႇၼၼ် ၶေႃႈတၢင်ႇၼႄ ဢမ်ႇၼၼ် ၶေႃႈတွပ်ႇ တီႈၼႆႈၶႃႈ..."
               className={cn(
-                "bg-background/30 border-none focus:ring-1! ring-primary/30 h-40  rounded-lg resize-none"
+                "bg-background/30 border border-primary/10 focus:ring-1! ring-primary/30 h-40  rounded-xl resize-none",
               )}
             />
-            <Button
-              variant="destructive"
+            <button
               type="submit"
-              disabled={isSubmitting}
-              className="mt-3 h-10 text-primary rounded-lg bg-background/50 w-full cursor-pointer flex justify-center items-center hover:bg-background text-base"
+              disabled={isSubmitting || !text}
+              className={cn(
+                "mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base",
+                !text && "cursor-not-allowed opacity-50",
+              )}
             >
-              {isSubmitting ? <MiniSpinner /> : <>Submit</>}
-            </Button>
+              {isSubmitting ? <MiniSpinner /> : <>သူင်ႇၸူး</>}
+            </button>
           </form>
         </DialogContent>
       </Dialog>

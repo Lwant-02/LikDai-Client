@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Save, X } from "lucide-react";
 
 import { toast } from "sonner";
 import { Button } from "./ui/button";
@@ -7,6 +6,18 @@ import { InputFiled } from "./InputFiled";
 import { AccountDeleteDialog } from "../features/account/components/AccountDeleteDialog";
 import { useUpdatePassword } from "@/hooks/useUser";
 import { MiniSpinner } from "./MiniSpinner";
+import {
+  ACCOUNT_PROFILE_CONTENT,
+  ACCOUNT_SETTINGS_CONTENT,
+} from "@/content/account.content";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { COMMON_INPUT_CONTENT } from "@/content/common.content";
 
 export const SettingTab = () => {
   const { isUpdatingPassword, updatePassword } = useUpdatePassword();
@@ -16,8 +27,7 @@ export const SettingTab = () => {
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const handleUpdatePassword = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleUpdatePassword = async () => {
     if (!newPassword || !confirmPassword || !currentPassword) {
       toast("ⓘ Notice", {
         description: <p className="text-white">Please fill in all fields!</p>,
@@ -73,7 +83,7 @@ export const SettingTab = () => {
             ),
           });
         },
-      }
+      },
     );
     setNewPassword("");
     setConfirmPassword("");
@@ -84,101 +94,97 @@ export const SettingTab = () => {
   return (
     <>
       <div className="space-y-6">
-        <h2 className="text-xl font-bold">Account Settings</h2>
+        <h2 className="text-xl font-bold">{ACCOUNT_SETTINGS_CONTENT.title}</h2>
 
         <div className="space-y-4">
-          <form
-            className="p-4 bg-foreground/40 rounded-lg"
-            onSubmit={handleUpdatePassword}
-          >
-            <h3 className="font-semibold mb-3">
-              {!isChangePassword ? "Password" : "Change Your Password"}
+          <div className="p-4 bg-foreground/80 rounded-3xl">
+            <h3 className="font-semibold mb-3 text-lg">
+              {ACCOUNT_SETTINGS_CONTENT.accountManage}
             </h3>
-            {!isChangePassword ? (
-              <Button
-                variant="outline"
-                type="button"
-                className="bg-foreground/30 hover:bg-foreground/50 cursor-pointer"
-                onClick={() => setIsChangePassword(true)}
-              >
-                Change Password
-              </Button>
-            ) : (
-              <div className="flex gap-2 w-full justify-end items-center">
+
+            <Button
+              variant="outline"
+              type="button"
+              className="bg-foreground/30 btn hover:bg-foreground/50 cursor-pointer w-40"
+              onClick={() => setIsChangePassword(true)}
+            >
+              {ACCOUNT_SETTINGS_CONTENT.editPassBtn}
+            </Button>
+          </div>
+
+          <Dialog open={isChangePassword} onOpenChange={setIsChangePassword}>
+            <DialogContent className="sm:max-w-md bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
+              <DialogHeader>
+                <DialogTitle className="mb-4">
+                  {ACCOUNT_SETTINGS_CONTENT.editPassDialogTitle}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Dialog
+                </DialogDescription>
+              </DialogHeader>
+              <InputFiled
+                type="password"
+                id="current_password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder={COMMON_INPUT_CONTENT.currentPasswordPlaceholder}
+                label={COMMON_INPUT_CONTENT.currentPassword}
+                helperText={COMMON_INPUT_CONTENT.currentPasswordHelperText}
+              />
+              <InputFiled
+                type="password"
+                id="new_password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder={COMMON_INPUT_CONTENT.newPasswordPlaceholder}
+                label={COMMON_INPUT_CONTENT.newPassword}
+                helperText={COMMON_INPUT_CONTENT.passwordHelperText}
+              />
+              <InputFiled
+                type="password"
+                id="confirm_password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder={COMMON_INPUT_CONTENT.confirmPasswordPlaceholder}
+                label={COMMON_INPUT_CONTENT.confirmPassword}
+                helperText={COMMON_INPUT_CONTENT.passwordHelperText}
+              />
+              <div className="grid grid-cols-2 gap-3">
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="destructive"
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="mt-3 btn h-10 border border-primary/10 text-white bg-red-500 cursor-pointer flex justify-center items-center hover:bg-red-500/80 transition-colors duration-300 text-base"
+                >
+                  {ACCOUNT_PROFILE_CONTENT.cancelBtn}
+                </Button>
+                <Button
+                  variant="destructive"
                   type="submit"
                   disabled={isUpdatingPassword}
-                  className="bg-green/20 hover:bg-green/30 text-green cursor-pointer w-28"
+                  onClick={handleUpdatePassword}
+                  className="mt-3 btn h-10 border border-primary/10 text-primary bg-foreground  cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base"
                 >
                   {isUpdatingPassword ? (
                     <MiniSpinner />
                   ) : (
-                    <>
-                      <Save className="size-4" />
-                      Confirm
-                    </>
+                    <>{ACCOUNT_PROFILE_CONTENT.saveBtn}</>
                   )}
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  type="button"
-                  onClick={() => {
-                    setIsChangePassword(false);
-                    setNewPassword("");
-                    setConfirmPassword("");
-                    setCurrentPassword("");
-                  }}
-                  className="bg-red/20 hover:bg-red/30 text-red cursor-pointer w-28"
-                >
-                  <X className="size-4" />
-                  Cancel
-                </Button>
               </div>
-            )}
-            {isChangePassword && (
-              <div className="mt-4 w-full flex flex-col justify-center items-center gap-4">
-                <InputFiled
-                  type="password"
-                  id="current_password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="Current Password"
-                  label="Current Password"
-                  helperText="Current password is required."
-                />
-                <InputFiled
-                  type="password"
-                  id="new_password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="New Password"
-                  label="New Password"
-                  helperText="Password must be at least 8 characters long and contain at least one letter and one number."
-                />
-                <InputFiled
-                  type="password"
-                  id="confirm_password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm Password"
-                  label="Confirm Password"
-                  helperText="Password must be at least 8 characters long and contain at least one letter and one number."
-                />
-              </div>
-            )}
-          </form>
-          <div className="p-4 bg-foreground/40 rounded-lg">
-            <h3 className="font-semibold mb-3">Account Management</h3>
+            </DialogContent>
+          </Dialog>
+          <div className="p-4 bg-foreground/80 rounded-3xl">
+            <h3 className="font-semibold mb-3">
+              {ACCOUNT_SETTINGS_CONTENT.accountManage}
+            </h3>
             <div className="space-y-2">
               <Button
                 variant="destructive"
-                className="cursor-pointer justify-start bg-red w-32"
+                className="cursor-pointer text-center bg-red w-40 btn"
                 onClick={() => setIsOpen(true)}
               >
-                Delete Account
+                {ACCOUNT_SETTINGS_CONTENT.deleteAccountBtn}
               </Button>
             </div>
           </div>

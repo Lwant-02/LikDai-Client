@@ -12,6 +12,7 @@ import { engIntermediateLessons } from "@/resources/eng.intermediate";
 import { engAdvancedLessons } from "@/resources/eng.advancend";
 import { engQuotesLessons } from "@/resources/eng.quoteLessons";
 import { engMusicLessons } from "@/resources/eng.musicLesson";
+import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
 export const LessonGuide = () => {
   const { setTargetText, mode } = settingStore();
@@ -52,12 +53,12 @@ export const LessonGuide = () => {
         }`}
       >
         <ChevronLeft className="size-4 sm:size-5" />
-        <p className="text-base notranslate">Prev</p>
+        <p className="text-base notranslate">{TYPING_TEST_CONTENT.prev}</p>
       </div>
 
       {/* Lesson Number */}
       <div className="text-base font-bold text-yellow">
-        Lessons - {lessonNumber}
+        {TYPING_TEST_CONTENT.lesson} - {lessonNumber}
       </div>
 
       {/* Next */}
@@ -69,7 +70,7 @@ export const LessonGuide = () => {
             : "opacity-50 hover:opacity-100"
         }`}
       >
-        <p className="text-base notranslate">Next</p>
+        <p className="text-base notranslate">{TYPING_TEST_CONTENT.next}</p>
         <ChevronRight className="size-4 sm:size-5" />
       </div>
     </div>

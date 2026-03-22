@@ -21,7 +21,7 @@ export const LessonPagination = ({
           "p-1 sm:p-2 rounded-md cursor-pointer",
           currentPage === 1
             ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-foreground/10"
+            : "hover:bg-foreground/10",
         )}
       >
         <ChevronLeft className="size-4 sm:size-5" />
@@ -40,10 +40,10 @@ export const LessonPagination = ({
                 key={page}
                 onClick={() => setCurrentPage(page)}
                 className={cn(
-                  "size-7 sm:size-8 rounded-md flex items-center justify-center text-xs sm:text-sm",
+                  "size-7 sm:size-8 rounded-xl border border-primary/20 flex items-center justify-center text-xs",
                   currentPage === page
                     ? "bg-blue/50 text-primary"
-                    : "hover:bg-foreground/10"
+                    : "hover:bg-foreground/10",
                 )}
               >
                 {page}
@@ -66,7 +66,7 @@ export const LessonPagination = ({
           "p-1 sm:p-2 rounded-md cursor-pointer",
           currentPage === totalPages
             ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-foreground/10"
+            : "hover:bg-foreground/10",
         )}
       >
         <ChevronRight className="size-4 sm:size-5 " />

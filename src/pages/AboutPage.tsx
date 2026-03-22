@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronsUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
 
-import { Button } from "@/components/ui/button";
-import { ReportSummitDialog } from "@/components/ReportSummitDialog";
-import { AboutEngSection } from "@/components/AboutEngSection";
+import { AllInformation } from "@/components/AllInformation";
 import { settingStore } from "@/store/settingStore";
+import { ABOUT_CONTENT } from "@/content/about.content";
+import { HOME_CONTENT } from "@/content/home.content";
 
 // Animation variants
 export const containerVariants = {
@@ -16,7 +15,7 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -27,11 +26,8 @@ export const itemVariants = {
 };
 
 export const AboutPage = () => {
-  const { t } = useTranslation();
   const { isFromHome, setInstallPromptEvent, installPromptEvent } =
     settingStore();
-  const [isSubmittingDialogOpen, setIsSubmittingDialogOpen] =
-    useState<boolean>(false);
   const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -71,69 +67,53 @@ export const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About | LikDai</title>
-        <meta
-          name="description"
-          content="About LikDai - Pro, the ultimate Shan typing app."
-        />
+        <title>{ABOUT_CONTENT.metaTitle}</title>
+        <meta name="description" content={ABOUT_CONTENT.metaDescription} />
       </Helmet>
-      <article className="min-h-screen relative">
-        {/* English Section */}
-        <AboutEngSection
-          setIsSubmittingDialogOpen={setIsSubmittingDialogOpen}
-          handleInstallClick={handleInstallClick}
-        />
 
-        {/* CTA Section */}
-        <section className="px-4 pb-20">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-            className="max-w-4xl mx-auto text-center"
+      <main className="min-h-screen py-8 relative overflow-hidden">
+        <motion.div
+          className="layout"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <AllInformation handleInstallClick={handleInstallClick} />
+
+          {/* CTA Section */}
+          <motion.section
+            variants={itemVariants}
+            className="pt-10 pb-6 text-center mt-10"
           >
-            <motion.h2
-              variants={itemVariants}
-              className="text-3xl sm:text-4xl font-bold mb-6"
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              {ABOUT_CONTENT.cta.title}
+            </h2>
+            <p className="text-lg opacity-80 mb-8 max-w-2xl mx-auto">
+              {ABOUT_CONTENT.cta.descOne}
+              <span className="font-bold text-yellow">
+                {ABOUT_CONTENT.cta.likdai}
+              </span>
+              {ABOUT_CONTENT.cta.descTwo}
+            </p>
+            <button
+              className="bg-yellow hover:bg-yellow/80 text-background btn cursor-pointer"
+              onClick={() => navigate("/lessons")}
             >
-              {t("about_page.footer.title")}
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-lg opacity-80 mb-8 max-w-2xl mx-auto"
-            >
-              {t("about_page.footer.description")}
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <Button
-                size="lg"
-                className="bg-yellow hover:bg-yellow/80 text-background font-bold text-lg px-8 py-6 cursor-pointer"
-                onClick={() => navigate("/lessons")}
-              >
-                {t("home_page.button")}
-              </Button>
-            </motion.div>
-          </motion.div>
-        </section>
+              {HOME_CONTENT.buttonLabel}
+            </button>
+          </motion.section>
+        </motion.div>
 
         {/* Back to top button */}
         {isUserScrolled && (
           <button
             onClick={scrollToTop}
-            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer"
+            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer shadow-lg"
           >
             <ChevronsUp className="size-6" />
           </button>
         )}
-      </article>
-      {/* Dialog to report a bug */}
-      <ReportSummitDialog
-        isOpen={isSubmittingDialogOpen}
-        setIsOpen={setIsSubmittingDialogOpen}
-      />
+      </main>
     </>
   );
 };

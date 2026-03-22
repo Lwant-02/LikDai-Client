@@ -2,6 +2,7 @@ import { User, Settings, History, Award, BarChart3 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ACCOUNT_PROFILE_CONTENT } from "@/content/account.content";
 
 interface AccountTabsProps {
   activeTab: TabType;
@@ -11,27 +12,27 @@ interface AccountTabsProps {
 const tabs = [
   {
     id: "profile",
-    label: "Profile",
+    label: ACCOUNT_PROFILE_CONTENT.tabs.profile,
     icon: <User className="size-4" />,
   },
   {
     id: "stats",
-    label: "Stats",
+    label: ACCOUNT_PROFILE_CONTENT.tabs.stats,
     icon: <BarChart3 className="size-4" />,
   },
   {
     id: "history",
-    label: "History",
+    label: ACCOUNT_PROFILE_CONTENT.tabs.history,
     icon: <History className="size-4" />,
   },
   {
     id: "achievements",
-    label: "Achievements",
+    label: ACCOUNT_PROFILE_CONTENT.tabs.achievements,
     icon: <Award className="size-4" />,
   },
   {
     id: "settings",
-    label: "Settings",
+    label: ACCOUNT_PROFILE_CONTENT.tabs.settings,
     icon: <Settings className="size-4" />,
   },
 ];
@@ -44,10 +45,10 @@ export const AccountTabs = ({ activeTab, setActiveTab }: AccountTabsProps) => {
           key={tab.id}
           variant="ghost"
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer",
+            "flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer w-32 border border-primary/20",
             activeTab === tab.id
               ? "bg-foreground text-yellow"
-              : "hover:bg-foreground/50"
+              : "hover:bg-foreground/50",
           )}
           onClick={() => setActiveTab(tab.id as TabType)}
         >

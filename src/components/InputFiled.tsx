@@ -32,7 +32,7 @@ export const InputFiled = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="bg-foreground border-none focus:ring-1! ring-primary/30 h-10  rounded-lg"
+        className="bg-foreground border-none focus:ring-1! ring-primary/30 h-10 rounded-full px-5"
       />
       <p className="text-xs opacity-70">{helperText}</p>
     </div>

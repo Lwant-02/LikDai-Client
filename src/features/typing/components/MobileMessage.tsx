@@ -6,7 +6,7 @@ export const MobileMessage = () => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-gradient-to-br from-foreground/20 to-foreground/10 rounded-2xl border border-primary/20 backdrop-blur-sm h-full w-full "
+      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl aspect-video "
     >
       <motion.div
         className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
@@ -35,13 +35,14 @@ export const MobileMessage = () => {
         </svg>
       </motion.div>
 
-      <h3 className="text-xl font-semibold text-center mb-2 bg-gradient-to-r from-yellow to-orange bg-clip-text text-transparent">
-        Desktop Experience Required
+      <h3 className="text-xl font-semibold text-center mb-2 text-yellow">
+        လူဝ်ႇလႆႈၸႂ်ႉၼိူဝ် ၶွမ်ႇပိဝ်ႇတႃႇ
       </h3>
 
       <p className="text-center text-sm opacity-80 leading-relaxed max-w-xs">
-        LikDai is optimized for desktop and laptop screens to provide the best
-        typing experience with full keyboard support.
+        <span className="text-yellow">လိၵ်ႈတႆး</span> ၼႆႉ ၶိုင်သၢင်ႈဝႆႉတွၼ်ႈတႃႇ
+        ၼႃႈၸေႃးၶွမ်ႇပိဝ်ႇတႃႇ လႄႈ လႅပ်ႉထွပ်ႉ၊ ပိူဝ်ႈတႃႇႁႂ်ႈပိတ်ႉလိၵ်ႈလႆႈလီသုတ်း
+        လႄႈ ၸႂ်ႉလႆႈၶီးပွတ်ႉ (Keyboard) တဵမ်ထူၼ်ႈ။
       </p>
 
       <div className="flex items-center mt-4 px-4 py-2 bg-primary/10 rounded-full">
@@ -59,7 +60,7 @@ export const MobileMessage = () => {
           />
         </svg>
         <span className="text-xs text-blue font-medium">
-          Switch to desktop for full access
+          လၢႆႈၵႂႃႇၸႂ်ႉ ၶွမ်ႇပိဝ်ႇတႃႇ (Desktop) တႃႇလဵၼ်ႈလႆႈတဵမ်ထူၼ်ႈ
         </span>
       </div>
     </motion.div>

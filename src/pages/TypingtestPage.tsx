@@ -2,6 +2,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { ArrowLeft } from "lucide-react";
 
 import { settingStore } from "@/store/settingStore";
 import { resultStore } from "@/store/resultStore";
@@ -17,6 +18,8 @@ import { LessonGuide } from "@/features/typing/components/LessonGuide";
 import { useTimer } from "@/hooks/useTimer";
 import { DesktopTestSetting } from "@/features/typing/components/DesktopTestSetting";
 import { TimeWords } from "@/features/typing/components/TimeWords";
+import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
+import { NORMAL_CONTENT } from "@/content/normal.content";
 
 export const TypingtestPage = () => {
   const {
@@ -47,7 +50,7 @@ export const TypingtestPage = () => {
   const navigate = useNavigate();
   const correctCharCount = calculateCorrectChars(
     userInput.replace(/\s/g, ""),
-    targetText.replace(/\s/g, "")
+    targetText.replace(/\s/g, ""),
   );
 
   //Get search params
@@ -188,25 +191,38 @@ export const TypingtestPage = () => {
   return (
     <>
       <Helmet>
-        <title>Typing Test | LikDai</title>
-        <meta
-          name="description"
-          content="Test your typing speed and accuracy with LikDai"
-        />
+        <title>{TYPING_TEST_CONTENT.metatitle}</title>
+        <meta name="description" content={TYPING_TEST_CONTENT.description} />
       </Helmet>
-      <article className="w-full h-full flex flex-col gap-4 items-center ">
+
+      {/* Back Button */}
+      <motion.button
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={() => navigate("/normal-typing")}
+        className="absolute top-10 left-[90px] hidden xl:flex items-center gap-2 text-primary/70 hover:text-primary transition-colors z-50 px-4 py-2 hover:bg-foreground/10 rounded-full cursor-pointer"
+      >
+        <ArrowLeft className="size-5" />
+        <span className="font-semibold hidden sm:inline">
+          {TYPING_TEST_CONTENT.backBtn}
+        </span>
+      </motion.button>
+
+      <article className="w-full layout h-full flex flex-col gap-4 items-center pt-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-auto mt-5 h-auto flex justify-center gap-16 items-center "
+          className="w-auto mt-5 h-auto flex justify-center gap-16 items-center"
         >
           <div className="hidden xl:flex gap-5">
             <h3 className="text-base capitalize text-yellow">
-              Level - {lessonLevel}
+              {TYPING_TEST_CONTENT.level} - {NORMAL_CONTENT.type[lessonLevel]}
             </h3>
             <p className="text-base capitalize text-yellow">
-              Language - {mode === "eng" ? "English" : "Shan"}
+              {TYPING_TEST_CONTENT.language} -{" "}
+              {mode === "eng" ? NORMAL_CONTENT.eng : NORMAL_CONTENT.shn}
             </p>
           </div>
           <DesktopTestSetting />
@@ -225,7 +241,7 @@ export const TypingtestPage = () => {
               isRunning={isRunning}
               startTimer={startTimer}
             />
-            {/* Mobile Message */}
+
             <MobileMessage />
           </motion.div>
           <TimeWords

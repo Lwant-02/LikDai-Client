@@ -77,7 +77,7 @@ const Key: React.FC<KeyProps> = ({
           <span className="text-[10px] text-gray-500 dark:text-gray-500 leading-none">
             {shiftChar}
           </span>
-          <span className="text-lg font-secondary text-gray-800 dark:text-gray-200 leading-none mt-0.5">
+          <span className="text-lg text-gray-800 dark:text-gray-200 leading-none mt-0.5">
             {shanChar}
           </span>
         </div>
@@ -88,7 +88,7 @@ const Key: React.FC<KeyProps> = ({
         <span className="text-xs text-gray-500 dark:text-gray-500 leading-none">
           {physicalKey}
         </span>
-        <span className="text-xl font-secondary text-gray-800 dark:text-gray-200 leading-none mt-0.5">
+        <span className="text-xl text-gray-800 dark:text-gray-200 leading-none mt-0.5">
           {shanChar}
         </span>
       </div>

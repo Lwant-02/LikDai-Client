@@ -11,6 +11,7 @@ import {
 import { motion } from "framer-motion";
 import { getChartColor } from "@/util/getChartColor";
 import { settingStore } from "@/store/settingStore";
+import { RESULT_CONTENT } from "@/content/result.content";
 
 interface ResultsChartProps {
   wpm: number;
@@ -21,7 +22,7 @@ export const ResultsChart = ({ wpm, accuracy }: ResultsChartProps) => {
   const { theme } = settingStore();
   const data = [
     {
-      name: "Your Results",
+      name: RESULT_CONTENT.yourResult,
       wpm: wpm,
       accuracy: accuracy,
     },

@@ -11,6 +11,7 @@ import { Button } from "../../../components/ui/button";
 import { authStore } from "@/store/authStore";
 import { useDeleteAccount } from "@/hooks/useUser";
 import { MiniSpinner } from "../../../components/MiniSpinner";
+import { ACCOUNT_SETTINGS_CONTENT } from "@/content/account.content";
 
 interface AccountDeleteDialogProps {
   isOpen: boolean;
@@ -65,12 +66,13 @@ export const AccountDeleteDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md border-none bg-foreground rounded-lg">
+      <DialogContent className="sm:max-w-md bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
         <DialogHeader>
-          <DialogTitle>Delete Account Warning ❗️</DialogTitle>
-          <DialogDescription className="text-sm opacity-70">
-            This action cannot be undone. This will permanently delete your
-            account and all of your data. Please confirm to proceed.
+          <DialogTitle>
+            {ACCOUNT_SETTINGS_CONTENT.deleteAccountDialogTitle}
+          </DialogTitle>
+          <DialogDescription className="opacity-70 mt-4">
+            {ACCOUNT_SETTINGS_CONTENT.deleteAccountDialogDesc}
           </DialogDescription>
         </DialogHeader>
         <Button
@@ -78,9 +80,13 @@ export const AccountDeleteDialog = ({
           type="submit"
           disabled={isDeletingAccount}
           onClick={handleDeleteAccount}
-          className="mt-3 h-10 text-white rounded-lg bg-red/80 w-full cursor-pointer flex justify-center items-center hover:bg-red text-base"
+          className="btn text-white bg-red/80 w-full cursor-pointer flex justify-center items-center hover:bg-red text-base"
         >
-          {isDeletingAccount ? <MiniSpinner /> : <>Confirm & Delete</>}
+          {isDeletingAccount ? (
+            <MiniSpinner />
+          ) : (
+            <>{ACCOUNT_SETTINGS_CONTENT.deleteAccountDialogBtn}</>
+          )}
         </Button>
       </DialogContent>
     </Dialog>

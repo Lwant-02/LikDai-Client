@@ -22,12 +22,7 @@ export const LanguageMode = () => {
     <div className="xl:flex hidden gap-3 mb-2 w-auto justify-center items-center">
       <div className="flex items-center gap-1">
         <Globe className="size-5 text-yellow" />
-        <p
-          className={cn(
-            "w-auto opacity-70 text-center",
-            mode === "shan" && "font-secondary"
-          )}
-        >
+        <p className={cn("w-auto opacity-70 text-center")}>
           {mode === "eng" ? "Choose Language" : "လိူၵ်ႈၽႃႇသႃႇ"}
         </p>
       </div>
@@ -37,7 +32,7 @@ export const LanguageMode = () => {
             onClick={handleChangeMode}
             className={cn(
               "w-auto flex justify-center items-center gap-1 opacity-50 hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-              mode === "shan" && "opacity-100 text-yellow"
+              mode === "shan" && "opacity-100 text-yellow",
             )}
           >
             <img
@@ -52,7 +47,7 @@ export const LanguageMode = () => {
             onClick={handleChangeMode}
             className={cn(
               "w-auto opacity-50  hover:opacity-100 transition-opacity duration-200 cursor-pointer flex justify-center items-center gap-1",
-              mode === "eng" && "opacity-100 text-yellow"
+              mode === "eng" && "opacity-100 text-yellow",
             )}
           >
             <img

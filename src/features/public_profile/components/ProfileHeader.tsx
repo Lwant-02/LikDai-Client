@@ -1,5 +1,6 @@
 import { formatName } from "@/util/formatName";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
+import { ACCOUNT_PROFILE_CONTENT } from "@/content/account.content";
 
 interface ProfileHeaderProps {
   id: string;
@@ -31,14 +32,16 @@ export const ProfileHeader = ({
         <div>
           <h1 className="text-2xl font-bold">{username}</h1>
           <p className="text-sm opacity-70">
-            Member since - {formatJoinedDate(joinedAt)}
+            {ACCOUNT_PROFILE_CONTENT.joinDate} - {formatJoinedDate(joinedAt)}
           </p>
         </div>
       </div>
       <div className=" w-auto md:mb-0 mb-4 text-center md:ml-96">
-        <h1 className="text-xl font-bold">User Bio</h1>
+        <h1 className="text-xl font-bold">
+          {ACCOUNT_PROFILE_CONTENT.publicBioTitle}
+        </h1>
         <p className="text-sm opacity-70 ">
-          {bio ? bio : "This user has not set the bio yet."}
+          {bio ? bio : ACCOUNT_PROFILE_CONTENT.noBio}
         </p>
       </div>
     </div>

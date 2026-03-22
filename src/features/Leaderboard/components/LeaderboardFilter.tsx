@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Languages } from "lucide-react";
-import { useTranslation } from "react-i18next";
+
+import { LEADERBOARD_CONTENT } from "@/content/leaderboard.content";
 
 interface LeaderboardFilterProps {
   languageFilter: LanguageFilter;
@@ -11,7 +12,6 @@ export const LeaderboardFilter = ({
   languageFilter,
   setLanguageFilter,
 }: LeaderboardFilterProps) => {
-  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,24 +21,26 @@ export const LeaderboardFilter = ({
     >
       <div className="flex justify-between items-center gap-3">
         <div className="xl:flex hidden items-center gap-2">
-          <Languages className="size-5 opacity-70" />
-          <span className="text-sm opacity-70">
-            {t("lesson_page.lang_mode.title")}:
+          <Languages className="size-6 opacity-70" />
+          <span className="text-base opacity-70">
+            {LEADERBOARD_CONTENT.language.lng} :
           </span>
         </div>
 
-        <div className="flex bg-foreground/50 rounded-md overflow-hidden">
+        <div className="flex bg-foreground border border-primary/20 rounded-full overflow-hidden w-52 ">
           {(["shan", "eng"] as LanguageFilter[]).map((filter) => (
             <button
               key={filter}
               onClick={() => setLanguageFilter(filter)}
-              className={`cursor-pointer px-3 py-1 text-sm capitalize ${
+              className={`cursor-pointer px-3 py-2 w-full text-sm capitalize ${
                 languageFilter === filter
                   ? "bg-blue/50 text-primary"
                   : "hover:bg-foreground/20"
               }`}
             >
-              {t(`lesson_page.lang_mode.${filter === "eng" ? 0 : 1}`)}
+              {filter === "eng"
+                ? LEADERBOARD_CONTENT.language.eng
+                : LEADERBOARD_CONTENT.language.shan}
             </button>
           ))}
         </div>
