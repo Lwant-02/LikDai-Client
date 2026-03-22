@@ -24,31 +24,25 @@
   ],
   "screenshots": [
     {
-      "src": "/images/landing-dark.png",
+      "src": "/images/screenshot-one.png",
       "sizes": "640x320",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/images/lesson.png",
+      "src": "/images/screenshot-two.png",
       "sizes": "640x320",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/images/typing-test.png",
+      "src": "/images/screenshot-three.png",
       "sizes": "640x320",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/images/typing-test-light.png",
-      "sizes": "640x320",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/images/leaderboard.png",
+      "src": "/images/screenshot-four.png",
       "sizes": "640x320",
       "type": "image/png",
       "form_factor": "wide"

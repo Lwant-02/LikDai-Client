@@ -76,12 +76,4 @@ export const SONGS = [
     color: "text-green",
     bg: "bg-green/10",
   },
-  {
-    id: "6",
-    title: "Study With Me",
-    artist: "Study Song",
-    url: "/songs/study-with-me.mp3",
-    color: "text-green",
-    bg: "bg-green/10",
-  },
 ];
