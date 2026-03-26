@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ShanCharFloat } from "@/components/ShanCharFloat";
 import { LESSONS_CONTENT } from "@/content/lessons.content";
 import { cn } from "@/lib/utils";
+import { LoginPromptDialog } from "@/components/LoginPromptDialog";
+import { authStore } from "@/store/authStore";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -32,12 +35,10 @@ interface LessonCardProps {
     link: string;
     type: string;
   };
+  onClick: (link: string) => void;
 }
 
-import { useState } from "react";
-
-const LessonCard = ({ category }: LessonCardProps) => {
-  const navigate = useNavigate();
+const LessonCard = ({ category, onClick }: LessonCardProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const liveType = category.type === "ၸႂ်ႉလႆႈယဝ်ႉ";
   return (
@@ -87,7 +88,7 @@ const LessonCard = ({ category }: LessonCardProps) => {
 
         <button
           disabled={!liveType}
-          onClick={() => navigate(category.link)}
+          onClick={() => onClick(category.link)}
           className={cn(
             "flex items-center gap-1 text-yellow font-bold hover:text-yellow/80 cursor-pointer",
             !liveType && "cursor-not-allowed opacity-50",
@@ -106,6 +107,20 @@ const LessonCard = ({ category }: LessonCardProps) => {
 };
 
 export const LessonsPage = () => {
+  const { accessToken } = authStore();
+  const navigate = useNavigate();
+  const [isLoginPromptOpen, setIsLoginPromptOpen] = useState(false);
+  const [selectedLink, setSelectedLink] = useState<string>("");
+
+  const handleLessonClickWithNoAuth = (link: string) => {
+    setSelectedLink(link);
+    setIsLoginPromptOpen(true);
+  };
+
+  const handleLessonClickWithAuth = (link: string) => {
+    navigate(link);
+  };
+
   return (
     <>
       <Helmet>
@@ -135,10 +150,23 @@ export const LessonsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {LESSONS_CONTENT.categories.map((category) => (
               <motion.div key={category.id} variants={itemVariants}>
-                <LessonCard category={category} />
+                <LessonCard
+                  category={category}
+                  onClick={
+                    accessToken
+                      ? handleLessonClickWithAuth
+                      : handleLessonClickWithNoAuth
+                  }
+                />
               </motion.div>
             ))}
           </div>
+
+          <LoginPromptDialog
+            isOpen={isLoginPromptOpen}
+            setIsOpen={setIsLoginPromptOpen}
+            pageLink={selectedLink}
+          />
         </motion.div>
       </div>
     </>

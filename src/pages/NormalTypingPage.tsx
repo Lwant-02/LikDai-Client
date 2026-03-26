@@ -25,8 +25,6 @@ import { engQuotesLessons } from "@/resources/eng.quoteLessons";
 import { engBeginnerLessons } from "@/resources/eng.beginner";
 import { engIntermediateLessons } from "@/resources/eng.intermediate";
 import { engAdvancedLessons } from "@/resources/eng.advancend";
-import { shanMusicLessons } from "@/resources/shan.musicLesson";
-import { engMusicLessons } from "@/resources/eng.musicLesson";
 import { cn } from "@/lib/utils";
 import { NORMAL_CONTENT } from "@/content/normal.content";
 import { LessonCard } from "@/features/Lessons/components/LessonCard";
@@ -56,7 +54,10 @@ export const NormalTypingPage = () => {
     let newLessons: { content: string }[] = [];
     switch (lessonLevel) {
       case "beginner":
-        newLessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
+        newLessons =
+          mode === "eng"
+            ? engBeginnerLessons
+            : [{ content: "မႂ်ႇသုင်ၶႃႈၸၢမ်းတူၺ်း12345" }];
         break;
       case "intermediate":
         newLessons =
@@ -67,9 +68,6 @@ export const NormalTypingPage = () => {
         break;
       case "quotes":
         newLessons = mode === "eng" ? engQuotesLessons : shanQuoteLessons;
-        break;
-      case "music":
-        newLessons = mode === "eng" ? engMusicLessons : shanMusicLessons;
         break;
       default:
         newLessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
