@@ -54,10 +54,7 @@ export const NormalTypingPage = () => {
     let newLessons: { content: string }[] = [];
     switch (lessonLevel) {
       case "beginner":
-        newLessons =
-          mode === "eng"
-            ? engBeginnerLessons
-            : [{ content: "မႂ်ႇသုင်ၶႃႈၸၢမ်းတူၺ်း12345" }];
+        newLessons = mode === "eng" ? engBeginnerLessons : shanBeginnerLessons;
         break;
       case "intermediate":
         newLessons =
