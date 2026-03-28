@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
@@ -10,6 +11,7 @@ interface InputFiledProps {
   label: string;
   helperText: string;
   disabled?: boolean;
+  containerWidth?: string;
 }
 
 export const InputFiled = ({
@@ -21,9 +23,15 @@ export const InputFiled = ({
   label,
   helperText,
   disabled,
+  containerWidth,
 }: InputFiledProps) => {
   return (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div
+      className={cn(
+        "grid w-full items-center gap-2",
+        containerWidth ? containerWidth : "max-w-sm",
+      )}
+    >
       <Label htmlFor={id}>{label}</Label>
       <Input
         type={type}
