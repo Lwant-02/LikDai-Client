@@ -116,7 +116,7 @@ export const ChangePasswordPage = () => {
             alt="Logo"
             className="size-12 object-cover"
           />
-          <p className="text-3xl pt-1 font-bold ">လိၵ်ႈတႆး</p>
+          <p className="text-3xl pt-1 font-bold font-tachileik">လိၵ်ႈတႆး</p>
         </motion.div>
         <motion.form
           initial={{ opacity: 0, y: 20 }}

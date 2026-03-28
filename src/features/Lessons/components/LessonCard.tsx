@@ -70,7 +70,7 @@ export const LessonCard = ({ content, index }: LessonGridProps) => {
           </div>
         </div>
 
-        <h3 className="text-xl sm:text-2xl font-bold leading-relaxed line-clamp-2 text-primary/80 group-hover:text-primary transition-colors duration-300 px-1 mb-1">
+        <h3 className="text-xl sm:text-2xl font-bold leading-relaxed line-clamp-1 text-primary/80 group-hover:text-primary transition-colors duration-300 px-1 mb-1">
           {content}
         </h3>
 

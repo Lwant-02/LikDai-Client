@@ -80,7 +80,9 @@ const LessonCard = ({ category, onClick }: LessonCardProps) => {
           >
             {category.category}
           </span>
-          <h2 className="text-3xl font-bold mb-2">{category.title}</h2>
+          <h2 className="text-3xl font-bold mb-2 font-tachileik">
+            {category.title}
+          </h2>
           <p className="opacity-90 line-clamp-1 mb-4 group-hover:line-clamp-none transition-all duration-300">
             {category.description}
           </p>
@@ -141,7 +143,7 @@ export const LessonsPage = () => {
             variants={itemVariants}
             className="flex justify-center items-start flex-col mb-16"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-primary">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-primary font-tachileik">
               {LESSONS_CONTENT.title}
             </h1>
             <p className="text-xl opacity-80">{LESSONS_CONTENT.subtitle}</p>

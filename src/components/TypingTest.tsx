@@ -31,12 +31,21 @@ export const TypingTest = ({
   const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
   const UNICODE_REGEX = /[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]/;
 
+  // Normalize typographic/smart quotes in target text to plain ASCII equivalents.
+  // This ensures the displayed text matches what can actually be typed on a keyboard
+  // (e.g. macOS smart-quotes produce U+2019 ' instead of ASCII ' U+0027).
+  const normalizeQuotes = (text: string): string =>
+    text
+      .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'") // curly single → '
+      .replace(/[\u201C\u201D\u201E]/g, '"'); // curly double → "
+
   const splitter = new GraphemeSplitter();
   // Use GraphemeSplitter for both modes to properly handle Unicode characters
+  const normalizedTarget = mode === "shan" ? targetText : normalizeQuotes(targetText);
   const units =
     mode === "shan"
-      ? targetText.split("") // Simple split for Shan to highlight each character component
-      : splitter.splitGraphemes(targetText);
+      ? normalizedTarget.split("") // Simple split for Shan to highlight each character component
+      : splitter.splitGraphemes(normalizedTarget);
   const typedUnits =
     mode === "shan"
       ? userInput.split("") // Simple split for Shan to highlight each character component
@@ -90,16 +99,34 @@ export const TypingTest = ({
     }
   }, [inputScrollOffset]);
 
+  // Normalize smart/curly quotes/apostrophes to their ASCII equivalents.
+  // macOS can auto-substitute these via smart quotes or dead-key composition.
+  const normalizeKey = (key: string): string => {
+    const map: Record<string, string> = {
+      "\u2018": "'", // LEFT  SINGLE QUOTATION MARK  '
+      "\u2019": "'", // RIGHT SINGLE QUOTATION MARK  '
+      "\u201A": "'", // SINGLE LOW-9 QUOTATION MARK  ‚
+      "\u201B": "'", // SINGLE HIGH-REVERSED-9 MARK  ‛
+      "\u201C": '"', // LEFT  DOUBLE QUOTATION MARK  “
+      "\u201D": '"', // RIGHT DOUBLE QUOTATION MARK  ”
+      "\u201E": '"', // DOUBLE LOW-9 QUOTATION MARK  „
+      "\u2032": "'", // PRIME  ′
+      "\u2035": "'", // REVERSED PRIME  ‵
+    };
+    return map[key] ?? key;
+  };
+
   //Handle Eng typing
   const handleEngKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const key = e.key;
+    const rawKey = e.key;
+    const key = normalizeKey(rawKey);
 
     // Play key sound for any valid key press
-    if (key === "Backspace" || key.length === 1) {
+    if (rawKey === "Backspace" || rawKey.length === 1) {
       playKeySound();
     }
 
-    if (key === "Backspace") {
+    if (rawKey === "Backspace") {
       setUserInput(userInput.slice(0, -1));
     } else if (key.length === 1) {
       setUserInput(userInput + key);
@@ -120,7 +147,7 @@ export const TypingTest = ({
     }
     if (key === "Backspace") {
       setUserInput(userInput.slice(0, -1));
-    } else if (key.length === 1) {
+    } else if (mappedKey && key.length === 1) {
       setUserInput(userInput + mappedKey);
     }
     e.preventDefault();
@@ -178,7 +205,7 @@ export const TypingTest = ({
       {/* Scrollable text container with fixed height and hidden overflow */}
       <div
         ref={textContainerRef}
-        className="h-[70px] overflow-hidden relative transition-transform duration-200 ease-out px-2"
+        className="h-[70px] overflow-hidden relative transition-transform duration-200 ease-out px-2 "
       >
         <div
           className="transition-transform duration-200 ease-out"
@@ -213,7 +240,7 @@ export const TypingTest = ({
       {/* User Input Display - Bottom Half */}
       <div
         ref={inputContainerRef}
-        className="h-[70px] w-full overflow-hidden relative transition-transform duration-200 ease-out px-2 border border-foreground  items-center flex rounded-md"
+        className="h-[70px] w-full  overflow-hidden relative transition-transform duration-200 ease-out px-2 border border-foreground  items-center flex rounded-md"
       >
         <div
           className="transition-transform duration-200 ease-out"
@@ -244,7 +271,6 @@ export const TypingTest = ({
 
               const finalClassName = cn(
                 "relative md:text-3xl text-2xl leading-loose transition-all duration-300 ease-in-out ",
-                mode === "shan" && "font-tachileik",
                 colorClass,
               );
 

@@ -54,7 +54,7 @@ export const AllInformation = ({
   return (
     <>
       <motion.div variants={itemVariants} className="text-start mb-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight font-tachileik">
           {ABOUT_CONTENT.header.title}
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed ">

@@ -17,12 +17,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "GreatHorKham";
+  src: url("/fonts/GreatHorKham.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-primary: "Roboto Mono", monospace;
   --font-kengtung: "GHKKengtung", sans-serif;
   --font-tachileik: "GHKTachileik", sans-serif;
+  --font-great-hor-kham: "GreatHorKham", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -37,6 +45,7 @@
   --font-primary: "Roboto Mono", monospace;
   --font-kengtung: "GHKKengtung", sans-serif;
   --font-tachileik: "GHKTachileik", sans-serif;
+  --font-great-hor-kham: "GreatHorKham", sans-serif;
   --color-background: #040303;
   --color-foreground: #2b2e31;
   --color-primary: #ffffff;
@@ -52,6 +61,7 @@
   --font-primary: "Roboto Mono", monospace;
   --font-kengtung: "GHKKengtung", sans-serif;
   --font-tachileik: "GHKTachileik", sans-serif;
+  --font-great-hor-kham: "GreatHorKham", sans-serif;
   --color-background: #ffffff;
   --color-foreground: #f1f0e8;
   --color-primary: #040303;
@@ -65,7 +75,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-primary font-tachileik font-normal transition-colors duration-200;
+    @apply bg-background text-primary font-great-hor-kham font-normal transition-colors duration-200;
   }
 }
 
