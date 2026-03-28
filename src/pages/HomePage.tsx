@@ -44,7 +44,7 @@ export function HomePage() {
             variants={item}
             className="absolute top-5 left-1/2 -translate-x-1/2 z-5"
           >
-            <div className="flex justify-center items-center px-4 py-1 rounded-full sm:w-fit w-[345px] text-sm font-medium border border-foreground/20">
+            <div className="flex text-center justify-center items-center px-4 py-1 rounded-full sm:w-fit w-[345px] text-sm font-medium border border-foreground/20">
               <Dot className="size-6 text-green animate-pulse" />
               {HOME_CONTENT.bannerLabel}
             </div>
@@ -73,11 +73,13 @@ export function HomePage() {
               alt="Logo"
               className="xl:size-[100px] size-16 object-cover flex"
             />
-            <h1 className="text-5xl sm:text-8xl pt-5">{HOME_CONTENT.likdai}</h1>
+            <h1 className="text-5xl sm:text-8xl pt-5 font-tachileik">
+              {HOME_CONTENT.likdai}
+            </h1>
           </motion.div>
 
           <motion.div variants={item}>
-            <p className="sm:text-3xl text-lg text-center my-7 leading-relaxed">
+            <p className="sm:text-3xl text-lg text-center my-7 leading-relaxed font-tachileik">
               <span className="text-yellow">{HOME_CONTENT.likdai}</span>{" "}
               {HOME_CONTENT.descriptionOne}
               <br />

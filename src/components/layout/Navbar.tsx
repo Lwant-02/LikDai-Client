@@ -69,7 +69,7 @@ export const Navbar = () => {
             alt="Logo"
             className="size-10 object-cover flex"
           />
-          <p className="xl:text-3xl text-2xl text-center font-bold xl:pt-2 pt-1">
+          <p className="xl:text-3xl text-2xl text-center font-bold xl:pt-2 pt-1 font-tachileik">
             လိၵ်ႈတႆး
           </p>
         </Link>

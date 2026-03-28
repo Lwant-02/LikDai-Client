@@ -38,7 +38,7 @@ export const LoginPromptDialog = ({
               "mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-/80 transition-colors duration-300 text-base",
             )}
           >
-            သိုပ်ႇၸႂ်ႉၼင်ႇၶႅၵ်ႇ (Guest)
+            ၸႂ်ႉၼင်ႇၶႅၵ်ႇ
           </Link>
           <Link
             to="/login"
@@ -46,7 +46,7 @@ export const LoginPromptDialog = ({
               "mt-3 btn h-10 border border-blue/10 text-primary bg-blue w-full cursor-pointer flex justify-center items-center hover:bg-blue/80 transition-colors duration-300 text-base",
             )}
           >
-            ၶဝ်ႈလွၵ်ႉဢိၼ် (Login)
+            လွၵ်ႉဢိၼ်
           </Link>
         </div>
       </DialogContent>

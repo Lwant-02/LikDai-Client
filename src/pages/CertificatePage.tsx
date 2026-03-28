@@ -67,7 +67,7 @@ export const CertificatePage = () => {
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
             <Trophy className="size-6 sm:size-8 text-yellow animate-bounce" />
-            <p className="text-xl sm:text-2xl md:text-3xl font-bold text-center">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold text-center font-tachileik">
               {CERTIFICATE_CONTENT.pageTitle}
             </p>
             <Trophy className="size-6 sm:size-8 text-yellow animate-bounce sm:flex hidden" />
