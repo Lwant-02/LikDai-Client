@@ -27,7 +27,7 @@ export const LeaderboardFilter = ({
           </span>
         </div>
 
-        <div className="flex bg-foreground border border-primary/20 rounded-full overflow-hidden w-52 ">
+        <div className="flex bg-foreground border border-primary/20 rounded-full overflow-hidden w-64">
           {(["shan", "eng"] as LanguageFilter[]).map((filter) => (
             <button
               key={filter}

@@ -78,14 +78,29 @@ export const TypingtestPage = () => {
     // For space, return space
     if (grapheme === " ") return " ";
 
+    // Normalize typographic/curly quotes to their plain ASCII equivalents
+    // so keyboard highlighting works when target text contains smart quotes.
+    const smartQuoteMap: Record<string, string> = {
+      "\u2018": "'", // LEFT  SINGLE QUOTATION MARK  '
+      "\u2019": "'", // RIGHT SINGLE QUOTATION MARK  '
+      "\u201A": "'", // SINGLE LOW-9 QUOTATION MARK
+      "\u201B": "'", // SINGLE HIGH-REVERSED-9 MARK
+      "\u201C": '"', // LEFT  DOUBLE QUOTATION MARK
+      "\u201D": '"', // RIGHT DOUBLE QUOTATION MARK
+      "\u201E": '"', // DOUBLE LOW-9 QUOTATION MARK
+      "\u2032": "'", // PRIME
+      "\u2035": "'", // REVERSED PRIME
+    };
+    const normalized = smartQuoteMap[grapheme] ?? grapheme;
+
     // For Shan mode, extract the first character from the grapheme
     // This handles cases like "ၵွ" where we want to highlight "ၵ"
     if (mode === "shan") {
-      return grapheme.charAt(0);
+      return normalized.charAt(0);
     }
 
-    // For English mode, return the grapheme as is
-    return grapheme;
+    // For English mode, return the normalized grapheme as is
+    return normalized;
   };
 
   const currentChar = getBaseCharForKeyboard(currentGrapheme);

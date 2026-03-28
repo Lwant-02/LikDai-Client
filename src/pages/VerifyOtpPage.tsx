@@ -154,7 +154,7 @@ export const VerifyOtpPage = () => {
             alt="Logo"
             className="size-12 object-cover"
           />
-          <p className="text-3xl font-bold">လိၵ်ႈတႆး</p>
+          <p className="text-3xl font-bold font-tachileik">လိၵ်ႈတႆး</p>
         </motion.div>
 
         {/* Main Form */}

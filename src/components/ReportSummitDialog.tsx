@@ -80,15 +80,14 @@ export const ReportSummitDialog = ({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-md bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
+        <DialogContent className="sm:max-w-lg bg-background/80 overflow-hidden backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl">
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="text-center mb-2">
               တၢင်ႇလၢတ်ႈ လွင်ႈၽိတ်းပိူင်ႈ ဢမ်ႇၼၼ် ပၼ်တၢင်းႁၼ်ထိုင် 🐞
             </DialogTitle>
-            <DialogDescription className="text-sm opacity-70">
+            <DialogDescription className="text-sm opacity-70 text-center">
               ၶႅၼ်းတေႃႈ သပ်းလႅင်းၼႄ လွင်ႈတၢင်း ဢၼ်ၸဝ်ႈၵဝ်ႇ လႆႈႁူပ်ႉထူပ်း ဢမ်ႇၼၼ်
               ၶေႃႈႁၼ်ထိုင် ဢမ်ႇၼၼ် ၶေႃႈတၢင်ႇၼႄ ဢၼ်ၸဝ်ႈၵဝ်ႇ မီးဝႆႉၼၼ်ႉ သေၵမ်း။
-              ႁဝ်းၶႃႈတေၶိုၼ်းတွင်ႈထၢမ်လႆႈဝႆးဝႆးၶႃႈ။
             </DialogDescription>
           </DialogHeader>
           <form
@@ -99,7 +98,7 @@ export const ReportSummitDialog = ({
               id="custom_text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="တၢင်ႇလၢတ်ႈၼႄပၼ်ႁႃ ဢမ်ႇၼၼ် ၶေႃႈတၢင်ႇၼႄ ဢမ်ႇၼၼ် ၶေႃႈတွပ်ႇ တီႈၼႆႈၶႃႈ..."
+              placeholder="တၢင်ႇလၢတ်ႈၼႄပၼ်ႁႃ ဢမ်ႇၼၼ် တၢင်းႁၼ်ထိုင် တီႈၼႆႈၶႃႈ..."
               className={cn(
                 "bg-background/30 border border-primary/10 focus:ring-1! ring-primary/30 h-40  rounded-xl resize-none",
               )}
