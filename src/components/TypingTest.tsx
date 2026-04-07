@@ -41,10 +41,11 @@ export const TypingTest = ({
 
   const splitter = new GraphemeSplitter();
   // Use GraphemeSplitter for both modes to properly handle Unicode characters
-  const normalizedTarget = mode === "shan" ? targetText : normalizeQuotes(targetText);
+  const normalizedTarget =
+    mode === "shan" ? targetText : normalizeQuotes(targetText);
   const units =
     mode === "shan"
-      ? normalizedTarget.split("") // Simple split for Shan to highlight each character component
+      ? normalizedTarget.split("") // Simple split for Shan to highlight each character component. normalizedTarget.split("")
       : splitter.splitGraphemes(normalizedTarget);
   const typedUnits =
     mode === "shan"
@@ -197,7 +198,7 @@ export const TypingTest = ({
   // Style helpers
   const getTextClasses = () => {
     const baseClasses = "relative md:text-4xl text-2xl";
-    return mode === "eng" ? baseClasses : cn(baseClasses, "leading-relaxed");
+    return mode === "eng" ? baseClasses : cn(baseClasses, "leading-loose");
   };
 
   return (
@@ -223,9 +224,9 @@ export const TypingTest = ({
                   ref={isCurrent ? currentCharRef : null}
                   className={cn(
                     getTextClasses(),
-                    "leading-loose transition-all duration-300 ease-in-out ",
+                    "transition-all duration-300 ease-in-out",
                     isCurrent &&
-                      "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs  ring-1 ring-yellow/40",
+                      "bg-gradient-to-r from-yellow/30 via-yellow/20 to-yellow/30 animate-pulse shadow-sm rounded-xs ring-1 ring-yellow/40",
                   )}
                   lang={mode === "shan" ? "shn" : "en"}
                 >
@@ -270,7 +271,7 @@ export const TypingTest = ({
               }
 
               const finalClassName = cn(
-                "relative md:text-3xl text-2xl leading-loose transition-all duration-300 ease-in-out ",
+                "leading-loose relative md:text-3xl text-2xl transition-all duration-300 ease-in-out",
                 colorClass,
               );
 

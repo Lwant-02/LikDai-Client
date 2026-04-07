@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { RegisterForm } from "@/features/auth/components/RegisterForm";
 import { LoginForm } from "@/features/auth/components/LoginForm";
 import { authStore } from "@/store/authStore";
+import { useOffline } from "@/hooks/useOffline";
+import { OfflineState } from "@/components/OfflineState";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,6 +25,7 @@ const itemVariants = {
 
 export const LoginPage = () => {
   const { isCheckingAuth } = authStore();
+  const isOffline = useOffline();
 
   if (isCheckingAuth) {
     return (
@@ -41,23 +44,33 @@ export const LoginPage = () => {
           content="Log in to your LikDai account to track your Shan / Dai / Tai typing progress (ၽိုၵ်းပေႃႉလိၵ်ႈတႆး) and access exclusive features."
         />
       </Helmet>
-      <motion.article
-        className="flex justify-center items-center layout "
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div
-          variants={itemVariants}
-          className="w-full h-auto grid md:grid-cols-2 grid-cols-1 gap-10 md:my-28 mt-10 md:mb-0 mb-20 "
+      {isOffline ? (
+        <OfflineState
+          variant="login"
+          title="ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉၶၢတ်ႇဝႆႉ"
+          message="တေၶဝ်ႈလွၵ်ႉဢိၼ်ႇ (Login) လႆႈၼၼ်ႉ လူဝ်ႇမီးဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉဢေႃႈ။ ၶႅၼ်းတေႃႈ ၵူတ်ႇထတ်းတူၺ်း ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉၸဝ်ႈၵဝ်ႇ သေ ၶတ်းၸႂ်တူၺ်း ထႅင်ႈၵမ်းၼိုင်ႈၶႃႈ။"
+        />
+      ) : (
+        <motion.article
+          className="flex justify-center items-center layout "
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <RegisterForm />
-          <span className="w-full h-1 bg-foreground/40 md:hidden rounded-full flex " />
-          <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-            <LoginForm />
-          </GoogleOAuthProvider>
-        </motion.div>
-      </motion.article>
+          <motion.div
+            variants={itemVariants}
+            className="w-full h-auto grid md:grid-cols-2 grid-cols-1 gap-10 md:my-28 mt-10 md:mb-0 mb-20 "
+          >
+            <RegisterForm />
+            <span className="w-full h-1 bg-foreground/40 md:hidden rounded-full flex " />
+            <GoogleOAuthProvider
+              clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+            >
+              <LoginForm />
+            </GoogleOAuthProvider>
+          </motion.div>
+        </motion.article>
+      )}
     </>
   );
 };

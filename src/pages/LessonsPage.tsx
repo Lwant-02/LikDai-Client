@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ShanCharFloat } from "@/components/ShanCharFloat";
 import { LESSONS_CONTENT } from "@/content/lessons.content";
 import { cn } from "@/lib/utils";
 import { LoginPromptDialog } from "@/components/LoginPromptDialog";
@@ -131,8 +130,6 @@ export const LessonsPage = () => {
       </Helmet>
 
       <div className="min-h-screen pt-8 relative overflow-hidden pb-32">
-        <ShanCharFloat />
-
         <motion.div
           className="layout relative z-10"
           variants={containerVariants}
