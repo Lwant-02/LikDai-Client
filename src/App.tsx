@@ -29,6 +29,7 @@ import { FeedbackDialog } from "./components/FeedbackDialog";
 import { MusicPlayer } from "./components/MusicPlayer";
 import { NormalTypingPage } from "./pages/NormalTypingPage";
 import { ShanCharFloat } from "./components/ShanCharFloat";
+import { WordFallingPage } from "./pages/WordFallingPage";
 
 export default function App() {
   const { accessToken } = authStore();
@@ -78,6 +79,7 @@ export default function App() {
             />
             <Route path="/typing-test" element={<TypingtestPage />} />
             <Route path="/normal-typing" element={<NormalTypingPage />} />
+            <Route path="/word-falling" element={<WordFallingPage />} />
             <Route path="/lessons" element={<LessonsPage />} />
             <Route path="/leaderboards" element={<LeaderboardPage />} />
             <Route path="/about" element={<AboutPage />} />

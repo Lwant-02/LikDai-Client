@@ -15,6 +15,7 @@ import { submitReport } from "@/service/submitReport";
 import { MiniSpinner } from "./MiniSpinner";
 import { InputFiled } from "./InputFiled";
 import { COMMON_INPUT_CONTENT } from "@/content/common.content";
+import { useOffline } from "@/hooks/useOffline";
 
 interface ReportSummitDialogProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export const ReportSummitDialog = ({
   isOpen,
   setIsOpen,
 }: ReportSummitDialogProps) => {
+  const isOffline = useOffline();
   const [form, setForm] = useState({
     email: "",
     text: "",
@@ -36,6 +38,16 @@ export const ReportSummitDialog = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isOffline) {
+      toast("ⓘ ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉၶၢတ်ႇဝႆႉ (Offline)", {
+        description: (
+          <p className="text-white">
+            သူင်ႇၶေႃႈမုၼ်းလူဝ်ႇမီး ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉဢေႃႈ (Internet required).
+          </p>
+        ),
+      });
+      return;
+    }
     if (!form.text || !form.email) {
       toast("ⓘ Notice", {
         description: (
@@ -126,13 +138,13 @@ export const ReportSummitDialog = ({
             </div>
             <button
               type="submit"
-              disabled={isSubmitting || !form.text || !form.email}
+              disabled={isSubmitting || !form.text || !form.email || isOffline}
               className={cn(
                 "mt-3 btn h-10 border border-primary/10 text-primary bg-foreground w-full cursor-pointer flex justify-center items-center hover:bg-foreground/80 transition-colors duration-300 text-base",
-                !form.text && !form.email && "cursor-not-allowed opacity-50",
+                (!form.text || !form.email || isOffline) && "cursor-not-allowed opacity-50",
               )}
             >
-              {isSubmitting ? <MiniSpinner /> : <>သူင်ႇၸူး</>}
+              {isSubmitting ? <MiniSpinner /> : isOffline ? <>ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉၶၢတ်ႇဝႆႉ</> : <>သူင်ႇၸူး</>}
             </button>
           </form>
         </DialogContent>

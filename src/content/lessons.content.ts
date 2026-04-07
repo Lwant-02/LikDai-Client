@@ -25,7 +25,7 @@ export const LESSONS_CONTENT = {
       description:
         "ပေႃႉလိၵ်ႈတႆးဢၼ်တူၵ်းလူင်းမႃး မိူဝ်ႈပႆႇၽႅဝ်ၼႃႈလိၼ်။ မိုဝ်းႁႂ်ႈၽႂ်း၊ ပေႃႉႁႂ်ႈမႅၼ်ႈ၊ လႄႈ တေႃႇသူႈႁႂ်ႈလႆႈႁိုင်သုတ်း!",
       image: "/images/word-falling.jpg",
-      link: "/typing-test",
+      link: "/word-falling",
     },
     {
       id: "shooter",

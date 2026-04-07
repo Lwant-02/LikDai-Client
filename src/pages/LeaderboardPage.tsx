@@ -10,6 +10,8 @@ import { LeaderboardFilter } from "@/features/Leaderboard/components/Leaderboard
 import { LeaderboardTable } from "@/features/Leaderboard/components/LeaderboardTable";
 import { useGetLeaderboard } from "@/hooks/useLeaderboard";
 import { Spinner } from "@/components/Spinner";
+import { OfflineState } from "@/components/OfflineState";
+import { useOffline } from "@/hooks/useOffline";
 import { LEADERBOARD_CONTENT } from "@/content/leaderboard.content";
 
 const containerVariants = {
@@ -28,6 +30,7 @@ const itemVariants = {
 };
 
 export const LeaderboardPage = () => {
+  const isOffline = useOffline();
   const [searchParams, setSearchParams] = useSearchParams();
   const mode = searchParams.get("mode") || "shan";
   const total = searchParams.get("total") || "10";
@@ -85,77 +88,85 @@ export const LeaderboardPage = () => {
           content={LEADERBOARD_CONTENT.metaDescription}
         />
       </Helmet>
-      <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="w-full layout space-y-4"
-        >
-          {/* Header - Responsive layout */}
-          <motion.div variants={itemVariants} className="w-full">
-            <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
-          </motion.div>
-
-          {/* Filters - Responsive layout */}
-          <motion.div variants={itemVariants} className="w-full">
-            <LeaderboardFilter
-              languageFilter={languageFilter}
-              setLanguageFilter={setLanguageFilter}
-            />
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="w-full">
-            <p className="md:text-2xl text-xl font-bold mb-3">
-              {languageFilter === "eng"
-                ? LEADERBOARD_CONTENT.engTitle
-                : LEADERBOARD_CONTENT.shnTitle}
-            </p>
-          </motion.div>
-
-          {isFetchingLeaderboard ? (
-            <motion.div
-              variants={itemVariants}
-              className="w-full flex justify-center items-center h-52"
-            >
-              <Spinner />
+      {isOffline ? (
+        <OfflineState
+          variant="leaderboard"
+          title="ဢိၼ်ႇထိူၼ်ႇၼႅတ်ႉၶၢတ်ႇဝႆႉ"
+          message="တေတူၺ်း ၽႅၼ်ႇၽူႈဢွၼ်ႁူဝ်ၼႆ လူဝ်ႇမီးဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉဢေႃႈ။ ၶႅၼ်းတေႃႈ ၵူတ်ႇထတ်းတူၺ်း ဢိၼ်ႇထိူဝ်ႇၼႅတ်ႉၸဝ်ႈၵဝ်ႇ သေ ၶတ်းၸႂ်တူၺ်း ထႅင်ႈၵမ်းၼိုင်ႈၶႃႈ။"
+        />
+      ) : (
+        <article className="min-h-screen w-full flex flex-col items-center py-8 px-4">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full layout space-y-4"
+          >
+            {/* Header - Responsive layout */}
+            <motion.div variants={itemVariants} className="w-full">
+              <LeaderboardHeader isLeaderboardhas={isLeaderboardhas} />
             </motion.div>
-          ) : (
-            <motion.div variants={itemVariants} className="w-full space-y-4">
-              {leaderboard.leaderboard.length > 0 ? (
-                <>
-                  {/* Leaderboard table - Responsive layout */}
-                  <LeaderboardTable leaderboardData={leaderboardWithRank} />
 
-                  {/* Pagination - Responsive layout */}
-                  <LeaderboardPagination
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    totalPages={leaderboard.totalPages}
-                  />
-
-                  {/* Info text */}
-                  <p className="mt-4 text-xs sm:text-sm text-center mb-20 opacity-70">
-                    {LEADERBOARD_CONTENT.infoText}
-                  </p>
-                </>
-              ) : (
-                <motion.div
-                  variants={itemVariants}
-                  className="w-full flex flex-col justify-center items-center h-64 bg-foreground/5 border border-foreground/10 rounded-3xl border-dashed"
-                >
-                  <div className="p-5 bg-yellow/50 shadow-sm rounded-full mb-4 border border-foreground/5">
-                    <Trophy className="size-10 sm:size-12 text-yellows opacity-90" />
-                  </div>
-                  <p className="text-center text-lg sm:text-xl font-medium opacity-80">
-                    {LEADERBOARD_CONTENT.noData}
-                  </p>
-                </motion.div>
-              )}
+            {/* Filters - Responsive layout */}
+            <motion.div variants={itemVariants} className="w-full">
+              <LeaderboardFilter
+                languageFilter={languageFilter}
+                setLanguageFilter={setLanguageFilter}
+              />
             </motion.div>
-          )}
-        </motion.div>
-      </article>
+
+            <motion.div variants={itemVariants} className="w-full">
+              <p className="md:text-2xl text-xl font-bold mb-3">
+                {languageFilter === "eng"
+                  ? LEADERBOARD_CONTENT.engTitle
+                  : LEADERBOARD_CONTENT.shnTitle}
+              </p>
+            </motion.div>
+
+            {isFetchingLeaderboard ? (
+              <motion.div
+                variants={itemVariants}
+                className="w-full flex justify-center items-center h-52"
+              >
+                <Spinner />
+              </motion.div>
+            ) : (
+              <motion.div variants={itemVariants} className="w-full space-y-4">
+                {leaderboard.leaderboard.length > 0 ? (
+                  <>
+                    {/* Leaderboard table - Responsive layout */}
+                    <LeaderboardTable leaderboardData={leaderboardWithRank} />
+
+                    {/* Pagination - Responsive layout */}
+                    <LeaderboardPagination
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      totalPages={leaderboard.totalPages}
+                    />
+
+                    {/* Info text */}
+                    <p className="mt-4 text-xs sm:text-sm text-center mb-20 opacity-70">
+                      {LEADERBOARD_CONTENT.infoText}
+                    </p>
+                  </>
+                ) : (
+                  <motion.div
+                    variants={itemVariants}
+                    className="w-full flex flex-col justify-center items-center h-64 bg-foreground/5 border border-foreground/10 rounded-3xl border-dashed"
+                  >
+                    <div className="p-5 bg-yellow/50 shadow-sm rounded-full mb-4 border border-foreground/5">
+                      <Trophy className="size-10 sm:size-12 text-yellows opacity-90" />
+                    </div>
+                    <p className="text-center text-lg sm:text-xl font-medium opacity-80">
+                      {LEADERBOARD_CONTENT.noData}
+                    </p>
+                  </motion.div>
+                )}
+              </motion.div>
+            )}
+          </motion.div>
+        </article>
+      )}
     </>
   );
 };

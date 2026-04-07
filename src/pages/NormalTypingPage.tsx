@@ -28,6 +28,7 @@ import { engAdvancedLessons } from "@/resources/eng.advancend";
 import { cn } from "@/lib/utils";
 import { NORMAL_CONTENT } from "@/content/normal.content";
 import { LessonCard } from "@/features/Lessons/components/LessonCard";
+import { LESSONS_CONTENT } from "@/content/lessons.content";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -138,10 +139,10 @@ export const NormalTypingPage = () => {
         >
           <motion.div variants={itemVariants} className="text-start mb-10">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight font-tachileik">
-              {NORMAL_CONTENT.title}
+              {LESSONS_CONTENT.categories[0].title}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {NORMAL_CONTENT.subtitle}
+              {LESSONS_CONTENT.categories[0].description}
             </p>
           </motion.div>
 
