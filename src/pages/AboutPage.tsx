@@ -80,7 +80,6 @@ export const AboutPage = () => {
         >
           <AllInformation handleInstallClick={handleInstallClick} />
 
-          {/* CTA Section */}
           <motion.section
             variants={itemVariants}
             className="pt-10 pb-6 text-center mt-10"
@@ -104,11 +103,10 @@ export const AboutPage = () => {
           </motion.section>
         </motion.div>
 
-        {/* Back to top button */}
         {isUserScrolled && (
           <button
             onClick={scrollToTop}
-            className="fixed animate-bounce bottom-10 md:right-10 right-2 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer shadow-lg"
+            className="fixed animate-bounce bottom-10 md:right-10 right-4 z-50 p-3 rounded-full bg-yellow text-primary hover:bg-yellow/80 transition-colors cursor-pointer shadow-lg"
           >
             <ChevronsUp className="size-6" />
           </button>
