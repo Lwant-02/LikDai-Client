@@ -71,9 +71,10 @@ export const ABOUT_CONTENT = {
   section3: {
     title: "3. ၸၼ်ဢဝ်ဢႅပ်ႉသႂ်ႇၼႂ်းၶွမ်း",
     pwaTag: "Progressive Web App",
-    desc: "တိတ်ႉတင်ႈ လိၵ်ႈတႆး ပဵၼ် PWA သေ ၸႂ်ႉတိုဝ်းလႆႈငၢႆႈငၢႆႈ။ ဢမ်ႇတၢပ်ႈလူဝ်ႇ ၶဝ်ႈ Browser သေ ၸႂ်ႉလႆႈ လူၺ်ႈၶဝ်ႈ ဢႅပ်ႉတီႈၶွမ်းဢဝ်။",
+    desc: "တိတ်ႉတင်ႈ လိၵ်ႈတႆး ပဵၼ် PWA သေ ၸႂ်ႉတိုဝ်းလႆႈငၢႆႈငၢႆႈ။ ဢမ်ႇတၢပ်ႈလူဝ်ႇ ၶဝ်ႈ Browser သေ ၸႂ်ႉလႆႈ လူၺ်ႈၶဝ်ႈ ဢႅပ်ႉတီႈၶွမ်းဢဝ် လႄႈ ၸႂ်ႉတိုဝ်းလႆႈ ၽွင်းဢမ်ႇမီးဢိၼ်ႇတႃႇၼႅတ်ႉ (Offline) ယူႇၶႃႈ။",
     badge1: "Native Vibe",
     badge2: "Lightweight",
+    badge3: "Offline Use",
     button: "တိတ်ႉတင်ႈ (Install App)",
   },
   section4: {

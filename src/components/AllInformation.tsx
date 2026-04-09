@@ -8,6 +8,7 @@ import {
   Code,
   Trophy,
   MonitorDown,
+  WifiOff,
 } from "lucide-react";
 
 import {
@@ -207,6 +208,14 @@ export const AllInformation = ({
                     </div>
                     <span className="text-sm font-medium">
                       {ABOUT_CONTENT.section3.badge2}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-background p-3 rounded-xl border border-foreground/5 shadow-sm">
+                    <div className="p-2 bg-green/10 text-green rounded-lg">
+                      <WifiOff className="size-4" />
+                    </div>
+                    <span className="text-sm font-medium">
+                      {ABOUT_CONTENT.section3.badge3}
                     </span>
                   </div>
                 </div>
