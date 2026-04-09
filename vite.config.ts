@@ -12,6 +12,7 @@ export default defineConfig({
       registerType: "prompt",
       devOptions: {
         enabled: true,
+        suppressWarnings: true,
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024, // 20 MB
