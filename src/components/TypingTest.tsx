@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import GraphemeSplitter from "grapheme-splitter";
 
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
-import { KeyMaps } from "@/keymaps/KeyMaps";
+import { useSettingStore } from "@/store/settingStore";
 import { useKeySound } from "@/hooks/useKeySound";
 import { AlertDialog } from "./AlertDialog";
+import { handleEngKeyDown, handleShanKeyDown } from "@/util/handleKeydown";
 
 interface TypingTestProps {
   targetText: string;
@@ -20,7 +20,7 @@ export const TypingTest = ({
   startTimer,
   setStartTime,
 }: TypingTestProps) => {
-  const { mode, userInput, setUserInput, selectedKeyMap } = settingStore();
+  const { mode, userInput, setUserInput, selectedKeyMap } = useSettingStore();
   const { playKeySound } = useKeySound();
   const inputRef = useRef<HTMLInputElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
@@ -31,26 +31,20 @@ export const TypingTest = ({
   const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
   const UNICODE_REGEX = /[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]/;
 
-  // Normalize typographic/smart quotes in target text to plain ASCII equivalents.
-  // This ensures the displayed text matches what can actually be typed on a keyboard
-  // (e.g. macOS smart-quotes produce U+2019 ' instead of ASCII ' U+0027).
   const normalizeQuotes = (text: string): string =>
     text
       .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'") // curly single → '
       .replace(/[\u201C\u201D\u201E]/g, '"'); // curly double → "
 
   const splitter = new GraphemeSplitter();
-  // Use GraphemeSplitter for both modes to properly handle Unicode characters
   const normalizedTarget =
     mode === "shan" ? targetText : normalizeQuotes(targetText);
   const units =
     mode === "shan"
-      ? normalizedTarget.split("") // Simple split for Shan to highlight each character component. normalizedTarget.split("")
+      ? normalizedTarget.split("")
       : splitter.splitGraphemes(normalizedTarget);
   const typedUnits =
-    mode === "shan"
-      ? userInput.split("") // Simple split for Shan to highlight each character component
-      : splitter.splitGraphemes(userInput);
+    mode === "shan" ? userInput.split("") : splitter.splitGraphemes(userInput);
 
   // Calculate scroll position based on current character position
   const updateScrollPosition = useCallback(() => {
@@ -62,20 +56,14 @@ export const TypingTest = ({
     const currentCharTop = currentChar.offsetTop;
     const currentCharHeight = currentChar.offsetHeight;
 
-    // Check if current character is near the bottom of visible area
     const visibleBottom = scrollOffset + containerHeight;
     const charBottom = currentCharTop + currentCharHeight;
 
-    // If character is below visible area, scroll down
     if (charBottom > visibleBottom - 20) {
-      // 20px buffer from bottom
       const newScrollOffset =
         currentCharTop - containerHeight / 2 + currentCharHeight / 2;
       setScrollOffset(Math.max(0, newScrollOffset));
-    }
-    // If character is above visible area (when backspacing), scroll up
-    else if (currentCharTop < scrollOffset + 20) {
-      // 20px buffer from top
+    } else if (currentCharTop < scrollOffset + 20) {
       const newScrollOffset = Math.max(
         0,
         currentCharTop - containerHeight / 2 + currentCharHeight / 2,
@@ -99,60 +87,6 @@ export const TypingTest = ({
       setInputScrollOffset(0);
     }
   }, [inputScrollOffset]);
-
-  // Normalize smart/curly quotes/apostrophes to their ASCII equivalents.
-  // macOS can auto-substitute these via smart quotes or dead-key composition.
-  const normalizeKey = (key: string): string => {
-    const map: Record<string, string> = {
-      "\u2018": "'", // LEFT  SINGLE QUOTATION MARK  '
-      "\u2019": "'", // RIGHT SINGLE QUOTATION MARK  '
-      "\u201A": "'", // SINGLE LOW-9 QUOTATION MARK  ‚
-      "\u201B": "'", // SINGLE HIGH-REVERSED-9 MARK  ‛
-      "\u201C": '"', // LEFT  DOUBLE QUOTATION MARK  “
-      "\u201D": '"', // RIGHT DOUBLE QUOTATION MARK  ”
-      "\u201E": '"', // DOUBLE LOW-9 QUOTATION MARK  „
-      "\u2032": "'", // PRIME  ′
-      "\u2035": "'", // REVERSED PRIME  ‵
-    };
-    return map[key] ?? key;
-  };
-
-  //Handle Eng typing
-  const handleEngKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const rawKey = e.key;
-    const key = normalizeKey(rawKey);
-
-    // Play key sound for any valid key press
-    if (rawKey === "Backspace" || rawKey.length === 1) {
-      playKeySound();
-    }
-
-    if (rawKey === "Backspace") {
-      setUserInput(userInput.slice(0, -1));
-    } else if (key.length === 1) {
-      setUserInput(userInput + key);
-    }
-
-    e.preventDefault();
-  };
-
-  //Handle Shan typing
-  const handleShanKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const key = e.key;
-    const keyMap = KeyMaps[selectedKeyMap];
-    const mappedKey = key === " " ? " " : keyMap.map[key];
-
-    // Play key sound for any valid key press
-    if (key === "Backspace" || key.length === 1) {
-      playKeySound();
-    }
-    if (key === "Backspace") {
-      setUserInput(userInput.slice(0, -1));
-    } else if (mappedKey && key.length === 1) {
-      setUserInput(userInput + mappedKey);
-    }
-    e.preventDefault();
-  };
 
   // Update scroll position when target text changes
   useEffect(() => {
@@ -297,7 +231,17 @@ export const TypingTest = ({
         ref={inputRef}
         type="text"
         id="typing-input"
-        onKeyDown={mode === "eng" ? handleEngKeyDown : handleShanKeyDown}
+        onKeyDown={(e) =>
+          mode === "eng"
+            ? handleEngKeyDown(e, playKeySound, setUserInput, userInput)
+            : handleShanKeyDown(
+                e,
+                playKeySound,
+                setUserInput,
+                userInput,
+                selectedKeyMap,
+              )
+        }
         className="opacity-0 absolute pointer-events-none"
         aria-label="Typing input"
         autoComplete="off"

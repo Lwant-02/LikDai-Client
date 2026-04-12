@@ -13,6 +13,7 @@ interface SettingOptions {
   targetText: string;
   isFromHome: boolean;
   installPromptEvent: BeforeInstallPromptEvent | null;
+  timer: Timer;
   setIsFromHome: (isFromHome: boolean) => void;
   setTargetText: (text: string) => void;
   setLessonLevel: (level: LessonLevel) => void;
@@ -25,9 +26,10 @@ interface SettingOptions {
   setUserInput: (v: string) => void;
   setMode: (mode: LanguageMode) => void;
   setInstallPromptEvent: (event: BeforeInstallPromptEvent | null) => void;
+  setTimer: (timer: Timer) => void;
 }
 
-export const settingStore = create<SettingOptions>((set) => ({
+export const useSettingStore = create<SettingOptions>((set) => ({
   mode: "shan",
   selectedSetting: "time",
   selectedTimer: 15,
@@ -44,6 +46,7 @@ export const settingStore = create<SettingOptions>((set) => ({
   targetText: "",
   isFromHome: false,
   installPromptEvent: null,
+  timer: 60,
   setIsFromHome: (isFromHome) => set({ isFromHome }),
   setTargetText: (text) => set({ targetText: text }),
   setLessonLevel: (level) => set({ lessonLevel: level }),
@@ -62,4 +65,5 @@ export const settingStore = create<SettingOptions>((set) => ({
   setUserInput: (v) => set({ userInput: v }),
   setMode: (mode) => set({ mode: mode }),
   setInstallPromptEvent: (event) => set({ installPromptEvent: event }),
+  setTimer: (timer) => set({ timer }),
 }));

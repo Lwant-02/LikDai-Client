@@ -21,7 +21,7 @@ interface ResultState {
   setFinalLevel: (type: LessonLevel | null) => void;
 }
 
-export const resultStore = create<ResultState>((set) => ({
+export const useResultStore = create<ResultState>((set) => ({
   finalWpm: null,
   finalAccuracy: null,
   finalRawWpm: null,

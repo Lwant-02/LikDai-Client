@@ -3,9 +3,9 @@ import { Moon, Sun, Text } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import {
   Sheet,
   SheetClose,
@@ -22,9 +22,9 @@ interface MobileDrawerProps {
 
 export function MobileDrawer({ navLink }: MobileDrawerProps) {
   const { pathname } = useLocation();
-  const { accessToken } = authStore();
+  const { accessToken } = useAuthStore();
   const { profile } = useGetProfile();
-  const { theme, setTheme } = settingStore();
+  const { theme, setTheme } = useSettingStore();
 
   return (
     <Sheet>

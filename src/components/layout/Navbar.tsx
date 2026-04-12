@@ -3,16 +3,16 @@ import { Moon, Sun } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { MobileDrawer } from "@/components/MobileDrawer";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
-  const { accessToken } = authStore();
+  const { accessToken } = useAuthStore();
   const { profile } = useGetProfile();
-  const { theme, setTheme } = settingStore();
+  const { theme, setTheme } = useSettingStore();
   const isChangePasswordPage = pathname.endsWith("/change-password");
   const isHomePage = pathname.endsWith("/");
   const isNotFoundPage = pathname.endsWith("/404");
@@ -20,6 +20,7 @@ export const Navbar = () => {
   const isVerifyOtpPage = pathname.includes("/verify-otp");
   const isTypingTestOrResultPage =
     pathname.includes("/typing-test") || pathname.includes("/result");
+  const isGamePage = pathname.includes("/games");
 
   const navLink = [
     {
@@ -50,7 +51,8 @@ export const Navbar = () => {
     isNotFoundPage ||
     isCertificatePage ||
     isVerifyOtpPage ||
-    isTypingTestOrResultPage
+    isTypingTestOrResultPage ||
+    isGamePage
   ) {
     return null;
   }

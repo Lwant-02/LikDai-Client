@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { formatName } from "@/util/formatName";
 import { useLogout } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { formatJoinedDate } from "@/util/formatJoinedDate";
 import { MiniSpinner } from "@/components/MiniSpinner";
 import { ACCOUNT_PROFILE_CONTENT } from "@/content/account.content";
@@ -23,7 +23,7 @@ export const AccoutHeader = ({
   averageWpm,
   bio,
 }: AccoutHeaderProps) => {
-  const { setAccessToken } = authStore();
+  const { setAccessToken } = useAuthStore();
   const { isLoggingOut, logoutUser } = useLogout();
 
   const handleLogout = async () => {

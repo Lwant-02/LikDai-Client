@@ -19,11 +19,11 @@ import { ResultPage } from "./pages/ResultPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { Footer } from "./components/layout/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage";
-import { authStore } from "./store/authStore";
+import { useAuthStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
 import { LessonsPage } from "./pages/LessonsPage";
 import { useEffect } from "react";
-import { settingStore } from "./store/settingStore";
+import { useSettingStore } from "./store/settingStore";
 import { PolicyPage } from "./pages/PolicyPage";
 import { FeedbackDialog } from "./components/FeedbackDialog";
 import { MusicPlayer } from "./components/MusicPlayer";
@@ -32,13 +32,13 @@ import { ShanCharFloat } from "./components/ShanCharFloat";
 import { WordFallingPage } from "./pages/WordFallingPage";
 
 export default function App() {
-  const { accessToken } = authStore();
+  const { accessToken } = useAuthStore();
 
   //Put this global and store it in settingStore so AboutPage.tsx install button can fire immediately
   useEffect(() => {
     const handler = (e: Event) => {
       e.preventDefault();
-      settingStore
+      useSettingStore
         .getState()
         .setInstallPromptEvent(e as BeforeInstallPromptEvent);
     };
@@ -79,7 +79,7 @@ export default function App() {
             />
             <Route path="/typing-test" element={<TypingtestPage />} />
             <Route path="/normal-typing" element={<NormalTypingPage />} />
-            <Route path="/word-falling" element={<WordFallingPage />} />
+            <Route path="/games/word-falling" element={<WordFallingPage />} />
             <Route path="/lessons" element={<LessonsPage />} />
             <Route path="/leaderboards" element={<LeaderboardPage />} />
             <Route path="/about" element={<AboutPage />} />

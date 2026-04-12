@@ -1,8 +1,8 @@
 import { useRef, useCallback } from "react";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 
 export const useKeySound = () => {
-  const { soundEnabled } = settingStore();
+  const { soundEnabled } = useSettingStore();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize audio on first use

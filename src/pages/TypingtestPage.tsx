@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft } from "lucide-react";
 
-import { settingStore } from "@/store/settingStore";
-import { resultStore } from "@/store/resultStore";
+import { useSettingStore } from "@/store/settingStore";
+import { useResultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/features/typing/components/KeyboardLayout";
@@ -30,7 +30,7 @@ export const TypingtestPage = () => {
     lessonLevel,
     targetText,
     setUserInput,
-  } = settingStore();
+  } = useSettingStore();
   const {
     setFinalWpm,
     setFinalAccuracy,
@@ -41,7 +41,7 @@ export const TypingtestPage = () => {
     setFinalLevel,
     setFinalMode,
     setFinalTypedCharacters,
-  } = resultStore();
+  } = useResultStore();
 
   const { isRunning, startTimer, seconds, stopTimer, resetTimer } = useTimer();
   const [startTime, setStartTime] = useState<number | null>(null);

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { LESSONS_CONTENT } from "@/content/lessons.content";
 import { cn } from "@/lib/utils";
 import { LoginPromptDialog } from "@/components/LoginPromptDialog";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,7 +43,7 @@ const LessonCard = ({ category, onClick }: LessonCardProps) => {
   return (
     <div
       key={category.id}
-      className="group relative h-96 cursor-pointer overflow-hidden bg-background/80 backdrop-blur-xl border border-primary/20 hover:border-yellow/80 transition-all duration-300 shadow-2xl rounded-3xl hover:-translate-y-2"
+      className="group relative h-96 cursor-pointer overflow-hidden bg-background/80 backdrop-blur-xl border border-primary/20 hover:border-yellow/80 transition-all duration-300 shadow-2xl rounded-3xl"
     >
       <div className="absolute top-4 right-4 z-20">
         <span className="inline-block px-3 py-1 rounded-full bg-yellow text-white text-sm font-bold uppercase tracking-wider mb-2 border border-yellow/30">
@@ -54,13 +54,13 @@ const LessonCard = ({ category, onClick }: LessonCardProps) => {
         <img
           src={category.image}
           alt={category.category}
-          loading="eager"
+          loading="lazy"
           decoding="async"
           className={cn(
             "w-full h-full object-cover transition-all duration-700 ease-out",
             isImageLoaded
               ? "opacity-100 blur-0 scale-100"
-              : "opacity-0 blur-md scale-105",
+              : "opacity-0 blur-md scale-100",
           )}
           onLoad={() => setIsImageLoaded(true)}
         />
@@ -108,7 +108,7 @@ const LessonCard = ({ category, onClick }: LessonCardProps) => {
 };
 
 export const LessonsPage = () => {
-  const { accessToken } = authStore();
+  const { accessToken } = useAuthStore();
   const navigate = useNavigate();
   const [isLoginPromptOpen, setIsLoginPromptOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState<string>("");

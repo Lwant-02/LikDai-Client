@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Zap, Languages, Library } from "lucide-react";
 
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { LessonPagination } from "@/features/Lessons/components/LessonPagination";
 
 import {
@@ -46,7 +46,7 @@ const itemVariants = {
 };
 
 export const NormalTypingPage = () => {
-  const { lessonLevel, setLessonLevel, mode, setMode } = settingStore();
+  const { lessonLevel, setLessonLevel, mode, setMode } = useSettingStore();
   const [lessons, setLessons] = useState<{ content: string }[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const lessonsPerPage = 10;

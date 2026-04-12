@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import { getChartColor } from "@/util/getChartColor";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { RESULT_CONTENT } from "@/content/result.content";
 
 interface ResultsChartProps {
@@ -19,7 +19,7 @@ interface ResultsChartProps {
 }
 
 export const ResultsChart = ({ wpm, accuracy }: ResultsChartProps) => {
-  const { theme } = settingStore();
+  const { theme } = useSettingStore();
   const data = [
     {
       name: RESULT_CONTENT.yourResult,

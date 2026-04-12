@@ -1,5 +1,5 @@
 import { authAxios } from "@/lib/axiosInstance";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetPublicProfile = ({ username }: { username: string }) => {
@@ -13,7 +13,7 @@ export const useGetPublicProfile = ({ username }: { username: string }) => {
       const { data } = await authAxios.get(`/profile/me/${username}`);
       return data.data;
     },
-    enabled: !!username && settingStore.getState().profileAciveTab === "stats",
+    enabled: !!username && useSettingStore.getState().profileAciveTab === "stats",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
@@ -36,7 +36,7 @@ export const useGetPublicAchievements = ({
       return data.data;
     },
     enabled:
-      !!username && settingStore.getState().profileAciveTab === "achievements",
+      !!username && useSettingStore.getState().profileAciveTab === "achievements",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
@@ -54,7 +54,7 @@ export const useGetPublicHistory = ({ username }: { username: string }) => {
       return data.data;
     },
     enabled:
-      !!username && settingStore.getState().profileAciveTab === "history",
+      !!username && useSettingStore.getState().profileAciveTab === "history",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
@@ -69,7 +69,7 @@ export const useGetPublicStats = ({ username }: { username: string }) => {
       const { data } = await authAxios.get(`/profile/stats/${username}`);
       return data.data;
     },
-    enabled: !!username && settingStore.getState().profileAciveTab === "stats",
+    enabled: !!username && useSettingStore.getState().profileAciveTab === "stats",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,

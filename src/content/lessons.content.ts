@@ -20,12 +20,12 @@ export const LESSONS_CONTENT = {
     {
       id: "word-falling",
       title: "🌧️ ၾူၼ်မၢၵ်ႇလိၵ်ႈ",
-      type: "တိုၵ်ႉတေမႃး",
+      type: "ၸႂ်ႉလႆႈယဝ်ႉ",
       category: "ပေႃႉလိၵ်ႈၵဵမ်း",
       description:
         "ပေႃႉလိၵ်ႈတႆးဢၼ်တူၵ်းလူင်းမႃး မိူဝ်ႈပႆႇၽႅဝ်ၼႃႈလိၼ်။ မိုဝ်းႁႂ်ႈၽႂ်း၊ ပေႃႉႁႂ်ႈမႅၼ်ႈ၊ လႄႈ တေႃႇသူႈႁႂ်ႈလႆႈႁိုင်သုတ်း!",
       image: "/images/word-falling.jpg",
-      link: "/word-falling",
+      link: "/games/word-falling",
     },
     {
       id: "shooter",
@@ -35,7 +35,7 @@ export const LESSONS_CONTENT = {
       description:
         "ယိုဝ်းတႅၵ်ႇတူဝ်လိၵ်ႈ လူၺ်ႈၵၢၼ်ပေႃႉႁႂ်ႈမႅၼ်ႈ။ တေႃႇၶွမ်ႇပူဝ်ႇ၊ ႁႃဝၢၵ်ႈႁႂ်ႈၼမ် လႄႈ ၽဵဝ်ႈပႅတ်ႈႁႂ်ႈမူတ်းၼႃႈၸေႃး!",
       image: "/images/shooter.jpg",
-      link: "/typing-test",
+      link: "/games/typing-test",
     },
     {
       id: "running",
@@ -45,7 +45,7 @@ export const LESSONS_CONTENT = {
       description:
         "လႅၼ်ႈလတ်းၵႂႃႇၽၢႆႇၼႃႈ လူၺ်ႈၵၢၼ်ပေႃႉလိၵ်ႈႁႂ်ႈမႅၼ်ႈတႅတ်ႈတေႃး။ ဝႄႈလွင်ႈႁႄႉႁၢမ်ႈ၊ ထိင်းလွင်ႈမိုဝ်းဝႆႉ လႄႈ ၵႂႃႇႁႂ်ႈလႆႈၵႆသုတ်း တီႈတေပဵၼ်လႆႈ!",
       image: "/images/running.jpg",
-      link: "/typing-test",
+      link: "/games/typing-test",
     },
   ],
 };

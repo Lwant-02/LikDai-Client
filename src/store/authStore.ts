@@ -7,7 +7,7 @@ interface GlobalState {
   setAccessToken: (accessToken: string | null) => void;
 }
 
-export const authStore = create<GlobalState>((set) => ({
+export const useAuthStore = create<GlobalState>((set) => ({
   accessToken: null,
   isCheckingAuth: true,
   setIsCheckingAuth: (isCheckingAuth: boolean) => set({ isCheckingAuth }),

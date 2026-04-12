@@ -8,14 +8,14 @@ import { StatsTab } from "@/features/account/components/StatsTab";
 import { HistoryTab } from "@/features/account/components/HistoryTab";
 import { AchievementsTab } from "@/features/account/components/AchievementsTab";
 import { SettingTab } from "@/components/SettingTab";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useGetProfile } from "@/hooks/useUser";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 
 export const AccountPage = () => {
-  const { isCheckingAuth } = authStore();
+  const { isCheckingAuth } = useAuthStore();
 
-  const { activeTab, setActiveTab } = settingStore();
+  const { activeTab, setActiveTab } = useSettingStore();
 
   const { profile, isFetchingProfile } = useGetProfile();
 

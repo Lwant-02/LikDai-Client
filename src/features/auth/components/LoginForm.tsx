@@ -8,7 +8,7 @@ import { Button } from "../../../components/ui/button";
 import { ForgotPasswordDialog } from "./ForgotPasswordDialog";
 import { InputFiled } from "../../../components/InputFiled";
 import { useGoogleLoginHook, useLogin } from "@/hooks/useAuth";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { MiniSpinner } from "@/components/MiniSpinner";
 import { COMMON_INPUT_CONTENT } from "@/content/common.content";
@@ -22,7 +22,7 @@ type FormData = {
 export const LoginForm = () => {
   const { isLoggingIn, loginUser } = useLogin();
   const { googleLogin, isLoggingInWithGoogle } = useGoogleLoginHook();
-  const { setAccessToken } = authStore();
+  const { setAccessToken } = useAuthStore();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     email: "",

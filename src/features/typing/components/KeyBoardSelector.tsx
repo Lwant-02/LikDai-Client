@@ -1,10 +1,10 @@
 import { KeyMaps } from "@/keymaps/KeyMaps";
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { TooltipHover } from "../../../components/TooltipHover";
 
 export const KeyBoardSelector = () => {
-  const { selectedKeyMap, setSelectedKeyMap, mode } = settingStore();
+  const { selectedKeyMap, setSelectedKeyMap, mode } = useSettingStore();
   return (
     <div
       className={cn(
