@@ -29,7 +29,7 @@ export const GameOver = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-sm z-50"
+      className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-sm z-30"
     >
       <div className="text-center space-y-6 max-w-md mx-auto p-6">
         <motion.div

@@ -5,6 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Toaster } from "sonner";
+import { useEffect } from "react";
 
 import { AboutPage } from "@/pages/AboutPage";
 import { HomePage } from "@/pages/HomePage";
@@ -22,7 +23,6 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { useAuthStore } from "./store/authStore";
 import { CertificatePage } from "./pages/CertificatePage";
 import { LessonsPage } from "./pages/LessonsPage";
-import { useEffect } from "react";
 import { useSettingStore } from "./store/settingStore";
 import { PolicyPage } from "./pages/PolicyPage";
 import { FeedbackDialog } from "./components/FeedbackDialog";
@@ -30,6 +30,8 @@ import { MusicPlayer } from "./components/MusicPlayer";
 import { NormalTypingPage } from "./pages/NormalTypingPage";
 import { ShanCharFloat } from "./components/ShanCharFloat";
 import { WordFallingPage } from "./pages/WordFallingPage";
+import { ShooterPage } from "./pages/ShooterPage";
+import { RunningPage } from "./pages/RunningPage";
 
 export default function App() {
   const { accessToken } = useAuthStore();
@@ -80,6 +82,8 @@ export default function App() {
             <Route path="/typing-test" element={<TypingtestPage />} />
             <Route path="/normal-typing" element={<NormalTypingPage />} />
             <Route path="/games/word-falling" element={<WordFallingPage />} />
+            <Route path="/games/shooter" element={<ShooterPage />} />
+            <Route path="/games/running" element={<RunningPage />} />
             <Route path="/lessons" element={<LessonsPage />} />
             <Route path="/leaderboards" element={<LeaderboardPage />} />
             <Route path="/about" element={<AboutPage />} />

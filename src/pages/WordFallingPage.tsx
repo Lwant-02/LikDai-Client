@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { cn } from "@/lib/utils";
 import { useSettingStore } from "@/store/settingStore";
 import { useKeySound } from "@/hooks/useKeySound";
+import { useGameSound } from "@/hooks/useGameSound";
 import { handleEngKeyDown, handleShanKeyDown } from "@/util/handleKeydown";
 import { englishWords } from "@/resources/eng.words";
 import { shanWords } from "@/resources/shan.words";
@@ -27,6 +28,16 @@ interface FallingWord {
 
 export const WordFallingPage = () => {
   const { playKeySound } = useKeySound();
+  const {
+    playBackground,
+    pauseBackground,
+    resumeBackground,
+    playGameOver,
+    stopBackground,
+  } = useGameSound({
+    backgroundPath: "/sounds/game-background.mp3",
+    gameOverPath: "/sounds/game-over.mp3",
+  });
   const { mode, lessonLevel } = useSettingStore();
   const { selectedKeyMap, setUserInput, userInput } = useSettingStore();
 
@@ -179,6 +190,7 @@ export const WordFallingPage = () => {
           if (newLives <= 0) {
             setIsGameOver(true);
             setIsPaused(true);
+            playGameOver();
           }
           return Math.max(0, newLives);
         });
@@ -234,12 +246,23 @@ export const WordFallingPage = () => {
 
     // Initial spawn
     setTimeout(spawnWord, 500);
+
+    // Play background music
+    playBackground();
   };
 
   // Toggle pause
   const togglePause = () => {
     if (isGameOver) return;
-    setIsPaused((prev) => !prev);
+    setIsPaused((prev) => {
+      const next = !prev;
+      if (next) {
+        pauseBackground();
+      } else {
+        resumeBackground();
+      }
+      return next;
+    });
   };
 
   // Focus input on mount and when paused state changes
@@ -248,6 +271,13 @@ export const WordFallingPage = () => {
       inputRef.current?.focus();
     }
   }, [isGameStarted, isPaused]);
+
+  // Clean up sounds on unmount
+  useEffect(() => {
+    return () => {
+      stopBackground();
+    };
+  }, [stopBackground]);
 
   // Keyboard handler wrapper
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

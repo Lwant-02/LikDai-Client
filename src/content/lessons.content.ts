@@ -30,22 +30,22 @@ export const LESSONS_CONTENT = {
     {
       id: "shooter",
       title: "🔫 ယိုဝ်းတူဝ်လိၵ်ႈ",
-      type: "တိုၵ်ႉတေမႃး",
+      type: "ၸႂ်ႉလႆႈယဝ်ႉ",
       category: "ပေႃႉလိၵ်ႈၵဵမ်း",
       description:
         "ယိုဝ်းတႅၵ်ႇတူဝ်လိၵ်ႈ လူၺ်ႈၵၢၼ်ပေႃႉႁႂ်ႈမႅၼ်ႈ။ တေႃႇၶွမ်ႇပူဝ်ႇ၊ ႁႃဝၢၵ်ႈႁႂ်ႈၼမ် လႄႈ ၽဵဝ်ႈပႅတ်ႈႁႂ်ႈမူတ်းၼႃႈၸေႃး!",
       image: "/images/shooter.jpg",
-      link: "/games/typing-test",
+      link: "/games/shooter",
     },
     {
       id: "running",
       title: "🏃 လႅၼ်ႈၽႃႇၽေး",
-      type: "တိုၵ်ႉတေမႃး",
+      type: "ၸႂ်ႉလႆႈယဝ်ႉ",
       category: "ပေႃႉလိၵ်ႈၵဵမ်း",
       description:
         "လႅၼ်ႈလတ်းၵႂႃႇၽၢႆႇၼႃႈ လူၺ်ႈၵၢၼ်ပေႃႉလိၵ်ႈႁႂ်ႈမႅၼ်ႈတႅတ်ႈတေႃး။ ဝႄႈလွင်ႈႁႄႉႁၢမ်ႈ၊ ထိင်းလွင်ႈမိုဝ်းဝႆႉ လႄႈ ၵႂႃႇႁႂ်ႈလႆႈၵႆသုတ်း တီႈတေပဵၼ်လႆႈ!",
       image: "/images/running.jpg",
-      link: "/games/typing-test",
+      link: "/games/running",
     },
   ],
 };

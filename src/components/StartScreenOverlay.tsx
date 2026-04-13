@@ -30,7 +30,7 @@ export const StartScreenOverlay = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="absolute inset-0 flex items-center justify-center rounded-xl z-50"
+      className="absolute inset-0 flex items-center justify-center rounded-xl z-30"
     >
       <div className="text-center space-y-6 w-96 flex justify-center items-center flex-col">
         <motion.div

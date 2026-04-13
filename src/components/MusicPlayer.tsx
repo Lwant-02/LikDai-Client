@@ -87,7 +87,7 @@ export const MusicPlayer = () => {
         animate={{ opacity: 1, scale: 1, x: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.3 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-44 md:right-10 right-4 p-3 rounded-full border border-yellow bg-background/50 backdrop-blur-md hover:bg-yellow transition-colors duration-300 cursor-pointer text-primary hover:text-background z-40 shadow-lg"
+        className="fixed bottom-44 md:right-10 right-4 p-3 rounded-full border border-yellow bg-background/50 backdrop-blur-md hover:bg-yellow transition-colors duration-300 cursor-pointer text-primary hover:text-background z-50 shadow-lg"
       >
         <Music className="size-6" />
       </motion.div>
