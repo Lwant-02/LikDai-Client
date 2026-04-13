@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { WORD_FALLING_CONTENT } from "@/content/word-falling.content";
 import {
   Trophy,
   Sparkles,
@@ -38,15 +37,13 @@ export const GameOver = ({
           className="space-y-4"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-red-500 font-tachileik">
-            {WORD_FALLING_CONTENT.gameOver}
+            ၵဵမ်းယဝ်ႉတူဝ်ႈ
           </h2>
 
           <div className="grid grid-cols-2 gap-4 py-6">
             <div className="bg-primary/5 rounded-full p-4">
               <Trophy className="w-6 h-6 text-yellow mx-auto mb-2" />
-              <div className="text-sm opacity-60">
-                {WORD_FALLING_CONTENT.finalScore}
-              </div>
+              <div className="text-sm opacity-60">Score</div>
               <div className="text-2xl font-bold text-yellow">
                 {score.toLocaleString()}
               </div>

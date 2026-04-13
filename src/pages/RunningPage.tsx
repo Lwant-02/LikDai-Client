@@ -16,6 +16,7 @@ import { GameOver } from "@/components/GameOver";
 import { PauseOverlay } from "@/components/PauseOverlay";
 import { StartScreenOverlay } from "@/components/StartScreenOverlay";
 import { DIFFICULTY_CONFIG } from "@/util/gameConfig";
+import { LESSONS_CONTENT } from "@/content/lessons.content";
 
 interface Obstacle {
   id: number;
@@ -579,7 +580,7 @@ export const RunningPage = () => {
                         "px-4 py-2 rounded-lg text-lg font-semibold whitespace-nowrap mb-1",
                         "border transition-all duration-150",
                         isTargeted
-                          ? "bg-orange/15 border-orange/50 shadow-[0_0_16px_-4px_rgba(251,191,36,0.4)]"
+                          ? "bg-red-500/20 border-red-400/60 shadow-[0_0_20px_-4px_rgba(239,68,68,0.5)]"
                           : "bg-emerald-500/10 border-emerald-500/25",
                       )}
                     >
@@ -729,7 +730,10 @@ export const RunningPage = () => {
 
           {/* Overlays */}
           {!isGameStarted && !isGameOver && (
-            <StartScreenOverlay startGame={startGame} />
+            <StartScreenOverlay
+              startGame={startGame}
+              title={LESSONS_CONTENT.categories[3].title}
+            />
           )}
 
           {isPaused && !isGameOver && (

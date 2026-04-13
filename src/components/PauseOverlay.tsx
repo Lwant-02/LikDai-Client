@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { WORD_FALLING_CONTENT } from "@/content/word-falling.content";
 import { ArrowRight, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const PauseOverlay = ({ togglePause }: { togglePause: () => void }) => {
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -12,7 +13,7 @@ export const PauseOverlay = ({ togglePause }: { togglePause: () => void }) => {
     >
       <div className="text-center space-y-6">
         <h2 className="text-4xl md:text-6xl font-bold font-tachileik">
-          {WORD_FALLING_CONTENT.pause}
+          ၵိုတ်းဝႆႉ
         </h2>
         <div className="flex flex-col items-center gap-4 mt-10">
           <button
@@ -23,7 +24,7 @@ export const PauseOverlay = ({ togglePause }: { togglePause: () => void }) => {
             <Play className="size-4 relative z-10 transition-transform duration-300" />
           </button>
           <button
-            onClick={togglePause}
+            onClick={() => navigate("/lessons")}
             className="group relative w-60 bg-primary cursor-pointer text-background btn h-11! transition-all hover:shadow-xl hover:shadow-secondary/20"
           >
             <span className="relative z-10 text-base">မိူဝ်းၼႃႈႁိူၼ်း</span>

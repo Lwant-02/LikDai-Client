@@ -16,6 +16,7 @@ import { GameOver } from "@/components/GameOver";
 import { PauseOverlay } from "@/components/PauseOverlay";
 import { StartScreenOverlay } from "@/components/StartScreenOverlay";
 import { DIFFICULTY_CONFIG } from "@/util/gameConfig";
+import { LESSONS_CONTENT } from "@/content/lessons.content";
 
 interface FallingWord {
   id: number;
@@ -152,9 +153,24 @@ export const WordFallingPage = () => {
     setCurrentTarget(null);
   };
 
-  // Check if user input matches any falling word
+  // Auto-target: find the falling word whose text starts with userInput
   useEffect(() => {
-    if (!isGameStarted || isPaused) return;
+    if (!isGameStarted || isPaused || !userInput) {
+      setCurrentTarget(null);
+      return;
+    }
+
+    // Find word whose text starts with current input
+    const target = fallingWords.find((word) =>
+      word.text.toLowerCase().startsWith(userInput.toLowerCase()),
+    );
+
+    setCurrentTarget(target || null);
+  }, [userInput, fallingWords, isGameStarted, isPaused]);
+
+  // Check if user input matches any falling word fully
+  useEffect(() => {
+    if (!isGameStarted || isPaused || !userInput) return;
 
     const matchingWord = fallingWords.find(
       (word) => word.text.toLowerCase() === userInput.toLowerCase(),
@@ -309,7 +325,7 @@ export const WordFallingPage = () => {
       <div className="min-h-screen relative overflow-hidden">
         <div
           ref={gameAreaRef}
-          className="layout relative rounded-4xl overflow-hidden border border-yellow/50 mt-12"
+          className="layout relative rounded-4xl overflow-hidden border border-purple/50 mt-12"
           style={{ height: "calc(100vh - 100px)" }}
         >
           <HeadsUpDisplay
@@ -326,28 +342,63 @@ export const WordFallingPage = () => {
 
           <div className="absolute inset-0">
             <AnimatePresence>
-              {fallingWords.map((word) => (
-                <motion.div
-                  key={word.id}
-                  className={cn(
-                    "absolute px-3 py-1.5 rounded-xl font-medium text-lg whitespace-nowrap",
-                    "backdrop-blur-sm border border-primary/20",
-                    currentTarget?.id === word.id
-                      ? "bg-yellow/20 text-yellow border-yellow"
-                      : "bg-primary/5 text-primary",
-                  )}
-                  style={{
-                    left: word.x,
-                    top: word.y,
-                  }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {word.text}
-                </motion.div>
-              ))}
+              {fallingWords.map((word) => {
+                const isTargeted = currentTarget?.id === word.id;
+                const matchLen = isTargeted ? userInput.length : 0;
+
+                return (
+                  <motion.div
+                    key={word.id}
+                    className={cn(
+                      "absolute px-3 py-1.5 rounded-xl font-medium text-lg whitespace-nowrap",
+                      "backdrop-blur-sm border transition-colors duration-150",
+                      isTargeted
+                        ? "bg-red-500/20 border-red-400/60 shadow-[0_0_20px_-4px_rgba(239,68,68,0.5)]"
+                        : "bg-purple/10 border-purple/50",
+                    )}
+                    style={{
+                      left: word.x,
+                      top: word.y,
+                    }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{
+                      scale: 1.5,
+                      opacity: 0,
+                      transition: { duration: 0.15 },
+                    }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {/* Render letters individually for partial highlight */}
+                    <span className="text-lg font-semibold tracking-wide">
+                      {word.text.split("").map((char, i) => (
+                        <span
+                          key={i}
+                          className={cn(
+                            "transition-colors duration-100",
+                            isTargeted && i < matchLen
+                              ? "text-red-400 drop-shadow-[0_0_6px_rgba(234,179,8,0.8)]"
+                              : isTargeted
+                                ? "text-red-200/70"
+                                : "text-purple",
+                          )}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+
+                    {/* Targeting indicator */}
+                    {isTargeted && (
+                      <motion.div
+                        className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-yellow"
+                        animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
+                        transition={{ duration: 0.6, repeat: Infinity }}
+                      />
+                    )}
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </div>
 
@@ -358,9 +409,9 @@ export const WordFallingPage = () => {
                   initial={{ opacity: 0, scale: 0.8, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.8, y: 5 }}
-                  className="bg-background/40 backdrop-blur-xl px-10 py-4 rounded-3xl border border-yellow/50 shadow-[0_0_40px_-10px_rgba(234,179,8,0.3)]"
+                  className="bg-background/40 backdrop-blur-xl px-10 py-4 rounded-3xl border border-purple/50 shadow-[0_0_40px_-10px_rgba(234,179,8,0.3)]"
                 >
-                  <span className="text-3xl font-bold text-yellow  drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">
+                  <span className="text-3xl font-bold text-purple  drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">
                     {userInput}
                   </span>
                 </motion.div>
@@ -385,7 +436,10 @@ export const WordFallingPage = () => {
           </div>
 
           {!isGameStarted && !isGameOver && (
-            <StartScreenOverlay startGame={startGame} />
+            <StartScreenOverlay
+              startGame={startGame}
+              title={LESSONS_CONTENT.categories[1].title}
+            />
           )}
 
           {isPaused && !isGameOver && (

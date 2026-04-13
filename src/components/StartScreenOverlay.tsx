@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Gamepad2 } from "lucide-react";
-import { WORD_FALLING_CONTENT } from "@/content/word-falling.content";
 import { useSettingStore } from "@/store/settingStore";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +19,10 @@ const MODE_CONFIG = [
 
 export const StartScreenOverlay = ({
   startGame,
+  title,
 }: {
   startGame: () => void;
+  title: string;
 }) => {
   const { mode, setMode } = useSettingStore();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export const StartScreenOverlay = ({
           className="space-y-4"
         >
           <h1 className="text-4xl md:text-6xl font-bold font-tachileik">
-            {WORD_FALLING_CONTENT.title}
+            {title}
           </h1>
         </motion.div>
 

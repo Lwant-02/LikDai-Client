@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { WORD_FALLING_CONTENT } from "@/content/word-falling.content";
 
 interface LevelUpProps {
   showLevelUp: boolean;
@@ -20,7 +19,7 @@ export const LevelUp = ({ showLevelUp }: LevelUpProps) => {
               animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
               transition={{ duration: 0.5 }}
             >
-              {WORD_FALLING_CONTENT.levelUp}
+              ၶိုၼ်ႈၸၼ်ႉထႅင်ႈယဝ်ႉ!
             </motion.div>
           </div>
         </motion.div>

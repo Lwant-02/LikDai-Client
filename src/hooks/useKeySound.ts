@@ -8,7 +8,7 @@ export const useKeySound = () => {
   // Initialize audio on first use
   const initializeAudio = useCallback(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio("/sounds/key_sound.mp3");
+      audioRef.current = new Audio("/sounds/key-sound-two.mp3");
       audioRef.current.preload = "auto";
       audioRef.current.volume = 0.3; // Set volume to 30% to avoid being too loud
     }

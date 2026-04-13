@@ -16,6 +16,7 @@ import { GameOver } from "@/components/GameOver";
 import { PauseOverlay } from "@/components/PauseOverlay";
 import { StartScreenOverlay } from "@/components/StartScreenOverlay";
 import { DIFFICULTY_CONFIG } from "@/util/gameConfig";
+import { LESSONS_CONTENT } from "@/content/lessons.content";
 
 type SpawnEdge = "top" | "left" | "right";
 
@@ -755,7 +756,10 @@ export const ShooterPage = () => {
 
           {/* Overlays */}
           {!isGameStarted && !isGameOver && (
-            <StartScreenOverlay startGame={startGame} />
+            <StartScreenOverlay
+              startGame={startGame}
+              title={LESSONS_CONTENT.categories[2].title}
+            />
           )}
 
           {isPaused && !isGameOver && (

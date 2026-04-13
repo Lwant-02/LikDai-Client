@@ -8,6 +8,7 @@ import { LESSONS_CONTENT } from "@/content/lessons.content";
 import { cn } from "@/lib/utils";
 import { LoginPromptDialog } from "@/components/LoginPromptDialog";
 import { useAuthStore } from "@/store/authStore";
+import { MobileMessage } from "@/features/typing/components/MobileMessage";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -146,7 +147,8 @@ export const LessonsPage = () => {
             <p className="text-xl opacity-80">{LESSONS_CONTENT.subtitle}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <MobileMessage />
+          <div className="hidden xl:grid grid-cols-1 md:grid-cols-3 gap-8">
             {LESSONS_CONTENT.categories.map((category) => (
               <motion.div key={category.id} variants={itemVariants}>
                 <LessonCard

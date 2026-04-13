@@ -11,7 +11,6 @@ import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/features/typing/components/KeyboardLayout";
 import { TypingTest } from "@/components/TypingTest";
 import GraphemeSplitter from "grapheme-splitter";
-import { MobileMessage } from "@/features/typing/components/MobileMessage";
 import { TypingToggleButtons } from "@/features/typing/components/TypingToggleButtons";
 import { Information } from "@/components/Information";
 import { LessonGuide } from "@/features/typing/components/LessonGuide";
@@ -256,8 +255,6 @@ export const TypingtestPage = () => {
               isRunning={isRunning}
               startTimer={startTimer}
             />
-
-            <MobileMessage />
           </motion.div>
           <TimeWords
             seconds={seconds}

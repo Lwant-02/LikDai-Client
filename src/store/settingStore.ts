@@ -41,7 +41,7 @@ export const useSettingStore = create<SettingOptions>((set) => ({
   theme: localStorage.getItem("theme") || "dark",
   wpmPerSecond: [],
   selectedKeyMap: "namkhone",
-  soundEnabled: localStorage.getItem("soundEnabled") === "true" || false,
+  soundEnabled: localStorage.getItem("soundEnabled") === "true" || true,
   lessonLevel: "beginner",
   targetText: "",
   isFromHome: false,
