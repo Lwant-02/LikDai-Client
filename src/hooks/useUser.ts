@@ -2,20 +2,20 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/lib/axiosInstance";
 import { queryClient } from "@/lib/queryClient";
-import { authStore } from "@/store/authStore";
-import { settingStore } from "@/store/settingStore";
+import { useAuthStore } from "@/store/authStore";
+import { useSettingStore } from "@/store/settingStore";
 
 export const useGetProfile = () => {
   const { data: profile, isLoading: isFetchingProfile } = useQuery<User | null>(
     {
-      queryKey: ["profile", authStore.getState().accessToken],
+      queryKey: ["profile", useAuthStore.getState().accessToken],
       queryFn: async () => {
         const { data } = await axiosInstance.get("/account/me");
         return data.data;
       },
       enabled:
-        !!authStore.getState().accessToken &&
-        settingStore.getState().activeTab === "profile",
+        !!useAuthStore.getState().accessToken &&
+        useSettingStore.getState().activeTab === "profile",
       retry: 1,
       refetchOnWindowFocus: false,
       staleTime: Infinity,
@@ -34,8 +34,8 @@ export const useGetHistorys = () => {
       return data.data;
     },
     enabled:
-      !!authStore.getState().accessToken &&
-      settingStore.getState().activeTab === "history",
+      !!useAuthStore.getState().accessToken &&
+      useSettingStore.getState().activeTab === "history",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
@@ -51,8 +51,8 @@ export const useGetStats = () => {
       return data.data;
     },
     enabled:
-      !!authStore.getState().accessToken &&
-      settingStore.getState().activeTab === "stats",
+      !!useAuthStore.getState().accessToken &&
+      useSettingStore.getState().activeTab === "stats",
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
@@ -69,8 +69,8 @@ export const useGetAchievements = () => {
         return data.data;
       },
       enabled:
-        !!authStore.getState().accessToken &&
-        settingStore.getState().activeTab === "achievements",
+        !!useAuthStore.getState().accessToken &&
+        useSettingStore.getState().activeTab === "achievements",
       retry: 1,
       refetchOnWindowFocus: false,
       staleTime: Infinity,
@@ -101,7 +101,7 @@ export const useGetCertificate = () => {
       const { data } = await axiosInstance.get("/account/certificate");
       return data.data;
     },
-    enabled: !!authStore.getState().accessToken,
+    enabled: !!useAuthStore.getState().accessToken,
     retry: 1,
     refetchOnWindowFocus: false,
     staleTime: Infinity,

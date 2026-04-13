@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft } from "lucide-react";
 
-import { settingStore } from "@/store/settingStore";
-import { resultStore } from "@/store/resultStore";
+import { useSettingStore } from "@/store/settingStore";
+import { useResultStore } from "@/store/resultStore";
 import { calculateFinalResult } from "@/util/calculateFinalResult";
 import { calculateCorrectChars } from "@/util/calculateCorrectChars";
 import { KeyboardLayout } from "@/features/typing/components/KeyboardLayout";
 import { TypingTest } from "@/components/TypingTest";
 import GraphemeSplitter from "grapheme-splitter";
-import { MobileMessage } from "@/features/typing/components/MobileMessage";
 import { TypingToggleButtons } from "@/features/typing/components/TypingToggleButtons";
 import { Information } from "@/components/Information";
 import { LessonGuide } from "@/features/typing/components/LessonGuide";
@@ -30,7 +29,7 @@ export const TypingtestPage = () => {
     lessonLevel,
     targetText,
     setUserInput,
-  } = settingStore();
+  } = useSettingStore();
   const {
     setFinalWpm,
     setFinalAccuracy,
@@ -41,7 +40,7 @@ export const TypingtestPage = () => {
     setFinalLevel,
     setFinalMode,
     setFinalTypedCharacters,
-  } = resultStore();
+  } = useResultStore();
 
   const { isRunning, startTimer, seconds, stopTimer, resetTimer } = useTimer();
   const [startTime, setStartTime] = useState<number | null>(null);
@@ -256,8 +255,6 @@ export const TypingtestPage = () => {
               isRunning={isRunning}
               startTimer={startTimer}
             />
-
-            <MobileMessage />
           </motion.div>
           <TimeWords
             seconds={seconds}

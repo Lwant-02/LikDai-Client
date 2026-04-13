@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { KeyMaps } from "@/keymaps/KeyMaps";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ const Key: React.FC<KeyProps> = ({
   isCurrent = false,
   isShiftRequired = false,
 }) => {
-  const { mode } = settingStore();
+  const { mode } = useSettingStore();
   const getKeyWidth = () => {
     switch (width) {
       case "wide":
@@ -120,7 +120,7 @@ const Key: React.FC<KeyProps> = ({
 };
 
 export const KeyboardLayout = ({ currentChar }: KeyboardLayoutProps) => {
-  const { selectedKeyMap, mode } = settingStore();
+  const { selectedKeyMap, mode } = useSettingStore();
   const [isShiftPressed] = useState(false); // For now, always show normal keys
 
   // Use English keyboard when in English mode, otherwise use selected Shan keyboard

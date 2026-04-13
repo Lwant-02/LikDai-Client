@@ -7,8 +7,8 @@ import { ArrowLeft } from "lucide-react";
 
 import { ResultCard } from "@/components/ResultCard";
 import { ResultsChart } from "@/components/ResultsChart";
-import { authStore } from "@/store/authStore";
-import { resultStore } from "@/store/resultStore";
+import { useAuthStore } from "@/store/authStore";
+import { useResultStore } from "@/store/resultStore";
 import { saveFinalResults } from "@/service/saveFinalResults";
 import { ResultNextButton } from "@/components/ResultNextButton";
 import { RESULT_CONTENT } from "@/content/result.content";
@@ -24,8 +24,8 @@ export const ResultPage = () => {
     finalLevel,
     finalMode,
     finalTypedCharacters,
-  } = resultStore();
-  const { accessToken } = authStore();
+  } = useResultStore();
+  const { accessToken } = useAuthStore();
   const navigate = useNavigate();
   const hanSavedRef = useRef(false);
 

@@ -6,7 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [["babel-plugin-react-compiler"]],
+      },
+    }),
     tailwindcss(),
     VitePWA({
       registerType: "prompt",
@@ -17,6 +21,7 @@ export default defineConfig({
       workbox: {
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024, // 20 MB
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,mp3,ttf,jpg,jpeg}"],
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\./i,
@@ -24,7 +29,7 @@ export default defineConfig({
             options: {
               cacheName: "api-cache",
               expiration: {
-                maxEntries: 100,
+                maxEntries: 200,
                 maxAgeSeconds: 60 * 60 * 24,
               },
             },

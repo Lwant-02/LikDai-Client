@@ -6,7 +6,7 @@ export const MobileMessage = () => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl aspect-video "
+      className="xl:hidden flex flex-col items-center justify-center p-6 mx-4 bg-background/80 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-3xl aspect-video w-fit"
     >
       <motion.div
         className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 bg-gradient-to-br from-yellow/20 to-orange/20 rounded-full"
@@ -46,20 +46,7 @@ export const MobileMessage = () => {
       </p>
 
       <div className="flex items-center mt-4 px-4 py-2 bg-primary/10 rounded-full">
-        <svg
-          className="w-4 h-4 text-blue mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span className="text-xs text-blue font-medium">
+        <span className="text-xs text-blue font-medium text-center">
           လၢႆႈၵႂႃႇၸႂ်ႉ ၶွမ်ႇပိဝ်ႇတႃႇ (Desktop) တႃႇလဵၼ်ႈလႆႈတဵမ်ထူၼ်ႈ
         </span>
       </div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { RegisterForm } from "@/features/auth/components/RegisterForm";
 import { LoginForm } from "@/features/auth/components/LoginForm";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useOffline } from "@/hooks/useOffline";
 import { OfflineState } from "@/components/OfflineState";
 
@@ -24,7 +24,7 @@ const itemVariants = {
 };
 
 export const LoginPage = () => {
-  const { isCheckingAuth } = authStore();
+  const { isCheckingAuth } = useAuthStore();
   const isOffline = useOffline();
 
   if (isCheckingAuth) {

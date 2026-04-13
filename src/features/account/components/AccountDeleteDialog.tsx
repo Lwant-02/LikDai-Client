@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "../../../components/ui/button";
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useDeleteAccount } from "@/hooks/useUser";
 import { MiniSpinner } from "../../../components/MiniSpinner";
 import { ACCOUNT_SETTINGS_CONTENT } from "@/content/account.content";
@@ -22,7 +22,7 @@ export const AccountDeleteDialog = ({
   isOpen,
   setIsOpen,
 }: AccountDeleteDialogProps) => {
-  const { setAccessToken } = authStore();
+  const { setAccessToken } = useAuthStore();
   const { deleteAccount, isDeletingAccount } = useDeleteAccount();
 
   const handleDeleteAccount = async () => {

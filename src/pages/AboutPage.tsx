@@ -5,7 +5,7 @@ import { ChevronsUp } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import { AllInformation } from "@/components/AllInformation";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { ABOUT_CONTENT } from "@/content/about.content";
 import { HOME_CONTENT } from "@/content/home.content";
 
@@ -27,7 +27,7 @@ export const itemVariants = {
 
 export const AboutPage = () => {
   const { isFromHome, setInstallPromptEvent, installPromptEvent } =
-    settingStore();
+    useSettingStore();
   const [isUserScrolled, setIsUserScrolled] = useState<boolean>(false);
   const navigate = useNavigate();
 

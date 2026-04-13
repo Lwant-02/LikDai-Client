@@ -1,8 +1,8 @@
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { useEffect } from "react";
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { theme } = settingStore();
+  const { theme } = useSettingStore();
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");

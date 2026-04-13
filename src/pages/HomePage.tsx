@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { HOME_CONTENT } from "@/content/home.content";
 
 export const container: Variants = {
@@ -26,7 +26,7 @@ export const item: Variants = {
 };
 
 export function HomePage() {
-  const { setIsFromHome } = settingStore();
+  const { setIsFromHome } = useSettingStore();
 
   return (
     <>
@@ -113,12 +113,12 @@ export function HomePage() {
           <motion.div variants={item} className="relative mt-10 mb-5">
             <Link
               to="/lessons"
-              className="group relative bg-primary text-background btn transition-all hover:scale-105 hover:shadow-xl hover:shadow-secondary/20"
+              className="group relative bg-primary text-background btn transition-all hover:shadow-xl hover:shadow-secondary/20"
             >
               <span className="relative z-10 text-base">
                 {HOME_CONTENT.buttonLabel}
               </span>
-              <Rocket className="size-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <Rocket className="size-5 relative z-10 transition-transform duration-300" />
               <div className="absolute inset-0 bg-yellow translate-y-full group-hover:translate-y-[0%] transition-transform duration-300 ease-out" />
             </Link>
           </motion.div>

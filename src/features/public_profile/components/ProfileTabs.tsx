@@ -2,7 +2,7 @@ import { History, Award, BarChart3 } from "lucide-react";
 
 import { Button } from "../../../components/ui/button";
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { ACCOUNT_PROFILE_CONTENT } from "@/content/account.content";
 
 const tabs = [
@@ -24,7 +24,7 @@ const tabs = [
 ];
 
 export const ProfileTabs = () => {
-  const { profileAciveTab, setProfileAciveTab } = settingStore();
+  const { profileAciveTab, setProfileAciveTab } = useSettingStore();
   return (
     <div className="flex overflow-x-auto mb-6 pb-2 gap-2 ">
       {tabs.map((tab) => (

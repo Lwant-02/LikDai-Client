@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { shanBeginnerLessons } from "@/resources/shan.beginner";
 import { shanIntermediateLessons } from "@/resources/shan.intermediate";
 import { shanAdvancedLessons } from "@/resources/shan.advancend";
@@ -15,7 +15,7 @@ import { engMusicLessons } from "@/resources/eng.musicLesson";
 import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
 export const ResultNextButton = () => {
-  const { setTargetText, mode } = settingStore();
+  const { setTargetText, mode } = useSettingStore();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 

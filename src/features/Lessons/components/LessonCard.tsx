@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { useNavigate } from "react-router-dom";
 import { getWordNumber } from "@/util/getWordNumber";
 import { NORMAL_CONTENT } from "@/content/normal.content";
@@ -13,7 +13,7 @@ interface LessonGridProps {
 }
 
 export const LessonCard = ({ content, index }: LessonGridProps) => {
-  const { lessonLevel, setTargetText } = settingStore();
+  const { lessonLevel, setTargetText } = useSettingStore();
   const navigate = useNavigate();
 
   const getlevelColor = (level: LessonLevel) => {

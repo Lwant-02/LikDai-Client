@@ -1,13 +1,13 @@
 import { Volume2, VolumeX } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 import { KeyBoardSelector } from "@/features/typing/components/KeyBoardSelector";
 import { TooltipHover } from "../../../components/TooltipHover";
 import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
 export const DesktopTestSetting = () => {
-  const { mode, soundEnabled, setSoundEnabled } = settingStore();
+  const { mode, soundEnabled, setSoundEnabled } = useSettingStore();
 
   return (
     <>

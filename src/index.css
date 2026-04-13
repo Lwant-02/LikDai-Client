@@ -84,7 +84,7 @@
     @apply mx-auto max-w-7xl xl:px-0 px-3;
   }
   .btn {
-    @apply inline-flex items-center gap-2 px-8 py-2 font-semibold rounded-full overflow-hidden;
+    @apply inline-flex justify-center items-center gap-2 px-8 py-2 font-semibold rounded-full overflow-hidden;
   }
 }
 

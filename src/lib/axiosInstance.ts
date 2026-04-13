@@ -1,4 +1,4 @@
-import { authStore } from "@/store/authStore";
+import { useAuthStore } from "@/store/authStore";
 import axios from "axios";
 
 // Create a separate instance for authentication requests
@@ -24,7 +24,7 @@ export const axiosInstance = axios.create({
 // Request interceptor - Add access token to requests
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = authStore.getState().accessToken;
+    const token = useAuthStore.getState().accessToken;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -54,7 +54,7 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = refreshResponse.data.accessToken;
 
         // Update access token in memory only
-        authStore.getState().setAccessToken(newAccessToken);
+        useAuthStore.getState().setAccessToken(newAccessToken);
 
         // Retry the original request with new token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -64,7 +64,7 @@ axiosInstance.interceptors.response.use(
         console.error("Token refresh failed:", refreshError);
 
         // Clear access token from memory
-        authStore.getState().setAccessToken(null);
+        useAuthStore.getState().setAccessToken(null);
 
         // Redirect to login page or dispatch logout action
         window.location.href = "/login";

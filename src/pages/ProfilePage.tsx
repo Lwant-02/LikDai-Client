@@ -8,11 +8,11 @@ import { ProfileStatsTab } from "@/features/public_profile/components/ProfileSta
 import { ProfileHistoryTab } from "@/features/public_profile/components/ProfileHistoryTab";
 import { ProfileAchievementsTab } from "@/features/public_profile/components/ProfileAchievementTab";
 import { useGetPublicProfile } from "@/hooks/useProfile";
-import { settingStore } from "@/store/settingStore";
+import { useSettingStore } from "@/store/settingStore";
 
 export const ProfilePage = () => {
   const params = useParams();
-  const { profileAciveTab } = settingStore();
+  const { profileAciveTab } = useSettingStore();
   const username = params.username;
 
   if (!username) {
