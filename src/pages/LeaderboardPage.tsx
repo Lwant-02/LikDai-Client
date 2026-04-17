@@ -53,7 +53,7 @@ export const LeaderboardPage = () => {
   const leaderboardWithRank: LeaderboardEntry[] = leaderboard.leaderboard.map(
     (entry, index) => ({
       ...entry,
-      rank: index + 1,
+      rank: (currentPage - 1) * Number(total) + index + 1,
     }),
   );
 
