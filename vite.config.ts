@@ -20,7 +20,11 @@ export default defineConfig({
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024, // 20 MB
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,mp3,ttf,jpg,jpeg}"],
+        globPatterns: [
+          "**/*.{js,css,html,ico,png,svg,woff2,mp3,ttf,jpg,jpeg}",
+          // Keyboard sound packs: the sprite plus the config that slices it
+          "sounds/**/*.{ogg,json}",
+        ],
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {

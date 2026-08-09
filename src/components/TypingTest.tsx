@@ -132,7 +132,13 @@ export const TypingTest = ({
   // Style helpers
   const getTextClasses = () => {
     const baseClasses = "relative md:text-4xl text-2xl";
-    return mode === "eng" ? baseClasses : cn(baseClasses, "leading-loose");
+    // The highlight is painted over the font's own ascent/descent box, which is
+    // taller than the line box the default leading gives. Without extra leading
+    // the top of the highlight is cut off by the scroll container.
+    return cn(
+      baseClasses,
+      mode === "eng" ? "leading-relaxed" : "leading-loose",
+    );
   };
 
   return (

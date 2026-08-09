@@ -7,6 +7,8 @@ export const TYPING_TEST_CONTENT = {
   language: "ၽႃႇသႃႇ",
   soundOn: "ပိုတ်ႇသဵင်",
   soundOff: "ပိၵ်ႉသဵင်",
+  keySound: "သဵင်လွၵ်းမိုဝ်း",
+  keyBoard: "လွၵ်းမိုဝ်း",
   next: "တေႃႇထႅင်ႈ",
   prev: "ထွၺ်လင်",
   hideKeyboard: "ပိၵ်ႉ",

@@ -3,6 +3,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSettingStore } from "@/store/settingStore";
 import { KeyBoardSelector } from "@/features/typing/components/KeyBoardSelector";
+import { KeySoundSelector } from "@/features/typing/components/KeySoundSelector";
 import { TooltipHover } from "../../../components/TooltipHover";
 import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
@@ -11,7 +12,7 @@ export const DesktopTestSetting = () => {
 
   return (
     <>
-      <div className="py-2 text-sm gap-2 xl:flex hidden">
+      <div className="py-2 text-sm gap-3 xl:flex hidden items-center">
         {mode === "shan" && <KeyBoardSelector />}
         <span
           className={cn(
@@ -48,6 +49,7 @@ export const DesktopTestSetting = () => {
             )}
           </div>
         </TooltipHover>
+        <KeySoundSelector />
       </div>
     </>
   );

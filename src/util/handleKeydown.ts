@@ -17,7 +17,7 @@ const normalizeKey = (key: string): string => {
 
 export const handleEngKeyDown = (
   e: React.KeyboardEvent<HTMLInputElement>,
-  playKeySound: () => void,
+  playKeySound: (code?: string) => void,
   setUserInput: (input: string) => void,
   userInput: string,
 ) => {
@@ -25,7 +25,7 @@ export const handleEngKeyDown = (
   const key = normalizeKey(rawKey);
 
   if (rawKey === "Backspace" || rawKey.length === 1) {
-    playKeySound();
+    playKeySound(e.code);
   }
 
   if (rawKey === "Backspace") {
@@ -39,7 +39,7 @@ export const handleEngKeyDown = (
 
 export const handleShanKeyDown = (
   e: React.KeyboardEvent<HTMLInputElement>,
-  playKeySound: () => void,
+  playKeySound: (code?: string) => void,
   setUserInput: (input: string) => void,
   userInput: string,
   selectedKeyMap: keyof typeof KeyMaps,
@@ -49,7 +49,7 @@ export const handleShanKeyDown = (
   const mappedKey = key === " " ? " " : keyMap.map[key];
 
   if (key === "Backspace" || key.length === 1) {
-    playKeySound();
+    playKeySound(e.code);
   }
   if (key === "Backspace") {
     setUserInput(userInput.slice(0, -1));

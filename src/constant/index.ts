@@ -77,3 +77,63 @@ export const SONGS = [
     bg: "bg-green/10",
   },
 ];
+
+export const KEY_SOUND_PACKS: {
+  id: KeySoundName;
+  name: string;
+  variant?: string;
+  color: string;
+}[] = [
+  {
+    id: "cherrymx-brown-pbt",
+    name: "CherryMX Brown",
+    variant: "PBT",
+    color: "bg-orange",
+  },
+  {
+    id: "cherrymx-brown-abs",
+    name: "CherryMX Brown",
+    variant: "ABS",
+    color: "bg-orange",
+  },
+  {
+    id: "cherrymx-blue-pbt",
+    name: "CherryMX Blue",
+    variant: "PBT",
+    color: "bg-blue",
+  },
+  {
+    id: "cherrymx-blue-abs",
+    name: "CherryMX Blue",
+    variant: "ABS",
+    color: "bg-blue",
+  },
+  {
+    id: "cherrymx-red-pbt",
+    name: "CherryMX Red",
+    variant: "PBT",
+    color: "bg-red",
+  },
+  {
+    id: "cherrymx-red-abs",
+    name: "CherryMX Red",
+    variant: "ABS",
+    color: "bg-red",
+  },
+  {
+    id: "cherrymx-black-pbt",
+    name: "CherryMX Black",
+    variant: "PBT",
+    color: "bg-primary/60",
+  },
+  {
+    id: "cherrymx-black-abs",
+    name: "CherryMX Black",
+    variant: "ABS",
+    color: "bg-primary/60",
+  },
+  { id: "eg-crystal-purple", name: "EG Crystal Purple", color: "bg-purple" },
+  { id: "eg-oreo", name: "EG Oreo", color: "bg-primary/40" },
+];
+
+export const DEFAULT_KEY_SOUND: KeySoundName = "cherrymx-brown-pbt";

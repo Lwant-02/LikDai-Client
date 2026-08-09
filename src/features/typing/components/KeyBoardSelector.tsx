@@ -1,33 +1,22 @@
 import { KeyMaps } from "@/keymaps/KeyMaps";
-import { cn } from "@/lib/utils";
 import { useSettingStore } from "@/store/settingStore";
-import { TooltipHover } from "../../../components/TooltipHover";
+import { SettingDropdown } from "@/features/typing/components/SettingDropdown";
+import { TYPING_TEST_CONTENT } from "@/content/typing-test.content";
 
 export const KeyBoardSelector = () => {
-  const { selectedKeyMap, setSelectedKeyMap, mode } = useSettingStore();
+  const { selectedKeyMap, setSelectedKeyMap } = useSettingStore();
+
+  const options = Object.entries(KeyMaps)
+    .filter(([key]) => key !== "english")
+    .map(([key, value]) => ({ id: key, name: value.name }));
+
   return (
-    <div
-      className={cn(
-        "grid gap-4",
-        mode === "eng" ? "grid-cols-1" : "grid-cols-4",
-      )}
-    >
-      {Object.entries(KeyMaps).map(([key, value]) => {
-        if (key === "english") return null;
-        return (
-          <TooltipHover tooltipText={`လွၵ်းမိုဝ်း ${value.name}`} key={key}>
-            <div
-              onClick={() => setSelectedKeyMap(key as KeyMapNames)}
-              className={cn(
-                "w-auto opacity-50 text-base hover:opacity-100 transition-opacity duration-200 cursor-pointer",
-                selectedKeyMap === key && "opacity-100 text-yellow",
-              )}
-            >
-              {value.name}
-            </div>
-          </TooltipHover>
-        );
-      })}
-    </div>
+    <SettingDropdown
+      label={TYPING_TEST_CONTENT.keyBoard}
+      options={options}
+      selectedId={selectedKeyMap}
+      onSelect={(keyMap) => setSelectedKeyMap(keyMap as KeyMapNames)}
+      width="w-32"
+    />
   );
 };

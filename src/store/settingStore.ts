@@ -1,5 +1,14 @@
 import { create } from "zustand";
 
+import { DEFAULT_KEY_SOUND, KEY_SOUND_PACKS } from "@/constant";
+
+const getStoredKeySound = (): KeySoundName => {
+  const stored = localStorage.getItem("keySound");
+  return KEY_SOUND_PACKS.some((pack) => pack.id === stored)
+    ? (stored as KeySoundName)
+    : DEFAULT_KEY_SOUND;
+};
+
 interface SettingOptions {
   mode: LanguageMode;
   activeTab: TabType;
@@ -9,6 +18,7 @@ interface SettingOptions {
   wpmPerSecond: number[];
   selectedKeyMap: KeyMapNames;
   soundEnabled: boolean;
+  selectedKeySound: KeySoundName;
   lessonLevel: LessonLevel;
   targetText: string;
   isFromHome: boolean;
@@ -19,6 +29,7 @@ interface SettingOptions {
   setLessonLevel: (level: LessonLevel) => void;
   setSelectedKeyMap: (keyMap: KeyMapNames) => void;
   setSoundEnabled: (enabled: boolean) => void;
+  setSelectedKeySound: (keySound: KeySoundName) => void;
   setWpmPerSecond: (wpmPerSecond: number[]) => void;
   setTheme: (theme: string) => void;
   setProfileAciveTab: (tab: TabType) => void;
@@ -41,7 +52,8 @@ export const useSettingStore = create<SettingOptions>((set) => ({
   theme: localStorage.getItem("theme") || "dark",
   wpmPerSecond: [],
   selectedKeyMap: "namkhone",
-  soundEnabled: localStorage.getItem("soundEnabled") === "true" || true,
+  soundEnabled: localStorage.getItem("soundEnabled") !== "false",
+  selectedKeySound: getStoredKeySound(),
   lessonLevel: "beginner",
   targetText: "",
   isFromHome: false,
@@ -54,6 +66,10 @@ export const useSettingStore = create<SettingOptions>((set) => ({
   setSoundEnabled: (enabled) => {
     set({ soundEnabled: enabled });
     localStorage.setItem("soundEnabled", enabled.toString());
+  },
+  setSelectedKeySound: (keySound) => {
+    set({ selectedKeySound: keySound });
+    localStorage.setItem("keySound", keySound);
   },
   setWpmPerSecond: (wpmPerSecond) => set({ wpmPerSecond }),
   setTheme: (theme) => {

@@ -135,3 +135,20 @@ interface BeforeInstallPromptEvent extends Event {
   prompt: () => void;
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
+
+type KeySoundName =
+  | "cherrymx-black-abs"
+  | "cherrymx-black-pbt"
+  | "cherrymx-blue-abs"
+  | "cherrymx-blue-pbt"
+  | "cherrymx-brown-abs"
+  | "cherrymx-brown-pbt"
+  | "cherrymx-red-abs"
+  | "cherrymx-red-pbt"
+  | "eg-crystal-purple"
+  | "eg-oreo";
+
+interface KeySoundConfig {
+  key_define_type?: "single" | "multi";
+  defines: Record<string, [number, number] | string | null>;
+}
