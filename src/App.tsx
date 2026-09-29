@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { Toaster } from "sonner";
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 import { AboutPage } from "@/pages/AboutPage";
 import { HomePage } from "@/pages/HomePage";
@@ -113,6 +114,7 @@ export default function App() {
           position="top-right"
         />
       </div>
+      <Analytics />
     </main>
   );
 }
